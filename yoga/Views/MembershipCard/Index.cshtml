@@ -1,0 +1,102 @@
+@model IEnumerable<MembershipCard>
+@{
+    ViewData["Title"] ="Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<h1>Teacher Licence</h1>
+
+
+<div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Membership cards requests</h1>
+				    </div>
+				    
+			    </div><!--//row-->
+			   
+			    
+			    @* <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
+				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
+				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
+				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
+				</nav> *@
+				
+				
+				<div class="tab-content" id="orders-table-tab-content">
+			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+					    <div class="app-card app-card-orders-table shadow-sm mb-5">
+						    <div class="app-card-body">
+							    <div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+                                                <th>User Name</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Card Serial</th>
+                                                <th>Pay Fees</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                                <tr>
+                                                    <td class="cell">
+                                                @item.AppUser.UserName
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.AppUser.PhoneNumber
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.AppUser.Email
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.SerialNumber
+                                                    </td>
+                                            @if (@item.Payed == false)
+                                            {
+                                                        <td class="cell">No</td>
+                                            }
+                                            else
+                                            {
+                                                        <td class="cell">Yes</td>
+                                            }
+                                            @if (@item.Active == true)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-success">Approved</span> </td>
+                                            }
+                                            else
+                                            {
+                                                        <td class="cell"> <span class="badge bg-info">Pending</span> </td>
+                                            }
+
+                                            
+                                                    <td>
+                                                        <div class="w-75 btn-group" role="group">
+                                                            <a class="btn-sm app-btn-secondary" asp-controller="MembershipCard" asp-action="Detail"
+                                                            asp-route-id="@item.CardId"><i class="fa-solid fa-memo-circle-info"></i>Details</a>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                    }
+		
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+						    </div><!--//app-card-body-->		
+						</div><!--//app-card-->
+			        
+				</div><!--//tab-content-->
+				
+				
+			    
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+

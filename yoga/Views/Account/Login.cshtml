@@ -1,0 +1,70 @@
+@model yoga.ViewModels.LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Contact-section
+    ================================================== -->
+<section>
+    <div id="contact-section" class="pad-sec">
+
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <!-- form fields -->
+                        <form id="account" method="post">
+                        <h2>Login</h2>
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <a asp-controller="Account" asp-action="ForgetPassword" >Forget your password?</a>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                You don't have an account, 
+                                <a asp-controller="Account" asp-action="Register"> Register Here.</a>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Log in</button>
+                        </div>
+                    </form>
+
+                    </div> <!-- end col-md-8 -->
+                </div> <!-- end row -->
+            </div> <!-- end form-wrapper -->
+
+        </div> <!-- end container -->
+
+    </div> <!-- End contact-section -->
+
+
+@* @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    } *@

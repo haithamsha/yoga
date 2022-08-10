@@ -1,0 +1,46 @@
+@model yoga.ViewModels.MembershipCardVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<form method="post" enctype="multipart/form-data">
+    @if(ViewData["Saved"] != null)
+    {
+        <div class="alert alert-success">@ViewData["Saved"]</div>
+    }
+    
+   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <h2>ٍMembership Card -- Apply your card now!</h2>
+    <div class="border p-3 mt-4">
+        <div class="alert alert-info">Please Send <span class="fw-bold">150</span> SAR to the below bank account</div>
+
+        <div class="mb-3">
+            <label class="fw-bold">ٍMembership Card Price</label>
+            <label>150 ريال سعودي</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="fw-bold">IBAN</label>
+            <label>99789789789798</label>
+        </div>
+
+        <div class="mb-3">
+            <label class="fw-bold" asp-for="RecietCopy"></label>
+            <input type="file" asp-for="RecietCopy" class="form-control"/>
+            <span asp-validation-for="RecietCopy" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success">Apply</button>
+    </div>
+    </div>
+</form>
+
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+}

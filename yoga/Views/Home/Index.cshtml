@@ -1,0 +1,292 @@
+﻿@model IEnumerable<Platform>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
+<!-- Hero
+  ================================================== -->
+<section>
+    <div id="hero-section" class="landing-hero" data-stellar-background-ratio="0">
+
+        <video width="100%" id="background-video" autoplay loop muted
+            poster="https://assets.codepen.io/6093409/river.jpg">
+            <source src="~/assets/images/hero-bg/landing.mp4" type="video/mp4">
+        </video>
+    </div> <!-- End hero-section -->
+</section>
+<!-- End hero section -->
+
+<!-- Offer
+    ================================================== -->
+<section>
+    <div id="landing-offer" class="pad-sec">
+        <div class="container">
+
+            <div class="title-section big-title-sec animated out" data-animation="fadeInUp" data-delay="0">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="big-title">@localizer["AboutUs"]</h2>
+                        <h1 class="big-subtitle">@localizer["InfoAboutUs"]</h1>
+                        <hr>
+                        <p class="about-text">
+                            @* The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic
+                            Committee, which is
+                            affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the
+                            growing popularity of
+                            this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a
+                            genuine desire to supervise
+                            and develop its activities, as well as to support and improve the performance of yogis and
+                            sport professionals. A
+                            true desire exists to improve training quality and activate national participation in future
+                            international yoga
+                            tournaments and competitions. *@
+                            @localizer["AboutUsBody"]
+                        </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <h2 class="big-title"></h2>
+                        <h1 class="big-subtitle"></h1>
+                        <img src="~/assets/images/DSC01860.jpg" alt="">
+                    </div>
+                </div> <!-- End row -->
+            </div> <!-- end title-section -->
+
+            <div class="offer-boxes">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-1">
+                        <h3>@localizer["AimAndObjectives"]</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="offer-post text-center animated out" data-animation="fadeInLeft" data-delay="0">
+                            <div class="offer-icon">
+                                <span class="icon-desktop"></span>
+                            </div>
+                            <h4>@localizer["aim1Title"]</h4>
+                            <p>@localizer["aim1Body"]</p>
+                        </div> <!-- End offer-post -->
+                    </div> <!-- End col-sm-4 -->
+
+                    <div class="col-sm-4">
+                        <div class="offer-post text-center animated out" data-animation="fadeInUp" data-delay="0">
+                            <div class="offer-icon">
+                                <span class="icon-piechart"></span>
+                            </div>
+                            <h4>@localizer["aim2Title"]</h4>
+                            <p>
+                                @localizer["aim2Body"]
+                            </p>
+                        </div> <!-- End offer-post -->
+                    </div> <!-- End col-sm-4 -->
+
+                    <div class="col-sm-4">
+                        <div class="offer-post text-center animated out" data-animation="fadeInRight" data-delay="0">
+                            <div class="offer-icon">
+                                <span class="icon-lifesaver"></span>
+                            </div>
+                            <h4>@localizer["aim3Title"]</h4>
+                            <p>
+                                @localizer["aim3Body"]
+                            </p>
+                        </div> <!-- End offer-post -->
+                    </div> <!-- End col-sm-4 -->
+
+                </div> <!-- End row -->
+
+            </div> <!-- End offer-boxes -->
+
+            <!-- Features services
+    ================================================== -->
+            <section>
+                <div id="features-section" class="pad-sec">
+                    <div class="container">
+                        <div class="title-section text-center animated out" data-animation="fadeInUp" data-delay="0">
+                            <div class="row">
+                                <div class="col-sm-8 col-sm-offset-2">
+                                    <h2>@localizer["visionmessionObj"]</h2>
+                                    <hr>
+                                    <p>
+                                        @localizer["visionmissionObjDesc"]
+                                    </p>
+                                </div> <!-- edn col-sm-8 -->
+                            </div> <!-- End row -->
+                        </div> <!-- end title-section -->
+                        <div class="row">
+                            <div class="col-md-3 without-padding">
+                                <div class="left-features-services">
+                                    <ul class="features-list">
+
+                                        <!-- feature -->
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-mobile"></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["MissionTitle"]</h6>
+                                                    <p>@localizer["MissionBody"]</p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+
+                                        <!-- feature -->
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-mobile"></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["LearningGrowthTitle"]</h6>
+                                                    <p>
+                                                        @localizer["LearningGrowthBody"]
+                                                    </p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-strategy"></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["ClientFocusTitle"]</h6>
+                                                    <p>
+                                                        @localizer["ClientFocusBody"]
+                                                    </p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+                                    </ul> <!-- end features-list -->
+                                </div> <!-- end left-features-service -->
+                            </div><!--  end col-md-3 -->
+
+                            <div class="col-md-6">
+                                <div class="features-image animated out" data-animation="fadeInUp" data-delay="0">
+                                    <img src="~/assets/images/serv.jpg" alt="">
+                                </div> <!-- end features-image -->
+                            </div> <!-- end col-md-6 -->
+
+                            <div class="col-md-3 without-padding">
+                                <div class="right-features-services">
+                                    <ul class="features-list">
+                                        <!-- feature -->
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-browser"></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["VisionTitle"]</h6>
+                                                    <p>@localizer["VisionBody"]</p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+                                        <!-- feature -->
+                                        <!-- feature -->
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-browser"></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["InternalProceduresTitle"]</h6>
+                                                    <p>
+                                                        @localizer["InternalProceduresBody"]
+                                                    </p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+                                        <!-- feature -->
+                                        <li>
+                                            <div class="left-features-box animated out" data-animation="fadeInLeft"
+                                                data-delay="0">
+                                                <span class="iconbox"><i class="icon-hotairballoon "></i></span>
+                                                <div class="features-box-content">
+                                                    <h6>@localizer["FinancialsTitle"]</h6>
+                                                    <p>@localizer["FinancialsBody"]</p>
+                                                </div> <!-- end features-box-content -->
+                                            </div> <!-- end left-features-box -->
+                                        </li>
+                                    </ul> <!-- end features-list -->
+                                </div>
+                            </div> <!-- end col-md-3 -->
+
+                        </div> <!-- end row -->
+                    </div> <!-- end container -->
+                </div>
+            </section>
+            <!-- End features-section -->
+        </div> <!-- End container -->
+    </div> <!-- End landing-offer-section -->
+</section>
+<!-- End offer section -->
+
+<!-- Team
+    ================================================== -->
+<section>
+    <div id="team-section" class="pad-sec">
+        <div class="container">
+            <div class="title-section animated out" data-animation="fadeInUp" data-delay="0">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h2>@localizer["PlatformTitle"]</h2>
+                        <hr>
+                        <p>
+                            @localizer["PlatformTitleDesc"]
+                        </p>
+                    </div>
+                </div> <!-- End row -->
+            </div> <!-- end title-section -->
+
+            <div class="team-members">
+                <div class="row">
+
+                    @foreach (var item in Model)
+                    {
+                        <!-- member-team -->
+                        <div class="col-sm-4">
+                            <div class="member-team animated out" data-animation="fadeInLeft" data-delay="0">
+                                <a asp-controller="Platform" asp-action="Detail" asp-route-id="@item.PlatformId">
+                                    <img src="~/assets/images/platforms/@item.Image" alt="@item.Title">
+                                </a>
+                                
+                                <div class="magnifier">
+                                    <div class="magnifier-inner">
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="@item.PlatformId">
+                                            <h3>
+                                                @if(@culture.RequestCulture.UICulture.Name == "en")
+                                                {
+                                                    @item.Title
+                                                }
+                                                else {
+                                                    @item.TitleAr
+                                                }
+                                            </h3>
+                                        </a>
+                                        
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="@item.PlatformId">
+                                            @if(culture.RequestCulture.UICulture.Name == "en")
+                                            {
+                                                <p>@item.Summury</p>
+                                            }
+                                            else{
+                                                <p>@item.SummuryAr</p>
+                                            }
+                                        </a>
+                                        
+                                        
+                                    </div> <!-- End magnifier-inner -->
+                            </div> <!-- End magnifier -->
+                        </div> <!-- End member-team -->
+                    </div> <!-- End col-sm-4 -->
+                    }
+
+                </div> <!-- End col-sm-4 -->
+            </div>
+        </div> <!-- End team-members -->
+    </div> <!-- End container -->
+    </div> <!-- End team-section -->
+</section>
+<!-- End team section -->

@@ -1,0 +1,39 @@
+@model yoga.ViewModels.TechearMemberShipVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<div class="border p-3 mt-4">
+    <form method="post" enctype="multipart/form-data">
+
+        @if (ViewData["Saved"] != null)
+        {
+            <div class="alert alert-success">@ViewData["Saved"]</div>
+            <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a></div>
+        }
+
+        <h2>Pay Exam Fees</h2>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="alert alert-info">
+            Please Send Exam Fees to the below bank account
+            <p>IBAN: 9999999999987</p>
+        </div>
+        <div class="mb-3">
+            <label>Receit</label>
+            <input type="file" name="Receit" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-success" >Submit</button>
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts{
+@{
+    <partial name="_ValidationScriptsPartial" />
+}
+}

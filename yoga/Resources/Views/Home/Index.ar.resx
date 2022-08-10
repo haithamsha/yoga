@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="InfoAboutUs" xml:space="preserve">
+    <value>معلومات عنا</value>
+  </data>
+  <data name="AimAndObjectives" xml:space="preserve">
+    <value>الغايات والاهداف</value>
+  </data>
+  <data name="aim1Title" xml:space="preserve">
+    <value> العمل على زيادة عدد الممارسين لرياضة اليوغا</value>
+  </data>
+  <data name="aim1Body" xml:space="preserve">
+    <value>  التحفيز على نشر الوعي والحماس لممارستها كأسلوب حياة لجميع فئات المجتمع ومختلف الأعمار، وذلك بزيادة الفعاليات والمبادرات والتشيع عليها، وبناء جيل من محبي الرياضة ومحترفيها، يقودهم الشغف للخروج بمجتمع صحي رياضي يعي أن اليوغا للجميع، وهذا يؤدي لتحقيق التميز في المنافسات والمشاركات محلياً ودولياً.  التحفيز على نشر الوعي والحماس لممارستها كأسلوب حياة لجميع فئات المجتمع ومختلف الأعمار، وذلك بزيادة الفعاليات والمبادرات والتشيع عليها، وبناء جيل من محبي الرياضة ومحترفيها، يقودهم الشغف للخروج بمجتمع صحي رياضي يعي أن اليوغا للجميع، وهذا يؤدي لتحقيق التميز في المنافسات والمشاركات محلياً ودولياً.</value>
+  </data>
+  <data name="aim2Title" xml:space="preserve">
+    <value>أن نكون الفنار الإقليمي الداعم والمنظم لرياضة اليوغا</value>
+  </data>
+  <data name="aim2Body" xml:space="preserve">
+    <value>من خلال تطوير البرامج التعليمية والترفيهية المستدامة، ورفع مستوى الوعي العام، عن طريق تأهيل مجتمع ممارس لرياضة اليوغا، بمضمونها ومبادئها الصحيحة، والتي ستؤدي للتمتع برفاهية العافية البدنية والنفسية.من خلال تطوير البرامج التعليمية والترفيهية المستدامة، ورفع مستوى الوعي العام، عن طريق تأهيل مجتمع ممارس لرياضة اليوغا، بمضمونها ومبادئها الصحيحة، والتي ستؤدي للتمتع برفاهية العافية البدنية والنفسية.</value>
+  </data>
+  <data name="aim3Title" xml:space="preserve">
+    <value> الوصول إلى مجتمع يعي أهمية الصحة النفسية والبدنية</value>
+  </data>
+  <data name="aim3Body" xml:space="preserve">
+    <value>  وأثرها على الحياة اليومية، من خلال توفير ودعم البرامج الرياضية والجلسات التوعوية بأنماطها المختلفة لجميع الفئات المجتمعية  وأثرها على الحياة اليومية، من خلال توفير ودعم البرامج الرياضية والجلسات التوعوية بأنماطها المختلفة لجميع الفئات المجتمعية</value>
+  </data>
+  <data name="visionmessionObj" xml:space="preserve">
+    <value>الرؤية - الرسالة - الاهداف</value>
+  </data>
+  <data name="visionmissionObjDesc" xml:space="preserve">
+    <value>رؤيتنا ورسالتنا وأهدافنا الاستراتيجية.</value>
+  </data>
+  <data name="MissionTitle" xml:space="preserve">
+    <value>رسالتنا</value>
+  </data>
+  <data name="MissionBody" xml:space="preserve">
+    <value>العمل على زيادة عدد الممارسين لرياضة اليوغا في المجتمع و التحفيز على نشر الوعي و الحماس للمارستها كنمط حياة لجميع فئات المجتمع أو لمختلف الأعمار بزيادة الفعاليات و المبادرات و التشيع عليها و بناء جيل من محبي الرياضة و المحترفين يقودهم الشغف للخروج بمجتمع صحي رياضي يعي أن اليوغا للجميع لتحقيق التميز في المنافسات و المشاركات محليا و دوليا</value>
+  </data>
+  <data name="LearningGrowthTitle" xml:space="preserve">
+    <value>أهداف التعلم و الابتكار النمو</value>
+  </data>
+  <data name="LearningGrowthBody" xml:space="preserve">
+    <value>طرح فرص مشاركة القطاعات التعليمية و الصحية الخاصة و الحكومية المحلية و العالمية لتفعيل برامج قيمة ذات أثر مستدام.طرح فرص مشاركة القطاعات التعليمية و الصحية الخاصة و الحكومية المحلية و العالمية لتفعيل برامج قيمة ذات أثر مستدام.</value>
+  </data>
+  <data name="ClientFocusTitle" xml:space="preserve">
+    <value>أهداف العميل</value>
+  </data>
+  <data name="ClientFocusBody" xml:space="preserve">
+    <value>الوصول إلى مجتمع يعي أهمية الصحة النفسية و البدنية و أثرها على الحياة اليومية من خلال توفير و دعم البرامج الرياضية و الجلسات التوعوية بأنماطها المختلفة لجميع الفئات المجتمعية </value>
+  </data>
+  <data name="VisionTitle" xml:space="preserve">
+    <value>الرؤية</value>
+  </data>
+  <data name="VisionBody" xml:space="preserve">
+    <value>الوعي العام عن طريق تأهيل مجتمع ممارس لرياضة اليوغا بمضمونها و مبادئها الصحيحة. للتمتع برفاهية العافية البدنية و النفسية</value>
+  </data>
+  <data name="InternalProceduresTitle" xml:space="preserve">
+    <value>أهداف الاجراءات الداخليةأهداف الاجراءات الداخلية</value>
+  </data>
+  <data name="InternalProceduresBody" xml:space="preserve">
+    <value>- تطوير معايير و شروط مؤسسات رياضة اليوغا. 2- تصميم إطار عمل تدعم و تطور  شروط افتتاح مراكز تغليم و تدريب رياضة اليوغا 3- توفير مصادر التعلم و التطوير المعتمدة من الجهات الرسمية. 4- تقديم خدمات متميزة لفئات المجتمع من خلال تجارب عالمية لأفضل الممارسات 5- تصميم الإطار العلمي و المهني لممارسة و تدريب رياضة اليوغا من أجل ضمان تعليم اليوغا عالي الجودة والآمن والمتاح والمنصف لجميغ فئات المجتمع</value>
+  </data>
+  <data name="FinancialsTitle" xml:space="preserve">
+    <value>أهداف ماليةأهداف مالية</value>
+  </data>
+  <data name="FinancialsBody" xml:space="preserve">
+    <value>وضع الخطة التشغيلية للبرامج و مبادرات اتحاد اليوغا لتحديد الميزانيات اللازمة لتطبيقها. رفع التقارير المالية لهيئة الرياضة لمطالبات الدعم المالية. وضع خطة الاستدامة المالية للجنة. وضع الخطة التشغيلية للبرامج و مبادرات اتحاد اليوغا لتحديد الميزانيات اللازمة لتطبيقها. رفع التقارير المالية لهيئة الرياضة لمطالبات الدعم المالية. وضع خطة الاستدامة المالية للجنة.</value>
+  </data>
+  <data name="PlatformTitle" xml:space="preserve">
+    <value>منصة اليوجيين</value>
+  </data>
+  <data name="PlatformTitleDesc" xml:space="preserve">
+    <value>تعتبر هذه المنصة بمثابة دليل كامل للمدربين والمراكز والصالات و اندية اليوغا المعتمدة في المملكةتعتبر هذه المنصة بمثابة دليل كامل للمدربين والمراكز والصالات و اندية اليوغا المعتمدة في المملكة</value>
+  </data>
+  <data name="AboutUsBody" xml:space="preserve">
+    <value>  اللجنة السعودية لليوغا هي لجنة رياضية تحت مظلة اللجنة الأولمبية العربية السعودية التابعة لوزارة الرياضة، تأسست في العام 2021م، وجاء تأسيس اللجنة نظراً لشعبية رياضة اليوغا وانتشارها الواسع في المملكة العربية السعودية، ووجود قاعدة جماهيرية لها، والرغبة الجادة في الإشراف على أنشطة هذه الرياضة في المملكة والعمل على تطويرها ودعم ممارسيها ومحترفيها، لتطوير أدائهم وتحسين جودة التدريب في المملكة لتحسين وتفعيل المشاركة الوطنية في البطولات والمسابقات الدولية الخاصة برياضة اليوغا مستقبلاً.</value>
+  </data>
+</root>

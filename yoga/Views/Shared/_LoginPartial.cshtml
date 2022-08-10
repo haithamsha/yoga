@@ -1,0 +1,23 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<ul class="navbar-nav">
+    @if(User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-secondary" asp-controller="Account" asp-action="UserProfile">@User.Identity.Name</a>
+
+        <li class="nav-item">
+            <form class="form-inline" asp-controller="Account" asp-action="Logout">
+                <button type="submit" class="nav-link btn btn-link text-dark">@localizer["Logout"]</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">@localizer["MyAccount"]</a>
+    </li>
+    @* <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+    </li> *@
+    }
+</ul>

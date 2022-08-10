@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yoga.tests", "..\yoga.tests\yoga.tests.csproj", "{5FAC0084-136D-4CEC-B5F0-C8374FFF0A27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "yoga", "yoga.csproj", "{418A708B-19A3-41AD-AD56-096505BEE2D4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5FAC0084-136D-4CEC-B5F0-C8374FFF0A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FAC0084-136D-4CEC-B5F0-C8374FFF0A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FAC0084-136D-4CEC-B5F0-C8374FFF0A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FAC0084-136D-4CEC-B5F0-C8374FFF0A27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{418A708B-19A3-41AD-AD56-096505BEE2D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{418A708B-19A3-41AD-AD56-096505BEE2D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{418A708B-19A3-41AD-AD56-096505BEE2D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{418A708B-19A3-41AD-AD56-096505BEE2D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

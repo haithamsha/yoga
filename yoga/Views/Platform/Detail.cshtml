@@ -1,0 +1,81 @@
+@model Platform
+@{
+    ViewData["Title"] = "Index";
+}
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
+<!-- Features App 2
+    ================================================== -->
+<section>
+    <div id="features-app-section-2" class="pad-sec">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 features-app-content-left animated out" data-animation="fadeInLeft" data-delay="0">
+                    <div class="section_header">
+                        <h2>
+                            @if(@culture.RequestCulture.UICulture.Name=="en")
+                            {
+                                @Model.Title
+                            }
+                            else {
+                                @Model.TitleAr
+                            }
+                        </h2>
+                    </div> <!-- End section_header -->
+                    <p>
+                        @if(@culture.RequestCulture.UICulture.Name=="en")
+                        {
+                            @Model.Summury
+                        }
+                        else {
+                            @Model.SummuryAr
+                        }
+                        
+                    </p>
+
+                    <ul class="features-app-list">
+                        @{
+                            var items = new string[]{};
+                            if(@culture.RequestCulture.UICulture.Name == "en")
+                            {
+                                items =  @Model.Detail.Split('.');
+                            }
+                            else {
+                                items =  @Model.DetailAr.Split('.');
+                            }
+                            foreach (var item in items)
+                            {
+                                <!-- feature -->
+                                <li>
+                                    <div class="feature-app-box animated out" data-animation="fadeInLeft" data-delay="0">
+                                        <div class="app-feature-icon pull-left"><span class="pe-7s-graph"></span></div>
+                                        <div class="feature-app-box-content">
+                                            <h6>@item<span>.</span></h6>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div> <!-- End feature-content -->
+
+                <div class="col-sm-5 col-sm-offset-1 text-center img-app-right animated out"
+                    data-animation="fadeInRight" data-delay="0">
+                    <figure>
+                        <img src="~/assets/images/platforms/@Model.Image" alt="">
+                    </figure>
+                </div> <!-- End col-sm-8 -->
+
+            </div> <!-- End row -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <a class="btn btn-success" asp-controller="Account" asp-action="Register">@localizer["SubscribeNow"]</a>
+                </div>
+            </div>
+        </div> <!-- End container -->
+    </div> <!-- End feature-section -->
+</section>
+<!-- End Features App 2 section -->
