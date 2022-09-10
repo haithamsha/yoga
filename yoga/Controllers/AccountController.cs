@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using yoga.Data;
 using yoga.Models;
@@ -67,9 +68,24 @@ namespace yoga.Controllers
             return View(userSetting);
         }
 
+        private List<SelectListItem> GetCountries()
+        {
+            var countries =  _db.Country
+                        .Select(r=>new SelectListItem() {
+                            Value = r.CountryId.ToString(),
+                            Text = r.EnName
+                        })
+                        .ToList();
+            return countries;
+            
+        }
+
         public IActionResult Register()
         {
-            return View();
+            var countries = GetCountries();
+            var vm = new RegisterModel();
+            vm.Counries = countries;
+            return View(vm);
         }
 
         [HttpPost]
@@ -80,7 +96,7 @@ namespace yoga.Controllers
             Input.ReturnUrl = returnUrl;
             ModelState.Remove("ReturnUrl");
             ModelState.Remove("Image");
-            
+            ModelState.Remove("Counries");
             if (ModelState.IsValid)
             {
                     // Upload image
@@ -95,9 +111,11 @@ namespace yoga.Controllers
                         }
                     }
 
+                var country = _db.Country.Find(Input.CountryId);
+
                 var user = new AppUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.Phone, NationalId = Input.NationalId, 
                 MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
-                FirstName = Input.FirstName, UserImage = fileName};
+                FirstName = Input.FirstName, UserImage = fileName, Country = country};
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

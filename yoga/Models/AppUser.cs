@@ -10,5 +10,6 @@ namespace yoga.Models
         public string LastName { get; set; }
         public string UserImage { get; set; }
         public string Discriminator { get; set; } = "Default";
+        public Country? Country {get;set;}    
     }
 }

@@ -14,5 +14,6 @@ namespace yoga.Data
         public DbSet<TechearMemberShip> TechearMemberShips{get;set;}
         public DbSet<Platform> Platforms{get;set;}
         public DbSet<MembershipCard> MembershipCards { get; set; }
+        public DbSet<Country> Country { get; set; }
     }
 }

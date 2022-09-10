@@ -37,6 +37,10 @@ namespace yoga.Models
 
         public DateTime? ExpireDate { get; set; }
         public bool PayExamFees { get; set; } = false;
+        public decimal LicenseFeesPrice { get; set; } = 0;
+        public string? ExamLocation { get; set; }
+        public string? SerialNumber { get; set; }
+
 
         [NotMapped]
         public string EducationLevel_String { get; set; }

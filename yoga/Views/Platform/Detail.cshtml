@@ -1,3 +1,6 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @model Platform
 @{
     ViewData["Title"] = "Index";
@@ -7,75 +10,168 @@
 @{
     var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
 }
-<!-- Features App 2
-    ================================================== -->
-<section>
-    <div id="features-app-section-2" class="pad-sec">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 features-app-content-left animated out" data-animation="fadeInLeft" data-delay="0">
-                    <div class="section_header">
-                        <h2>
-                            @if(@culture.RequestCulture.UICulture.Name=="en")
-                            {
-                                @Model.Title
-                            }
-                            else {
-                                @Model.TitleAr
-                            }
-                        </h2>
-                    </div> <!-- End section_header -->
-                    <p>
-                        @if(@culture.RequestCulture.UICulture.Name=="en")
-                        {
-                            @Model.Summury
-                        }
-                        else {
-                            @Model.SummuryAr
-                        }
-                        
-                    </p>
+<div class="row">
 
-                    <ul class="features-app-list">
+    <div id="fws_62f0174d76e72" data-column-margin="default" data-midnight="dark" data-top-percent="8%"
+        data-bottom-percent="7%"
+        class="wpb_row vc_row-fluid vc_row top-level full-width-content vc_row-o-equal-height vc_row-flex vc_row-o-content-middle  zindex-set right_padding_6pct left_padding_6pct top_padding_tablet_20pct top_padding_phone_25pct"
+        style="padding-top: calc(100vw * 0.08); padding-bottom: calc(100vw * 0.07);  z-index: 100;">
+        <div class="row-bg-wrap" data-bg-animation="fade-in" data-bg-overlay="false">
+            <div class="inner-wrap">
+                <div class="row-bg viewport-desktop"></div>
+            </div>
+        </div>
+        <div class="row_col_wrap_12 col span_12 dark left">
+            <div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
+                data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation=""
+                data-delay="0">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper">
+                        <div id="fws_62f0174d79345" data-midnight="" data-column-margin="default"
+                            class="wpb_row vc_row-fluid vc_row inner_row vc_row-o-equal-height vc_row-flex vc_row-o-content-middle">
+                            <div class="row-bg-wrap">
+                                <div class="row-bg"></div>
+                            </div>
+                            <div class="row_col_wrap_12_inner col span_12  left">
+                                <div class="vc_col-sm-4/5 vc_col-md-9 wpb_column column_container vc_column_container col child_column no-extra-padding bottom_margin_tablet_20px inherit_tablet inherit_phone "
+                                    data-t-w-inherits="small_desktop" data-padding-pos="all" data-has-bg-color="false"
+                                    data-bg-color="" data-bg-opacity="1" data-animation="" data-delay="0">
+                                    <div class="vc_column-inner" style="padding:5%;">
+                                        <div class="wpb_wrapper">
+                                            <div class="nectar-split-heading  font_size_tablet_9vw font_size_phone_10vw "
+                                                data-align="default" data-m-align="inherit"
+                                                data-text-effect="letter-reveal-bottom"
+                                                data-animation-type="line-reveal-by-space" data-animation-delay="0"
+                                                data-animation-offset="" data-m-rm-animation="true" data-stagger="true"
+                                                data-custom-font-size="true"
+                                                style="font-size: 95px; line-height: 102.6px;">
+                                                <h1>@Model.Title </h1>
+                                            </div>
+                                            <div class="wpb_text_column wpb_content_element  vc_custom_1658117897397"
+                                                style=" max-width: 700px; display: inline-block;">
+                                                <div class="wpb_wrapper">
+                                                    <p>
+                                                        @Model.Summury
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="vc_col-sm-1/5 vc_col-md-3 wpb_column column_container vc_column_container col child_column has-animation no-extra-padding el_spacing_10px inherit_tablet inherit_phone mobile-disable-entrance-animation "
+                                    data-t-w-inherits="small_desktop" data-padding-pos="all" data-has-bg-color="false"
+                                    data-bg-color="" data-bg-opacity="1" data-animation="fade-in-from-bottom"
+                                    data-delay="500">
+                                    <div class="vc_column-inner">
+                                        <div class="wpb_wrapper">
+                                            <a class="nectar-button large regular accent-color  regular-button" asp-controller="Account" asp-action="Login"
+                                                data-color-override="false" data-hover-color-override="false"
+                                                data-hover-text-color-override="#fff"><span>Get This License</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fws_62f0174d7a0e7" data-column-margin="default" data-midnight="dark"
+        class="wpb_row vc_row-fluid vc_row full-width-content vc_row-o-full-height vc_row-o-columns-stretch vc_row-o-equal-height vc_row-flex vc_row-o-content-middle"
+        style="padding-top: 0px; padding-bottom: 0px; ">
+        <div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false">
+            <div class="inner-wrap">
+                <div class="row-bg viewport-desktop"></div>
+            </div>
+        </div>
+        <div class="row_col_wrap_12 col span_12 dark left">
+            <div class="vc_col-sm-6 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
+                data-using-bg="true" data-bg-cover="true" data-padding-pos="all" data-has-bg-color="false"
+                data-bg-color="" data-bg-opacity="1" data-animation="" data-delay="0">
+                <div class="vc_column-inner">
+                    <div class="column-image-bg-wrap viewport-desktop" data-n-parallax-bg="true"
+                        data-parallax-speed="very_subtle" data-bg-pos="center center" data-bg-animation="none"
+                        data-bg-overlay="false">
+                        <div class="inner-wrap">
+                            <div class="column-image-bg parallax-layer"></div>
+                        </div>
+                    </div>
+                    <div class="wpb_wrapper">
+                        <div class="img-with-aniamtion-wrap " data-max-width="100%" data-max-width-mobile="default"
+                            data-shadow="none" data-animation="fade-in">
+                            <div class="inner">
+                                <div class="hover-wrap">
+                                    <div class="hover-wrap-inner">
+                                        <img class="img-with-animation skip-lazy  nectar-lazy" data-delay="0"
+                                            height="1536" width="2048" data-animation="fade-in"
+                                            data-nectar-img-src="../../assets3/wp-content/uploads/2021/11/@Model.Image"
+                                            src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%202048%201536'%2F%3E"
+                                            alt=""
+                                            data-nectar-img-srcset="../../assets3/wp-content/uploads/2021/11/@Model.Image 2048w, 
+                                            ../../assets3/wp-content/uploads/2021/11/@Model.Image 300w, 
+                                            ../../assets3/wp-content/uploads/2021/11/@Model.Image 1024w, 
+                                            ../../assets3/wp-content/uploads/2021/11/@Model.Image 768w, 
+                                            ../../assets3/wp-content/uploads/2021/11/@Model.Image 1536w, 
+                                            ../../assets3/wp-content/uploads/2021/11/@Model.Image 600w"
+                                            sizes="(max-width: 2048px) 100vw, 2048px">
+
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vc_col-sm-6 wpb_column column_container vc_column_container col padding-5-percent inherit_tablet inherit_phone "
+                data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation=""
+                data-delay="0">
+                <div class="vc_column-inner">
+                    <div class="wpb_wrapper">
+                        <h2 style="text-align: left" class="vc_custom_heading">Advantages</h2>
+                        <div class="wpb_text_column wpb_content_element  vc_custom_1658117961215">
+                            <div class="wpb_wrapper">
+                                <ul>
+                                    @* <li>Discounts from 5-15% on all courses offered by the committee</li>
+                                    <li> Discounts up to 50% for committee events</li>
+                                    <li> Obtaining the committee’s news (courses, lectures, events) through our
+                                        registered email Priority for registration in courses, lectures, and committee
+                                        activities.</li> *@
+
                         @{
-                            var items = new string[]{};
-                            if(@culture.RequestCulture.UICulture.Name == "en")
-                            {
-                                items =  @Model.Detail.Split('.');
-                            }
-                            else {
-                                items =  @Model.DetailAr.Split('.');
-                            }
+                            var items = @Model.Detail.Split('.');
+                            
                             foreach (var item in items)
                             {
                                 <!-- feature -->
                                 <li>
-                                    <div class="feature-app-box animated out" data-animation="fadeInLeft" data-delay="0">
-                                        <div class="app-feature-icon pull-left"><span class="pe-7s-graph"></span></div>
-                                        <div class="feature-app-box-content">
-                                            <h6>@item<span>.</span></h6>
-                                        </div>
-                                    </div>
+                                    @item
                                 </li>
                             }
                         }
-                    </ul>
-                </div> <!-- End feature-content -->
+                                </ul>
+                            </div>
+                        </div>
 
-                <div class="col-sm-5 col-sm-offset-1 text-center img-app-right animated out"
-                    data-animation="fadeInRight" data-delay="0">
-                    <figure>
-                        <img src="~/assets/images/platforms/@Model.Image" alt="">
-                    </figure>
-                </div> <!-- End col-sm-8 -->
 
-            </div> <!-- End row -->
-            <div class="row">
-                <div class="col-sm-6">
-                    <a class="btn btn-success" asp-controller="Account" asp-action="Register">@localizer["SubscribeNow"]</a>
+
+                        <a class="nectar-button large regular accent-color  regular-button"
+                            asp-controller="Account" asp-action="Login" data-color-override="false"
+                            data-hover-color-override="false" data-hover-text-color-override="#fff"><span>Get This
+                                License</span></a>
+                    </div>
                 </div>
             </div>
-        </div> <!-- End container -->
-    </div> <!-- End feature-section -->
-</section>
-<!-- End Features App 2 section -->
+        </div>
+    </div>
+</div>
+</div>
+
+<partial name="_mainFooter" />

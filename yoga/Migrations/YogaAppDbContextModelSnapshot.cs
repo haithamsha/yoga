@@ -167,6 +167,9 @@ namespace yoga.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CountryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -233,6 +236,8 @@ namespace yoga.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -242,6 +247,39 @@ namespace yoga.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("yoga.Models.Country", b =>
+                {
+                    b.Property<int>("CountryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CountryId"), 1L, 1);
+
+                    b.Property<string>("ArName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArNationalityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EnNationalityName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CountryId");
+
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("yoga.Models.MembershipCard", b =>
@@ -342,6 +380,9 @@ namespace yoga.Migrations
                     b.Property<int>("EducationLevel")
                         .HasColumnType("int");
 
+                    b.Property<string>("ExamLocation")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ExpYears")
                         .HasColumnType("int");
 
@@ -354,6 +395,9 @@ namespace yoga.Migrations
                     b.Property<string>("Id")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("LicenseFeesPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -392,6 +436,9 @@ namespace yoga.Migrations
 
                     b.Property<string>("SchoolSocialMediaAccount")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SerialNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SocialMediaAccounts")
@@ -463,6 +510,15 @@ namespace yoga.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("yoga.Models.AppUser", b =>
+                {
+                    b.HasOne("yoga.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("yoga.Models.MembershipCard", b =>

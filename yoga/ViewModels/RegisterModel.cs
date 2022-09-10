@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace yoga.ViewModels
 {
@@ -52,6 +53,11 @@ namespace yoga.ViewModels
         [Display(Name = "Image")]
         [DataType(DataType.Upload)]
         public string Image { get; set; }
+
+        [Display(Name = "Nationality")]
+        public int CountryId { get; set; }
+        public List<SelectListItem> Counries { get; set; }
+
 
     }
 }

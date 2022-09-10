@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using yoga.Data;
 using yoga.Models;
 using yoga.ViewModels;
@@ -191,11 +192,13 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Detail(string Approve, string reason, int Info, int PayExamFees, int PayLicFees, int TakeExam,
-        int PassExam, int MemId)
+        int PassExam, int MemId, decimal LicFeesPrice, string ExamLocation)
         {
             ModelState.Remove("Approve");
             ModelState.Remove("reason");
             ModelState.Remove("PayLicFees");
+            ModelState.Remove("LicFeesPrice");
+            ModelState.Remove("ExamLocation");
 
             if(ModelState.IsValid)
             {
@@ -208,10 +211,17 @@ namespace yoga.Controllers
                 {
                     if(Info == 1)
                     {
+                        
+                        if(string.IsNullOrEmpty(ExamLocation))
+                        {
+                            ModelState.AddModelError("", "Please Insert The Exam Location and Date!");
+                            return View(tech);
+                        }
+
                         tech.Status = (int)StatusEnum.Approved;
-                        content = "Congratuilation, You information is approved, next step is take the exam at the below address.. ";
+                        tech.ExamLocation = ExamLocation;
+                        content = $"Congratuilation, You information is approved, next step is take the exam at the datails <p> {ExamLocation} </p>";
                     }
-                     
                     if(PayExamFees == 1)
                     {
                         tech.PayExamFees = true;
@@ -222,7 +232,37 @@ namespace yoga.Controllers
                     {
                         tech.PayFees = true;
                         tech.FinalApprove = true;
-                        content += "Congratuilation, Your Are now Licensed SAUDI YOGA COMMITTEE Teacher. ";
+                        tech.ExpireDate = DateTime.Now.AddYears(1);
+                         // Generate card serial
+                        var serials = _db.TechearMemberShips.Select(m=>m.SerialNumber).ToList();
+                        string serialNumber = YogaUtilities.GenerateSerialNumber(serials);
+                        tech.SerialNumber = serialNumber;
+
+                        content += @$"<div>
+                        <p>
+                        Congratuilation, Your Are now Licensed SAUDI YOGA COMMITTEE Teacher.
+                        </p>
+                        </div>
+                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
+    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
+        <div style='padding-bottom: 20px;'>
+            <img width='80px' src='https://iili.io/r1zcZb.png'
+            alt='Yoga'> 
+        </div>
+        <div>
+            <img swidth='80px' src='https://iili.io/r1uyHN.png' alt='Yoga'>
+        </div>
+       <div >
+        <div>
+            {tech.AppUser.FirstName} {tech.AppUser.LastName}
+        </div>
+        <div>
+            ID: {serialNumber}
+        </div>
+        <div>
+            Validity: {DateTime.Now.AddYears(1).ToShortDateString()}
+</div></div></div>
+                        ";
                     }
                     if(TakeExam == 1) 
                     {
@@ -231,8 +271,14 @@ namespace yoga.Controllers
                     }
                     if(PassExam == 1)
                     {
+                        if(LicFeesPrice <= 0)
+                        {
+                            ModelState.AddModelError("", "Please Insert The License Fees!");
+                            return View(tech);
+                        }
                         content = "Congratuilation, Your Are Passed The SAUDI YOGA COMMITTEE Teacher license exam. ";
                         tech.PassExam = true;
+                        tech.LicenseFeesPrice = LicFeesPrice;
                     }
                     
 
@@ -261,15 +307,16 @@ namespace yoga.Controllers
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     if(rowAffect == 1)
-                    _emailSender.SendEmailAsync(emailMessage);
+                    _emailSender.SendEmailBySendGrid(emailMessage);
                     return RedirectToAction("Detail", "TeacherLic", new {id=MemId});
                 }
                 catch (System.Exception ex)
                 {
                     
-                    ModelState.AddModelError("", ex.Message);
+                    ModelState.AddModelError("Error, Please Try Again ", ex.Message);
+                    return View(tech);
                 }
-                return View();
+                
             }
             return View();
         }
@@ -277,7 +324,18 @@ namespace yoga.Controllers
 
         public IActionResult PayExamFees()
         {
-            return View();
+            TechearMemberShipVM vm = new TechearMemberShipVM();
+            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tech = _db.TechearMemberShips.Include("AppUser")
+            .Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+
+            if(tech == null){
+                return NotFound();
+            }
+
+            vm.ExamDetails = tech != null ? tech.ExamLocation : "";
+
+            return View(vm);
         }
 
         [HttpPost]
@@ -311,7 +369,12 @@ namespace yoga.Controllers
 
         public IActionResult PayLicFees()
         {
-            return View();
+            TechearMemberShipVM vm = new TechearMemberShipVM();
+            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tech = _db.TechearMemberShips.Where(t=>t.Id == userId).FirstOrDefault();
+            if(tech == null ) return NotFound();
+            vm.LicenseFeesPrice = tech.LicenseFeesPrice;
+            return View(vm);
         }
 
         [HttpPost]
@@ -341,6 +404,31 @@ namespace yoga.Controllers
                 return View();
             }
             return View();
+        }
+
+        public IActionResult ExportToExcel()
+        {
+            var result = _db.TechearMemberShips
+            .Select( t => new {
+                Name = t.Name,
+                ExperienceYears = t.ExpYears,
+                AccreditedHours= t.AccreditedHours,
+                PayExamFees = t.PayExamFees == true ? "Yes": "No",
+                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                Active = t.Status == 1  ? "Pending" : "Approved"
+            })
+            .ToList();
+            var stream = new MemoryStream();
+
+            using (var package = new ExcelPackage(stream))
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+                worksheet.Cells.LoadFromCollection(result, true);
+                package.Save();
+            }
+            stream.Position= 0;
+            string excelName = $"Techers Licenses data {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -16,7 +16,14 @@
         <h2>Pay Licence Fees</h2>
         <div class="alert alert-info">
             Please Send Licence Fees to the below bank account
-            <p>IBAN: 9999999999987</p>
+            <p>IBAN: SA5865000000101459418001</p>
+            <p>Amount: </p>
+            <p>
+                @if(@Model != null)
+                {
+                    <span>@Model.LicenseFeesPrice SAR</span>
+                }
+            </p>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">

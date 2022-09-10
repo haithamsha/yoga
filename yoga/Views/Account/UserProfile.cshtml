@@ -35,13 +35,18 @@
 				}
 				@if(Model.User_Subscribtions.HasMemberShip == false && Model.User_Subscribtions.HasTeacherLic == false)
 				{
-					<p>You Can Subscribte to one of Our Services</p>
+					@if(!User.IsInRole("Admin"))
+					{
+						<p>You Can Subscribte to one of Our Services</p>
+					}
+					
 				}
 				
 			</div>
 			<div class="row gx-5 gy-3">
 				@{
-					if (Model.User_Subscribtions.HasMemberShip == false && Model.User_Subscribtions.HasTeacherLic == false)
+					if (Model.User_Subscribtions.HasMemberShip == false 
+					&& Model.User_Subscribtions.HasTeacherLic == false && !User.IsInRole("Admin"))
 					{
 						<div class="col-12 col-lg-6">
 							<a class="btn app-btn-primary"

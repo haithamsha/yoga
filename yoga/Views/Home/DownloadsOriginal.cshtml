@@ -1,0 +1,50 @@
+<!-- Prices
+    ================================================== -->
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<section>
+    <div id="prices-section" class="pad-sec">
+        <div class="container">
+            <div class="title-section text-center animated out" data-animation="fadeInUp" data-delay="0">
+                <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <h1>
+                            @localizer["PageTitle"]
+                        </h1>
+                        <hr>
+                        <h2> @localizer["PageSubTitle"]</h2>
+                    </div>
+                </div> <!-- End row -->
+            </div> <!-- end title-section -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="price-table animated out" data-animation="fadeInLeft" data-delay="0">
+                        <li class="title-price">
+                            <h3>@localizer["TRAINERSHANDBOOK"]</h3>
+                            <a href="#" class="btn btn-sm btn-dark">@localizer["DOWNLOAD"]</a>
+                        </li>
+                        <li class="title-price">
+                            <h3>@localizer["CENTERSHANDBOOK"]</h3>
+                            <a href="#" class="btn btn-sm btn-dark">@localizer["DOWNLOAD"]</a>
+                        </li>
+                        <li class="title-price">
+                            <h3>@localizer["CLUBSHANDBOOK"]</h3>
+                            <a href="#" class="btn btn-sm btn-dark">@localizer["DOWNLOAD"]</a>
+                        </li>
+                        <li class="title-price">
+                            <h3>@localizer["TOURNAMENTSCOMPETITIONS"]</h3>
+                            <a href="#" class="btn btn-sm btn-dark">@localizer["DOWNLOAD"]</a>
+                        </li>
+                        
+                    </ul>
+                </div> <!-- end col-sm-4 -->
+
+
+
+
+            </div> <!-- end row -->
+        </div> <!-- end container -->
+    </div>
+</section>
+<!-- End prices section -->

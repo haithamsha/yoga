@@ -16,8 +16,15 @@
         <h2>Pay Exam Fees</h2>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="alert alert-info">
-            Please Send Exam Fees to the below bank account
-            <p>IBAN: 9999999999987</p>
+            Please Send Exam Fees (500 SAR) to the below bank account
+            <p>IBAN: SA5865000000101459418001</p>
+            <p>Exam Details</p>
+            <p>
+                @if(@Model != null)
+                {
+                    @Model.ExamDetails
+                }
+            </p>
         </div>
         <div class="mb-3">
             <label>Receit</label>

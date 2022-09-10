@@ -37,5 +37,8 @@ namespace yoga.ViewModels
         public string Name { get; set; }
         public bool Agreement { get; set; }
 
+        public string ExamDetails { get; set; }
+         public decimal LicenseFeesPrice { get; set; }
+
     }
 }

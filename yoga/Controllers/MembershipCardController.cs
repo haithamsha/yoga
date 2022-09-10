@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 using yoga.Data;
 using yoga.Models;
 using yoga.ViewModels;
@@ -127,7 +128,31 @@ namespace yoga.Controllers
                 int rowAffect = _db.SaveChanges();
                 // Send Email to the user(Congratuilation, Your Membership card is active now until {expire date}, Your)
                 // Card Serial Number "999"
-                string content = $"Congratuilation, Your Membership card is active now until {DateTime.Now.AddYears(1).ToShortDateString()}, Card Serial Number {serialNumber}";
+                string content = @$"<div>
+                        <p>
+                        Congratuilation, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active.
+                        </p>
+                        </div>
+                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
+    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
+        <div style='padding-bottom: 20px;'>
+            <img width='80px' src='https://iili.io/r1zcZb.png'
+            alt='Yoga'> 
+        </div>
+        <div>
+            <img swidth='80px' src='https://iili.io/r1uyHN.png' alt='Yoga'>
+        </div>
+       <div >
+        <div>
+            {memCard.AppUser.FirstName} {memCard.AppUser.LastName}
+        </div>
+        <div>
+            ID: {serialNumber}
+        </div>
+        <div>
+            Validity: {DateTime.Now.AddYears(1)}
+</div></div></div>
+                        ";
                 string userId = _userManager.GetUserId(User);
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
                 var emailMessage = new EmailMessage
@@ -147,10 +172,10 @@ namespace yoga.Controllers
                 }
                 catch (System.Exception ex)
                 {
-                    
+                    var obj = _db.MembershipCards.Include("AppUser").Where(m=>m.CardId == id).SingleOrDefault();
                     ModelState.AddModelError("", ex.Message);
+                    return View(obj);
                 }
-                return View();
             }
             else 
             {
@@ -186,6 +211,31 @@ namespace yoga.Controllers
                 return View();
             }
             
+        }
+
+        public IActionResult ExportToExcel()
+        {
+            var result = _db.MembershipCards
+            .Select( t => new {
+                Name = t.AppUser.FirstName + " " + t.AppUser.LastName,
+                Phone = t.AppUser.PhoneNumber,
+                Email= t.AppUser.Email,
+                CardSerial = t.SerialNumber,
+                PayFees = t.Payed  == true ? "Yes": "No",
+                Active = t.Status == 1  ? "Pending" : "Approved"
+            })
+            .ToList();
+            var stream = new MemoryStream();
+
+            using (var package = new ExcelPackage(stream))
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+                worksheet.Cells.LoadFromCollection(result, true);
+                package.Save();
+            }
+            stream.Position= 0;
+            string excelName = $"Techers Licenses data {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
 
         // [HttpPost]

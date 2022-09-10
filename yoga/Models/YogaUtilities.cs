@@ -18,10 +18,7 @@ namespace yoga.Models
 
             // Check if this serial number exsiting in database
             var dbSerials = serials;
-            foreach (var item in dbSerials)
-            {
-                
-            }
+            
             if(dbSerials == null || dbSerials.Count() == 0) return serialNumber;
 
             var result = dbSerials.Where(s=>s == serialNumber);

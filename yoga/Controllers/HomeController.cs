@@ -27,12 +27,25 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult PrivacyAr()
+    {
+        return View();
+    }
+
     public IActionResult About()
+    {
+        return View();
+    }
+    public IActionResult AboutAr()
     {
         return View();
     }
 
     public IActionResult History()
+    {
+        return View();
+    }
+    public IActionResult HistoryAr()
     {
         return View();
     }
@@ -42,7 +55,17 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult NewsAr()
+    {
+        return View();
+    }
+
     public IActionResult Downloads()
+    {
+        return View();
+    }
+
+    public IActionResult DownloadsAr()
     {
         return View();
     }
@@ -52,7 +75,17 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult FAQSAr()
+    {
+        return View();
+    }
+
     public IActionResult Contact()
+    {
+        return View();
+    }
+
+     public IActionResult ContactAr()
     {
         return View();
     }
@@ -66,14 +99,15 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult CultureManagement(string culture, string returnUrl)
     {
-        Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(
+        Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, 
+        CookieRequestCultureProvider.MakeCookieValue(
             new RequestCulture(culture)
         ), new CookieOptions{ Expires = DateTimeOffset.Now.AddDays(30)});
 
         return LocalRedirect(returnUrl);
     }
 
-    public IActionResult IndexNew()
+    public IActionResult IndexAr()
     {
         return View();
     }

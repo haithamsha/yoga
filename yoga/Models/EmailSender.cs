@@ -1,6 +1,8 @@
 using System.Net;
 using System.Net.Mail;
 using MimeKit;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace yoga.Models
 {
@@ -100,6 +102,35 @@ namespace yoga.Models
                 throw;
             }
             
+        }
+
+        public async void SendEmailBySendGrid(EmailMessage emailMsg)
+        {
+            try
+            {
+                    var apiKey = "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";
+                    var client = new SendGridClient(apiKey);
+                    var from = new EmailAddress("shahaitham@gmail.com", "SAUDI YOGA COMMITTEE");
+                    var subject = emailMsg.Subject;
+                    var to = new EmailAddress(emailMsg.ToEmailAddresses.FirstOrDefault().ToString(), emailMsg.ToEmailAddresses.FirstOrDefault().ToString());
+                    var plainTextContent = emailMsg.Body;
+                    var htmlContent = emailMsg.Body;
+                    var msg = MailHelper.CreateSingleEmail(
+                        from, 
+                        to, 
+                        subject, 
+                        plainTextContent,
+                        htmlContent
+                        );
+                    var response = await client.SendEmailAsync(msg);
+                    var result = response.StatusCode;
+                    var isSucced = response.IsSuccessStatusCode;
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw;
+            }
         }
     }
 }

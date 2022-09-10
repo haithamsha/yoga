@@ -1,0 +1,124 @@
+ <!-- Preload the Whole Page -->
+ <div id="preloader">
+    <div id="loading-animation">&nbsp;</div>
+</div>
+<!-- Navbar -->
+<header class="header">
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navigation-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="~/assets/images/site-logo.png" alt="">
+                </a>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navigation-nav">
+                <ul class="nav navbar-nav navbar">
+                    <li class="active"><a class="section-scroll" asp-controller="Home" asp-action="Index">@localizer["Home"]</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        asp-controller="Home" asp-action="About">@localizer["About"]</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Home" asp-action="About">@localizer["About"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="History">@localizer["History"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Home" asp-action="News">@localizer["News"]</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a  href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        >@localizer["Platforms"]</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Platform" asp-action="Detail" asp-route-id="1" >@localizer["Amateurs"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Platform" asp-action="Detail" asp-route-id="2">@localizer["TrainersPrograms"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Platform" asp-action="Detail" asp-route-id="3">@localizer["YogaStudios"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Platform" asp-action="Detail" asp-route-id="4">@localizer["ClubsCompetition"]</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Platform" asp-action="Detail" asp-route-id="5">@localizer["YogasanSport"]</a>
+                        </div>
+                    </li>
+                    <li><a asp-controller="Home" asp-action="Downloads">@localizer["Handbook"]</a></li>
+                    <li><a asp-controller="Home" asp-action="FAQS" >@localizer["Faq"]</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a></li>
+                    <li><a asp-controller="Home" asp-action="IndexNew">Index new</a></li>
+                    @* <li class="nav-link">
+                        <partial name="_Culture"/>
+                    </li> *@
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <partial name="_LoginPartial"/>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <partial name="_Culture"/>
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+</header>
+<!-- End Navbar -->
+
+<div id="wrapper">
+    @RenderBody()
+</div>
+
+<!-- Contact-info
+================================================== -->
+<section>
+    <div class="contact-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="#"><i class="pe-7s-map-marker"></i>@localizer["footerTitle1"]</a>
+                    <p>
+                        @localizer["footerBody1"]
+                    </p>
+                </div> <!-- End col-sm-4 -->
+                <div class="col-sm-4">
+                    <a href="tel:+123000456"><i class="pe-7s-phone"></i>@localizer["AddressTitle"]</a>
+                    <div>The Castle</div>
+                    <div>345 2500 Castle Dr.</div>
+                    <div>Port Douglas, Queensland</div>
+                </div>
+                <div class="col-sm-4">
+                    <a href="mailto:hello@hotmail.com"><i class="pe-7s-mail"></i>@localizer["Contact"]</a>
+                    <div>@localizer["Phone"]: +216 (0)40 3629 4753</div>
+                    <div>@localizer["Email"]: hello@example.com</div>
+                </div>
+            </div> <!-- End row -->
+        </div> <!-- End container -->
+    </div> <!-- End contact-info -->
+</section>
+<!-- Footer
+    ================================================== -->
+<footer>
+    <div id="footer-section" class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <p class="copyright">
+                        &copy; @localizer["Rights"]
+                    </p>
+                </div> <!-- End col-sm-8 -->
+            </div> <!-- End row -->
+        </div> <!-- End container -->
+    </div> <!-- End footer-section  -->
+</footer>
+<!-- End footer -->
+
+ @RenderSection("Scripts", required: false)

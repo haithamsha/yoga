@@ -19,7 +19,18 @@ namespace yoga.Controllers
             return View(platforms);
         }
 
+        public IActionResult IndexAr()
+        {
+            var platforms = _db.Platforms.ToList();
+            return View(platforms);
+        }
+
         public IActionResult Detail(int id)
+        {
+            var platform = _db.Platforms.Find(id);
+            return View(platform);
+        }
+        public IActionResult DetailAr(int id)
         {
             var platform = _db.Platforms.Find(id);
             return View(platform);
