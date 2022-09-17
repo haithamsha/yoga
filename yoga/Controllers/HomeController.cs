@@ -10,16 +10,22 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly YogaAppDbContext _db;
-    public HomeController(ILogger<HomeController> logger,  YogaAppDbContext db)
+    // public HomeController(ILogger<HomeController> logger,  YogaAppDbContext db)
+    // {
+    //     _logger = logger;
+    //     _db = db;
+    // }
+
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-        _db = db;
     }
 
     public IActionResult Index()
     {
-        var platforms = _db.Platforms.ToList();
-        return View(platforms);
+        // var platforms = _db.Platforms.ToList();
+        // return View(platforms);
+        return View();
     }
 
     public IActionResult Privacy()
