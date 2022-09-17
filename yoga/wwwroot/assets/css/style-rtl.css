@@ -1,0 +1,27 @@
+body {
+    direction: rtl !important;
+}
+@media screen and (min-width: 768px) {
+    #about-us{
+        left: 0px;
+    }
+    #about-us img{
+        left: 0px;
+    right: unset;
+    }
+    .yoga-news-badge{
+        right: 55px;
+        left: unset;
+    }
+}
+.public-pages select{
+    appearance: none;
+    background-image: url('./assets/images/public/arrow.png');
+    background-repeat:no-repeat;
+    background-position: 12px center;
+    background-size: 10px;
+}
+#platform-page img{
+    left: 0px;
+    right: unset !important;
+}

@@ -1,0 +1,132 @@
+li.selected-item {
+    opacity: 1 !important;
+}
+
+
+
+.account-items ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.account-items li {
+    /* opacity: 0.5; */
+    padding-top: 32px;
+    padding-bottom: 32px;
+    font-family: zaridSerif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31px;
+}
+
+.account-items li:not(:last-child) {
+    border-bottom: 1px solid rgba(87, 114, 50, 0.15);
+}
+
+.account-details div {
+    margin-bottom: 40px;
+}
+
+.account-details h2:nth-child(1) {
+    margin-bottom: 10px;
+}
+
+.account-details h2:nth-child(3) {
+    margin-bottom: 25px;
+}
+
+.account-details p {
+    font-family: Tajawal;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 29px;
+    margin-inline-start: 10px;
+    color: var(--green-darker);
+    margin-bottom: 0px;
+}
+
+.account-details h2 {
+    font-family: zaridSerif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 47px;
+    color: var(--green-darker);
+}
+
+@media screen and (min-width: 768px) {
+    .account-items li {
+        opacity: 0.5;
+    }
+
+    .account-details,
+    .account-user {
+        margin-inline-start: 72px;
+        margin-top: 20px;
+    }
+
+    .account-items {
+        border-inline-end: 1px solid rgba(87, 114, 50, 0.15);
+    }
+
+    .account-items .arrow {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .account-items li:not(:last-child){
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.table {
+    background-color: rgba(255, 252, 251, 0.8);
+    ;
+    border-radius: 5px;
+    width: 90%;
+}
+
+.table .header {
+    font-family: zaridSerif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    color: #5C6146;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    display: flex;
+    padding-inline: 50px;
+}
+
+.table-row {
+    border-top: 1px solid rgba(87, 114, 50, 0.15);
+    color: rgba(92, 97, 70, 0.8);
+    font-family: Tajawal;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 19px;
+    padding-top: 26px;
+    padding-bottom: 26px;
+    display: flex;
+    padding-inline: 50px;
+}
+
+.pending {
+    color: #C09149;
+}
+
+.approved {
+    color: #577232;
+}
+
+.table-row .actions img {
+    padding-inline: 2px;
+}
+
+.account-row {
+    display: flex;
+    justify-content: space-between;
+
+}

@@ -1,0 +1,104 @@
+.teacher-list {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.teacher-list .page-header {
+    text-align: center;
+}
+
+.teacher-list .page-desc {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.teacher-item {
+    overflow: hidden;
+}
+
+.teacher-item img {
+    width: 370px;
+    height: 411px;
+}
+
+.teacher-position {
+    font-family: Tajawal;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    color: var(--green-darker);
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+
+.teacher-name {
+    font-family: zaridSerif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 44px;
+    color: var(--green-darker);
+    margin-bottom: 40px;
+}
+.objective-desc{
+    font-family: Tajawal;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #EEEAE3;
+}
+#objective-container {
+    width: 100%;
+    display: block;
+    background-color: var(--brown);
+}
+.objective-title{
+    font-family: zaridSerif;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 62px;
+    color: white;
+    text-align: start;
+    margin-bottom: 35px;
+}
+@media screen and (min-width: 768px){
+    #objective-desktop-container{
+        height: 665px;
+    } 
+    #objective-container {
+        position: absolute;
+        left: 0px;
+        height: 665px; 
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+    .objective-content{
+        padding-inline-start: 50px;
+    }
+    .objective-desc{
+        width:670px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    #objective-desktop-container{
+        margin-inline: var(--mobile-padding);
+    }
+    #objective-container {
+        padding-top:42px;
+        padding-bottom:42px;
+    }
+    .objective-content{
+        margin-top: 32px;
+    }
+    .teacher-item{
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .teacher-details{
+        width: 370px;
+    }
+   
+}

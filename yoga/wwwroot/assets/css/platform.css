@@ -1,0 +1,142 @@
+#platform-page {
+    width: 100%;
+    display: block;
+}
+
+#platform-page .platform-page-title {
+    font-family: zaridSerif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 62px;
+    color: var(--green-darker);
+}
+
+#platform-page .platform-page-desc {
+    font-family: Tajawal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--green-darker);
+}
+.advantage-title{
+    font-family: zaridSerif;
+    font-size: 42px;
+    font-weight: 600;
+    line-height: 62px;
+    color: white;
+    text-align: start;
+    margin-bottom: 35px;
+}
+.advantage-item img{
+    margin-inline-end: 12px;
+    height: 100%;
+}
+.advantage-item {
+    display: flex;
+    margin-bottom: 25px;
+    max-width: 535px;
+}
+.advantage-item p{
+    font-family: Tajawal;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 24px;
+    color: white;
+    margin-bottom: 0px;
+    text-align: start;
+}
+#advantage-container {
+    width: 100%;
+    display: block;
+    background-color: var(--brown);
+}
+
+@media screen and (min-width: 768px) {
+    #advantage-container {
+        position: absolute;
+        left: 0px;
+        height: 665px; 
+        padding-top: 75px;
+        padding-bottom: 75px;
+    }
+     #advanatage-desktop-container{
+        height: 665px;
+    } 
+    #platform-page {
+        position: absolute;
+        height: 600px;
+        left: 0px;
+    }
+
+    #platform-page img {
+        right: 0px;
+        top: 0px;
+        position: absolute;
+        height: 809px;
+        width: 618.17px;
+    }
+
+    .platform-page-content {
+        padding-top: 204px;
+        padding-bottom: 204px;
+    }
+    .platform-page-content a.btn-brown-primary{
+        margin-top: 100px;
+    }
+
+    #platform-page-container {
+        height: 809px;
+    }
+
+    #platform-page-container {
+        height: 809px;
+    }
+
+    .platform-page-content {
+        padding-top: 204px;
+        padding-bottom: 204px;
+    }
+
+    #platform-page .platform-page-desc {
+        width: 550px;
+    }
+    .advantage-content{
+        padding-inline-start: 50px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .advantage-content{
+        margin-top: 32px;
+    }
+
+    #advantage-container {
+        padding-top:42px;
+        padding-bottom:42px;
+    }
+    #advanatage-desktop-container{
+        margin-inline: var(--mobile-padding);
+    }
+   
+    #platform-page {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .platform-page-content {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    #platform-page img {
+        width: calc(100% + 24px);
+        margin-inline: var(--mobile-padding);
+    }
+
+    .platform-page-content .btn-brown-primary {
+        margin-top: 50px;
+    }
+
+}

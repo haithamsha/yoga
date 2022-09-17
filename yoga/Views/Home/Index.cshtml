@@ -1,681 +1,296 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = locOptions.Value.SupportedUICultures.Select(x=> new SelectListItem {Value = x.Name, Text = x.Name})
+    .ToList();
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<div class="container main-content">
-						<div class="row">
+<div>
+                <div id="banner-outer-container">
+                    <div class="banner-container">
+                        <div class="banner d-flex align-items-center justify-content-center">
+                            <div id="circle-one" class="circle"></div>
+                            <div id="circle-two" class="circle"></div>
+                            <div id="circle-three" class="circle"></div>
+                            <div id="circle-one-rotate" class="circle"></div>
+                            <div id="circle-two-rotate" class="circle"></div>
+                            <div id="circle-three-rotate" class="circle"></div>
+                            <div id="banner-title">
+                                <div id="title-ar">
+                                    اللجنة السعودية لليوغا
+                                </div>
+                                <div id="title-en">
+                                    saudi yoga committee
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="about-us-container">
+                <div id="about-us">
+                    <div class="about-us-content container">
+							@if(@culture.RequestCulture.UICulture.Name == "en")
+							{
+								<a type="button" class="btn btn-brown-outline about-btn">ABOUT US</a>
+							}
+							else {
+								<a type="button" class="btn btn-brown-outline about-btn">من نحن</a>
+							}
+							
+                        @if(@culture.RequestCulture.UICulture.Name == "en")
+						{
+							<div class="about-us-title">Who We Are</div>
+						}
+						else {
+							<div class="about-us-title">معلومات عنا</div>
+						}
+                        @if(@culture.RequestCulture.UICulture.Name == "en")
+						{
+							<div class="about-us-desc">
+                            The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic
+                            Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021
+                            to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan
+                            base across the country, and there is a genuine desire to supervise and develop its
+                            activities, as well as to support and improve the performance of yogis and sport
+                            professionals. A true desire exists to improve training quality and activate national
+                            participation in future international yoga tournaments and competitions.
+                        </div>
+						}
+						else {
+							<div class="about-us-desc">
+																اللجنة السعودية لليوغا هي لجنة رياضية تحت مظلة اللجنة الأولمبية العربية السعودية التابعة لوزارة الرياضة، تأسست في العام
+																2021م، وجاء تأسيس اللجنة نظراً لشعبية رياضة اليوغا وانتشارها الواسع في المملكة العربية السعودية، ووجود قاعدة جماهيرية
+																لها، والرغبة الجادة في الإشراف على أنشطة هذه الرياضة في المملكة والعمل على تطويرها ودعم ممارسيها ومحترفيها، لتطوير
+																أدائهم وتحسين جودة التدريب في المملكة لتحسين وتفعيل المشاركة الوطنية في البطولات والمسابقات الدولية الخاصة برياضة اليوغا
+																مستقبلاً.
 
-							<div id="fws_62f0174b8a908" data-column-margin="default" data-midnight="light"
-								data-top-percent="20%" data-bottom-percent="20%"
-								class="wpb_row vc_row-fluid vc_row top-level full-width-section  right_padding_8pct left_padding_8pct"
-								style="padding-top: calc(100vw * 0.20); padding-bottom: calc(100vw * 0.20); ">
-								<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="true">
-									<div class="inner-wrap">
-										<div class="row-bg viewport-desktop"></div>
-									</div>
-									<div class="row-bg-overlay" style="background-color:#000000;  opacity: 0.3; "></div>
-								</div>
-								<div class="video-color-overlay" data-color=""></div>
-								<div class="mobile-video-image"
-									style="background-image: url(./wp-content/uploads/2022/06/DSC01860.jpg)"></div>
-
-								<div class="nectar-video-wrap" data-bg-alignment="">
-									<div class="nectar-video-inner">
-										<video class="nectar-video-bg" width="1800" height="700" preload="auto" loop
-											autoplay muted playsinline>
-											<source src="~/assets3/bannervid.mp4" type="video/mp4">
-										</video>
-									</div>
-								</div>
-
-								<div class="row_col_wrap_12 col span_12 light left">
-									<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
-							<div id="fws_62f0174b8b101" data-column-margin="default" data-midnight="dark"
-								data-bottom-percent="7%"
-								class="wpb_row vc_row-fluid vc_row full-width-content vc_row-o-equal-height vc_row-flex vc_row-o-content-middle  reverse_columns_column_tablet reverse_columns_column_phone right_padding_tablet_8pct left_padding_tablet_8pct"
-								style="padding-top: 0px; padding-bottom: calc(100vw * 0.07); ">
-								<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false">
-									<div class="inner-wrap">
-										<div class="row-bg viewport-desktop"></div>
-									</div>
-								</div>
-								<div class="row_col_wrap_12 col span_12 dark left">
-									<div class="vc_col-sm-6 wpb_column column_container vc_column_container col padding-7-percent no-extra-padding_tablet no-extra-padding_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-												<div id="fws_62f0174b8d1ba" data-midnight="" data-column-margin="none"
-													class="wpb_row vc_row-fluid vc_row inner_row  top_padding_tablet_8pct"
-													style="padding-bottom: 10px; ">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column has-animation no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1"
-															data-animation="fade-in-from-bottom" data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
+						}
+                    </div>
+                    <img src="~/assets/images/about.jpg">
+                </div>
+            </div>
+            <div id="objectives-desktop-container">
+                <div id="objectives-container">
+                    <div id="objectives" class="container">
 
-																	<div class="nectar-animated-title"
-																		data-style="color-strip-reveal"
-																		data-color="accent-color">
-																		<div class="nectar-animated-title-outer">
-																			<div class="nectar-animated-title-inner">
-																				<div class="wrap">
-																					<h6 style="color: #ffffff;">About us
-																					</h6>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="nectar-split-heading " data-align="default"
-													data-m-align="inherit" data-text-effect="default"
-													data-animation-type="line-reveal-by-space" data-animation-delay="0"
-													data-animation-offset="" data-m-rm-animation="" data-stagger="true"
-													data-custom-font-size="true"
-													style="font-size: 3vw; line-height: 3.3vw;">
-													<h3 style=" color: #5c6146;">Who We Are</h3>
-												</div>
-												<div id="fws_62f0174b8d6fb" data-midnight="" data-column-margin="none"
-													class="wpb_row vc_row-fluid vc_row inner_row  right_padding_tablet_25pct right_padding_phone_0px">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column has-animation no-extra-padding el_spacing_0px inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1"
-															data-animation="fade-in-from-bottom" data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-split-heading "
-																		data-align="default" data-m-align="inherit"
-																		data-text-effect="none"
-																		data-animation-type="line-reveal-by-space"
-																		data-animation-delay="0"
-																		data-animation-offset="" data-m-rm-animation=""
-																		data-stagger="" data-custom-font-size="false">
-																		<p>The Saudi Yoga Committee is a sports
-																			committee that operates under the Saudi
-																			Arabian Olympic Committee, which is
-																			affiliated with the Ministry of Sports. The
-																			Committee was formed in 2021 to respond to
-																			the growing popularity of this sport in
-																			Saudi Arabia. Yoga has a large fan base
-																			across the country, and there is a genuine
-																			desire to supervise and develop its
-																			activities, as well as to support and
-																			improve the performance of yogis and sport
-																			professionals. A true desire exists to
-																			improve training quality and activate
-																			national participation in future
-																			international yoga tournaments and
-																			competitions.</p>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
+                        @if(@culture.RequestCulture.UICulture.Name == "en")
+						{
+							<div id="objectives-title">Aims & Objectives</div>
+						}
+						else {
+							<div id="objectives-title">الغايات والأهداف</div>
+						}
+                        <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center">
+
+                            <div class="objective-column">
+                                <div class="objective-title">
+                                    <img src="~/assets/images/brown-star.png">
+									@if(@culture.RequestCulture.UICulture.Name == "en")
+									{
+											<div>
+												TO INCREASE THE NUMBER OF YOGIS IN SOCIETY
 											</div>
-										</div>
-									</div>
-
-									<div class="vc_col-sm-6 wpb_column column_container vc_column_container col no-extra-padding el_spacing_0px inherit_tablet inherit_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-												<div id="fws_62f0174b8daaa" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row  left_padding_20pct left_padding_tablet_10pct">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-using-bg="true" data-padding-pos="all"
-															data-has-bg-color="false" data-bg-color=""
-															data-bg-opacity="1" data-animation="" data-delay="0">
-															<div class="vc_column-inner">
-																<div class="column-image-bg-wrap viewport-desktop"
-																	data-n-parallax-bg="true"
-																	data-parallax-speed="very_subtle"
-																	data-bg-pos="center center" data-bg-animation="none"
-																	data-bg-overlay="false">
-																	<div class="inner-wrap">
-																		<div class="column-image-bg parallax-layer"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/DSC01860.jpg">
-																		</div>
-																	</div>
-																</div>
-																<div class="wpb_wrapper">
-																	<div class="divider-wrap height_tablet_70vh height_phone_60vh "
-																		data-alignment="default">
-																		<div style="height: 90vh;" class="divider">
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div id="fws_62f0174b8ef16" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row  min_width_desktop_40pct row_position_absolute top_position_desktop_50pct left_position_desktop_0px"
-													style="-webkit-transform:  translateY(-50%); transform:  translateY(-50%); z-index: 50;">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-using-bg="true" data-shadow="x_large_depth"
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0" data-scroll-animation="true"
-															data-scroll-animation-movement="default"
-															data-scroll-animation-mobile="true"
-															data-scroll-animation-intensity="2.25">
-															<div class="vc_column-inner">
-																<div class="column-image-bg-wrap viewport-desktop"
-																	data-n-parallax-bg="true"
-																	data-parallax-speed="very_subtle"
-																	data-bg-pos="center center" data-bg-animation="none"
-																	data-bg-overlay="false">
-																	<div class="inner-wrap">
-																		<div class="column-image-bg parallax-layer"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/IMG_1082.jpg">
-																		</div>
-																	</div>
-																</div>
-																<div class="column-bg-overlay-wrap"
-																	data-bg-animation="none">
-																	<div class="column-bg-overlay"></div>
-																</div>
-																<div class="wpb_wrapper">
-																	<div class="divider-wrap height_tablet_40vh height_phone_35vh "
-																		data-alignment="default">
-																		<div style="height: 50vh;" class="divider">
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
+									}
+									else {
+											<div>
+												الوصول إلى مجتمع يعي أهمية
+												الصحة النفسية والبدنية
 											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="fws_62f0174b8f640" data-column-margin="default" data-midnight="dark"
-								class="wpb_row vc_row-fluid vc_row" style="padding-top: 0px; padding-bottom: 0px; ">
-								<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false">
-									<div class="inner-wrap">
-										<div class="row-bg viewport-desktop"></div>
-									</div>
-								</div>
-								<div class="row_col_wrap_12 col span_12 dark left">
-									<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-												<div id="fws_62f0174b8f7e1" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-split-heading "
-																		data-align="default" data-m-align="inherit"
-																		data-text-effect="default"
-																		data-animation-type="line-reveal-by-space"
-																		data-animation-delay="0"
-																		data-animation-offset="" data-m-rm-animation=""
-																		data-stagger="true" data-custom-font-size="true"
-																		style="font-size: 3vw; line-height: 3.3vw;">
-																		<h3 style=" color: #5c6146;">Aims & Objectives
-																		</h3>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="fws_62f0174b8fa4b" data-column-margin="default" data-midnight="dark"
-								class="wpb_row vc_row-fluid vc_row" style="padding-top: 0px; padding-bottom: 0px; ">
-								<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false">
-									<div class="inner-wrap">
-										<div class="row-bg viewport-desktop"></div>
-									</div>
-								</div>
-								<div class="row_col_wrap_12 col span_12 dark left">
-									<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-												<div id="fws_62f0174b8fc0d" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-4 wpb_column column_container vc_column_container col child_column centered-text padding-2-percent inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar_icon_wrap"
-																		data-border-thickness="2px"
-																		data-style="border-basic" data-padding="0px"
-																		data-color="accent-color">
-																		<div class="nectar_icon"><span
-																				class="im-icon-wrap"
-																				data-color="accent-color"
-																				style="height: 60px; width: 60px;"><span><svg
-																						version="1.1"
-																						xmlns="http://www.w3.org/2000/svg"
-																						width="40" height="40"
-																						viewbox="0 0 32 32">
-																						<path
-																							d="M18.541 26.459h-5.084c-5.808 0-5.875-15.028-5.875-15.667 0-4.837 4.773-8.899 8.219-9.972 0.131-0.037 0.267-0.037 0.396 0 3.445 1.073 8.219 5.104 8.219 9.888 0 0.644-0.067 15.751-5.875 15.751zM16 2.159c-2.967 1.021-7.084 4.583-7.084 8.633 0 5.952 1.411 14.333 4.541 14.333h5.084c3.133 0 4.54-8.431 4.54-14.417 0.001-4-4.116-7.529-7.081-8.549zM9.375 31.208c-0.051 0-0.1-0.005-0.149-0.017-0.211-0.048-0.387-0.196-0.469-0.397l-2.751-6.751c-0.105-0.256-0.040-0.552 0.165-0.744l2.939-2.719c0.269-0.251 0.691-0.235 0.943 0.035 0.251 0.271 0.233 0.695-0.037 0.943l-2.599 2.407 2.219 5.445 4.587-4.117c0.273-0.251 0.695-0.225 0.941 0.051 0.247 0.273 0.223 0.695-0.051 0.941l-5.292 4.751c-0.125 0.113-0.284 0.173-0.445 0.173zM22.625 31.208c-0.163 0-0.321-0.060-0.445-0.169l-5.292-4.751c-0.275-0.248-0.299-0.668-0.051-0.941 0.247-0.273 0.667-0.299 0.941-0.051l4.585 4.117 2.219-5.445-2.597-2.407c-0.271-0.251-0.288-0.672-0.037-0.943 0.249-0.271 0.672-0.289 0.943-0.035l2.939 2.719c0.203 0.192 0.269 0.483 0.165 0.744l-2.751 6.751c-0.081 0.2-0.255 0.349-0.468 0.397-0.051 0.008-0.101 0.013-0.151 0.013z">
-																						</path>
-																					</svg></span></span></div>
-																	</div>
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp vc_custom_1655895626236">
-																		<div class="wpb_wrapper">
-																			<h4>To increase the number of yogis in
-																				society</h4>
-																		</div>
-																	</div>
+									}
+                                   
+                                </div>
+                                
+								@if(@culture.RequestCulture.UICulture.Name == "en")
+								{
+									<div class="objective-desc">
+                                    As well as to raise awareness and enthusiasm for yoga as a way of life for all
+                                    segments
+                                    of
+                                    society and all ages. This will be accomplished by increasing and encouraging
+                                    activities
+                                    and
+                                    initiatives, as well as building a generation of sports enthusiasts and
+                                    professionals
+                                    who
+                                    are driven by a genuine desire to create a healthy sports society that recognizes
+                                    that
+                                    yoga
+                                    is for everyone. It will also help stand out in local and international competitions
+                                    and
+                                    events.
+                                </div>
+								}
+								else 
+								{
+									<div class="objective-desc">
+                                    وكذلك زيادة الوعي والحماس لليوغا كأسلوب حياة لجميع شرائح المجتمع وكافة الأعمار. سيتم تحقيق ذلك من خلال زيادة الأنشطة والمبادرات وتشجيعها ، فضلاً عن بناء جيل من عشاق الرياضة والمهنيين الذين تحركهم رغبة حقيقية في إنشاء مجتمع رياضي صحي يدرك أن اليوغا للجميع. كما سيساعد على التميز في المسابقات والأحداث المحلية والدولية.
+                                </div>
+								}
+                            </div>
 
+                            <div class="objective-column">
+                                <div class="objective-title">
+                                    <img src="~/assets/images/brown-star.png">
+                                    @if(@culture.RequestCulture.UICulture.Name == "en")
+									{
+									<div>
+                                        TO BE THE REGIONAL BEACON
+                                    </div>
+									}
+									else {
+										<div>
+                                        أن نكون الفنار الإقليمي الداعم 
+والمنظم لرياضة اليوغا
+                                    </div>
+									}
+                                </div>
+                               @if(@culture.RequestCulture.UICulture.Name == "en")
+							   {
+								 <div class="objective-desc">
+                                    Supports and regulates this sport and develops sustainable educational and
+                                    recreational
+                                    programs, raises public awareness, and prepares members of society to practice and
+                                    be
+                                    aware
+                                    of its correct content and principles. This will lead to physical and mental
+                                    well-being.
+                                </div>
+							   }
+							   else
+							    {
+									<div class="objective-desc">
+                                    تدعم هذه الرياضة وتنظمها وتطور برامج تعليمية وترفيهية مستدامة وتوعية الجمهور وتهيئ أفراد المجتمع لممارستها والاطلاع على محتواها ومبادئها الصحيحة. هذا سوف يؤدي إلى الرفاهية الجسدية والعقلية.
+                                </div>
+							   }
+                            </div>
 
+                            <div class="objective-column">
+                                <div class="objective-title">
+                                    <img src="~/assets/images/brown-star.png">
+                                   @if(@culture.RequestCulture.UICulture.Name == "en")
+								   {
+									 <div>
+                                        TO HELP SOCIETY
+                                    </div>
+								   }
+								   else {
+									<div>
+                                        للمساعدة المجتمع
+                                    </div>
+								   }
+                                </div>
+                               @if(@culture.RequestCulture.UICulture.Name == "en")
+							   {
+								 <div class="objective-desc">
+                                    realizes the importance of mental and physical health and its impact on daily life
+                                    by
+                                    providing and supporting various types of sports programs and awareness sessions for
+                                    all
+                                    community groups.
+                                </div>
+							   }
+							   else 
+							   {
+								<div class="objective-desc">
+                                    العمل على زيادة عدد الممارسين لرياضة اليوغا
+                                </div>
+							   }
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            <div id="platform" class="text-center">
+                @if(@culture.RequestCulture.UICulture.Name == "en")
+				{
+					<div class="header">Yogis’ Platform Licenses</div>
+				}
+				else {
+					<div class="header">منصة اليوغيين</div>
+				}
+                @if(@culture.RequestCulture.UICulture.Name == "en")
+				{
+					<div id="platform-desc">
+                    <div>This platform serves as a comprehensive resource for certified</div>
+                    <div>trainers, centers, gyms, and yoga clubs in Saudi Arabia.</div>
+                </div>
+				}
+				else {
+					<div id="platform-desc">
+                    <div> تعتبر هذه المنصة بمثابة دليل كامل للمدربين والمراكز</div>
+                    <div> والصالات و اندية اليوغا المعتمدة في المملكة.</div>
+                </div>
+				}
+                @if(culture.RequestCulture.UICulture.Name == "en")
+				{
+					<div class="platform-licenses row row-cols-2 row-cols-lg-5 align-items-center justify-content-lg-between justify-content-center">
+                    <div class="show-on-scroll">
+                        <img src="~/assets/images/amateurs.png" />
+                        <p>AMATEURS</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="~/assets/images/trainers.png" />
+                        <p>TRAINERS (PROGRAM)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="~/assets/images/centers.png" />
+                        <p>CENTERS & GYMS (COMPETITION)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="~/assets/images/clubs.png" />
+                        <p>CLUBS (COMPETITION)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="~/assets/images/yogasan.png" />
+                        <p>YOGASAN SPORTATHLETS</p>
+                    </div>
 
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp">
-																		<div class="wpb_wrapper">
-																			<p>ِِAs well as to raise awareness and
-																				enthusiasm for yoga as a way of life for
-																				all segments of society and all ages.
-																				This will be accomplished by increasing
-																				and encouraging activities and
-																				initiatives, as well as building a
-																				generation of sports enthusiasts and
-																				professionals who are driven by a
-																				genuine desire to create a healthy
-																				sports society that recognizes that yoga
-																				is for everyone. It will also help stand
-																				out in local and international
-																				competitions and events.</p>
-																		</div>
-																	</div>
+                </div>
+				}
+				else {
+					<div class="platform-licenses row row-cols-2 row-cols-lg-5 align-items-center justify-content-lg-between justify-content-center">
+                   
+                    
+                    <div class="show-on-scroll">
+                        <img src="assets/images/yogasan.png" />
+                        <p>لاعبين اليوغا
+                            (محترف)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="assets/images/clubs.png" />
+                        <p>الأندية (منافسة)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="assets/images/centers.png" />
+                        <p>المراكز والألعاب الرياضية
+                            (منافسة)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="assets/images/trainers.png" />
+                        <p>المدربون (برنامج)</p>
+                    </div>
+                    <div class="show-on-scroll">
+                        <img src="assets/images/amateurs.png" />
+                        <p>الهواة</p>
+                    </div>
 
-
-
-
-																</div>
-															</div>
-														</div>
-
-														<div class="vc_col-sm-4 wpb_column column_container vc_column_container col child_column centered-text padding-2-percent inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar_icon_wrap"
-																		data-border-thickness="2px"
-																		data-style="border-basic" data-padding="0px"
-																		data-color="accent-color">
-																		<div class="nectar_icon"><span
-																				class="im-icon-wrap"
-																				data-color="accent-color"
-																				style="height: 60px; width: 60px;"><span><svg
-																						version="1.1"
-																						xmlns="http://www.w3.org/2000/svg"
-																						width="40" height="40"
-																						viewbox="0 0 32 32">
-																						<path
-																							d="M20.68 14.325c-0.096 0-0.195-0.021-0.287-0.065-0.232-0.109-0.38-0.344-0.38-0.601v-7.252l-9.58 7.775c-0.2 0.161-0.475 0.195-0.707 0.084-0.232-0.112-0.38-0.347-0.38-0.601v-7.135l-8.241 7.621c-0.271 0.251-0.693 0.233-0.943-0.033-0.251-0.271-0.233-0.695 0.037-0.943l9.361-8.656c0.195-0.18 0.477-0.224 0.72-0.123 0.244 0.107 0.4 0.347 0.4 0.612v7.253l9.583-7.775c0.197-0.16 0.472-0.195 0.705-0.084 0.232 0.112 0.379 0.347 0.379 0.601v7.255l9.583-7.775c0.197-0.16 0.472-0.195 0.705-0.084 0.232 0.109 0.379 0.347 0.379 0.601v8.633c0 0.367-0.299 0.667-0.667 0.667-0.365 0-0.667-0.3-0.667-0.667v-7.232l-9.58 7.775c-0.123 0.096-0.271 0.148-0.421 0.148zM20.68 27.659c-0.096 0-0.195-0.021-0.287-0.065-0.232-0.109-0.38-0.344-0.38-0.601v-7.252l-9.58 7.775c-0.2 0.161-0.475 0.195-0.707 0.084-0.232-0.112-0.38-0.347-0.38-0.601v-7.136l-8.241 7.623c-0.271 0.251-0.693 0.233-0.943-0.033-0.251-0.271-0.233-0.695 0.037-0.943l9.361-8.656c0.195-0.18 0.477-0.224 0.72-0.123 0.244 0.107 0.4 0.347 0.4 0.612v7.252l9.583-7.773c0.197-0.161 0.472-0.195 0.705-0.084 0.232 0.112 0.379 0.348 0.379 0.601v7.253l9.583-7.773c0.197-0.161 0.472-0.196 0.705-0.084 0.232 0.109 0.379 0.348 0.379 0.601v8.635c0 0.365-0.299 0.667-0.667 0.667-0.365 0-0.667-0.301-0.667-0.667v-7.235l-9.58 7.775c-0.123 0.097-0.271 0.149-0.421 0.149z">
-																						</path>
-																					</svg></span></span></div>
-																	</div>
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp vc_custom_1655895826040">
-																		<div class="wpb_wrapper">
-																			<h4>To be the regional beacon</h4>
-																		</div>
-																	</div>
-
-
-
-
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp">
-																		<div class="wpb_wrapper">
-																			<p>Supports and regulates this sport and
-																				develops sustainable educational and
-																				recreational programs, raises public
-																				awareness, and prepares members of
-																				society to practice and be aware of its
-																				correct content and principles. This
-																				will lead to physical and mental
-																				well-being.</p>
-																		</div>
-																	</div>
-
-
-
-
-																</div>
-															</div>
-														</div>
-
-														<div class="vc_col-sm-4 wpb_column column_container vc_column_container col child_column centered-text padding-2-percent inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar_icon_wrap"
-																		data-border-thickness="2px"
-																		data-style="border-basic" data-padding="0px"
-																		data-color="accent-color">
-																		<div class="nectar_icon"><span
-																				class="im-icon-wrap"
-																				data-color="accent-color"
-																				style="height: 60px; width: 60px;"><span><svg
-																						version="1.1"
-																						xmlns="http://www.w3.org/2000/svg"
-																						width="40" height="40"
-																						viewbox="0 0 32 32">
-																						<path
-																							d="M14.667 28c-3.504 0-6.824-1.527-9.109-4.185-0.24-0.281-0.208-0.703 0.072-0.943 0.28-0.239 0.7-0.208 0.94 0.073 2.031 2.364 4.983 3.721 8.097 3.721 1.58 0 3.099-0.336 4.519-1 0.333-0.153 0.729-0.011 0.885 0.323s0.013 0.729-0.32 0.885c-1.599 0.748-3.308 1.125-5.084 1.125zM10 16.667c-1.837 0-3.333-1.496-3.333-3.333s1.496-3.333 3.333-3.333 3.333 1.497 3.333 3.333-1.496 3.333-3.333 3.333zM10 11.333c-1.103 0-2 0.897-2 2s0.897 2 2 2 2-0.896 2-2-0.897-2-2-2zM19.333 16.667c-1.837 0-3.333-1.496-3.333-3.333s1.496-3.333 3.333-3.333 3.333 1.497 3.333 3.333-1.496 3.333-3.333 3.333zM19.333 11.333c-1.103 0-2 0.897-2 2s0.897 2 2 2 2-0.896 2-2-0.897-2-2-2zM9.333 24h-4c-0.368 0-0.667-0.299-0.667-0.667 0-0.367 0.299-0.667 0.667-0.667h4c0.368 0 0.667 0.3 0.667 0.667 0 0.368-0.299 0.667-0.667 0.667zM14.667 32c-8.087 0-14.667-6.58-14.667-14.667 0-8.085 6.58-14.667 14.667-14.667 8.085 0 14.667 6.58 14.667 14.667s-6.581 14.667-14.667 14.667zM14.667 4c-7.352 0-13.333 5.983-13.333 13.333 0 7.352 5.981 13.333 13.333 13.333s13.333-5.981 13.333-13.333c0-7.351-5.981-13.333-13.333-13.333zM31.333 18.667h-2c-0.367 0-0.667-0.299-0.667-0.667 0-0.367 0.3-0.667 0.667-0.667h1.333v-1.333c0-5.827-1.276-9.811-1.289-9.851-0.113-0.349 0.079-0.725 0.427-0.84 0.356-0.112 0.727 0.079 0.841 0.428 0.055 0.171 1.355 4.228 1.355 10.264v2c0 0.367-0.3 0.665-0.667 0.665zM29.895 6.615c-0.239 0-0.699-0.044-1.116-0.333-0.357-0.247-0.779-0.74-0.779-1.697v-3.917c0-0.368 0.3-0.667 0.667-0.667h2.667c0.367 0 0.667 0.299 0.667 0.667v3.805c0 1.581-1.024 2.141-1.899 2.141-0.013 0-0.043-0.001-0.076-0.003-0.032 0.003-0.076 0.004-0.131 0.004zM29.333 1.333v3.251c0 0.307 0.069 0.509 0.205 0.604 0.123 0.084 0.289 0.095 0.356 0.095v0.667l0.044-0.668c0.047-0.004 0.105-0.004 0.149 0 0.060 0 0.224-0.008 0.347-0.097 0.193-0.137 0.232-0.463 0.232-0.712v-3.139h-1.333zM30.012 6.611c-1.037 0-3.337-0.624-4.6-2.988-0.172-0.325-0.049-0.728 0.276-0.901 0.323-0.172 0.727-0.053 0.901 0.275 1 1.872 2.809 2.283 3.423 2.283 0.368 0 0.667 0.299 0.667 0.667s-0.299 0.665-0.667 0.665z">
-																						</path>
-																					</svg></span></span></div>
-																	</div>
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp vc_custom_1655895990735">
-																		<div class="wpb_wrapper">
-																			<h4>To help society</h4>
-																		</div>
-																	</div>
-
-
-
-
-																	<div
-																		class="wpb_text_column wpb_content_element  wpb_animate_when_almost_visible wpb_fadeInUp fadeInUp">
-																		<div class="wpb_wrapper">
-																			<p>realizes the importance of mental and
-																				physical health and its impact on daily
-																				life by providing and supporting various
-																				types of sports programs and awareness
-																				sessions for all community groups.</p>
-																		</div>
-																	</div>
-
-
-
-
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div id="fws_62f0174b9455d" data-column-margin="default" data-midnight="dark"
-								data-bottom-percent="7%"
-								class="wpb_row vc_row-fluid vc_row full-width-content vc_row-o-equal-height vc_row-flex vc_row-o-content-top  right_padding_8pct left_padding_8pct top_padding_tablet_20pct bottom_padding_tablet_15pct top_margin_tablet_0px"
-								style="padding-top: 0px; padding-bottom: calc(100vw * 0.07); ">
-								<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false">
-									<div class="inner-wrap">
-										<div class="row-bg viewport-desktop"></div>
-									</div>
-								</div>
-								<div class="row_col_wrap_12 col span_12 dark left">
-									<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone "
-										data-padding-pos="all" data-has-bg-color="false" data-bg-color=""
-										data-bg-opacity="1" data-animation="" data-delay="0">
-										<div class="vc_column-inner">
-											<div class="wpb_wrapper">
-												<div id="fws_62f0174b947b7" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row  right_padding_50pct bottom_padding_tablet_6pct right_padding_tablet_40pct"
-													style="padding-bottom: 3%; ">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-12 wpb_column column_container vc_column_container col child_column has-animation no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1"
-															data-animation="fade-in-from-bottom" data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-
-																	<div class="nectar-animated-title"
-																		data-style="color-strip-reveal"
-																		data-color="accent-color">
-																		<div class="nectar-animated-title-outer">
-																			<div class="nectar-animated-title-inner">
-																				<div class="wrap">
-																					<h6 style="color: #ffffff;">Buy Now
-																					</h6>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="nectar-split-heading "
-																		data-align="default" data-m-align="inherit"
-																		data-text-effect="default"
-																		data-animation-type="line-reveal-by-space"
-																		data-animation-delay="0"
-																		data-animation-offset="" data-m-rm-animation=""
-																		data-stagger="true" data-custom-font-size="true"
-																		style="font-size: 3vw; line-height: 3.3vw;">
-																		<h3 style=" color: #5c6146;">Yogis’ Platform
-																			Licenses</h3>
-																	</div>
-																	<div class="nectar-split-heading "
-																		data-align="default" data-m-align="inherit"
-																		data-text-effect="none"
-																		data-animation-type="line-reveal-by-space"
-																		data-animation-delay="0"
-																		data-animation-offset="" data-m-rm-animation=""
-																		data-stagger="" data-custom-font-size="false">
-																		<p>This platform serves as a comprehensive
-																			resource for certified trainers, centers,
-																			gyms, and yoga clubs in Saudi Arabia.</p>
-																	</div>
-																	<div class="divider-wrap" data-alignment="default">
-																		<div style="height: 15px;" class="divider">
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div id="fws_62f0174b94b4b" data-midnight=""
-													data-column-margin="default"
-													class="wpb_row vc_row-fluid vc_row inner_row">
-													<div class="row-bg-wrap">
-														<div class="row-bg"></div>
-													</div>
-													<div class="row_col_wrap_12_inner col span_12  left">
-														<div class="vc_col-sm-3 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-fancy-box using-img "
-																		style="min-height: 300px"
-																		data-style="hover_desc"
-																		data-border-radius="default" data-animation=""
-																		data-bg-animation="long_zoom" data-border=""
-																		data-delay="" data-alignment="left"
-																		data-color="accent-color">
-																		<div class="box-bg"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/IMG_1121.jpg">
-																		</div>
-																		<div class="inner">
-																			<div class="heading-wrap">Amateurs</div>
-																		</div> <a
-																			href="./platforms/amateurs-license/index.html"
-																			class="box-link"></a>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="vc_col-sm-3 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-fancy-box using-img "
-																		style="min-height: 300px"
-																		data-style="hover_desc"
-																		data-border-radius="default" data-animation=""
-																		data-bg-animation="long_zoom" data-border=""
-																		data-delay="" data-alignment="left"
-																		data-color="accent-color">
-																		<div class="box-bg"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/DSC01855.jpg">
-																		</div>
-																		<div class="inner">
-																			<div class="heading-wrap">Trainers (Program)
-																			</div>
-																		</div> <a
-																			href="./platforms/trainers-license/index.html"
-																			class="box-link"></a>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="vc_col-sm-3 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-fancy-box using-img "
-																		style="min-height: 300px"
-																		data-style="hover_desc"
-																		data-border-radius="default" data-animation=""
-																		data-bg-animation="long_zoom" data-border=""
-																		data-delay="" data-alignment="left"
-																		data-color="accent-color">
-																		<div class="box-bg"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/IMG_4893.jpg">
-																		</div>
-																		<div class="inner">
-																			<div class="heading-wrap">Centers &amp; Gyms
-																				(Competition)</div>
-																		</div> <a
-																			href="./platforms/centers-gyms-license/index.html"
-																			class="box-link"></a>
-																	</div>
-																</div>
-															</div>
-														</div>
-
-														<div class="vc_col-sm-3 wpb_column column_container vc_column_container col child_column no-extra-padding inherit_tablet inherit_phone "
-															data-padding-pos="all" data-has-bg-color="false"
-															data-bg-color="" data-bg-opacity="1" data-animation=""
-															data-delay="0">
-															<div class="vc_column-inner">
-																<div class="wpb_wrapper">
-																	<div class="nectar-fancy-box using-img "
-																		style="min-height: 300px"
-																		data-style="hover_desc"
-																		data-border-radius="default" data-animation=""
-																		data-bg-animation="long_zoom" data-border=""
-																		data-delay="" data-alignment="left"
-																		data-color="accent-color">
-																		<div class="box-bg"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/DSC01879.jpg">
-																		</div>
-																		<div class="inner">
-																			<div class="heading-wrap">Clubs
-																				(Competition)</div>
-																		</div> <a
-																			href="./platforms/clubs-license/index.html"
-																			class="box-link"></a>
-																	</div>
-																	<div class="nectar-fancy-box using-img "
-																		style="min-height: 300px"
-																		data-style="hover_desc"
-																		data-border-radius="default" data-animation=""
-																		data-bg-animation="long_zoom" data-border=""
-																		data-delay="" data-alignment="left"
-																		data-color="accent-color">
-																		<div class="box-bg"
-																			data-nectar-img-src="../assets3/wp-content/uploads/2022/06/IMG_1082.jpg">
-																		</div>
-																		<div class="inner">
-																			<div class="heading-wrap">Yogasan Sport
-																				Athletes</div>
-																		</div> <a
-																			href="./platforms/yogasan-sport-athletes/index.html"
-																			class="box-link"></a>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<partial name="_mainFooter" />
-					</div>
+                </div>
+				}
+                @if(@culture.RequestCulture.UICulture.Name == "en")
+				{
+					<a class="btn show-on-scroll" href="#" role="button">BUY NOW</a>
+				}
+				else {
+					<a class="btn show-on-scroll" href="#" role="button">اشتري الآن</a>
+				}
+            </div>
