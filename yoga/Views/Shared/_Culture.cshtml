@@ -8,7 +8,7 @@
 }
 <div>
     <form asp-action="CultureManagement" asp-controller="Home" method="post" asp-route-returnUrl="@returnUrl">
-        <button style="border:none !important" name="culture" 
+        <button style="border:none !important; background-color: #EEEAE3 !important;" name="culture" 
         value="@(culture.RequestCulture.UICulture.Name == "ar" ? "en": "ar")" onclick="">
             @if(@culture.RequestCulture.UICulture.Name == "en")
             {
