@@ -416,6 +416,7 @@ footer .btn {
 #copy-right {
     padding-top: 30px;
     padding-bottom: 30px;
+    overflow: hidden;
 }
 
 #copy-right .logos img {
@@ -425,29 +426,29 @@ footer .btn {
     height: 665px;
 }
 /*******************Start public page*************************/
-.public-pages select{
+select{
     appearance: none;
     background-image: url('../images/public/arrow.png');
     background-repeat:no-repeat;
     background-position: calc(100% - 12px) center;
     background-size: 10px;
 }
-.public-pages input[type=text],
-.public-pages input[type=text]:focus,
-.public-pages input[type=text]:focus-visible,
-.public-pages input[type=password],
-.public-pages input[type=password]:focus,
-.public-pages input[type=password]:focus-visible,
-.public-pages select,
-.public-pages select:focus,
-.public-pages select:focus-visible
+input[type=text],
+input[type=text]:focus,
+input[type=text]:focus-visible,
+input[type=password],
+input[type=password]:focus,
+input[type=password]:focus-visible,
+select,
+select:focus,
+select:focus-visible
 {
     outline: 0px;
     border: 0px;
 }
-.public-pages input[type=text],
-.public-pages input[type=password],
-.public-pages select{
+input[type=text],
+input[type=password],
+select{
     width: 100%;
     height: 55px;
     border-radius: 5px;
@@ -1076,11 +1077,63 @@ a[aria-expanded="true"] {
 .box,.box2{
 	transition:all 0.05s ease-in-out;
 }
-.box{
-    width: 220px;
+.curve-1{
+    right: 0px;
+    top: -52px;
+    width: 235px;
+    height: 200px;
+    z-index: 1;
+    border-radius: 29% 71% 70% 30% / 100% 100% 0% 0%;
+}
+.curve-2{
+    right: 10px;
+    top: -52px;
+    width: 235px;
+    height: 200px;
+    z-index: 2;
+    border-radius:24% 76% 70% 30% / 100% 100% 0% 0% ;
+}
+.curve-3{
+    right: 20px;
+    top: -52px;
+    width: 235px;
+    height: 200px;
+    border-radius:14% 86% 70% 30% / 100% 100% 0% 0% ;
+}
+.curve-4{
+    right: 30px;
+    top: -52px;
+    width: 235px;
+    height: 200px;
+    border-radius:0% 100% 70% 30% / 100% 100% 0% 0% ;
+}
+.curve{
+    /* width: 220px;
     height: 100px;
     border: solid 1px #fff;
     border-color: #fff transparent transparent transparent;
     border-radius: 50%/99px 45px 0 0;
-    transform: rotate(62deg);
+    transform: rotate(62deg); */
+
+
+    /* position: ABSOLUTE;
+    border-radius: 50px / 200px;
+    transform: rotate(150deg);
+    width: 50px;
+    height: 188px;
+    border: solid 1px #fff;
+    border-color: transparent transparent transparent #fff; */
+    
+    background: transparent;
+    border: 1px solid ;
+    position: absolute;
+    /* border-radius: 100%; */
+    border-color: transparent linen transparent transparent;
+    
+
+}
+.footer-borders{
+    position: relative;
+    width: 100px;
+    
 }
