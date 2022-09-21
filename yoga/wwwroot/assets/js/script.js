@@ -5,7 +5,6 @@ const ACTIVE_TIME = 500;
 //     light.classList.remove(LIGHT_ACTIVE_CLASS);
 //   });
 // }
-//
 function reveal() {
     var reveals = document.querySelectorAll(".show-on-scroll");
     //debugger;

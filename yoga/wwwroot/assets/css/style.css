@@ -439,6 +439,9 @@ input[type=text]:focus-visible,
 input[type=password],
 input[type=password]:focus,
 input[type=password]:focus-visible,
+textarea,
+textarea:focus,
+textarea:focus-visible
 select,
 select:focus,
 select:focus-visible
@@ -448,6 +451,7 @@ select:focus-visible
 }
 input[type=text],
 input[type=password],
+textarea,
 select{
     width: 100%;
     height: 55px;
@@ -461,6 +465,9 @@ select{
     /* padding: 19px  0 13px 16px; */
     color: var(--green-darker);
     line-height: 24px;
+}
+textarea{
+    height: 210px !important;
 }
 
 #upload-container{
@@ -572,6 +579,11 @@ select{
 }
 /*******************End public page*************************/
 @media screen and (min-width: 768px) {
+   
+    #contact-us-form .input-container,
+    #contact-us-form .mapouter{
+        margin-top: 40px;
+    }
     .submenu > :nth-child(n+2):nth-last-child(n+2){
         margin-inline:40px;
     }
@@ -696,6 +708,13 @@ select{
 }
 
 @media screen and (max-width: 768px) {
+    #contact-us-form .mapouter iframe{
+        max-width: 100%;
+    }
+    #contact-us-form .contact-info{
+        margin-top: 35px;
+    }
+   
     .submenu > :nth-child(n+2):nth-last-child(n+2){
         margin-block:16px;
     }
@@ -1136,4 +1155,33 @@ a[aria-expanded="true"] {
     position: relative;
     width: 100px;
     
+}
+#contact-us-form h3{
+    font-family: Tajawal;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 22px;
+    color: var(--green-darker);
+    margin-bottom: 16px;
+}
+
+#contact-us-form p{
+    font-family: 'Tajawal';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    margin-bottom: 0px;
+}
+
+#contact-us-form .mapouter iframe{
+    height: 370px;
+}
+
+#contact-us-form .social-icons
+{
+    margin-top: 5px;
+}
+#contact-us-form .social-icons a:nth-child(2){
+    margin-inline: 15px;
 }
