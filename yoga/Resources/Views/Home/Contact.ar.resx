@@ -141,4 +141,28 @@
     <value>ارسال</value>
     <comment/>
   </data>
+  <data name="AddressTitle" xml:space="preserve">
+    <value>العنوان</value>
+    <comment/>
+  </data>
+  <data name="Address1" xml:space="preserve">
+    <value>sdfsdf</value>
+    <comment/>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>s</value>
+    <comment/>
+  </data>
+  <data name="SocialMediaTitle" xml:space="preserve">
+    <value>التواصل الاجتماعي</value>
+    <comment/>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>عنوان الرسالة</value>
+    <comment/>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>الجوال</value>
+    <comment/>
+  </data>
 </root>

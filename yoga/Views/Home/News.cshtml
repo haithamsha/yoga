@@ -1,30 +1,121 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- Features App 2
-    ================================================== -->
-<section>
-    <div id="features-app-section-2" class="pad-sec">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 features-app-content-left animated out" data-animation="fadeInLeft" data-delay="0">
-                    <div class="section_header" style="padding:10%;">
-                        <h2>Commint Soon</span></h2>
-                    </div> <!-- End section_header -->
-                    
 
-                </div> <!-- End feature-content -->
+@if(culture.RequestCulture.UICulture.Name == "ar")
+{
+    <div class="yoga-layout">
+    @* <h1 class="page-header">ألاخبار</h1>
+    <p class="page-desc">اطلع على أحدث المقالات والأنشطة والمسابقات والندوات الخاصة بلجنة اليوجا السعودية</p>
+    <div id="news-container" class="row row-cols-lg-2 gx-lg-5">
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">مقالات</div>
+            <img src="~/assets/images/news/yoga-2.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">الأنشطة والمسابقات والندوات</div>
+            <img src="~/assets/images/news/yoga-2.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">مقالات</div>
+            <img src="~/assets/images/news/yoga-3.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">الأنشطة والمسابقات والندوات</div>
+            <img src="~/assets/images/news/yoga-4.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">مقالات</div>
+            <img src="~/assets/images/news/yoga-5.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+        <div class="col-lg-6 news-item">
+            <div class="yoga-news-badge">الأنشطة والمسابقات والندوات</div>
+            <img src="~/assets/images/news/yoga-6.png" />
+            <p class="news-item-title">أفضل وقت في السنة لزيارة أستراليا</p>
+            <p class="news-item-desc">يقتصر هذا المحتوى لأعضاء الموقع. إذا كنت مستخدمًا حاليًا ، فيرجى تسجيل الدخول.
+                يمكن للمستخدمين الجدد التسجيل أدناه.</p>
+        </div>
+    </div>
 
-                
+    <div class="text-center d-none d-lg-block">
+        <a class="btn btn-brown-primary" href="#" role="button">see more</a>
+    </div> *@
+                <div class="news-item-title">قريبا</div>
+</div>
+}
+else
+{
+    <div class="yoga-layout">
+                @* <h1 class="page-header">News</h1>
+                <p class="page-desc">View the latest articles and activities, contests and seminars for Saudi Yoga Commitee</p>
+                <div id="news-container" class="row row-cols-lg-2 gx-lg-5">
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ARTICLES</div>
+                        <img src="~/assets/images/news/yoga-2.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing
+                            user, please log in. New users may register below.</p>
+                    </div>
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ACTIVITIES, CONTESTS, AND SEMINARS</div>
+                        <img src="~/assets/images/news/yoga-2.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing
+                            user, please log in. New users may register below.</p>
+                    </div>
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ARTICLES</div>
+                        <img src="~/assets/images/news/yoga-3.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing
+                            user, please log in. New users may register below.</p>
+                    </div>
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ACTIVITIES, CONTESTS, AND SEMINARS</div>
+                        <img src="~/assets/images/news/yoga-4.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing
+                            user, please log in. New users may register below.</p>
+                    </div>
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ARTICLES</div>
+                        <img src="~/assets/images/news/yoga-5.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing user,
+                            please log in. New users may register below.</p>
+                    </div>
+                    <div class="col-lg-6 news-item">
+                        <div class="yoga-news-badge">ACTIVITIES, CONTESTS, AND SEMINARS</div>
+                        <img src="~/assets/images/news/yoga-6.png" />
+                        <p class="news-item-title">The best time of year to visit Australia</p>
+                        <p class="news-item-desc">This content is restricted to site members. If you are an existing user,
+                            please log in. New users may register below.</p>
+                    </div>
+                </div>
 
-            </div> <!-- End row -->
-        </div> <!-- End container -->
-    </div> <!-- End feature-section -->
-</section>
-<!-- End Features App 2 section -->
-
-<section>
-    <div class="sep-section"></div>
-</section>
-
-<partial name="_mainFooter" />
+                <div class="text-center d-none d-lg-block">
+                    <a class="btn btn-brown-primary" href="#" role="button">see more</a>
+                </div> *@
+                <h1 class="news-item-title">Comming soon</h1>
+            </div>
+}

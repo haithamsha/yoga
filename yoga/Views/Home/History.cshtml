@@ -1,95 +1,93 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
 @{
-     Layout = "~/Views/Shared/_Layout.cshtml";
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container main-content">
-		<div class="row">
-			
-		<div id="fws_62f01750987eb" data-column-margin="default" data-midnight="dark" data-top-percent="8%" data-bottom-percent="10%" class="wpb_row vc_row-fluid vc_row top-level full-width-content vc_row-o-equal-height vc_row-flex vc_row-o-content-middle  zindex-set right_padding_6pct left_padding_6pct top_padding_tablet_20pct top_padding_phone_25pct" style="padding-top: calc(100vw * 0.08); padding-bottom: calc(100vw * 0.10);  z-index: 100;">
-<div class="row-bg-wrap" data-bg-animation="fade-in" data-bg-overlay="false"><div class="inner-wrap"><div class="row-bg viewport-desktop"></div></div></div>
-<div class="row_col_wrap_12 col span_12 dark left">
-	<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone " data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation="" data-delay="0">
-		<div class="vc_column-inner">
-			<div class="wpb_wrapper">
-				<div id="fws_62f017509bd93" data-midnight="" data-column-margin="default" class="wpb_row vc_row-fluid vc_row inner_row vc_row-o-equal-height vc_row-flex vc_row-o-content-middle">
-<div class="row-bg-wrap"> <div class="row-bg"></div> </div>
-<div class="row_col_wrap_12_inner col span_12  left">
-	<div class="vc_col-sm-4/5 vc_col-md-9 wpb_column column_container vc_column_container col child_column no-extra-padding bottom_margin_tablet_20px inherit_tablet inherit_phone " data-t-w-inherits="small_desktop" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation="" data-delay="0">
-		<div class="vc_column-inner">
-		<div class="wpb_wrapper">
-			<div class="nectar-split-heading  font_size_tablet_9vw font_size_phone_10vw " data-align="default" data-m-align="inherit" data-text-effect="letter-reveal-bottom" data-animation-type="line-reveal-by-space" data-animation-delay="0" data-animation-offset="" data-m-rm-animation="true" data-stagger="true" data-custom-font-size="true" style="font-size: 95px; line-height: 102.6px;padding-left: 5%;"><h1>Yoga History</h1></div>
-		</div> 
+<div class="yoga-layout">
+
+	@if(culture.RequestCulture.UICulture.Name == "en")
+	{
+		<div id="yoga-history">
+		<h1 class="page-header">@localizer["PageTitle"]</h1>
+		<img src="~/assets/images/yogahistory/intro.png" />
+
+		<p class="yoga-history-desc">
+			Yoga is an ancient Indian sport with roots in the Indus Valley Civilization, which dates back more
+			than 5,000 years. It is one of the most important ancient practices, which gives its practitioner
+			vitality, physical activity, mental control, and focus. Since then, people in India have been
+			practicing yoga. Over time, it evolved into various types and schools, and spread around the world,
+			becoming known as the sport of physical and mental well-being. One of its benefits is that it is
+			suitable for people of all ages and groups, and it can be practiced by people from all walks of
+			life.
+		</p>
+		<p class="yoga-history-desc">
+			Studies have shown that practicing yoga can have a significant impact on physical health and can
+			combat modern-day diseases caused by stress. It also has a positive effect on the practitioner’s
+			mental and psychological health.
+		</p>
+		<p class="yoga-history-desc">
+			Some of the most important yoga practices include Asanas (physical postures), Pranayama (breathing
+			exercises), Dhyana (meditation exercises), and Yoga Nnidra (total deep relaxation). These postures
+			are practiced while controlling the breathing rhythm in a meditative manner, which brings about a
+			state of focus and balance even if the poses are difficult.
+		</p>
+		<p class="yoga-history-desc">
+			Saudi Arabia has tens of thousands of yogis, as well as thousands of Saudi yoga trainers. The Saudi
+			Yoga Committee works to support them, develop sports, build capabilities, and empower them to
+			contribute to promoting yoga in society and expanding the public base of yoga lovers, practitioners,
+			and trainers in Saudi Arabia.
+		</p>
+		<p class="yoga-history-desc">
+			Yoga is an important and very useful recreational sport for children, adults, and the elderly
+			because it provides health, well-being, and recreation in proportion to their physical and
+			psychological needs. There are also several types of yoga that are practiced in Saudi Arabia, which
+			are classified as follows:
+		</p>
+		<ul class="yoga-history-desc">
+			<li>Yoga for Health and Wellbeing</li>
+			<li>Yoga Asana Sports</li>
+			<li>Yoga Therapy</li>
+		</ul>
+		<p class="yoga-history-desc">
+			According to the Saudi Yoga Committee’s regulations, each type of yoga has specific conditions and
+			requirements for training and practice in order to ensure a health, safe and effective yoga practice
+			that benefits everyone.
+		</p>
 	</div>
-	</div> 
+	}
+	else 
+	{
+		<div id="yoga-history">
+                <h1 class="page-header">تاريخ اليوجا</h1>
+                <img src="~/assets/images/yogahistory/intro.png" />
 
-	<div class="vc_col-sm-1/5 vc_col-md-3 wpb_column column_container vc_column_container col child_column has-animation no-extra-padding el_spacing_10px inherit_tablet inherit_phone mobile-disable-entrance-animation " data-t-w-inherits="small_desktop" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation="fade-in-from-bottom" data-delay="500">
-		<div class="vc_column-inner">
-		<div class="wpb_wrapper">
-			
-		</div> 
-	</div>
-	</div> 
+                <p class="yoga-history-desc">
+                    اليوغا هي رياضة هندية قديمة لها جذور في حضارة وادي السند ، والتي يعود تاريخها إلى أكثر من 5000 عام. وهي من أهم الممارسات القديمة التي تمنح ممارسها الحيوية والنشاط البدني والسيطرة الذهنية والتركيز. منذ ذلك الحين ، يمارس الناس في الهند اليوجا. بمرور الوقت ، تطورت إلى أنواع ومدارس مختلفة ، وانتشرت في جميع أنحاء العالم ، وأصبحت تُعرف باسم رياضة الرفاهية الجسدية والعقلية. ومن فوائده أنه مناسب للأشخاص من جميع الأعمار والفئات ، ويمكن أن يمارسه الناس من جميع مناحي الحياة.
+                </p>
+                <p class="yoga-history-desc">
+                    أظهرت الدراسات أن ممارسة اليوجا يمكن أن يكون لها تأثير كبير على الصحة البدنية ويمكن أن تحارب أمراض العصر الحديث التي يسببها الإجهاد. كما أن لها تأثير إيجابي على الصحة العقلية والنفسية للممارس.
+                </p>
+                <p class="yoga-history-desc">
+                    تشمل بعض أهم ممارسات اليوجا أساناس (المواقف الجسدية) وبراناياما (تمارين التنفس) وديانا (تمارين التأمل) ويوجا نيدرا (الاسترخاء التام العميق). تتم ممارسة هذه المواقف أثناء التحكم في إيقاع التنفس بطريقة تأملية ، مما يؤدي إلى حالة من التركيز والتوازن حتى لو كانت الأوضاع صعبة.
+                </p>
+                <p class="yoga-history-desc">
+                    يوجد في المملكة العربية السعودية عشرات الآلاف من اليوغيين ، فضلاً عن الآلاف من مدربي اليوغا السعوديين. تعمل اللجنة السعودية لليوجا على دعمهم وتطوير الرياضة وبناء القدرات وتمكينهم من المساهمة في تعزيز اليوجا في المجتمع وتوسيع القاعدة العامة لمحبي اليوجا والممارسين والمدربين في المملكة العربية السعودية.
+                </p>
+                <p class="yoga-history-desc">
+                    تعتبر اليوجا رياضة ترفيهية مهمة ومفيدة للغاية للأطفال والكبار وكبار السن لأنها توفر لهم الصحة والرفاهية والترفيه بما يتناسب مع احتياجاتهم الجسدية والنفسية. كما توجد عدة أنواع من اليوجا التي تُمارس في المملكة العربية السعودية ، والتي تُصنف على النحو التالي:
+                </p>
+                <ul class="yoga-history-desc">
+                    <li>اليوجا من أجل الصحة والعافية</li>
+                    <li>يوجا اسانا سبورتس</li>
+                    <li>علاج اليوجا</li>
+                </ul>
+                <p class="yoga-history-desc">
+                    وفقًا للوائح اللجنة السعودية لليوجا ، فإن كل نوع من أنواع اليوجا له شروط ومتطلبات محددة للتدريب والممارسة من أجل ضمان ممارسة يوجا صحية وآمنة وفعالة تفيد الجميع.
+                </p>
+            </div>
+	}
 </div>
-</div>
-			</div> 
-		</div>
-	</div> 
-</div>
-</div>
-		<div id="fws_62f017509c2ea" data-column-margin="default" data-midnight="dark" data-bottom-percent="7%" class="wpb_row vc_row-fluid vc_row full-width-content vc_row-o-equal-height vc_row-flex vc_row-o-content-top  top_margin_-5pct right_padding_6pct left_padding_6pct" style="padding-top: 0px; padding-bottom: calc(100vw * 0.07); ">
-<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false"><div class="inner-wrap"><div class="row-bg viewport-desktop"></div></div></div>
-<div class="row_col_wrap_12 col span_12 dark left">
-	<div class="vc_col-sm-12 wpb_column column_container vc_column_container col has-animation no-extra-padding inherit_tablet inherit_phone mobile-disable-entrance-animation " data-using-bg="true" data-bg-cover="true" data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation="fade-in-from-bottom" data-delay="600">
-		<div class="vc_column-inner">
-<div class="column-image-bg-wrap viewport-desktop" data-n-parallax-bg="true" data-parallax-speed="very_subtle" data-bg-pos="center center" data-bg-animation="none" data-bg-overlay="false"><div class="inner-wrap"><div class="column-image-bg parallax-layer" data-nectar-img-src="../assets3/wp-content/uploads/2022/06/IMG_1082.jpg"></div></div></div>
-			<div class="wpb_wrapper">
-				<div class="divider-wrap height_tablet_70vh height_phone_50vh " data-alignment="default"><div style="height: 100vh;" class="divider"></div></div>
-			</div> 
-		</div>
-	</div> 
-</div>
-</div>
-		<div id="fws_62f017509ca57" data-column-margin="default" data-midnight="dark" data-bottom-percent="7%" class="wpb_row vc_row-fluid vc_row full-width-section  reverse_columns_column_phone" style="padding-top: 0px; padding-bottom: calc(100vw * 0.07); ">
-<div class="row-bg-wrap" data-bg-animation="none" data-bg-overlay="false"><div class="inner-wrap"><div class="row-bg viewport-desktop"></div></div></div>
-<div class="row_col_wrap_12 col span_12 dark left">
-	<div class="vc_col-sm-12 wpb_column column_container vc_column_container col no-extra-padding inherit_tablet inherit_phone " data-padding-pos="all" data-has-bg-color="false" data-bg-color="" data-bg-opacity="1" data-animation="" data-delay="0">
-		<div class="vc_column-inner">
-			<div class="wpb_wrapper">
-				
-<div class="wpb_text_column wpb_content_element ">
-	<div class="wpb_wrapper">
-		<p>Yoga is an ancient Indian sport with roots in the Indus Valley Civilization, which dates back more than 5,000 years. It is one of the most important ancient practices, which gives its practitioner vitality, physical activity, mental control, and focus. Since then, people in India have been practicing yoga. Over time, it evolved into various types and schools, and spread around the world, becoming known as the sport of physical and mental well-being. One of its benefits is that it is suitable for people of all ages and groups, and it can be practiced by people from all walks of life.</p>
-<p>Studies have shown that practicing yoga can have a significant impact on physical health and can combat modern-day diseases caused by stress. It also has a positive effect on the practitioner&#8217;s mental and psychological health.</p>
-<p>Some of the most important yoga practices include Asanas (physical postures), Pranayama (breathing exercises), Dhyana (meditation exercises), and Yoga Nnidra (total deep relaxation). These postures are practiced while controlling the breathing rhythm in a meditative manner, which brings about a state of focus and balance even if the poses are difficult.</p>
-<p>Saudi Arabia has tens of thousands of yogis, as well as thousands of Saudi yoga trainers. The Saudi Yoga Committee works to support them, develop sports, build capabilities, and empower them to contribute to promoting yoga in society and expanding the public base of yoga lovers, practitioners, and trainers in Saudi Arabia.</p>
-<p>Yoga is an important and very useful recreational sport for children, adults, and the elderly because it provides health, well-being, and recreation in proportion to their physical and psychological needs. There are also several types of yoga that are practiced in Saudi Arabia, which are classified as follows:</p>
-	</div>
-</div>
-
-
-
-<div class="nectar-fancy-ul" data-list-icon="icon-salient-thin-line" data-animation="false" data-animation-delay="0" data-color="accent-color" data-spacing="default" data-alignment="left"> 
-<ul>
-<li>Yoga for Health and Wellbeing</li>
-<li>Yoga Asana Sports</li>
-<li>Yoga Therapy</li>
-</ul>
- </div>
-<div class="wpb_text_column wpb_content_element ">
-	<div class="wpb_wrapper">
-		<p>According to the Saudi Yoga Committee’s regulations, each type of yoga has specific conditions and requirements for training and practice in order to ensure a health, safe and effective yoga practice that benefits everyone.</p>
-	</div>
-</div>
-
-
-
-
-			</div> 
-		</div>
-	</div> 
-</div>
-</div>
-		</div>
-	</div>
-	<partial name="_mainFooter" />
-</div></div>

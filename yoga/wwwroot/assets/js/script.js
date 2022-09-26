@@ -1,27 +1,15 @@
 const LIGHT_ACTIVE_CLASS = 'active';
 const ACTIVE_TIME = 500;
-// const turnAllLightsOff = (lights) => {
-//   lights.forEach((light) => {
-//     light.classList.remove(LIGHT_ACTIVE_CLASS);
-//   });
-// }
 function reveal() {
     var reveals = document.querySelectorAll(".show-on-scroll");
-    //debugger;
+  
     reveals.forEach((light, index) => {
       setTimeout(() => {
         light.classList.add(LIGHT_ACTIVE_CLASS);
-        // if(index === lights.length - 1) {
-        //   setTimeout(() => {
-        //     turnAllLightsOff(lights);
-        //   }, ACTIVE_TIME);
-        // }
+     
       }, index * ACTIVE_TIME);
     });
   }
-
-//window.addEventListener("scroll", reveal);
-//document.getElementById('platform').addEventListener("scroll", reveal);
 
 window.addEventListener("scroll", ()=>{
   if(document.getElementById('platform')!=null)
@@ -43,3 +31,12 @@ function hideMenu(){
   document.querySelector(".menu-btn-container .close").style.display = 'none';
   document.querySelector(".menu-btn-container .menu").style.display = 'block';
 }
+
+let fileInput = document.getElementById("inputTag");
+let imageName = document.getElementById("imageName")
+
+fileInput.addEventListener("change", ()=>{
+    let inputImage = document.querySelector("input[type=file]").files[0];
+
+    imageName.innerText = inputImage.name;
+})

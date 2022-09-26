@@ -10,23 +10,23 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-// builder.Services.AddDbContext<YogaAppDbContext>(options => options.UseSqlServer(
-//     builder.Configuration.GetConnectionString("ApplicationDbContextConnection")
-// ));
+builder.Services.AddDbContext<YogaAppDbContext>(options => options.UseSqlServer(
+    builder.Configuration.GetConnectionString("ApplicationDbContextConnection")
+));
 
-// builder.Services.AddIdentity<AppUser, IdentityRole> (
-//     options => {
-//         options.Password.RequiredLength = 7; 
-//         options.Password.RequireDigit = false; 
-//         options.Password.RequireUppercase = false; 
-//         options.User.RequireUniqueEmail = true; 
-//         options.SignIn.RequireConfirmedEmail = true;
-//         options.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+builder.Services.AddIdentity<AppUser, IdentityRole> (
+    options => {
+        options.Password.RequiredLength = 7; 
+        options.Password.RequireDigit = false; 
+        options.Password.RequireUppercase = false; 
+        options.User.RequireUniqueEmail = true; 
+        options.SignIn.RequireConfirmedEmail = true;
+        options.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
 
-//     }
-// )
-// .AddEntityFrameworkStores<YogaAppDbContext>()
-// .AddTokenProvider<EmailConfirmationTokenProvider<AppUser>>("emailconfirmation");
+    }
+)
+.AddEntityFrameworkStores<YogaAppDbContext>()
+.AddTokenProvider<EmailConfirmationTokenProvider<AppUser>>("emailconfirmation");
 
 builder.Services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
     opt.TokenLifespan = TimeSpan.FromDays(3));

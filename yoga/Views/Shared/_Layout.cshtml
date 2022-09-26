@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Saudi Yoga Committee</title>
     <!-- CSS only -->
     
 	@if(culture.RequestCulture.UICulture.Name == "ar")
@@ -56,12 +56,9 @@
                         <div class="menu-btn"></div>
                     </div>
                 </a>
-                <!-- <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                    
-                </button> -->
             </div>
             <div>
-                <img src="~/assets/images/yoga-logo.jpg" />
+                <a asp-controller="Home" asp-action="Index"><img src="~/assets/images/yoga-logo.jpg" /></a>
             </div>
             <div class="menu-items d-none d-lg-block">
                 <ul>
@@ -79,19 +76,55 @@
             <div id="menu-inner" class="d-flex align-items-center ">
                 <div>
                     <ul>
-                        <li>About</li>
-                        <li>Platforms</li>
-                        <li>Handbook</li>
-                        <li>FAQ’s</li>
-                        <li>Contact</li>
+                        <li>
+                            <div class="collapse-container">
+                                <div class="d-flex">
+                                    <p class="collapse-title">
+                                        @localizer["About"]
+                                    </p>
+                                    <a data-bs-toggle="collapse" href="#aboutmenuitem" role="button"
+                                        aria-expanded="false" aria-controls="aboutmenuitem">
+                                    </a>
+                                </div>
+                                <div class="collapse" id="aboutmenuitem">
+                                    <div class="collapse-body submenu d-grid d-lg-flex">
+                                        <a asp-controller="Home" asp-action="About" >@localizer["About"]</a>
+                                        <a asp-controller="Home" asp-action="History">@localizer["History"]</a>
+                                        <a asp-controller="Home" asp-action="News">@localizer["News"]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collapse-container">
+                                <div class="d-flex">
+                                    <p class="collapse-title">
+                                        @localizer["Platforms"]
+                                    </p>
+                                    <a data-bs-toggle="collapse" href="#platformmenuitem" role="button"
+                                        aria-expanded="false" aria-controls="platformmenuitem">
+                                    </a>
+                                </div>
+                                <div class="collapse" id="platformmenuitem">
+                                    <div class="collapse-body submenu d-grid d-lg-flex">
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="1" >@localizer["Amateurs"]</a>
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="2">@localizer["TrainersPrograms"]</a>
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="3">@localizer["YogaStudios"]</a>
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="4">@localizer["ClubsCompetition"]</a>
+                                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="5">@localizer["YogasanSport"]</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li> <a asp-controller="Home" asp-action="Downloads">@localizer["Handbook"]</a></li>
+                        <li><a asp-controller="Home" asp-action="FAQS">@localizer["Faq"]</a></li>
+                        <li><a asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a></li>
                     </ul>
                 </div>
-                <!-- <div>
-                    <img src="~/assets/images/menu-image.jpg" width="370" height="481" />
-                </div> -->
+
             </div>
-            <div id="menu-footer" class="d-flex align-items-center justify-content-between">
-                <div class="email">E: hello@example.com</div>
+            <div id="menu-footer" class="d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                <div class="email">E: info@yoga.sa</div>
                 <div class="d-flex logos">
                     <img src="~/assets/images/saudi-sports.png" />
                     <img src="~/assets/images/saudi-logo.png" />
@@ -110,83 +143,34 @@
                 <div class="mb-5 mb-lg-0">
                     <div class="d-flex">
                         <img src="~/assets/images/brown-star.png" />
-                        @if(@culture.RequestCulture.UICulture.Name == "en")
-						{
-							<div id="miracles-title">About Us</div>
-						}
-						else {
-							<div id="miracles-title">من نحن  </div>
-						}
+                        <div id="miracles-title">@localizer["About"]</div>
                     </div>
                     <div>
-                        @if(@culture.RequestCulture.UICulture.Name == "en")
-						{
-							<p class="footer-desc">To conduct Yogasana premier league to encourage Yoga Players
-                        and Yoga Officials in terms of their country wide recognition
-                        and monetary benefits.</p>
-						}
-						else 
-						{
-							<p class="footer-desc">لإجراء دوري يوغاسانا الممتاز لتشجيع لاعبي اليوجا ومسؤولي اليوجا من حيث
-                            الاعتراف على مستوى بلادهم والفوائد المالية.</p>
-						}
+                        <p class="footer-desc">@localizer["footerBody1"]</p>
                     </div>
-                    @if(@culture.RequestCulture.UICulture.Name == "en")
-					{
-						<a class="btn btn-brown-primary" href="#" role="button">contact us</a>
-					}
-					else {
-						<a class="btn btn-darker-brown-primary" href="#" role="button">اتصل بنا</a>
-					}
+                    <a class="btn btn-brown-primary" asp-controller="Home" asp-action="Contact" role="button">@localizer["Contact"]</a>
                 </div>
                 <div>
-
-                    @if(@culture.RequestCulture.UICulture.Name == "en")
-					{
-							<div class="info-title">ADDRESS</div>
+                    <div class="info-title">@localizer["AddressTitle"]</div>
 							<div class="info-desc">
-								<p>The Castle345 2500</p>
-								<p>Castle Dr.Port Douglas, Queensland</p>
+								<p>@localizer["AddressItem1"]</p>
+								<p>@localizer["AddressItem2"]</p>
 							</div>
 
-							<div class="info-title">CONNECT</div>
+							<div class="info-title">@localizer["CONNECT"]</div>
 							<div class="info-desc">
 								<p>T: +966 53 353 3127</p>
 								<p>E: info@yoga.sa</p>
 							</div>
-					}
-					else 
-					{
-								<div class="info-title">الاتصال</div>
-								<div class="info-desc">
-									<p>T: +966 53 353 3127</p>
-									<p>E: info@yoga.sa</p>
-								</div>
-
-								<div class="info-title">عنوان</div>
-								<div class="info-desc">
-									<p>The Castle345 2500</p>
-									<p>Castle Dr.Port Douglas, Queensland</p>
-								</div>
-					}
-
                 </div>
             </div>
         </div>
         <div class="footer-separator"></div>
         <div class="container">
             <div id="copy-right" class="d-flex flex-column justify-content-center d-lg-flex flex-lg-row justify-content-lg-between align-items-center">
-                @if(@culture.RequestCulture.UICulture.Name == "en")
-				{
-					<div class="copyright order-1 order-lg-0">
-                    © 2022 Copyright. All Right Reserved
+                <div class="copyright order-1 order-lg-0">
+                    @localizer["Rights"]
                 </div>
-				}
-				else {
-					<div class="copyright order-1 order-lg-0">
-                    © 2022 حقوق النشر. جميع الحقوق محفوظة
-                </div>
-				}
                 <div class="logos order-0 order-lg-1 d-flex">
                     <img src="~/assets/images/footer/white/2030.png" />
                     <img src="~/assets/images/footer/white/saudi-logo.png" />

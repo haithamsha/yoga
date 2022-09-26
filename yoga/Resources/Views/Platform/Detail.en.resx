@@ -121,4 +121,16 @@
     <value>Subscribe Now</value>
     <comment/>
   </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Yoga Teachers</value>
+    <comment/>
+  </data>
+  <data name="Summury" xml:space="preserve">
+    <value>They are yoga instructors who have professional training specialized in qualifying and                             preparing yoga instructors at all levels. The Saudi Yoga Committee aims to provide                             professional accreditation for yoga instructors to enable them in the market to obtain the                             necessary licenses for yoga training in centers, halls, tourist events, and other special                             yoga activities</value>
+    <comment/>
+  </data>
+  <data name="Advantages" xml:space="preserve">
+    <value>Advantages</value>
+    <comment/>
+  </data>
 </root>

@@ -1,30 +1,133 @@
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!-- Features App 2
-    ================================================== -->
-<section>
-    <div id="features-app-section-2" class="pad-sec">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 features-app-content-left animated out" data-animation="fadeInLeft" data-delay="0">
-                    <div class="section_header" style="padding:10%;">
-                        <h2>Commint Soon</span></h2>
-                    </div> <!-- End section_header -->
-                    
 
-                </div> <!-- End feature-content -->
+<div class="yoga-layout">
+    @if(culture.RequestCulture.UICulture.Name == "en")
+    {
+         <h1 class="page-header">
+                        Soon
+                    </h1>
+    }
+    else
+    {
+         <h1 class="page-header">
+                        قريبا
+                    </h1>
+    }
+    @* <div id="faq" class="d-lg-flex">
+                <div class="col-lg-4">
+                    <h1 class="page-header">
+                        A frequently asked questions
+                    </h1>
+                    <p class="page-desc">Didn’t find the answer you 
+                        were looking for?</p>
+                    <a class="btn btn-brown-primary" >Contact us</a>
+                </div>
+                <div class="col-lg-8">
 
-                
+                    <div class="collapse-container">
+                        <div class="d-flex justify-content-between">
+                            <p class="collapse-title">
+                                What exactly is Salient App?
+                            </p>
+                            <a class="btn" data-bs-toggle="collapse" href="#collapse1" role="button"
+                                aria-expanded="false" aria-controls="collapse1">
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse1">
+                            <p class="collapse-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+                                Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus pharetra
+                                ultrices.
+                                In tincidunt turpis at odio dapibus maximus.
+                            </p>
+                        </div>
+                    </div>
 
-            </div> <!-- End row -->
-        </div> <!-- End container -->
-    </div> <!-- End feature-section -->
-</section>
-<!-- End Features App 2 section -->
+                    <div class="collapse-container">
+                        <div class="d-flex justify-content-between">
+                            <p class="collapse-title">
+                                How do I create my own Salient App account?
+                            </p>
+                            <a class="btn" data-bs-toggle="collapse" href="#collapse2" role="button"
+                                aria-expanded="false" aria-controls="collapse2">
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse2">
+                            <p class="collapse-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+                                Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus pharetra
+                                ultrices.
+                                In tincidunt turpis at odio dapibus maximus.
+                            </p>
+                        </div>
+                    </div>
 
-<section>
-    <div class="sep-section"></div>
-</section>
+                    <div class="collapse-container">
+                        <div class="d-flex justify-content-between">
+                            <p class="collapse-title">
+                                Do I need to link my bank account in order to use it?
+                            </p>
+                            <a class="btn" data-bs-toggle="collapse" href="#collapse3" role="button"
+                                aria-expanded="false" aria-controls="collapse3">
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse3">
+                            <p class="collapse-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+                                Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus pharetra
+                                ultrices.
+                                In tincidunt turpis at odio dapibus maximus.
+                            </p>
+                        </div>
+                    </div>
 
-<partial name="_mainFooter" />
+                    <div class="collapse-container">
+                        <div class="d-flex justify-content-between">
+                            <p class="collapse-title">
+                                Will Salient Service work on my mobile device?
+                            </p>
+                            <a class="btn" data-bs-toggle="collapse" href="#collapse4" role="button"
+                                aria-expanded="false" aria-controls="collapse4">
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse4">
+                            <p class="collapse-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+                                Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus pharetra
+                                ultrices.
+                                In tincidunt turpis at odio dapibus maximus.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="collapse-container">
+                        <div class="d-flex justify-content-between">
+                            <p class="collapse-title">
+                                Is it available in my country?
+                            </p>
+                            <a class="btn" data-bs-toggle="collapse" href="#collapse5" role="button"
+                                aria-expanded="false" aria-controls="collapse5">
+                            </a>
+                        </div>
+                        <div class="collapse" id="collapse5">
+                            <p class="collapse-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eget bibendum libero.
+                                Etiam id velit at enim porttitor facilisis. Vivamus tincidunt lectus at risus pharetra
+                                ultrices.
+                                In tincidunt turpis at odio dapibus maximus.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div> *@
+
+
+
+</div>

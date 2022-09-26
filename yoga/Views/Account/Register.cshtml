@@ -1,3 +1,4 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model yoga.ViewModels.RegisterModel
 @{
     @* ViewData["Title"] = "Register"; *@
@@ -5,91 +6,65 @@
 }
 
 
-<!-- Features App 2
-    ================================================== -->
-<section>
-    <div id="features-app-section-2" class="pad-sec">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 features-app-content-left animated out" data-animation="fadeInLeft" data-delay="0">
-                    
-                    <form method="post" enctype="multipart/form-data">
+<div class="yoga-layout">
+    <div class="container public-pages">
+        <h1 class="page-header text-center">@localizer["PageTitle"]</h1>
 
-                        <h2>Register</h2>
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
+            <span asp-validation-for="NationalId" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="FirstName"></label>
-                            <input asp-for="FirstName" class="form-control" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
+            <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
+            <span asp-validation-for="Email" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="MiddleName"></label>
-                            <input asp-for="MiddleName" class="form-control" />
-                            <span asp-validation-for="MiddleName" class="text-danger"></span>
-                        </div>
+            <input asp-for="Password" type="password" placeholder='@localizer["Password"] *' />
+            <span asp-validation-for="Password" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="LastName"></label>
-                            <input asp-for="LastName" class="form-control" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
+            <input asp-for="ConfirmPassword" type="password" placeholder='@localizer["ConfirmPassword"] *' />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="NationalId"></label>
-                            <input asp-for="NationalId" class="form-control" />
-                            <span asp-validation-for="NationalId" class="text-danger"></span>
-                        </div>
+            <input asp-for="Phone" type="text" placeholder='@localizer["Phone"] *' />
+            <span asp-validation-for="Phone" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="Phone"></label>
-                            <input asp-for="Phone" class="form-control" />
-                            <span asp-validation-for="Phone" class="text-danger"></span>
-                        </div>
 
-                        <div class="form-group">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
+            <select item class="form-control" name="CountryId" id="CountryId" asp-items="@Model.Counries"></select>
+            <span asp-validation-for="CountryId" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="CountryId"></label>
-                            <select class="form-control" name="CountryId" id="CountryId" asp-items="@Model.Counries"></select>
-                            <span asp-validation-for="CountryId" class="text-danger"></span>
-                        </div>
 
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
+            <input asp-for="FirstName" type="text" placeholder='@localizer["FirstName"] *'/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <label asp-for="ConfirmPassword"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Image"></label>
-                            <input type="file" asp-for="Image" class="form-control" />
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </div>
-                    </form>
-                </div> <!-- End feature-content -->
-            </div> <!-- End row -->
-        </div> <!-- End container -->
-    </div> <!-- End feature-section -->
-</section>
-<!-- End Features App 2 section -->
+            <input asp-for="MiddleName" type="text" placeholder='@localizer["MiddleName"] *' />
+            <span asp-validation-for="MiddleName" class="text-danger"></span>
+
+            <input asp-for="LastName" type="text" placeholder='@localizer["LastName"] *' />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+
+            <div id="upload-container" class="text-center">
+                <label>
+                    <img src="~/assets/images/public/upload.png" />
+                    <br />
+                    @localizer["Image"]
+                    <input asp-for="Image" id="inputTag" class="upload-text" type="file" />
+                    <br />
+                    <p class="extensions" id="imageName">
+                        JPG , PNG , PFD
+                    </p>
+                </label>
+            </div>
+
+            <p class="register-info">
+               
+            </p>
+            <button class="btn btn-brown-primary w-100">@localizer["Submit"]</button>
+        </form>
+    </div>
+</div>
 
 
 
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    }
+<partial name="_ValidationScriptsPartial" />
+}

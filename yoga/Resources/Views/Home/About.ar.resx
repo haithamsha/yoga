@@ -145,4 +145,36 @@
     <value>اشترك الان</value>
     <comment/>
   </data>
+  <data name="AboutUsTitle" xml:space="preserve">
+    <value>من نحن</value>
+    <comment/>
+  </data>
+  <data name="VisitonMissionTitle" xml:space="preserve">
+    <value>رؤيتنا</value>
+    <comment/>
+  </data>
+  <data name="BoardofDirectors" xml:space="preserve">
+    <value>فريق العمل</value>
+    <comment/>
+  </data>
+  <data name="t_nouf" xml:space="preserve">
+    <value>الأستاذة/ نوف محمد المروعي</value>
+    <comment/>
+  </data>
+  <data name="t_nouf_job" xml:space="preserve">
+    <value>رئيسة اللجنة السعودية لليوغا</value>
+    <comment/>
+  </data>
+  <data name="t_ahmed" xml:space="preserve">
+    <value>المهندس/ أحمد محمد السعدي  </value>
+    <comment/>
+  </data>
+  <data name="t_ahmed_job" xml:space="preserve">
+    <value>الرئيس التنفيذي للجنة السعودية لليوغا </value>
+    <comment/>
+  </data>
+  <data name="team_names" xml:space="preserve">
+    <value>مرام قادري - آيات سمان - علاء جمل الليل - دعاء العربي - سمو الأميرة مشاعل</value>
+    <comment/>
+  </data>
 </root>

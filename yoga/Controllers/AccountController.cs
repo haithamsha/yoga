@@ -152,7 +152,7 @@ namespace yoga.Controllers
                 }
             }
             // If we got this far, something failed, redisplay form
-            return View();
+            return View(Input);
         }
 
         [HttpGet]

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PageTitle" xml:space="preserve">
-    <value>CONTACT YOGA</value>
+    <value>Contact Us</value>
     <comment/>
   </data>
   <data name="PageSubTitle" xml:space="preserve">
@@ -126,7 +126,7 @@
     <comment/>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Full Name</value>
     <comment/>
   </data>
   <data name="Email" xml:space="preserve">
@@ -139,6 +139,30 @@
   </data>
   <data name="SendMessage" xml:space="preserve">
     <value>Send Message</value>
+    <comment/>
+  </data>
+  <data name="AddressTitle" xml:space="preserve">
+    <value>Address</value>
+    <comment/>
+  </data>
+  <data name="Address1" xml:space="preserve">
+    <value>The Castle345 2500</value>
+    <comment/>
+  </data>
+  <data name="Address2" xml:space="preserve">
+    <value>Castle Dr.Port Douglas, Queensland</value>
+    <comment/>
+  </data>
+  <data name="SocialMediaTitle" xml:space="preserve">
+    <value>Socaial Media</value>
+    <comment/>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+    <comment/>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
     <comment/>
   </data>
 </root>

@@ -1,3 +1,4 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model yoga.ViewModels.LoginModel
 
 @{
@@ -5,66 +6,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+    <div class="yoga-layout">
+        <form id="account" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-<!-- Contact-section
-    ================================================== -->
-<section>
-    <div id="contact-section" class="pad-sec">
+            <div class="container public-pages">
+            <h1 class="page-header text-center">@localizer["PageTitle"]</h1>
 
-        <div class="container">
-            <div class="form-wrapper">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
+            <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
+            <span asp-validation-for="Email" class="text-danger"></span>
 
-                        <!-- form fields -->
-                        <form id="account" method="post">
-                        <h2>Login</h2>
-                        <hr />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label asp-for="RememberMe">
-                                    <input asp-for="RememberMe" />
-                                    @Html.DisplayNameFor(m => m.RememberMe)
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <a asp-controller="Account" asp-action="ForgetPassword" >Forget your password?</a>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                You don't have an account, 
-                                <a asp-controller="Account" asp-action="Register"> Register Here.</a>
-                            </label>
-                        </div>
+            <input asp-for="Password" type="password" placeholder='@localizer["Password"] *' />
+            <span asp-validation-for="Password" class="text-danger"></span>
 
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Log in</button>
-                        </div>
-                    </form>
-
-                    </div> <!-- end col-md-8 -->
-                </div> <!-- end row -->
-            </div> <!-- end form-wrapper -->
-
-        </div> <!-- end container -->
-
-    </div> <!-- End contact-section -->
+            <input asp-for="RememberMe" />
+            <label asp-for="RememberMe">@localizer["RememberMe"]</label>
+            
+            <p class="forget-password">
+                <a asp-controller="Account" asp-action="ForgetPassword">@localizer["ForgetPassword"]</a>
+            </p>
 
 
-@* @section Scripts {
+            <button class="btn btn-brown-primary w-100">@localizer["Login"]</button>
+
+            <div class="d-flex justify-content-center sign-info">
+                <img src="~/assets/images/public/user.png" />
+                <div>
+                    <p>@localizer["Dont"]</p>
+                    <p><b>@localizer["Register"] <a asp-controller="Account" asp-action="Register">@localizer["Here"]</a></b></p>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+    @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    } *@
+    }

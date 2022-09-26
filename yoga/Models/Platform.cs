@@ -13,5 +13,7 @@ namespace yoga.Models
         public string? Detail { get; set; }
         public string? DetailAr { get; set; }
         public string? Image { get; set; }
+        public string? Requirements { get; set; }
+        public string? Requirements_Ar { get; set; }
     }
 }

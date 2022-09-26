@@ -10,7 +10,6 @@ li.selected-item {
 }
 
 .account-items li {
-    /* opacity: 0.5; */
     padding-top: 32px;
     padding-bottom: 32px;
     font-family: zaridSerif;
@@ -58,8 +57,7 @@ li.selected-item {
         opacity: 0.5;
     }
 
-    .account-details,
-    .account-user {
+    .account-container {
         margin-inline-start: 72px;
         margin-top: 20px;
     }
@@ -71,6 +69,16 @@ li.selected-item {
     .account-items .arrow {
         display: none;
     }
+
+    .table {
+        width: 90%;
+    }
+    
+    .table .header,
+    .table-row {
+        display: flex;
+        padding-inline: 50px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -79,13 +87,51 @@ li.selected-item {
         justify-content: space-between;
         align-items: center;
     }
+    .table {
+        width: 100%;
+        display: flex;
+        padding-inline: 24px;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+    .table-row{
+        text-align: end;
+        line-height: 50px !important;
+    }
+    .table .header,
+    .table-row{
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    .table .header .col{
+        line-height: 50px !important;
+        position: relative;
+    }
+    .table .header .col:not(:last-child)::after,
+    .account-row:not(:last-child)::after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -25px;
+        border-top: 1px solid rgba(87, 114, 50, 0.2);
+        width: 800px;
+    }
+    .account-row{
+        position: relative;
+        padding-bottom: 25px;
+    }
+    .account-details{
+    overflow: hidden;
+    }
+    .account-row:not(:last-child)::after{
+    margin-inline: var(--mobile-padding);
+    }
 }
 
 .table {
     background-color: rgba(255, 252, 251, 0.8);
     margin-top: 25px;
     border-radius: 5px;
-    width: 90%;
 }
 
 .table .header {
@@ -94,10 +140,8 @@ li.selected-item {
     font-weight: 600;
     line-height: 26px;
     color: #5C6146;
-    padding-top: 26px;
-    padding-bottom: 26px;
-    display: flex;
-    padding-inline: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 
 .table-row {
@@ -109,8 +153,6 @@ li.selected-item {
     line-height: 19px;
     padding-top: 26px;
     padding-bottom: 26px;
-    display: flex;
-    padding-inline: 50px;
 }
 
 .pending {
@@ -128,5 +170,8 @@ li.selected-item {
 .account-row {
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
+}
+.img-profile{
+    margin-bottom:25px;
 }
