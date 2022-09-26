@@ -117,96 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Home" xml:space="preserve">
-    <value>الرئيسية</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>طلبات العضويات</value>
     <comment/>
   </data>
-  <data name="About" xml:space="preserve">
-    <value>من نحن</value>
+  <data name="Export" xml:space="preserve">
+    <value>تصدير البيانات</value>
     <comment/>
   </data>
-  <data name="History" xml:space="preserve">
-    <value>تاريخنا</value>
-    <comment/>
-  </data>
-  <data name="News" xml:space="preserve">
-    <value>الاخبار</value>
-    <comment/>
-  </data>
-  <data name="Platforms" xml:space="preserve">
-    <value>منصة اليوغيين</value>
-    <comment/>
-  </data>
-  <data name="TrainersPrograms" xml:space="preserve">
-    <value>المدربين</value>
-    <comment/>
-  </data>
-  <data name="YogaStudios" xml:space="preserve">
-    <value>المراكز والصالات(نافس)</value>
-    <comment/>
-  </data>
-  <data name="ClubsCompetition" xml:space="preserve">
-    <value>الاندرية(نافس)</value>
-    <comment/>
-  </data>
-  <data name="YogasanSport" xml:space="preserve">
-    <value>لاعبين اليوجا اسانا</value>
-    <comment/>
-  </data>
-  <data name="Handbook" xml:space="preserve">
-    <value>الدليل الارشادي</value>
-    <comment/>
-  </data>
-  <data name="Faq" xml:space="preserve">
-    <value>أسئلة واجوبة</value>
-    <comment/>
-  </data>
-  <data name="Contact" xml:space="preserve">
-    <value>اتصل بنا</value>
-    <comment/>
-  </data>
-  <data name="Amateurs" xml:space="preserve">
-    <value>الهواه</value>
-    <comment/>
-  </data>
-  <data name="footerTitle1" xml:space="preserve">
-    <value>هل تؤمن بالمعجزات؟</value>
-    <comment/>
-  </data>
-  <data name="footerBody1" xml:space="preserve">
-    <value>اللجنة السعودية لليوغا هي لجنة رياضية تحت مظلة اللجنة الأولمبية العربية السعودية التابعة لوزارة الرياضة، تأسست في العام 2021م</value>
-    <comment/>
-  </data>
-  <data name="AddressTitle" xml:space="preserve">
-    <value>العنوان</value>
-    <comment/>
-  </data>
-  <data name="AddressItem1" xml:space="preserve">
-    <value>The Castle</value>
-    <comment/>
-  </data>
-  <data name="AddressItem2" xml:space="preserve">
-    <value>345 2500 Castle Dr.</value>
-    <comment/>
-  </data>
-  <data name="AddressItem3" xml:space="preserve">
-    <value>Port Douglas, Queensland</value>
-    <comment/>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>هاتف</value>
+  <data name="UserName" xml:space="preserve">
+    <value>المستخدم</value>
     <comment/>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>بريد الكتروني</value>
+    <value>البريد الالكتروني</value>
     <comment/>
   </data>
-  <data name="Rights" xml:space="preserve">
-    <value>جميع الحقوق محفوظة 2022</value>
+  <data name="CardSerial" xml:space="preserve">
+    <value>رقم العضوية</value>
     <comment/>
   </data>
-  <data name="CONNECT" xml:space="preserve">
-    <value>تواصل معنا</value>
+  <data name="PayFees" xml:space="preserve">
+    <value>المصاريف</value>
+    <comment/>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+    <comment/>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>اجراءات</value>
+    <comment/>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
+    <comment/>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>جوال</value>
     <comment/>
   </data>
 </root>

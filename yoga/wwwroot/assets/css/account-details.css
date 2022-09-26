@@ -18,6 +18,8 @@ li.selected-item {
     line-height: 31px;
 }
 
+
+
 .account-items li:not(:last-child) {
     border-bottom: 1px solid rgba(87, 114, 50, 0.15);
 }

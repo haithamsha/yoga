@@ -62,6 +62,14 @@ header {
     width: 176.65px;
 }
 
+.menu-items ul li a {
+    text-decoration: none;
+    color: var(--green)
+}
+a {
+    text-decoration: none;
+    color: var(--green)
+}
 .menu-items ul li:nth-child(2) {
     margin-inline-start: 52px;
 }

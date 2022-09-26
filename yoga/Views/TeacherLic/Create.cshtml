@@ -1,11 +1,23 @@
 @model yoga.ViewModels.TechearMemberShipVM
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/assets/css/account-details.css" rel="stylesheet">
 
-<form method="post" enctype="multipart/form-data">
+
+
+
+
+
+
+
+<div class="d-lg-flex">
+    <partial name="_AdminMenu" />
+    <div class="account-container account-details">
+
+        <form method="post" enctype="multipart/form-data">
 
     @if(ViewData["Saved"] != null)
     {
@@ -208,10 +220,23 @@
             @* <button type="submit" class="btn btn-primary">Approve</button>
                 <button type="submit" class="btn btn-danger">Reject</button> *@
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
         </div>
     </div>
 </form>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
 
 
 @section Scripts{

@@ -2,18 +2,19 @@
 
     @if(User.Identity.IsAuthenticated)
     {
-        <a class="btn btn-secondary" asp-controller="Account" asp-action="UserProfile">@User.Identity.Name</a>
+        <a asp-controller="Account" asp-action="UserProfile">@User.Identity.Name.Substring(4)</a>
         
         @* <li class="nav-item"> *@
             <form class="form-inline" asp-controller="Account" asp-action="Logout">
-                <button type="submit" class="nav-link btn btn-link text-dark">@localizer["Logout"]</button>
+                <button style="border: none;background-color:#EEEAE3" type="submit">@localizer["Logout"]</button>
             </form>
         @* </li> *@
     }
     else
     {
-        @* <li class="nav-item"> *@
-        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">@localizer["MyAccount"]</a>
-    @* </li> *@
+
+        <li>
+            <a asp-controller="Account" asp-action="Login">@localizer["MyAccount"]</a>
+        </li>
     
     }

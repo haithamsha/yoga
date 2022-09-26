@@ -1,0 +1,41 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+<div class="account-items col-lg-3">
+                    <ul>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="selected-item">
+                            <div>
+                                <a asp-controller="MembershipCard" asp-action="Index">
+                                    <img src="~/assets/images/accountdetails/dashboard.png" />
+                                    @localizer["Memberships"]</a>
+                                
+                            </div>
+                            <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
+                            </li>
+                        }
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="selected-item">
+                            <div>
+                                <a asp-controller="TeacherLic" asp-action="Index">
+                                    <img src="~/assets/images/accountdetails/users.png" />
+                                    @localizer["TeachersRequests"]
+                                </a>
+                            </div>
+                            <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
+                        </li>
+                        }
+                        <li class="selected-item">
+                            <div>
+                            <a asp-controller="Account" asp-action="Settings"><img src="~/assets/images/accountdetails/users.png" />
+                            @localizer["Settings"]</a>
+                        </div>
+                            <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
+                        </li>
+                        
+                        
+                    </ul>
+
+
+                </div>

@@ -1,64 +1,77 @@
 @model MembershipCard;
 @{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/assets/css/account-details.css" rel="stylesheet">
 
-<form method="post" enctype="multipart/form-data">
-    @if(ViewData["Saved"] != null)
-    {
-        <div class="alert alert-success">@ViewData["Saved"]</div>
-    }
-    <h2>ٍMembership Card Details</h2>
-    <div class="border p-3 mt-4">
-        <div class="mb-3">
-            <label class="fw-bold">Name</label>
-            <label>@Model?.AppUser.FirstName</label> <label>@Model?.AppUser.MiddleName</label> <label>@Model?.AppUser.LastName</label>
-        </div>
 
-        <div class="mb-3">
-            <label class="fw-bold">ٍMembership Card Price</label>
-            <label>150 ريال سعودي</label>
-        </div>
+<div class="d-lg-flex">
+                <partial name="_AdminMenu"/>
+                <div class="account-container account-details">
+                    
+                    <form method="post" enctype="multipart/form-data">
+            @if(ViewData["Saved"] != null)
+            {
+                <div class="alert alert-success">@ViewData["Saved"]</div>
+            }
+            <h2>ٍMembership Card Details</h2>
+            <div class="border p-3 mt-4">
+                <div class="mb-3">
+                    <label class="fw-bold">Name</label>
+                    <label>@Model?.AppUser.FirstName</label> <label>@Model?.AppUser.MiddleName</label> <label>@Model?.AppUser.LastName</label>
+                </div>
 
-        <div class="mb-3">
-            <label class="fw-bold">IBAN</label>
-            <label>SA5865000000101459418001</label>
-        </div>
-        <div class="mb-3">
-            <label class="fw-bold" asp-for="RecietCopy"></label>
-            <img width="400" height="400" src="~/assets/images/@Model?.RecietCopy" alt="">
-        </div>
+                <div class="mb-3">
+                    <label class="fw-bold">ٍMembership Card Price</label>
+                    <label>150 ريال سعودي</label>
+                </div>
 
-        <div class="mb-3">
-            <label class="fw-bold" asp-for="Active"></label>
-            <label>
-                @if(@Model?.Active== true){
-                    <span class="badge bg-success">Yes</span>
+                <div class="mb-3">
+                    <label class="fw-bold">IBAN</label>
+                    <label>SA5865000000101459418001</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="RecietCopy"></label>
+                    <img width="400" height="400" src="~/assets/images/@Model?.RecietCopy" alt="">
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="Active"></label>
+                    <label>
+                        @if(@Model?.Active== true){
+                            <span class="badge bg-success">Yes</span>
+                        }
+                        else {
+                            <span class="badge bg-danger">No</span>
+                        }
+                    </label>
+                </div>
+
+                
+                @if(@Model.Status != (int)StatusEnum.Approved)
+                {
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-success" id="Approve" name="Approve" value="approve">Approve</button>
+                        </div>
+                        <div class="mb-3">
+                            <label>Reject Reason</label>
+
+                        </div>
+                        <div class="mb-3">
+                            <textarea name="reason" id="reason" cols="30" rows="3"></textarea>
+
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-danger" value="reject" id="Reject" name="Reject">Reject</button>
+                        </div>
                 }
-                else {
-                    <span class="badge bg-danger">No</span>
-                }
-            </label>
-        </div>
+                </form>
+            </div>
+            </div>
+    
+                </div>
+</div>
 
-        
-        @if(@Model.Status != (int)StatusEnum.Approved)
-        {
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-success" id="Approve" name="Approve" value="approve">Approve</button>
-                </div>
-                <div class="mb-3">
-                    <label>Reject Reason</label>
 
-                </div>
-                <div class="mb-3">
-                    <textarea name="reason" id="reason" cols="30" rows="3"></textarea>
 
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-danger" value="reject" id="Reject" name="Reject">Reject</button>
-                </div>
-        }
-    </div>
-    </div>
-</form>
+

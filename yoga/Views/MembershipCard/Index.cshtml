@@ -1,35 +1,19 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @model IEnumerable<MembershipCard>
 @{
     ViewData["Title"] ="Index";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/assets/css/account-details.css" rel="stylesheet">
 
-<h1>Teacher Licence</h1>
+        <div class="d-lg-flex">
+                <partial name="_AdminMenu"/>
+                <div class="account-container account-details">
+                    <h2 class="header page-header">@localizer["PageTitle"]</h2>
+                    <a asp-controller="MembershipCard" asp-action="ExportToExcel">@localizer["Export"]</a>
 
-
-<div class="app-content pt-3 p-md-3 p-lg-4">
-		    <div class="container-xl">
-			    
-			    <div class="row g-3 mb-4 align-items-center justify-content-between">
-				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Membership cards requests</h1>
-				    </div>
-                    <div class="col-auto">
-			            <a asp-controller="MembershipCard" asp-action="ExportToExcel">Export Data</a>
-				    </div>
-				    
-			    </div><!--//row-->
-			   
-			    
-			    @* <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
-				</nav> *@
-				
-				
-				<div class="tab-content" id="orders-table-tab-content">
+                    <div class="tab-content" id="orders-table-tab-content">
 			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 					    <div class="app-card app-card-orders-table shadow-sm mb-5">
 						    <div class="app-card-body">
@@ -37,13 +21,13 @@
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-                                                <th>User Name</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Card Serial</th>
-                                                <th>Pay Fees</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
+                                                <th>@localizer["UserName"]</th>
+                                                <th>@localizer["Phone"]</th>
+                                                <th>@localizer["Email"]</th>
+                                                <th>@localizer["CardSerial"]</th>
+                                                <th>@localizer["PayFees"]</th>
+                                                <th>@localizer["Status"]</th>
+                                                <th>@localizer["Actions"]</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -83,7 +67,7 @@
                                                     <td>
                                                         <div class="w-75 btn-group" role="group">
                                                             <a class="btn-sm app-btn-secondary" asp-controller="MembershipCard" asp-action="Detail"
-                                                            asp-route-id="@item.CardId"><i class="fa-solid fa-memo-circle-info"></i>Details</a>
+                                                            asp-route-id="@item.CardId"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
                                                         </div>
                                                     </td>
 
@@ -96,10 +80,8 @@
 						    </div><!--//app-card-body-->		
 						</div><!--//app-card-->
 			        
-				</div><!--//tab-content-->
-				
-				
-			    
-		    </div><!--//container-fluid-->
-	    </div><!--//app-content-->
+                    </div>
+                </div><!--//tab-content-->
+                </div>
+            </div>
 

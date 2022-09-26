@@ -63,9 +63,10 @@
             <div class="menu-items d-none d-lg-block">
                 <ul>
 					<partial name="_culture"/>
-                    <li>
-                        Account
-                    </li>
+                    @* <li>
+                        <a asp-controller="Account" asp-action="Login">Account</a>
+                    </li> *@
+                    <partial name="_loginPartial"/>
                 </ul>
             </div>
 
@@ -137,31 +138,37 @@
             @RenderBody()
         </div>
     </div>
-    <footer>
+   <footer>
         <div class="container">
             <div class="d-lg-flex justify-content-between">
                 <div class="mb-5 mb-lg-0">
                     <div class="d-flex">
                         <img src="~/assets/images/brown-star.png" />
-                        <div id="miracles-title">@localizer["About"]</div>
+                        <div id="miracles-title">
+                            @localizer["About"]
+                            </div>
                     </div>
                     <div>
-                        <p class="footer-desc">@localizer["footerBody1"]</p>
+                        <p class="footer-desc">
+                            @localizer["footerBody1"]
+                            </p>
                     </div>
-                    <a class="btn btn-brown-primary" asp-controller="Home" asp-action="Contact" role="button">@localizer["Contact"]</a>
+                    <a class="btn btn-darker-brown-primary" href="#" role="button">
+                        @localizer["Contact"]
+                        </a>
                 </div>
                 <div>
-                    <div class="info-title">@localizer["AddressTitle"]</div>
-							<div class="info-desc">
-								<p>@localizer["AddressItem1"]</p>
-								<p>@localizer["AddressItem2"]</p>
-							</div>
+                    <div class="info-title">@localizer["CONNECT"]</div>
+                    <div class="info-desc">
+                        <p>T: +966 53 353 3127</p>
+                        <p>E: info@yoga.sa</p>
+                    </div>
 
-							<div class="info-title">@localizer["CONNECT"]</div>
-							<div class="info-desc">
-								<p>T: +966 53 353 3127</p>
-								<p>E: info@yoga.sa</p>
-							</div>
+                    <div class="info-title">@localizer["AddressTitle"]</div>
+                    <div class="info-desc">
+                        <p>The Castle345 2500</p>
+                        <p>Castle Dr.Port Douglas, Queensland</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,8 +180,8 @@
                 </div>
                 <div class="logos order-0 order-lg-1 d-flex">
                     <img src="~/assets/images/footer/white/2030.png" />
-                    <img src="~/assets/images/footer/white/saudi-logo.png" />
                     <img src="~/assets/images/footer/white/sport-ministry.png" />
+                    <img src="~/assets/images/footer/white/saudi-logo.png" />
                     <div class="footer-borders">
                         <div class="curve curve-1"></div>
                         <div class="curve curve-2"></div>
