@@ -78,7 +78,20 @@ namespace yoga.Controllers
                 // Add user to member role
                 await _userManager.AddToRoleAsync(loggedUser, "Member");
                 
-                ViewData["Saved"] = "Thanks, Your request sent successfully, we will review your it and approve your card ASAP.";
+                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                EmailSender _emailSender = new EmailSender(_emailConfiguration);
+                    
+                string content = $"Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                var emailMessage = new EmailMessage
+                {
+                    ToEmailAddresses = new List<string> {loggedUser.Email},
+                    Subject = "SAUDI YOGA COMMITTEE - MemberShip Card Rquest",
+                    Body = content
+                };
+                    
+                _emailSender.SendEmailAsync(emailMessage);
+
                 return View(obj);
             }
             return View();

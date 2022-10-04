@@ -104,7 +104,7 @@ namespace yoga.Controllers
 
                 // Add user to Teacher role
                 await _userManager.AddToRoleAsync(loggedUser, "Teacher");
-                ViewData["Saved"] = "Thanks, Your request sent successfully, we will review your it and approve your Membership ASAP.";
+                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
                 return View(obj);
             }
             return View();

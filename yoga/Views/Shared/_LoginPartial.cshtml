@@ -1,8 +1,18 @@
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    string firstName = "";
+    if(user != null)
+    {
+        firstName = $"{user.FirstName}";
+    }
+    
+}
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
     @if(User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Account" asp-action="UserProfile">@User.Identity.Name.Substring(4)</a>
+        <a asp-controller="Account" asp-action="UserProfile">@firstName</a>
         
         @* <li class="nav-item"> *@
             <form class="form-inline" asp-controller="Account" asp-action="Logout">

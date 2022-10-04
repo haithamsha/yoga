@@ -134,7 +134,7 @@
     <comment/>
   </data>
   <data name="ForgetPassword" xml:space="preserve">
-    <value>نسيت كلمة المرو؟</value>
+    <value>نسيت كلمة المرور؟</value>
     <comment/>
   </data>
   <data name="Login" xml:space="preserve">

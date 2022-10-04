@@ -39,10 +39,10 @@
                     <div class="about-us-content container">
 							@if(@culture.RequestCulture.UICulture.Name == "en")
 							{
-								<a type="button" class="btn btn-brown-outline about-btn">ABOUT US</a>
+								<a asp-controller="Home" asp-action="About" type="button" class="btn btn-brown-outline about-btn">ABOUT US</a>
 							}
 							else {
-								<a type="button" class="btn btn-brown-outline about-btn">من نحن</a>
+								<a asp-controller="Home" asp-action="About" type="button" class="btn btn-brown-outline about-btn">من نحن</a>
 							}
 							
                         @if(@culture.RequestCulture.UICulture.Name == "en")
@@ -235,23 +235,23 @@
 				{
 					<div class="platform-licenses row row-cols-2 row-cols-lg-5 align-items-center justify-content-lg-between justify-content-center">
                     <div class="show-on-scroll">
-                        <img src="~/assets/images/amateurs.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="1" ><img src="~/assets/images/amateurs.png" /></a>
                         <p>AMATEURS</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="~/assets/images/trainers.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="2"><img src="~/assets/images/trainers.png" /></a>
                         <p>TRAINERS (PROGRAM)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="~/assets/images/centers.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="3"><img src="~/assets/images/centers.png" /></a>
                         <p>CENTERS & GYMS (COMPETITION)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="~/assets/images/clubs.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="4"><img src="~/assets/images/clubs.png" /></a>
                         <p>CLUBS (COMPETITION)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="~/assets/images/yogasan.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="5"><img src="~/assets/images/yogasan.png" /></a>
                         <p>YOGASAN SPORTATHLETS</p>
                     </div>
 
@@ -262,25 +262,25 @@
                    
                     
                     <div class="show-on-scroll">
-                        <img src="assets/images/yogasan.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="1"><img src="assets/images/yogasan.png" /></a>
                         <p>لاعبين اليوغا
                             (محترف)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="assets/images/clubs.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="2"><img src="assets/images/clubs.png" /></a>
                         <p>الأندية (منافسة)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="assets/images/centers.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="3"><img src="assets/images/centers.png" /></a>
                         <p>المراكز والألعاب الرياضية
                             (منافسة)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="assets/images/trainers.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="4"><img src="assets/images/trainers.png" /></a>
                         <p>المدربون (برنامج)</p>
                     </div>
                     <div class="show-on-scroll">
-                        <img src="assets/images/amateurs.png" />
+                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="5"><img src="assets/images/amateurs.png" /></a>
                         <p>الهواة</p>
                     </div>
 
@@ -288,9 +288,9 @@
 				}
                 @if(@culture.RequestCulture.UICulture.Name == "en")
 				{
-					<a class="btn show-on-scroll" href="#" role="button">BUY NOW</a>
+					<a class="btn show-on-scroll" asp-controller="Account" asp-action="Register" role="button">BUY NOW</a>
 				}
 				else {
-					<a class="btn show-on-scroll" href="#" role="button">اشتري الآن</a>
+					<a class="btn show-on-scroll" asp-controller="Account" asp-action="Register" role="button">اشتري الآن</a>
 				}
             </div>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home" xml:space="preserve">
-    <value>Ho</value>
+    <value>Home</value>
     <comment/>
   </data>
   <data name="About" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment/>
   </data>
   <data name="Faq" xml:space="preserve">
-    <value>Faq</value>
+    <value>FAQ</value>
     <comment/>
   </data>
   <data name="Contact" xml:space="preserve">

@@ -4,6 +4,8 @@
 @{
     var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
 }
+
+
 <!DOCTYPE html>
 <html>
 
@@ -120,6 +122,11 @@
                         <li> <a asp-controller="Home" asp-action="Downloads">@localizer["Handbook"]</a></li>
                         <li><a asp-controller="Home" asp-action="FAQS">@localizer["Faq"]</a></li>
                         <li><a asp-controller="Home" asp-action="Contact">@localizer["Contact"]</a></li>
+                        <partial name="_culture" />
+                        @* <li>
+                            <a asp-controller="Account" asp-action="Login">Account</a>
+                            </li> *@
+                        <partial name="_loginPartial" />
                     </ul>
                 </div>
 
@@ -153,7 +160,7 @@
                             @localizer["footerBody1"]
                             </p>
                     </div>
-                    <a class="btn btn-darker-brown-primary" href="#" role="button">
+                    <a class="btn btn-darker-brown-primary" asp-controller="Home" asp-action="Contact" role="button">
                         @localizer["Contact"]
                         </a>
                 </div>
