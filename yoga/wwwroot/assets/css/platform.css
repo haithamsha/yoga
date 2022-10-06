@@ -17,7 +17,6 @@
     font-size: 20px;
     line-height: 26px;
     color: var(--green-darker);
-    height: auto;
 }
 .advantage-title{
     font-family: zaridSerif;
@@ -65,8 +64,10 @@
     } 
     #platform-page {
         position: absolute;
-        height: 600px;
+        height: 809px;
         left: 0px;
+        display: flex;
+        align-items: center;
     }
 
     #platform-page img {
@@ -77,10 +78,10 @@
         width: 618.17px;
     }
 
-    .platform-page-content {
+    /* .platform-page-content {
         padding-top: 204px;
         padding-bottom: 204px;
-    }
+    } */
     .platform-page-content a.btn-brown-primary{
         margin-top: 100px;
     }
