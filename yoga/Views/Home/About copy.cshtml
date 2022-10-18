@@ -1,15 +1,10 @@
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
-
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/assets/css/platform.css" rel="stylesheet">
 <link href="~/assets/css/related-news.css" rel="stylesheet">
-
-<div class="yog-layout">
-    
-</div>
 
 <div id="platform-page-container">
                 <div id="platform-page">
@@ -17,11 +12,7 @@
                         @* <a type="button" class="btn btn-brown-outline ">@localizer["AboutUsTitle"]</a> *@
                         <div class="platform-page-title">@localizer["WhoWeAre"]</div>
                         <div class="platform-page-desc">
-
-                            @* @localizer["AboutUsBody"] *@
-                            The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sports professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.
-                            The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sports professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.
-
+                            @localizer["AboutUsBody"]
                         </div>
                     </div>
                     <img src="~/assets/images/platform/platform-clubs.png" class="order-0">
@@ -77,4 +68,3 @@
 
 
         </div>
-

@@ -236,23 +236,23 @@
 					<div class="platform-licenses row row-cols-2 row-cols-lg-5 align-items-center justify-content-lg-between justify-content-center">
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="1" ><img src="~/assets/images/amateurs.png" /></a>
-                        <p>AMATEURS</p>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="1">AMATEURS</a></p>
                     </div>
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="2"><img src="~/assets/images/trainers.png" /></a>
-                        <p>TRAINERS (PROGRAM)</p>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="2">TRAINERS (PROGRAM)</a></p>
                     </div>
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="3"><img src="~/assets/images/centers.png" /></a>
-                        <p>CENTERS & GYMS (COMPETITION)</p>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="3">CENTERS & GYMS (COMPETITION)</a></p>
                     </div>
                     <div class="show-on-scroll">
-                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="4"><img src="~/assets/images/clubs.png" /></a>
-                        <p>CLUBS (COMPETITION)</p>
+                        <a><img src="~/assets/images/clubs.png" /></a>
+                        <p> <a asp-controller="Platform" asp-action="Detail" asp-route-id="4">CLUBS (COMPETITION)</a> </p>
                     </div>
                     <div class="show-on-scroll">
-                        <a asp-controller="Platform" asp-action="Detail" asp-route-id="5"><img src="~/assets/images/yogasan.png" /></a>
-                        <p>YOGASAN SPORTATHLETS</p>
+                        <a ><img src="~/assets/images/yogasan.png" /></a>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="5">YOGASAN SPORTATHLETS</a> </p>
                     </div>
 
                 </div>
@@ -262,29 +262,29 @@
                    
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="1"><img src="assets/images/amateurs.png" /></a>
-                        <p>الهواة</p>
+                        <p> <a asp-controller="Platform" asp-action="Detail" asp-route-id="1">الهواة</a> </p>
                     </div>
 
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="2"><img src="assets/images/trainers.png" /></a>
-                        <p>المدربون (برنامج)</p>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="2">المدربون (برنامج)</a> </p>
                     </div>
 
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="3"><img src="assets/images/centers.png" /></a>
-                        <p>المراكز والألعاب الرياضية
-                            (منافسة)</p>
+                        <p> <a asp-controller="Platform" asp-action="Detail" asp-route-id="3"> المراكز والألعاب الرياضية
+                            (منافسة)</a></p>
                     </div>
 
                      <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="4"><img src="assets/images/clubs.png" /></a>
-                        <p>الأندية (منافسة)</p>
+                        <p><a asp-controller="Platform" asp-action="Detail" asp-route-id="4">الأندية (منافسة)</a> </p>
                     </div>
 
                     <div class="show-on-scroll">
                         <a asp-controller="Platform" asp-action="Detail" asp-route-id="5"><img src="assets/images/yogasan.png" /></a>
-                        <p>لاعبين اليوغا
-                            (محترف)</p>
+                        <p> <a asp-controller="Platform" asp-action="Detail" asp-route-id="5">لاعبين اليوغا
+                            (محترف)</a> </p>
                     </div>
                    
                     
@@ -293,11 +293,5 @@
 
                 </div>
 				}
-                @if(@culture.RequestCulture.UICulture.Name == "en")
-				{
-					<a class="btn show-on-scroll" asp-controller="Account" asp-action="Register" role="button">BUY NOW</a>
-				}
-				else {
-					<a class="btn show-on-scroll" asp-controller="Account" asp-action="Register" role="button">اشتري الآن</a>
-				}
+                
             </div>

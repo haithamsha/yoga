@@ -16,8 +16,8 @@ namespace yoga.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "Password should contain a good mixture of upper/lower case letters, numbers, and symbols and least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password, ErrorMessage = "Password should contain a good mixture of upper/lower case letters, numbers, and symbols")]
         [Display(Name = "Password")]
         public string Password { get; set; }
 

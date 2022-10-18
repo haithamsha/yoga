@@ -136,6 +136,10 @@
                     <label asp-for="ReceiptCopy"></label>
                     <input type="file" asp-for="ReceiptCopy" class="form-control" />
                 </div>
+                <div class="mb-3">
+                    <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and
+                        Acknowledged</span>
+                </div>
             </div>
 
             @* <div class="tab-pane fade" id="status">
@@ -214,9 +218,7 @@
                 </table>
                 </div>
                 </div> *@
-            <div>
-                <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and Acknowledged</span>
-            </div>
+            
             @* <button type="submit" class="btn btn-primary">Approve</button>
                 <button type="submit" class="btn btn-danger">Reject</button> *@
 

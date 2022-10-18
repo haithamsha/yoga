@@ -49,6 +49,8 @@ namespace yoga.Controllers
             ModelState.Remove("ReceiptCopy");
             ModelState.Remove("CertficateFiles");
             ModelState.Remove("Agreement");
+            ModelState.Remove("ExamDetails");
+            ModelState.Remove("SchoolSocialMediaAccount");
             
 
             if(ModelState.IsValid)

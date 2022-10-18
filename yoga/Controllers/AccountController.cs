@@ -152,6 +152,8 @@ namespace yoga.Controllers
                 }
             }
             // If we got this far, something failed, redisplay form
+            var countries = GetCountries();
+            Input.Counries = countries;
             return View(Input);
         }
 
