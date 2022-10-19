@@ -35,8 +35,11 @@ function hideMenu(){
 let fileInput = document.getElementById("inputTag");
 let imageName = document.getElementById("imageName")
 
+if(fileInput!=null)
+{
 fileInput.addEventListener("change", ()=>{
     let inputImage = document.querySelector("input[type=file]").files[0];
 
     imageName.innerText = inputImage.name;
 })
+}

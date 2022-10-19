@@ -51,7 +51,9 @@ namespace yoga.Controllers
             ModelState.Remove("Agreement");
             ModelState.Remove("ExamDetails");
             ModelState.Remove("SchoolSocialMediaAccount");
-            
+            ModelState.Remove("Name");
+            ModelState.Remove("PersonalWebSite");
+            obj.Name = "tst";
 
             if(ModelState.IsValid)
             {
@@ -81,7 +83,7 @@ namespace yoga.Controllers
                 if(loggedUser == null)
                 {
                     ModelState.AddModelError("", "User Not Exist");
-                    return View();
+                    return View(obj);
                 }
 
                 TechearMemberShip entity = new TechearMemberShip();
@@ -107,8 +109,13 @@ namespace yoga.Controllers
                 // Add user to Teacher role
                 await _userManager.AddToRoleAsync(loggedUser, "Teacher");
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
-                return View(obj);
+                return RedirectToAction("DataSaved");
             }
+            return View();
+        }
+
+        public IActionResult DataSaved()
+        {
             return View();
         }
 

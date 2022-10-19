@@ -9,7 +9,7 @@ using yoga.ViewModels;
 
 namespace yoga.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class AccountController: Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
@@ -80,6 +80,7 @@ namespace yoga.Controllers
             
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             var countries = GetCountries();
@@ -88,6 +89,7 @@ namespace yoga.Controllers
             return View(vm);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel Input, IFormFile Image, string returnUrl = null)
@@ -116,6 +118,31 @@ namespace yoga.Controllers
                 var user = new AppUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.Phone, NationalId = Input.NationalId, 
                 MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
                 FirstName = Input.FirstName, UserImage = fileName, Country = country};
+
+                // Validate if user exists before
+                string validationError = "";
+
+                if(_db.Users.Where(u=>u.Email == user.Email).ToList().Count >=1)
+                {
+                    validationError += " This Email used before!,";
+                }
+                if(_db.Users.Where(u=>u.PhoneNumber == user.PhoneNumber).ToList().Count >=1)
+                {
+                    validationError += " This Phone used before!,";
+                }
+                if(_db.Users.Where(u=>u.NationalId == user.NationalId).ToList().Count >=1)
+                {
+                    validationError += " This National Id used before!";
+                }
+
+                if(!string.IsNullOrEmpty(validationError))
+                {
+                    var _countries = GetCountries();
+                    Input.Counries = _countries;
+                    ModelState.AddModelError("", validationError);
+                    return View(Input);
+                }
+
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -158,6 +185,7 @@ namespace yoga.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -169,23 +197,26 @@ namespace yoga.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Error()
         {
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SuccessRegistration()
         {
             return View();
         }
 
-
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel Input)
