@@ -50,11 +50,7 @@
                 
                 <div class="mb-3">
                     <label asp-for="EducationLevel"></label>
-                    <select name="EducationLevel" id="EducationLevel" class="form-control">
-                        <option value="0">Select Level</option>
-                        <option value="1">Level 1</option>
-                        <option value="2">Level 2</option>
-                        <option value="3">Level 3</option>
+                    <select name="EducationLevel" id="EducationLevel" class="form-control" asp-for="EducationLevel" asp-items="@Model.EducationLevels">
                     </select>
                     <span asp-validation-for="EducationLevel" class="text-danger"></span>
                 </div>
@@ -68,16 +64,8 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="TeachingType"></label>
-                    <select name="TeachingType" id="TeachingType" class="form-control">
-                        <option value="0">Select TeachingType</option>
-                        <option value="1">Yin</option>
-                        <option value="2">Prenatal</option>
-                        <option value="3">Therapy</option>
-                        <option value="4">Aerial</option>
-                        <option value="5">Hatha</option>
-                        <option value="6">Ashtanga</option>
-                        <option value="7">Vinyasa Flow</option>
-                        <option value="8">Iyengar</option>
+                    <select name="TeachingType" id="TeachingType" asp-for="TeachingType" asp-items="@Model.TeachingTypes" class="form-control">
+                        
                     </select>
                     <span asp-validation-for="TeachingType" class="text-danger"></span>
                 </div>
@@ -86,7 +74,7 @@
             <div class="tab-pane fade" id="profile">
                 <div class="mb-3">
                     <label asp-for="ExpYears"></label>
-                    <input asp-for="ExpYears" class="form-control" />
+                    <input required asp-for="ExpYears" class="form-control" />
                     <span asp-validation-for="ExpYears" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
@@ -97,6 +85,7 @@
                 <div class="mb-3">
                     <label asp-for="SchoolLocation"></label>
                     <input asp-for="SchoolLocation" class="form-control" />
+                    <span asp-validation-for="SchoolLocation" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="CertaficateDate"></label>
@@ -106,14 +95,17 @@
                 <div class="mb-3">
                     <label asp-for="SchoolName"></label>
                     <input asp-for="SchoolName" class="form-control" />
+                    <span asp-validation-for="SchoolName" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="SchoolLink"></label>
-                    <input asp-for="SchoolName" class="form-control" />
+                    <input asp-for="SchoolLink" class="form-control" />
+                    <span asp-validation-for="SchoolLink" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="SchoolSocialMediaAccount"></label>
                     <input asp-for="SchoolSocialMediaAccount" class="form-control" />
+                    <span asp-validation-for="SchoolSocialMediaAccount" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="CertficateFiles"></label>
@@ -131,6 +123,7 @@
                 <div class="mb-3">
                     <label asp-for="ReceiptCopy"></label>
                     <input type="file" asp-for="ReceiptCopy" class="form-control" />
+                    <span asp-validation-for="ReceiptCopy" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and

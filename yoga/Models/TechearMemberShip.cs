@@ -17,7 +17,7 @@ namespace yoga.Models
         public DateTime CertaficateDate { get; set; }
         public string SchoolName { get; set; }
         public string SchoolLink { get; set; } = "";
-        public string SchoolSocialMediaAccount { get; set; } = "";
+        public string? SchoolSocialMediaAccount { get; set; } = "";
         public string CertficateFiles { get; set; }
         public int Status { get; set; } = (int)StatusEnum.Pending;
         

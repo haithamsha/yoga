@@ -133,4 +133,8 @@
     <value>Memberships</value>
     <comment/>
   </data>
+  <data name="UserProfile" xml:space="preserve">
+    <value>User Profile</value>
+    <comment/>
+  </data>
 </root>

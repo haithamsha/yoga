@@ -4,6 +4,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using yoga.Data;
@@ -32,12 +33,85 @@ namespace yoga.Controllers
             return View(lics);
         }
         
+        private List<SelectListItem> getEducationLevels()
+        {
+            List<SelectListItem> levels =new List<SelectListItem>();
+            levels.Add(new SelectListItem{
+                Text = "Select Level",
+                Value = "0"
+            });
+
+            levels.Add(new SelectListItem{
+            Text = "Level 1",
+            Value = "1"
+            });
+
+            levels.Add(new SelectListItem{
+            Text = "Level 2",
+            Value = "2"
+            });
+
+            levels.Add(new SelectListItem{
+            Text = "Level 3",
+            Value = "3"
+            });
+            return levels;
+        }
+
+        private List<SelectListItem> getTeachingTypes()
+        {
+            List<SelectListItem> t_Types =new List<SelectListItem>();
+            t_Types.Add(new SelectListItem{
+                Text = "Select Teaching Type",
+                Value = "0"
+            });
+
+            t_Types.Add(new SelectListItem{
+            Text = "Yin",
+            Value = "1"
+            });
+
+            t_Types.Add(new SelectListItem{
+            Text = "Prenatal",
+            Value = "2"
+            });
+
+            t_Types.Add(new SelectListItem{
+            Text = "Therapy",
+            Value = "3"
+            });
+            t_Types.Add(new SelectListItem{
+            Text = "Aerial",
+            Value = "4"
+            });
+            t_Types.Add(new SelectListItem{
+            Text = "Hatha",
+            Value = "5"
+            });
+            t_Types.Add(new SelectListItem{
+            Text = "Ashtanga",
+            Value = "6"
+            });
+            t_Types.Add(new SelectListItem{
+            Text = "Vinyasa Flow",
+            Value = "7"
+            });
+            t_Types.Add(new SelectListItem{
+            Text = "Iyengar",
+            Value = "8"
+            });
+            return t_Types;
+        }
+
         [Authorize]
         public IActionResult Create()
         {
             var member = IfTeacherExists();
             if(member != null) return View(member);
-            return View();
+            var vm = new TechearMemberShipVM();
+            vm.EducationLevels = getEducationLevels();
+            vm.TeachingTypes = getTeachingTypes();
+            return View(vm);
         }
 
         //Post
@@ -53,12 +127,16 @@ namespace yoga.Controllers
             ModelState.Remove("SchoolSocialMediaAccount");
             ModelState.Remove("Name");
             ModelState.Remove("PersonalWebSite");
+            ModelState.Remove("EducationLevels"); 
+            ModelState.Remove("TeachingTypes");
             obj.Name = "tst";
 
             if(ModelState.IsValid)
             {
                 if(!obj.Agreement)
                 {
+                    obj.EducationLevels = getEducationLevels();
+                    obj.TeachingTypes = getTeachingTypes();
                     ModelState.AddModelError("Agreement", " Terms Conditions and Acknowledged");
                     return View(obj);
                 }
@@ -93,10 +171,10 @@ namespace yoga.Controllers
                 entity.SocialMediaAccounts = obj.SocialMediaAccounts;
                 entity.PersonalWebSite = obj.PersonalWebSite;
                 entity.TeachingType = obj.TeachingType;
-                entity.ExpYears = obj.ExpYears;
-                entity.AccreditedHours = obj.AccreditedHours;
+                entity.ExpYears = obj.ExpYears.Value;
+                entity.AccreditedHours = obj.AccreditedHours.Value;
                 entity.SchoolLocation = obj.SchoolLocation;
-                entity.CertaficateDate = obj.CertaficateDate;
+                entity.CertaficateDate = obj.CertaficateDate.Value;
                 entity.SchoolName = obj.SchoolName;
                 entity.SchoolLink = obj.SchoolLink;
                 entity.SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount;
@@ -111,7 +189,9 @@ namespace yoga.Controllers
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
                 return RedirectToAction("DataSaved");
             }
-            return View();
+            obj.EducationLevels = getEducationLevels();
+            obj.TeachingTypes = getTeachingTypes();
+            return View(obj);
         }
 
         public IActionResult DataSaved()

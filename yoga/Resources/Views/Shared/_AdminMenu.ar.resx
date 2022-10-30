@@ -133,4 +133,8 @@
     <value>طلبات العضويات</value>
     <comment/>
   </data>
+  <data name="UserProfile" xml:space="preserve">
+    <value>بياناتي</value>
+    <comment/>
+  </data>
 </root>
