@@ -7,6 +7,7 @@ namespace yoga.ViewModels
         
         [Display(Name = "Bank Receit Copy")]
         [DataType(DataType.Upload)]
+        [Required(ErrorMessage = "Reciet Copy is required")]
         public string RecietCopy { get; set; }
         public decimal? Price { get; set; } = 150;
     }

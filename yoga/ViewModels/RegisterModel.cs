@@ -35,7 +35,7 @@ namespace yoga.ViewModels
 
         [Required]
         [Display(Name = "National Id")]
-        [RegularExpression("([0-9]+)", ErrorMessage = "National Id accept numbers only")]
+        [RegularExpression("0[0-9]{9}", ErrorMessage = "National Id accept numbers only and begin with zero!")]
         public string NationalId { get; set; }
 
         [Required]

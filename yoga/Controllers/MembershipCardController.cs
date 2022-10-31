@@ -46,6 +46,11 @@ namespace yoga.Controllers
             {
                 // Upload image
                 string fileName = "";
+                if(RecietCopy == null || RecietCopy.Length == 0)
+                {
+                    ModelState.AddModelError("RecietCopy", "Reciet Copy Is required");
+                    return View(obj);
+                }
                 if(RecietCopy != null && RecietCopy.Length > 0)
                 {
                     fileName = Path.GetFileName(RecietCopy.FileName);
@@ -92,8 +97,13 @@ namespace yoga.Controllers
                     
                 _emailSender.SendEmailAsync(emailMessage);
 
-                return View(obj);
+                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                return RedirectToAction("DataSaved");
             }
+            return View();
+        }
+        public IActionResult DataSaved()
+        {
             return View();
         }
 

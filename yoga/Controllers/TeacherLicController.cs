@@ -131,6 +131,19 @@ namespace yoga.Controllers
             ModelState.Remove("TeachingTypes");
             obj.Name = "tst";
 
+            if(obj.TeachingType == 0)
+            {
+                obj.EducationLevels = getEducationLevels();
+                obj.TeachingTypes = getTeachingTypes();
+                ModelState.AddModelError("TeachingType", " Teaching Type is required");
+            }
+            if(obj.EducationLevel == 0)
+            {
+                obj.EducationLevels = getEducationLevels();
+                obj.TeachingTypes = getTeachingTypes();
+                ModelState.AddModelError("EducationLevel", " Education Level is required");
+            }
+
             if(ModelState.IsValid)
             {
                 if(!obj.Agreement)
@@ -140,6 +153,7 @@ namespace yoga.Controllers
                     ModelState.AddModelError("Agreement", " Terms Conditions and Acknowledged");
                     return View(obj);
                 }
+                
                 // Upload images
                 string fileName_rec = "";
                 string fileName_cert = "";
