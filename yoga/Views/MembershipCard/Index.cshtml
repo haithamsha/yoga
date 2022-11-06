@@ -21,7 +21,7 @@
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
-                                                <th>@localizer["UserName"]</th>
+                                                <th>@localizer["Name"]</th>
                                                 <th>@localizer["Phone"]</th>
                                                 <th>@localizer["Email"]</th>
                                                 <th>@localizer["CardSerial"]</th>
@@ -35,7 +35,7 @@
                                     {
                                                 <tr>
                                                     <td class="cell">
-                                                @item.AppUser.UserName
+                                                @item.AppUser.FirstName @item.AppUser.MiddleName @item.AppUser.LastName
                                                     </td>
                                                     <td class="cell">
                                                 @item.AppUser.PhoneNumber
