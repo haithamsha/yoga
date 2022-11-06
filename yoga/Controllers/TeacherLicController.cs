@@ -29,7 +29,7 @@ namespace yoga.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips;
+            IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips.Include("AppUser");
             return View(lics);
         }
         
@@ -226,7 +226,7 @@ namespace yoga.Controllers
         public IActionResult Detail(int? id)
         {
             if(id == null || id == 0) return NotFound();
-            var obj = _db.TechearMemberShips.Find(id);
+            var obj = _db.TechearMemberShips.Include("AppUser").Where(t=>t.MemId == id).SingleOrDefault();
             obj.EducationLevel_String = getEducationLevel((int)obj.EducationLevel);
             obj.TeachingType_string = getTeachingType(obj.TeachingType);
             if(obj == null) return NotFound();
@@ -234,7 +234,7 @@ namespace yoga.Controllers
             return View(obj);
         }
 
-        string getEducationLevel(int levelId)
+        static string getEducationLevel(int levelId)
         {
             if(levelId == 1)
             {
@@ -252,7 +252,7 @@ namespace yoga.Controllers
                 return "";
             }
         }
-        string getTeachingType(int typeId)
+        static string getTeachingType(int typeId)
         {
             if(typeId == 1)
             {
@@ -315,18 +315,17 @@ namespace yoga.Controllers
                     if(Info == 1)
                     {
                         
+                        tech.Status = (int)StatusEnum.Approved;
+                        tech.ExamLocation = ExamLocation;
+                        content = $"Congratuilation, You information is approved, next step is take the exam please go to your profile and pay the exam fees. </p>";
+                    }
+                    if(PayExamFees == 1)
+                    {
                         if(string.IsNullOrEmpty(ExamLocation))
                         {
                             ModelState.AddModelError("", "Please Insert The Exam Location and Date!");
                             return View(tech);
                         }
-
-                        tech.Status = (int)StatusEnum.Approved;
-                        tech.ExamLocation = ExamLocation;
-                        content = $"Congratuilation, You information is approved, next step is take the exam at the datails <p> {ExamLocation} </p>";
-                    }
-                    if(PayExamFees == 1)
-                    {
                         tech.PayExamFees = true;
                         content  += "Your Exam Fees Approved, next step is take the exam at the below address.. ";
                     }
@@ -465,8 +464,13 @@ namespace yoga.Controllers
                 _db.TechearMemberShips.Update(tech);
                 _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
-                return View();
+                return RedirectToAction("Confirmation");
             }
+            return View();
+        }
+
+        public ActionResult ConfirmPayExamFees()
+        {
             return View();
         }
 
@@ -504,6 +508,7 @@ namespace yoga.Controllers
                 _db.TechearMemberShips.Update(tech);
                 _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
+                return RedirectToAction("Confirmation");
                 return View();
             }
             return View();
@@ -512,13 +517,19 @@ namespace yoga.Controllers
         public IActionResult ExportToExcel()
         {
             var result = _db.TechearMemberShips
+            .Include("AppUser")
             .Select( t => new {
-                Name = t.Name,
+                Name = $"{t.AppUser.FirstName} {t.AppUser.MiddleName} {t.AppUser.LastName}",
                 ExperienceYears = t.ExpYears,
                 AccreditedHours= t.AccreditedHours,
+                EducationLevel = getEducationLevel((int)t.EducationLevel),
+                TeachingType = getTeachingType((int)t.TeachingType),
                 PayExamFees = t.PayExamFees == true ? "Yes": "No",
                 PayLicFees = t.PayFees  == true ? "Yes": "No",
-                Active = t.Status == 1  ? "Pending" : "Approved"
+                FinalApprove = t.Status == 1  ? "Pending" : "Approved",
+                CurrentInformationStatus = getCurrentStatus(t.Status),
+                SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
+                ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : ""
             })
             .ToList();
             var stream = new MemoryStream();
@@ -538,6 +549,14 @@ namespace yoga.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        static string getCurrentStatus(int statusId)
+        {
+            if(statusId == 1) return "Pending";
+            if(statusId == 2) return "Approved";
+            if(statusId == 3) return "Rejected";
+            return "Pending";
         }
     }
 }

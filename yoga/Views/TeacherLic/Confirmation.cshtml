@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+<div class="d-lg-flex">
+    <partial name="_AdminMenu" />
+    <div class="account-container account-details">
+
+
+    
+        <div class="alert alert-success">Thank you, We going to review your informatino ASAP.</div>
+        <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a></div>
+
+
+</div>
+</div>
+

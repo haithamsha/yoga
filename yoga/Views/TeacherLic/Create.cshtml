@@ -37,9 +37,9 @@
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#profile">Expreience</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a>
-            </li>
+            @* <li class="nav-item"> *@
+                @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
+            @* </li> *@
             @* <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#status">Status</a>
                 </li> *@
@@ -112,19 +112,6 @@
                     <input type="file" asp-for="CertficateFiles" class="form-control" />
                     <span asp-validation-for="CertficateFiles" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="tab-pan fade" id="payfees">
-                <div class="alert alert-info">Please Send <span class="fw-bold">150</span> 
-                SAR to the below bank account
-                    <p>IBAN: SA5865000000101459418001</p>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="ReceiptCopy"></label>
-                    <input type="file" asp-for="ReceiptCopy" class="form-control" />
-                    <span asp-validation-for="ReceiptCopy" class="text-danger"></span>
-                </div>
                 <div class="mb-3">
                     <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and
                         Acknowledged</span>
@@ -133,6 +120,20 @@
                     <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
                 </div>
             </div>
+
+            @* <div class="tab-pan fade" id="payfees">
+                <div class="alert alert-info">Please Send <span class="fw-bold">150</span> 
+                SAR to the below bank account
+                    <p>IBAN: SA5865000000101459418001</p>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ReceiptCopy"></label>
+                    <input type="file" asp-for="ReceiptCopy" class="form-control" />
+                    
+                </div>
+                
+            </div> *@
 
             @* <div class="tab-pane fade" id="status">
 

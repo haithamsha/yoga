@@ -29,13 +29,13 @@ namespace yoga.ViewModels
         public string ReturnUrl { get; set; }
 
         [Required]
-        [Phone]
+        [RegularExpression("0[0-9]{9}", ErrorMessage = "Phone accept numbers only and begin with zero!")]
         [Display(Name = "Phone")]
         public string Phone { get; set; }
 
         [Required]
         [Display(Name = "National Id")]
-        [RegularExpression("0[0-9]{9}", ErrorMessage = "National Id accept numbers only and begin with zero!")]
+        [RegularExpression("[1-9][0-9]{9}", ErrorMessage = "National Id accept ten numbers only")]
         public string NationalId { get; set; }
 
         [Required]

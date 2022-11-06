@@ -17,7 +17,7 @@ namespace yoga.ViewModels
         public List<SelectListItem> TeachingTypes{get;set;}
 
         [Required(ErrorMessage = "Years of experience required.")]
-        [Display(Name = "Exp Years")]
+        [Display(Name = "Years Of Experience")]
         public int? ExpYears { get; set; }
 
         [Display(Name = "Accredited Hours")]
@@ -42,7 +42,7 @@ namespace yoga.ViewModels
 
         [Display(Name = "Bank Receit Copy")]
         [DataType(DataType.Upload)]
-        public string ReceiptCopy { get; set; }
+        public string? ReceiptCopy { get; set; }
         
         
         public string Name { get; set; }

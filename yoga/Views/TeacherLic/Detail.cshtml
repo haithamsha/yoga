@@ -31,7 +31,7 @@
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="Name"></label>
                     <div>
-                        <label>@Model.Name</label>
+                        <label>@Model.AppUser.FirstName @Model.AppUser.MiddleName @Model.AppUser.LastName</label>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -180,10 +180,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <span class="fw-bold text-capitalize">Details</span> 
-                                            <div>
-                                                <textarea placeholder="Exam Details (Location And Date)" name="ExamLocation" id="" cols="30" rows="3"></textarea>
-                                            </div>
+                                            
                                     }
                                     else if(Model.Status == (int)StatusEnum.Approved) {
                                             <div>
@@ -213,6 +210,10 @@
                                                     <option value="0">Select</option>
                                                     <option value="1">Mark as paid exam fees</option>
                                                 </select>
+                                            </div>
+                                            <span class="fw-bold text-capitalize">Details</span> 
+                                            <div>
+                                                <textarea placeholder="Exam Details (Location And Date)" name="ExamLocation" id="" cols="30" rows="3"></textarea>
                                             </div>
                                     }
                                     else {
@@ -294,7 +295,7 @@
                         </div>
                     }
 
-                    @if(Model.FinalApprove == false)
+                    @if(Model.FinalApprove == false && Model.Status == (int)StatusEnum.Pending)
                     {
                         <div class="mb-3">
                         <div>

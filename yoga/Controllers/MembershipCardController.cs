@@ -243,9 +243,10 @@ namespace yoga.Controllers
                 Name = t.AppUser.FirstName + " " + t.AppUser.LastName,
                 Phone = t.AppUser.PhoneNumber,
                 Email= t.AppUser.Email,
-                CardSerial = t.SerialNumber,
+                CardSerial = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
+                ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 PayFees = t.Payed  == true ? "Yes": "No",
-                Active = t.Status == 1  ? "Pending" : "Approved"
+                Status = getCurrentStatus(t.Status)
             })
             .ToList();
             var stream = new MemoryStream();
@@ -257,8 +258,16 @@ namespace yoga.Controllers
                 package.Save();
             }
             stream.Position= 0;
-            string excelName = $"Techers Licenses data {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+            string excelName = $"Membership cards {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+        }
+
+        static string getCurrentStatus(int statusId)
+        {
+            if(statusId == 1) return "Pending";
+            if(statusId == 2) return "Approved";
+            if(statusId == 3) return "Rejected";
+            return "Pending";
         }
 
         // [HttpPost]
