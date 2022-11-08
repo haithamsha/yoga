@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
+using IronPdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -88,12 +89,16 @@ namespace yoga.Controllers
                 EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     
                 string content = $"Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                
                 var emailMessage = new EmailMessage
                 {
                     ToEmailAddresses = new List<string> {loggedUser.Email},
                     Subject = "SAUDI YOGA COMMITTEE - MemberShip Card Rquest",
                     Body = content
                 };
+
+                // Generate pdf license
+
                     
                 _emailSender.SendEmailAsync(emailMessage);
 
@@ -136,7 +141,7 @@ namespace yoga.Controllers
         {
             if(!string.IsNullOrEmpty(Approve))
             {
-                var memCard = _db.MembershipCards.Where(m=>m.CardId == id).SingleOrDefault();
+                var memCard = _db.MembershipCards.Include("AppUser").Where(m=>m.CardId == id).SingleOrDefault();
                 // Update status, payed, active and expire date for 1 year
                 memCard.Active = true;
                 memCard.Payed = true;
@@ -151,6 +156,9 @@ namespace yoga.Controllers
                 int rowAffect = _db.SaveChanges();
                 // Send Email to the user(Congratuilation, Your Membership card is active now until {expire date}, Your)
                 // Card Serial Number "999"
+                string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", 
+                memCard.AppUser.UserImage);
+
                 string content = @$"<div>
                         <p>
                         Congratuilation, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active.
@@ -162,8 +170,29 @@ namespace yoga.Controllers
             <img width='80px' src='https://iili.io/r1zcZb.png'
             alt='Yoga'> 
         </div>
+       <div >
         <div>
-            <img swidth='80px' src='https://iili.io/r1uyHN.png' alt='Yoga'>
+            {memCard.AppUser.FirstName} {memCard.AppUser.LastName}
+        </div>
+        <div>
+            ID: {serialNumber}
+        </div>
+        <div>
+            Validity: {DateTime.Now.AddYears(1)}
+</div></div></div>
+                        ";
+
+                        string htmlContent = @$"<div>
+                        
+                        </div>
+                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
+    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
+        <div style='padding-bottom: 20px;'>
+            <img width='80px' src='https://iili.io/r1zcZb.png'
+            alt='Yoga'> 
+        </div>
+        <div>
+            <img width='80px' height='80px' src='{userImage}' alt='Yoga'>
         </div>
        <div >
         <div>
@@ -178,11 +207,21 @@ namespace yoga.Controllers
                         ";
                 string userId = _userManager.GetUserId(User);
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
+
+                //Generate pdf file
+                var Rendered = new ChromePdfRenderer(); 
+                using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                string PdffileName = $"MemberShip_Card{memCard.SerialNumber}.pdf";
+                var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
+                PDF.SaveAs(attachmentFile);
+
                 var emailMessage = new EmailMessage
                 {
-                    ToEmailAddresses = new List<string> {loggedUser.Email},
+                    ToEmailAddresses = new List<string> {memCard.AppUser.Email},
                     Subject = "SAUDI YOGA COMMITTEE",
-                    Body = content
+                    Body = content,
+                    AttachmentFile = attachmentFile,
+                    FileName = PdffileName
                 };
 
                 try
@@ -190,7 +229,7 @@ namespace yoga.Controllers
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     if(rowAffect == 1)
-                    _emailSender.SendEmailAsync(emailMessage);
+                    _emailSender.SendEmailBySendGrid(emailMessage);
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)

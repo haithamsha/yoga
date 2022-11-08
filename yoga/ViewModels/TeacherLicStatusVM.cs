@@ -9,5 +9,8 @@ namespace yoga.ViewModels
         public bool PayExamFees { get; set; }
         public bool TakeExam { get; set; }
         public bool PassExam { get; set; }
+        public string ReceiptCopy { get; set; }
+        public string ReceiptCopyLic { get; set; }
+        public string Serial { get; set; }
     }
 }

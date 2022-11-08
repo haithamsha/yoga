@@ -1,3 +1,4 @@
+@using System.Net
 @model yoga.ViewModels.UserSetting;
 @{
     ViewData["Title"] = "My Account";
@@ -55,6 +56,7 @@
                 <div class="col">Current Plan</div>
                 <div class="col">Expires</div>
                 <div class="col">Status</div>
+                <div class="col">Download</div>
 
             </div>
             @if (@Model.User_Subscribtions.HasTeacherLic)
@@ -70,6 +72,9 @@
                     {
                         <div class="col pending">Not Active</div>
                     }
+                    <div class="col">
+                        <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">Download</a>
+                    </div>
 
                 </div>
             }
@@ -86,6 +91,9 @@
                     {
                         <div class="col pending">Not Active</div>
                     }
+                    <div class="col">
+                        <a target="_blank" href="~/assets/MemberShip_Card@(Model.MemshipCard.Serial).pdf">Download</a>
+                    </div>
 
                 </div>
             }

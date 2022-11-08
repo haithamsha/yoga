@@ -115,13 +115,22 @@ namespace yoga.Models
                     var to = new EmailAddress(emailMsg.ToEmailAddresses.FirstOrDefault().ToString(), emailMsg.ToEmailAddresses.FirstOrDefault().ToString());
                     var plainTextContent = emailMsg.Body;
                     var htmlContent = emailMsg.Body;
+                    
+                    
                     var msg = MailHelper.CreateSingleEmail(
                         from, 
                         to, 
                         subject, 
                         plainTextContent,
-                        htmlContent
+                        htmlContent 
                         );
+
+                    if(!string.IsNullOrEmpty(emailMsg.AttachmentFile))
+                    {
+                        var bytes = File.ReadAllBytes(emailMsg.AttachmentFile);
+                        var file = Convert.ToBase64String(bytes);
+                        msg.AddAttachment(emailMsg.FileName, file);
+                    }
                     var response = await client.SendEmailAsync(msg);
                     var result = response.StatusCode;
                     var isSucced = response.IsSuccessStatusCode;

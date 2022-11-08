@@ -7,12 +7,6 @@
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
 
-
-
-
-
-
-
 <div class="d-lg-flex">
     <partial name="_AdminMenu" />
     <div class="account-container account-details">
@@ -109,13 +103,17 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="CertficateFiles"></label>
-                    <input type="file" multiple asp-for="CertficateFiles" class="form-control" />
-                    <span asp-validation-for="CertficateFiles" class="text-danger"></span>
+                    <input type="file" asp-for="CertficateFiles" class="form-control" />
+                    @if(!string.IsNullOrEmpty(Model.CertficateFiles))
+                    {
+                        <div><a target="_blank" href="~/assets/images/@Model.CertficateFiles">Certficates</a></div>
+                    }
+                    else{
+                        <span asp-validation-for="CertficateFiles" class="text-danger"></span>
+                    }
+                    
                 </div>
-                <div class="mb-3">
-                    <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and
-                        Acknowledged</span>
-                </div>
+               
                 <div class="mb-3">
                     <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
                 </div>

@@ -51,6 +51,8 @@ namespace yoga.Controllers
                 userSetting.TeacherLic.TakeExam = tlic.TakeExam;
                 userSetting.TeacherLic.PayFees = tlic.PayFees;
                 userSetting.TeacherLic.PayExamFees = tlic.PayExamFees;
+                userSetting.TeacherLic.ReceiptCopy = tlic.ReceiptCopy;
+                userSetting.TeacherLic.ReceiptCopyLic = tlic.ReceiptCopyLic;
 
             } 
 
@@ -111,6 +113,12 @@ namespace yoga.Controllers
                         {
                             await Image.CopyToAsync(fileSrteam);
                         }
+                    }
+                    else {
+                        ModelState.AddModelError("", "Image required for Membership and license!");
+                        var countries_img = GetCountries();
+                        Input.Counries = countries_img;
+                        return View(Input);
                     }
 
                 var country = _db.Country.Find(Input.CountryId);
@@ -275,6 +283,7 @@ namespace yoga.Controllers
                 userSetting.TeacherLic.ExpireDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.TeacherLic.FinalApprove = tlic.FinalApprove;
                 userSetting.TeacherLic.Status = tlic.Status;
+                userSetting.TeacherLic.Serial = tlic.SerialNumber;
 
             } 
 
@@ -287,6 +296,7 @@ namespace yoga.Controllers
                 userSetting.MemshipCard.Active = memC.Active;
                 userSetting.MemshipCard.ExpireDate = memC.ExpireDate.HasValue ? memC.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.MemshipCard.Status = memC.Status;
+                userSetting.MemshipCard.Serial = memC.SerialNumber;
             }                
 
             return View(userSetting);

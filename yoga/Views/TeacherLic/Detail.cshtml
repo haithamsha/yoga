@@ -1,10 +1,11 @@
 @model TechearMemberShip
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout2.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<div class="d-lg-flex">
+<a asp-action="Index" asp-controller="TeacherLic">Dashboard</a>
 <form method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="MemId" hidden/>
@@ -108,7 +109,17 @@
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="CertficateFiles"></label>
                     <div>
-                        <img width="200" height="200" src="~/assets/images/@Model.CertficateFiles" alt="">
+                        @{
+                            if(!string.IsNullOrEmpty(Model.CertficateFiles))
+                            {
+                                foreach (var item in Model.CertficateFiles.Split(','))
+                                {
+                                    <div><a target="_blank" href="~/assets/images/@item" alt="CertficateFiles">@item</a></div>    
+                                }
+                                
+                            }
+                        }
+                        
                     </div>
                 </div>
             </div>
@@ -176,6 +187,7 @@
                                                     <select name="Info" id="Info">
                                                         <option value="0">Select</option>
                                                         <option value="1">Mark as approved</option>
+                                                        <option value="2">Mark as Rejected</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -195,6 +207,7 @@
                                                 <select name="Info" id="Info">
                                                     <option value="0">Select</option>
                                                     <option value="1">Mark as approved</option>
+                                                    
                                                 </select>
                                             </div>
                                     }
@@ -209,6 +222,7 @@
                                                 <select name="PayExamFees" id="PayExamFees">
                                                     <option value="0">Select</option>
                                                     <option value="1">Mark as paid exam fees</option>
+                                                    <option value="2">Reject Payment</option>
                                                 </select>
                                             </div>
                                             <span class="fw-bold text-capitalize">Details</span> 
@@ -252,6 +266,7 @@
                                                     <select name="PassExam" id="PassExam">
                                                         <option value="0">Select</option>
                                                         <option value="1">Mark as pass the exam</option>
+                                                        <option value="2">Not Passed</option>
                                                     </select>
                                                 </div>
                                                 <span class="fw-bold text-capitalize">License Fees</span>
@@ -275,6 +290,7 @@
                                                 <select name="PayLicFees" id="PayLicFees">
                                                     <option value="0">Select</option>
                                                     <option value="1">Mark as paid License fees</option>
+                                                    <option value="2">Reject Payment</option>
                                                 </select>
                                             </div>
                                     }
@@ -295,7 +311,7 @@
                         </div>
                     }
 
-                    @if(Model.FinalApprove == false && Model.Status == (int)StatusEnum.Pending)
+                    @if(Model.FinalApprove == false && Model.Status != (int)StatusEnum.Rejected)
                     {
                         <div class="mb-3">
                         <div>
@@ -318,10 +334,12 @@
             </div>
 
             
-            
+</form>            
         </div>
     </div>
-</form>
+
+</div>
+
 
 
 @section Scripts{
