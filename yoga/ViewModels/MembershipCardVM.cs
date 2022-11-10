@@ -10,5 +10,6 @@ namespace yoga.ViewModels
         [Required(ErrorMessage = "Reciet Copy is required")]
         public string RecietCopy { get; set; }
         public decimal? Price { get; set; } = 150;
+        public string Image { get; set; }
     }
 }

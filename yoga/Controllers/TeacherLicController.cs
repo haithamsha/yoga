@@ -120,7 +120,7 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(TechearMemberShipVM obj, List<IFormFile> CertficateFiles)
+        public async Task<IActionResult> Create(TechearMemberShipVM obj, List<IFormFile> CertficateFiles, IFormFile Image)
         {
             ModelState.Remove("ReceiptCopy");
             ModelState.Remove("CertficateFiles");
@@ -131,6 +131,7 @@ namespace yoga.Controllers
             ModelState.Remove("PersonalWebSite");
             ModelState.Remove("EducationLevels"); 
             ModelState.Remove("TeachingTypes");
+            ModelState.Remove("Image");
             obj.Name = "tst";
 
             if(obj.TeachingType == 0)
@@ -188,6 +189,37 @@ namespace yoga.Controllers
                     return View(obj);
                 }
 
+                // validate user image
+                if(string.IsNullOrEmpty(loggedUser.UserImage))
+                {
+                    // Upload image
+                    string fileName = "";
+                    if(Image != null && Image.Length > 0)
+                    {
+                        fileName = Path.GetFileName(Image.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName);
+                        using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileSrteam);
+                        }
+                        // update user image column
+                        var user = _db.Users.Find(loggedUser.Id);
+                        if(user != null)
+                        {
+                            user.UserImage = fileName;
+                            _db.Users.Update(user);
+                            _db.SaveChanges();
+                        }
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError("Image", "Image is rquired");
+                        obj.EducationLevels = getEducationLevels();
+                        obj.TeachingTypes = getTeachingTypes();
+                        return View(obj);    
+                    }
+                }
+                
                 TechearMemberShip entity = new TechearMemberShip();
                 entity.AppUser = loggedUser;
                 entity.Id = userId;

@@ -49,7 +49,11 @@ namespace yoga.ViewModels
         public bool Agreement { get; set; }
 
         public string ExamDetails { get; set; }
-         public decimal LicenseFeesPrice { get; set; }
+        public decimal LicenseFeesPrice { get; set; }
+
+        [Display(Name = "Image")]
+        [DataType(DataType.Upload)]
+        public string Image { get; set; }
 
     }
 }

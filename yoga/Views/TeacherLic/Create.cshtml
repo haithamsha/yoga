@@ -3,6 +3,11 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    var imagePath = user.UserImage;
+}
 
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
@@ -19,206 +24,228 @@
 
         <form method="post" enctype="multipart/form-data">
 
-    @if(ViewData["Saved"] != null)
-    {
-        <div class="alert alert-success">@ViewData["Saved"]</div>
-        <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a></div>
-    }
-
-    
-
-    <div class="border p-3 mt-4">
-        <h2>Teacher Licence Issue</h2>
-        <div asp-validation-summary="All" class="text-danger"></div>
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#home">Basic Information</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#profile">Expreience</a>
-            </li>
-            @* <li class="nav-item"> *@
-                @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
-            @* </li> *@
-            @* <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#status">Status</a>
-                </li> *@
-
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active show" id="home">
-                
-                <div class="mb-3">
-                    <label asp-for="EducationLevel"></label>
-                    <select name="EducationLevel" id="EducationLevel" class="form-control" asp-for="EducationLevel" asp-items="@Model.EducationLevels">
-                    </select>
-                    <span asp-validation-for="EducationLevel" class="text-danger"></span>
+            @if (ViewData["Saved"] != null)
+            {
+                <div class="alert alert-success">@ViewData["Saved"]</div>
+                <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="SocialMediaAccounts"></label>
-                    <input asp-for="SocialMediaAccounts" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label asp-for="PersonalWebSite"></label>
-                    <input asp-for="PersonalWebSite" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label asp-for="TeachingType"></label>
-                    <select name="TeachingType" id="TeachingType" asp-for="TeachingType" asp-items="@Model.TeachingTypes" class="form-control">
-                        
-                    </select>
-                    <span asp-validation-for="TeachingType" class="text-danger"></span>
-                </div>
+            }
 
+
+
+            <div class="border p-3 mt-4">
+                <h2>Teacher Licence Issue</h2>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#home">Basic Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#profile">Expreience</a>
+                    </li>
+                    @* <li class="nav-item"> *@
+                    @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
+                    @* </li> *@
+                    @* <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#status">Status</a>
+                        </li> *@
+
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active show" id="home">
+
+                        <div class="mb-3">
+                            <label asp-for="EducationLevel"></label>
+                            <select name="EducationLevel" id="EducationLevel" class="form-control"
+                                asp-for="EducationLevel" asp-items="@Model.EducationLevels">
+                            </select>
+                            <span asp-validation-for="EducationLevel" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SocialMediaAccounts"></label>
+                            <input asp-for="SocialMediaAccounts" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="PersonalWebSite"></label>
+                            <input asp-for="PersonalWebSite" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="TeachingType"></label>
+                            <select name="TeachingType" id="TeachingType" asp-for="TeachingType"
+                                asp-items="@Model.TeachingTypes" class="form-control">
+
+                            </select>
+                            <span asp-validation-for="TeachingType" class="text-danger"></span>
+                        </div>
+                        @if (string.IsNullOrEmpty(imagePath))
+                        {
+                            <div class="mb-3">
+                                <div id="upload-container" class="text-center">
+                                    <label>
+                                        <img src="~/assets/images/public/upload.png" />
+                                        <br />
+
+                                        <input asp-for="Image" id="inputTag" class="upload-text" type="file" />
+                                        <br />
+                                        <p class="extensions" id="imageName">
+                                            JPG , PNG , PFD
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <div class="tab-pane fade" id="profile">
+                        <div class="mb-3">
+                            <label asp-for="ExpYears"></label>
+                            <input required asp-for="ExpYears" class="form-control" />
+                            <span asp-validation-for="ExpYears" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="AccreditedHours"></label>
+                            <input asp-for="AccreditedHours" class="form-control" />
+                            <span asp-validation-for="AccreditedHours" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SchoolLocation"></label>
+                            <input asp-for="SchoolLocation" class="form-control" />
+                            <span asp-validation-for="SchoolLocation" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CertaficateDate"></label>
+                            <input type="date" asp-for="CertaficateDate" asp-format="yyyy-mm-dd" class="form-control" />
+                            <span asp-validation-for="CertaficateDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SchoolName"></label>
+                            <input asp-for="SchoolName" class="form-control" />
+                            <span asp-validation-for="SchoolName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SchoolLink"></label>
+                            <input asp-for="SchoolLink" class="form-control" />
+                            <span asp-validation-for="SchoolLink" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="SchoolSocialMediaAccount"></label>
+                            <input asp-for="SchoolSocialMediaAccount" class="form-control" />
+                            <span asp-validation-for="SchoolSocialMediaAccount" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="CertficateFiles"></label>
+                            <input type="file" multiple asp-for="CertficateFiles" class="form-control" />
+                            <span asp-validation-for="CertficateFiles" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on
+                                Terms and Conditions and
+                                Acknowledged</span>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
+                        </div>
+                    </div>
+
+                    @* <div class="tab-pan fade" id="payfees">
+                        <div class="alert alert-info">Please Send <span class="fw-bold">150</span>
+                        SAR to the below bank account
+                        <p>IBAN: SA5865000000101459418001</p>
+                        </div>
+
+                        <div class="mb-3">
+                        <label asp-for="ReceiptCopy"></label>
+                        <input type="file" asp-for="ReceiptCopy" class="form-control" />
+
+                        </div>
+
+                        </div> *@
+
+                    @* <div class="tab-pane fade" id="status">
+
+                        <div style="padding: 10px;">
+                        @if(Model.FinalApprove)
+                        {
+                        <p class="text-center fw-bold text-success">Congratulation, Your Licence Approved</p>
+                        }
+                        </div>
+                        <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                        <th>Information Completed</th>
+                        <th>Pay Fees</th>
+                        <th>Take The Exam</th>
+                        <th>Pass The Exam</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td>
+                        @if(Model.Status == 0)
+                        {
+                        <div>
+                        <span class="text-info fw-bold text-capitalize">Pending,</span> We are reviewing your information
+                        now.
+                        </div>
+                        }
+                        else {
+                        <div>
+                        <span class="text-success fw-bold text-capitalize">Approved,</span>
+                        </div>
+                        }
+                        </td>
+                        <td>
+                        @if(Model.PayFees == false)
+                        {
+                        <div>
+                        <span class="text-danger">No</span>
+                        </div>
+                        }
+                        else {
+                        <div>
+                        <span class="text-success">Yes</span>
+                        </div>
+                        }
+                        </td>
+                        <td>
+                        @if(Model.TakeExam == false)
+                        {
+                        <div>
+                        <span class="text-danger">No</span>
+                        </div>
+                        }
+                        else {
+                        <div>
+                        <span class="text-success">Yes</span>
+                        </div>
+                        }
+                        </td>
+                        <td>
+                        @if(Model.PassExam == false)
+                        {
+                        <div>
+                        <span class="text-danger">No</span>
+                        </div>
+                        }
+                        else {
+                        <div>
+                        <span class="text-success">Yes</span>
+                        </div>
+                        }
+                        </td>
+                        </tr>
+                        </tbody>
+                        </table>
+                        </div>
+                        </div> *@
+
+                    @* <button type="submit" class="btn btn-primary">Approve</button>
+                        <button type="submit" class="btn btn-danger">Reject</button> *@
+
+
+                </div>
             </div>
-            <div class="tab-pane fade" id="profile">
-                <div class="mb-3">
-                    <label asp-for="ExpYears"></label>
-                    <input required asp-for="ExpYears" class="form-control" />
-                    <span asp-validation-for="ExpYears" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="AccreditedHours"></label>
-                    <input asp-for="AccreditedHours" class="form-control" />
-                    <span asp-validation-for="AccreditedHours" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="SchoolLocation"></label>
-                    <input asp-for="SchoolLocation" class="form-control" />
-                    <span asp-validation-for="SchoolLocation" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="CertaficateDate"></label>
-                    <input type="date" asp-for="CertaficateDate" asp-format="yyyy-mm-dd" class="form-control" />
-                    <span asp-validation-for="CertaficateDate" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="SchoolName"></label>
-                    <input asp-for="SchoolName" class="form-control" />
-                    <span asp-validation-for="SchoolName" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="SchoolLink"></label>
-                    <input asp-for="SchoolLink" class="form-control" />
-                    <span asp-validation-for="SchoolLink" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="SchoolSocialMediaAccount"></label>
-                    <input asp-for="SchoolSocialMediaAccount" class="form-control" />
-                    <span asp-validation-for="SchoolSocialMediaAccount" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="CertficateFiles"></label>
-                    <input type="file" multiple asp-for="CertficateFiles" class="form-control" />
-                    <span asp-validation-for="CertficateFiles" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on Terms and Conditions and
-                        Acknowledged</span>
-                </div>
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
-                </div>
-            </div>
-
-            @* <div class="tab-pan fade" id="payfees">
-                <div class="alert alert-info">Please Send <span class="fw-bold">150</span> 
-                SAR to the below bank account
-                    <p>IBAN: SA5865000000101459418001</p>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="ReceiptCopy"></label>
-                    <input type="file" asp-for="ReceiptCopy" class="form-control" />
-                    
-                </div>
-                
-            </div> *@
-
-            @* <div class="tab-pane fade" id="status">
-
-                <div style="padding: 10px;">
-                @if(Model.FinalApprove)
-                {
-                <p class="text-center fw-bold text-success">Congratulation, Your Licence Approved</p>
-                }
-                </div>
-                <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                <th>Information Completed</th>
-                <th>Pay Fees</th>
-                <th>Take The Exam</th>
-                <th>Pass The Exam</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                <td>
-                @if(Model.Status == 0)
-                {
-                <div>
-                <span class="text-info fw-bold text-capitalize">Pending,</span> We are reviewing your information now.
-                </div>
-                }
-                else {
-                <div>
-                <span class="text-success fw-bold text-capitalize">Approved,</span>
-                </div>
-                }
-                </td>
-                <td>
-                @if(Model.PayFees == false)
-                {
-                <div>
-                <span class="text-danger">No</span>
-                </div>
-                }
-                else {
-                <div>
-                <span class="text-success">Yes</span>
-                </div>
-                }
-                </td>
-                <td>
-                @if(Model.TakeExam == false)
-                {
-                <div>
-                <span class="text-danger">No</span>
-                </div>
-                }
-                else {
-                <div>
-                <span class="text-success">Yes</span>
-                </div>
-                }
-                </td>
-                <td>
-                @if(Model.PassExam == false)
-                {
-                <div>
-                <span class="text-danger">No</span>
-                </div>
-                }
-                else {
-                <div>
-                <span class="text-success">Yes</span>
-                </div>
-                }
-                </td>
-                </tr>
-                </tbody>
-                </table>
-                </div>
-                </div> *@
-            
-            @* <button type="submit" class="btn btn-primary">Approve</button>
-                <button type="submit" class="btn btn-danger">Reject</button> *@
-
-            
-        </div>
-    </div>
-</form>
+        </form>
     </div>
 </div>
 
@@ -238,6 +265,6 @@
 
 
 @section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <partial name="_ValidationScriptsPartial" />
 }

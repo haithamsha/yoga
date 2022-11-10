@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    var imagePath = user.UserImage;
+}
+
+
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
 
@@ -20,6 +27,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <h2>ٍMembership Card -- Apply your card now!</h2>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="border p-3 mt-4">
                 <div class="alert alert-info">Please Send <span class="fw-bold">150</span> SAR to the below bank account
                 </div>
@@ -39,6 +47,25 @@
                     <input type="file" asp-for="RecietCopy" class="form-control" />
                     <span asp-validation-for="RecietCopy" class="text-danger"></span>
                 </div>
+
+                @if (string.IsNullOrEmpty(imagePath))
+                        {
+                            <div class="mb-3">
+                                <div id="upload-container" class="text-center">
+                                    <label>
+                                        <img src="~/assets/images/public/upload.png" />
+                                        <br />
+
+                                        <input asp-for="Image" id="inputTag" class="upload-text" type="file" />
+                                        <span asp-validation-for="Image" class="text-danger"></span>
+                                        <br />
+                                        <p class="extensions" id="imageName">
+                                            JPG , PNG , PFD
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        }
 
                 <button type="submit" class="btn btn-brown-outline about-btn">Apply</button>
         </form>

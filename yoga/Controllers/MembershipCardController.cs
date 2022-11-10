@@ -40,9 +40,10 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(MembershipCardVM obj, IFormFile RecietCopy)
+        public async Task<IActionResult> Create(MembershipCardVM obj, IFormFile RecietCopy, IFormFile Image)
         {
             ModelState.Remove("RecietCopy");
+            ModelState.Remove("Image");
             if(ModelState.IsValid)
             {
                 // Upload image
@@ -68,6 +69,35 @@ namespace yoga.Controllers
                 {
                     ModelState.AddModelError("", "User Not Exist");
                     return View();
+                }
+
+                // validate user image
+                if(string.IsNullOrEmpty(loggedUser.UserImage))
+                {
+                    // Upload image
+                    string fileName_image = "";
+                    if(Image != null && Image.Length > 0)
+                    {
+                        fileName_image = Path.GetFileName(Image.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName_image);
+                        using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileSrteam);
+                        }
+                        // update user image column
+                        var user = _db.Users.Find(loggedUser.Id);
+                        if(user != null)
+                        {
+                            user.UserImage = fileName_image;
+                            _db.Users.Update(user);
+                            _db.SaveChanges();
+                        }
+                    }
+                    else 
+                    {
+                        ModelState.AddModelError("Image", "Image is rquired");
+                        return View(obj);    
+                    }
                 }
 
 

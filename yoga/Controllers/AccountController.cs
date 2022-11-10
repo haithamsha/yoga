@@ -114,12 +114,7 @@ namespace yoga.Controllers
                             await Image.CopyToAsync(fileSrteam);
                         }
                     }
-                    else {
-                        ModelState.AddModelError("", "Image required for Membership and license!");
-                        var countries_img = GetCountries();
-                        Input.Counries = countries_img;
-                        return View(Input);
-                    }
+                    
 
                 var country = _db.Country.Find(Input.CountryId);
 
