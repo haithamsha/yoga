@@ -26,7 +26,8 @@ builder.Services.AddIdentity<AppUser, IdentityRole> (
     }
 )
 .AddEntityFrameworkStores<YogaAppDbContext>()
-.AddTokenProvider<EmailConfirmationTokenProvider<AppUser>>("emailconfirmation");
+.AddTokenProvider<EmailConfirmationTokenProvider<AppUser>>("emailconfirmation")
+.AddErrorDescriber<CustomIdentityErrorDescriber>();
 
 builder.Services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
     opt.TokenLifespan = TimeSpan.FromDays(3));
