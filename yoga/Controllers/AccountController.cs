@@ -65,6 +65,7 @@ namespace yoga.Controllers
                 userSetting.MemshipCard.Active = memC.Active;
                 userSetting.MemshipCard.ExpireDate = memC.ExpireDate.HasValue ? memC.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.MemshipCard.Status = memC.Status;
+                userSetting.MemshipCard.Id = memC.CardId;
             }                
 
             return View(userSetting);
@@ -169,7 +170,7 @@ namespace yoga.Controllers
                         Body = content
                     };
                     
-                    _emailSender.SendEmailAsync(emailMessage);
+                    _emailSender.SendEmailBySendGrid(emailMessage);
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
 

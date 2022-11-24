@@ -219,7 +219,7 @@
 	@* <h3 class="mb-3">Welcome To Yoga Saudi Committee.</h3> *@
 
 	<div class="row gx-5 gy-3">
-		@if (Model.User_Subscribtions.HasMemberShip)
+		@if (Model.User_Subscribtions.HasMemberShip && !User.IsInRole("Admin"))
 		{
 			<h4>Your Member Card Status</h4>
 			<div>
@@ -234,6 +234,7 @@
 				else
 				{
 					<strong>Status: </strong> <span class="badge bg-danger">Rejected</span>
+					<a class="btn btn-primary" asp-controller="MembershipCard" asp-action="Create" asp-route-id="@Model.MemshipCard.Id" >Re Submit</a>
 				}
 			</div>
 		}

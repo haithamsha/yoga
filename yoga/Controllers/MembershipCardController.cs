@@ -40,7 +40,7 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(MembershipCardVM obj, IFormFile RecietCopy, IFormFile Image)
+        public async Task<IActionResult> Create(MembershipCardVM obj, IFormFile RecietCopy, IFormFile Image, int id)
         {
             ModelState.Remove("RecietCopy");
             ModelState.Remove("Image");
@@ -101,13 +101,24 @@ namespace yoga.Controllers
                 }
 
 
-                MembershipCard entity = new MembershipCard{
-                    AppUser = loggedUser,
-                    RecietCopy = fileName
-                };
+                if(id > 0)
+                {
+                    var entity_forUpdate = _db.MembershipCards.Find(id);
+                    entity_forUpdate.RecietCopy = fileName;
+                    entity_forUpdate.Status = (int)StatusEnum.Pending;
+                    _db.MembershipCards.Update(entity_forUpdate);
+                }
+                else
+                {
+                    MembershipCard entity_forCreate = new MembershipCard
+                    {
+                        AppUser = loggedUser,
+                        RecietCopy = fileName
+                    };
 
-
-                _db.MembershipCards.Add(entity);
+                    _db.MembershipCards.Add(entity_forCreate);
+                }
+                
 
                 await _db.SaveChangesAsync();
 
@@ -130,7 +141,7 @@ namespace yoga.Controllers
                 // Generate pdf license
 
                     
-                _emailSender.SendEmailAsync(emailMessage);
+                _emailSender.SendEmailBySendGrid(emailMessage);
 
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
                 return RedirectToAction("DataSaved");
@@ -283,7 +294,7 @@ namespace yoga.Controllers
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
                 var emailMessage = new EmailMessage
                 {
-                    ToEmailAddresses = new List<string> {loggedUser.Email},
+                    ToEmailAddresses = new List<string> {memCard.AppUser.Email},
                     Subject = "SAUDI YOGA COMMITTEE",
                     Body = content
                 };
@@ -292,7 +303,7 @@ namespace yoga.Controllers
                 {
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
-                    if(rowAffect == 1) _emailSender.SendEmailAsync(emailMessage);
+                    if(rowAffect == 1) _emailSender.SendEmailBySendGrid(emailMessage);
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)

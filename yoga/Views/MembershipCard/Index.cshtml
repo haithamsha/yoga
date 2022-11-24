@@ -54,13 +54,17 @@
                                             {
                                                         <td class="cell">Yes</td>
                                             }
-                                            @if (@item.Active == true)
+                                            @if (@item.Status == 2)
                                             {
                                                         <td class="cell"> <span class="badge bg-success">Approved</span> </td>
                                             }
-                                            else
+                                            else if(item.Status == 1)
                                             {
                                                         <td class="cell"> <span class="badge bg-info">Pending</span> </td>
+                                            }
+                                            else if(item.Status == 3)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-danger">Rejected</span> </td>
                                             }
 
                                             

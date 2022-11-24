@@ -6,5 +6,6 @@ namespace yoga.ViewModels
         public bool? Active { get; set; }
         public string ExpireDate { get; set; }
         public string Serial { get; set; }
+        public int Id { get; set; }
     }
 }
