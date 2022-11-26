@@ -12,12 +12,6 @@
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
 
-
-
-
-
-
-
 <div class="d-lg-flex">
     <partial name="_AdminMenu" />
     <div class="account-container account-details">
@@ -38,10 +32,10 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#home">Basic Information</a>
+                        <a class="nav-link active" data-bs-toggle="tab" id="liHome" href="#home">Basic Information</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#profile">Expreience</a>
+                        <a class="nav-link" data-bs-toggle="tab" id="liProfile" href="#profile">Expreience</a>
                     </li>
                     @* <li class="nav-item"> *@
                     @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
@@ -59,11 +53,19 @@
                             <select name="EducationLevel" id="EducationLevel" class="form-control"
                                 asp-for="EducationLevel" asp-items="@Model.EducationLevels">
                             </select>
+                            @* <select asp-for="EducationLevel"name="EducationLevel" id="EducationLevel"
+                                class="form-control">
+                                <option value="0">Select ...</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                </select> *@
                             <span asp-validation-for="EducationLevel" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label asp-for="SocialMediaAccounts"></label>
                             <input asp-for="SocialMediaAccounts" class="form-control" />
+                            <span asp-validation-for="SocialMediaAccounts" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
                             <label asp-for="PersonalWebSite"></label>
@@ -71,8 +73,7 @@
                         </div>
                         <div class="mb-3">
                             <label asp-for="TeachingType"></label>
-                            <select name="TeachingType" id="TeachingType" asp-for="TeachingType"
-                                asp-items="@Model.TeachingTypes" class="form-control">
+                            <select asp-for="TeachingType" asp-items="@Model.TeachingTypes" class="form-control">
 
                             </select>
                             <span asp-validation-for="TeachingType" class="text-danger"></span>
@@ -99,7 +100,7 @@
                     <div class="tab-pane fade" id="profile">
                         <div class="mb-3">
                             <label asp-for="ExpYears"></label>
-                            <input required asp-for="ExpYears" class="form-control" />
+                            <input asp-for="ExpYears" class="form-control" />
                             <span asp-validation-for="ExpYears" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
@@ -134,117 +135,26 @@
                         </div>
                         <div class="mb-3">
                             <label asp-for="CertficateFiles"></label>
-                            <input type="file" multiple asp-for="CertficateFiles" class="form-control" />
+                            <input id="CertficateFiles" type="file" multiple asp-for="CertficateFiles"
+                                class="form-control" />
                             <span asp-validation-for="CertficateFiles" class="text-danger"></span>
+                            <span>You can select more than file.</span>
                         </div>
                         <div class="mb-3">
                             <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on
                                 Terms and Conditions and
                                 Acknowledged</span>
                         </div>
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
-                        </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
                     </div>
-
-                    @* <div class="tab-pan fade" id="payfees">
-                        <div class="alert alert-info">Please Send <span class="fw-bold">150</span>
-                        SAR to the below bank account
-                        <p>IBAN: SA5865000000101459418001</p>
-                        </div>
-
-                        <div class="mb-3">
-                        <label asp-for="ReceiptCopy"></label>
-                        <input type="file" asp-for="ReceiptCopy" class="form-control" />
-
-                        </div>
-
-                        </div> *@
-
-                    @* <div class="tab-pane fade" id="status">
-
-                        <div style="padding: 10px;">
-                        @if(Model.FinalApprove)
-                        {
-                        <p class="text-center fw-bold text-success">Congratulation, Your Licence Approved</p>
-                        }
-                        </div>
-                        <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                        <th>Information Completed</th>
-                        <th>Pay Fees</th>
-                        <th>Take The Exam</th>
-                        <th>Pass The Exam</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                        <td>
-                        @if(Model.Status == 0)
-                        {
-                        <div>
-                        <span class="text-info fw-bold text-capitalize">Pending,</span> We are reviewing your information
-                        now.
-                        </div>
-                        }
-                        else {
-                        <div>
-                        <span class="text-success fw-bold text-capitalize">Approved,</span>
-                        </div>
-                        }
-                        </td>
-                        <td>
-                        @if(Model.PayFees == false)
-                        {
-                        <div>
-                        <span class="text-danger">No</span>
-                        </div>
-                        }
-                        else {
-                        <div>
-                        <span class="text-success">Yes</span>
-                        </div>
-                        }
-                        </td>
-                        <td>
-                        @if(Model.TakeExam == false)
-                        {
-                        <div>
-                        <span class="text-danger">No</span>
-                        </div>
-                        }
-                        else {
-                        <div>
-                        <span class="text-success">Yes</span>
-                        </div>
-                        }
-                        </td>
-                        <td>
-                        @if(Model.PassExam == false)
-                        {
-                        <div>
-                        <span class="text-danger">No</span>
-                        </div>
-                        }
-                        else {
-                        <div>
-                        <span class="text-success">Yes</span>
-                        </div>
-                        }
-                        </td>
-                        </tr>
-                        </tbody>
-                        </table>
-                        </div>
-                        </div> *@
-
-                    @* <button type="submit" class="btn btn-primary">Approve</button>
-                        <button type="submit" class="btn btn-danger">Reject</button> *@
-
-
+                    </div>
+                    
                 </div>
             </div>
+           
+            
         </form>
     </div>
 </div>
@@ -264,7 +174,9 @@
 
 
 
+
 @section Scripts {
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <partial name="_ValidationScriptsPartial" />
+
 }

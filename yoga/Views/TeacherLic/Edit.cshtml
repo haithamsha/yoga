@@ -1,4 +1,4 @@
-@model yoga.ViewModels.TechearMemberShipVM
+@model yoga.ViewModels.TechearMemberShip_EditVM
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -83,7 +83,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="CertaficateDate"></label>
-                    <input type="date" asp-for="CertaficateDate" asp-format="yyyy-mm-dd" class="form-control" />
+                    <input type="date" asp-for="CertaficateDate"  class="form-control" />
                     <span asp-validation-for="CertaficateDate" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
@@ -106,7 +106,7 @@
                     <input type="file" asp-for="CertficateFiles" class="form-control" />
                     @if(!string.IsNullOrEmpty(Model.CertficateFiles))
                     {
-                        <div><a target="_blank" href="~/assets/images/@Model.CertficateFiles">Certficates</a></div>
+                        <div><a target="_blank" href="~/assets/images/@Model.CertficateFiles">Uploaded Certificate</a></div>
                     }
                     else{
                         <span asp-validation-for="CertficateFiles" class="text-danger"></span>
@@ -238,4 +238,13 @@
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <partial name="_ValidationScriptsPartial" />
+
+
+<script>
+    $(function(){
+        $("#CertaficateDate").click(functin(e) {
+            $(this).prop("type", 'data');
+        })
+    })
+</script>
 }

@@ -192,7 +192,7 @@ namespace yoga.Controllers
                 // Generate card serial
                 var serials = _db.MembershipCards.Select(m=>m.SerialNumber).ToList();
                 string serialNumber = YogaUtilities.GenerateSerialNumber(serials);
-                memCard.SerialNumber = serialNumber;
+                memCard.SerialNumber = $"{memCard.CardId}{serialNumber}";
                 _db.MembershipCards.Update(memCard);
                 int rowAffect = _db.SaveChanges();
                 // Send Email to the user(Congratuilation, Your Membership card is active now until {expire date}, Your)
@@ -283,9 +283,10 @@ namespace yoga.Controllers
             else 
             {
                 // Update status to rejected
-                var memCard = _db.MembershipCards.Where(m=>m.CardId == id).SingleOrDefault();
+                var memCard = _db.MembershipCards.Include("AppUser").Where(m=>m.CardId == id).SingleOrDefault();
                 memCard.Status = (int)StatusEnum.Rejected;
                 memCard.Active = false;
+                memCard.ExpireDate = null;
                 _db.MembershipCards.Update(memCard);
                 int rowAffect = _db.SaveChanges();
                 // Send Email to the user.
@@ -320,10 +321,15 @@ namespace yoga.Controllers
         {
             var result = _db.MembershipCards
             .Select( t => new {
-                Name = t.AppUser.FirstName + " " + t.AppUser.LastName,
+                UserId = t.CardId,
+                FirstName = t.AppUser.FirstName,
+                MiddleName = t.AppUser.MiddleName,
+                LastName = t.AppUser.LastName,
+                Nationality = t.AppUser.Country.EnName,
                 Phone = t.AppUser.PhoneNumber,
                 Email= t.AppUser.Email,
                 CardSerial = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 PayFees = t.Payed  == true ? "Yes": "No",
                 Status = getCurrentStatus(t.Status)

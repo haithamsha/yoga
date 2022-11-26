@@ -29,6 +29,17 @@ namespace yoga.Controllers
             _userManager = userManager;
         }
 
+        public IActionResult CreateDemo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateDemo(CreateDemoVM obj)
+        {
+            return View(obj);
+        }
+
         public IActionResult Index()
         {
             IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips.Include("AppUser");
@@ -40,7 +51,7 @@ namespace yoga.Controllers
             List<SelectListItem> levels =new List<SelectListItem>();
             levels.Add(new SelectListItem{
                 Text = "Select Level",
-                Value = "0"
+                Value = string.Empty
             });
 
             levels.Add(new SelectListItem{
@@ -65,7 +76,7 @@ namespace yoga.Controllers
             List<SelectListItem> t_Types =new List<SelectListItem>();
             t_Types.Add(new SelectListItem{
                 Text = "Select Teaching Type",
-                Value = "0"
+                Value = string.Empty
             });
 
             t_Types.Add(new SelectListItem{
@@ -113,6 +124,10 @@ namespace yoga.Controllers
             var vm = new TechearMemberShipVM();
             vm.EducationLevels = getEducationLevels();
             vm.TeachingTypes = getTeachingTypes();
+            if(ViewData["SavedFiles"] != null)
+            {
+                vm.CertficateFiles = ViewData["SavedFiles"].ToString();
+            }
             return View(vm);
         }
 
@@ -180,6 +195,7 @@ namespace yoga.Controllers
                     
                 }
                 
+                
                 // get logened user
                 string userId = _userManager.GetUserId(User);
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
@@ -223,10 +239,10 @@ namespace yoga.Controllers
                 TechearMemberShip entity = new TechearMemberShip();
                 entity.AppUser = loggedUser;
                 entity.Id = userId;
-                entity.EducationLevel = obj.EducationLevel;
+                entity.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
                 entity.SocialMediaAccounts = obj.SocialMediaAccounts;
                 entity.PersonalWebSite = obj.PersonalWebSite;
-                entity.TeachingType = obj.TeachingType;
+                entity.TeachingType = obj.TeachingType.Value;
                 entity.ExpYears = obj.ExpYears.Value;
                 entity.AccreditedHours = obj.AccreditedHours.Value;
                 entity.SchoolLocation = obj.SchoolLocation;
@@ -361,6 +377,7 @@ namespace yoga.Controllers
                 };
                 if(!string.IsNullOrEmpty(Approve))
                 {
+                    tech.RejectReason = "";
                     if(PayExamFees == 2 || PayLicFees == 2)
                     {
                         ModelState.AddModelError("", "You Must click reject button after type the reject reason");
@@ -388,6 +405,8 @@ namespace yoga.Controllers
                         tech.PayExamFees = true;
                         content  += "Your Exam Fees Approved, next step is take the exam at the below address.. ";
                         content += $" {ExamLocation}";
+                        // update location in db
+                        tech.ExamLocation = ExamLocation;
                     }
 
                     if(PayLicFees == 1)
@@ -403,7 +422,7 @@ namespace yoga.Controllers
                          // Generate card serial
                         var serials = _db.TechearMemberShips.Select(m=>m.SerialNumber).ToList();
                         string serialNumber = YogaUtilities.GenerateSerialNumber(serials);
-                        tech.SerialNumber = serialNumber;
+                        tech.SerialNumber = $"{tech.MemId}{serialNumber}";
                         string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", 
                 tech.AppUser.UserImage);
                         var htmlContent = @$"<div>
@@ -544,7 +563,7 @@ namespace yoga.Controllers
                 }
 
                 
-
+                tech.RejectReason = reason;
                 _db.TechearMemberShips.Update(tech);
                 int rowAffect = _db.SaveChanges();
                 // Send email
@@ -673,14 +692,20 @@ namespace yoga.Controllers
             var result = _db.TechearMemberShips
             .Include("AppUser")
             .Select( t => new {
-                Name = $"{t.AppUser.FirstName} {t.AppUser.MiddleName} {t.AppUser.LastName}",
+                UserId = t.MemId,
+                FirstName = t.AppUser.FirstName,
+                MiddleName = t.AppUser.MiddleName,
+                LastName = t.AppUser.LastName,
+                Nationality = t.AppUser.Country.EnName,
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
                 ExperienceYears = t.ExpYears,
                 AccreditedHours= t.AccreditedHours,
                 EducationLevel = getEducationLevel((int)t.EducationLevel),
                 TeachingType = getTeachingType((int)t.TeachingType),
                 PayExamFees = t.PayExamFees == true ? "Yes": "No",
                 PayLicFees = t.PayFees  == true ? "Yes": "No",
-                FinalApprove = t.Status == 1  ? "Pending" : "Approved",
+                Status = getCurrentStatus(t.Status),
+                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
                 CurrentInformationStatus = getCurrentStatus(t.Status),
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : ""
@@ -718,13 +743,13 @@ namespace yoga.Controllers
         {
             var member = IfTeacherExists();
             if(member == null) throw new Exception("Teacher Not Found!");
-            var vm = new TechearMemberShipVM();
+            var vm = new TechearMemberShip_EditVM();
             vm.EducationLevels = getEducationLevels();
             vm.TeachingTypes = getTeachingTypes();
             vm.AccreditedHours = member.AccreditedHours;
             vm.CertaficateDate = member.CertaficateDate;
             vm.CertficateFiles = member.CertficateFiles;
-            vm.EducationLevel =  member.EducationLevel;
+            vm.EducationLevel =  (int)member.EducationLevel;
             vm.ExamDetails = !string.IsNullOrEmpty(member.ExamLocation) ? member.ExamLocation : "";
             vm.ExpYears = member.ExpYears;
             vm.PersonalWebSite = member.PersonalWebSite;
@@ -739,7 +764,7 @@ namespace yoga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(TechearMemberShipVM obj, IFormFile CertficateFiles)
+        public async Task<IActionResult> Edit(TechearMemberShip_EditVM obj, IFormFile CertficateFiles)
         {
             ModelState.Remove("ReceiptCopy");
             ModelState.Remove("CertficateFiles");
@@ -749,26 +774,27 @@ namespace yoga.Controllers
             ModelState.Remove("Name");
             ModelState.Remove("PersonalWebSite");
             ModelState.Remove("EducationLevels"); 
-            ModelState.Remove("TeachingTypes");
+            ModelState.Remove("TeachingTypes"); 
+            ModelState.Remove("Image");
             obj.Name = "tst";
             
             var member = IfTeacherExists();
             
-            if(obj.TeachingType == 0)
-            {
-                obj.EducationLevels = getEducationLevels();
-                obj.TeachingTypes = getTeachingTypes();
-                ModelState.AddModelError("TeachingType", " Teaching Type is required");
-                return View(obj);
-            }
-            if(obj.EducationLevel == 0)
-            {
-                obj.EducationLevels = getEducationLevels();
-                obj.TeachingTypes = getTeachingTypes();
-                ModelState.AddModelError("EducationLevel", " Education Level is required");
-                return View(obj);
-            }
-            if(string.IsNullOrEmpty(member.CertficateFiles))
+            // if(obj.TeachingType == 0)
+            // {
+            //     obj.EducationLevels = getEducationLevels();
+            //     obj.TeachingTypes = getTeachingTypes();
+            //     ModelState.AddModelError("TeachingType", " Teaching Type is required");
+            //     return View(obj);
+            // }
+            // if(obj.EducationLevel == 0)
+            // {
+            //     obj.EducationLevels = getEducationLevels();
+            //     obj.TeachingTypes = getTeachingTypes();
+            //     ModelState.AddModelError("EducationLevel", " Education Level is required");
+            //     return View(obj);
+            // }CertficateFiles != null && CertficateFiles.Count > 0
+            if(string.IsNullOrEmpty(member.CertficateFiles) && CertficateFiles == null)
             {
                 obj.EducationLevels = getEducationLevels();
                 obj.TeachingTypes = getTeachingTypes();
@@ -804,10 +830,10 @@ namespace yoga.Controllers
 
                 var entity =_db.TechearMemberShips.Where(m=> m.MemId == member.MemId).FirstOrDefault();
 
-                entity.EducationLevel = obj.EducationLevel;
+                entity.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
                 entity.SocialMediaAccounts = obj.SocialMediaAccounts;
                 entity.PersonalWebSite = obj.PersonalWebSite;
-                entity.TeachingType = obj.TeachingType;
+                entity.TeachingType = obj.TeachingType.Value;
                 entity.ExpYears = obj.ExpYears.Value;
                 entity.AccreditedHours = obj.AccreditedHours.Value;
                 entity.SchoolLocation = obj.SchoolLocation;

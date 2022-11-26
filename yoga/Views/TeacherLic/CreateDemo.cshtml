@@ -1,0 +1,30 @@
+@model yoga.ViewModels.CreateDemoVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+<div asp-validation-summary="All" class="text-danger"></div>
+    <select asp-for="LevelId">
+        <option value="">Select Level</option>
+        <option value="1">Level 1</option>
+        <option value="2">Level 2</option>
+        <option value="3">Level 3</option>
+    </select>
+
+    <span asp-validation-for="LevelId" class="text-danger"></span>
+
+    <div>
+        <button>Submit</button>
+    </div>
+</form>
+
+
+@section Scripts {
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />
+
+
+}

@@ -62,10 +62,17 @@
 										</svg>
 									</div>
 									<div><b>Unfortunately</b>, Your information Rejected, Please Review Your Information
+									
 										<a class="btn btn-danger" asp-controller="TeacherLic" asp-action="Edit">here</a>
 									</div>
 								}
 							</div>
+						</div>
+						<div>
+							@if(!string.IsNullOrEmpty(Model.TeacherLic.RejectReason))
+							{
+								<div><span class="text-danger">Last Reject Reason: </span> @Model.TeacherLic.RejectReason</div>
+							}
 						</div>
 						<!--//app-card-body-->
 
@@ -159,6 +166,14 @@
 								else
 								{
 									<span class="badge bg-danger">Not Yet</span>
+									@if(Model.TeacherLic.PayExamFees)
+									{
+										<div><b>Exam Details:</b> </div>
+										<p>
+											
+											@Model.TeacherLic.ExamLocation
+										</p>
+									}
 								}
 							</div>
 							<div class="stats-meta">

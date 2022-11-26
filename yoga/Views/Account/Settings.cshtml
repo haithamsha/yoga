@@ -51,53 +51,61 @@
                 <p>You have no any Subscriptions</p>
             }
         </div>
-        <div class="table">
-            <div class="header">
-                <div class="col">Current Plan</div>
-                <div class="col">Expires</div>
-                <div class="col">Status</div>
-                <div class="col">Download</div>
-
-            </div>
-            @if (@Model.User_Subscribtions.HasTeacherLic)
-            {
-                <div class="table-row">
-                    <div class="col">Teacher Licence</div>
-                    <div class="col">@Model.TeacherLic.ExpireDate</div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Plan</th>
+                    <th>Issue Date</th>
+                    <th>Expires</th>
+                    <th>Status</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model.User_Subscribtions.HasTeacherLic)
+                {
+                    <tr>
+                    <td>Teacher Licence</td>
+                    <td>@Model.TeacherLic.IssueDate</td>
+                    <td>@Model.TeacherLic.ExpireDate</td>
                     @if (Model.TeacherLic.FinalApprove)
                     {
-                        <div class="col approved">Active</div>
+                        <td class="col approved">Active</td>
                     }
                     else
                     {
-                        <div class="col pending">Not Active</div>
+                        <td class="col pending">Not Active</td>
                     }
-                    <div class="col">
+                    <td>
                         <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">Download</a>
-                    </div>
-
-                </div>
-            }
-            @if (Model.User_Subscribtions.HasMemberShip)
-            {
-                <div class="table-row">
-                    <div class="col">Membership Card</div>
-                    <div class="col">@Model.MemshipCard.ExpireDate</div>
-                    @if (Model.TeacherLic.FinalApprove)
+                    </td>
+                    </tr>
+                }
+                @if(Model.User_Subscribtions.HasMemberShip)
+                {
+                    <tr>
+                    <td>Membership Card</td>
+                    <td>@Model.MemshipCard.IssueDate</td>
+                    <td>@Model.MemshipCard.ExpireDate</td>
+                   @if (Model.MemshipCard.Active.Value)
                     {
-                        <div class="col approved">Active</div>
+                        <td class="col approved">Active</td>
                     }
                     else
                     {
-                        <div class="col pending">Not Active</div>
+                        <td class="col pending">Not Active</td>
                     }
-                    <div class="col">
-                        <a target="_blank" href="~/assets/MemberShip_Card@(Model.MemshipCard.Serial).pdf">Download</a>
-                    </div>
-
-                </div>
-            }
-
-        </div>
+                    <td>
+                        @if(Model.MemshipCard.Active.Value)
+                        {
+                            <a target="_blank" href="~/assets/MemberShip_Card@(Model.MemshipCard.Serial).pdf">Download</a>
+                        }
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
     </div>
 </div>

@@ -45,6 +45,7 @@ namespace yoga.Controllers
                 userSetting.User_Subscribtions.HasTeacherLic = true;
                 var tlic = _db.TechearMemberShips.Where(m=>m.AppUser.Id == userId).FirstOrDefault();
                 userSetting.TeacherLic.ExpireDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.ToShortDateString() : "";
+                userSetting.TeacherLic.IssueDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.AddYears(-1).ToShortDateString() : "";
                 userSetting.TeacherLic.FinalApprove = tlic.FinalApprove;
                 userSetting.TeacherLic.Status = tlic.Status;
                 userSetting.TeacherLic.PassExam = tlic.PassExam;
@@ -53,6 +54,8 @@ namespace yoga.Controllers
                 userSetting.TeacherLic.PayExamFees = tlic.PayExamFees;
                 userSetting.TeacherLic.ReceiptCopy = tlic.ReceiptCopy;
                 userSetting.TeacherLic.ReceiptCopyLic = tlic.ReceiptCopyLic;
+                userSetting.TeacherLic.ExamLocation = tlic.ExamLocation;
+                userSetting.TeacherLic.RejectReason = tlic.RejectReason;
 
             } 
 
@@ -280,6 +283,8 @@ namespace yoga.Controllers
                 userSetting.TeacherLic.FinalApprove = tlic.FinalApprove;
                 userSetting.TeacherLic.Status = tlic.Status;
                 userSetting.TeacherLic.Serial = tlic.SerialNumber;
+                userSetting.TeacherLic.IssueDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.AddYears(-1).ToShortDateString() : "";
+
 
             } 
 
@@ -293,6 +298,7 @@ namespace yoga.Controllers
                 userSetting.MemshipCard.ExpireDate = memC.ExpireDate.HasValue ? memC.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.MemshipCard.Status = memC.Status;
                 userSetting.MemshipCard.Serial = memC.SerialNumber;
+                userSetting.MemshipCard.IssueDate = memC.ExpireDate.HasValue ?   memC.ExpireDate.Value.AddYears(-1).ToShortDateString() : "";
             }                
 
             return View(userSetting);

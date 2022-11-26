@@ -6,7 +6,7 @@ namespace yoga.Models
         public static string GenerateSerialNumber(List<string>? serials) 
         {
             Random generator = new Random();
-            String r = generator.Next(0, 1000000).ToString("D6");
+            String r = generator.Next(0, 1000000).ToString("D5");
             string serialNumber = "";
             if(r.Distinct().Count() == 1)
             {

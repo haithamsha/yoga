@@ -9,7 +9,7 @@ namespace yoga.Models
         public int MemId { get; set; }
         public EducationLevelEnum EducationLevel { get; set; }
         public string SocialMediaAccounts { get; set; } = "";
-        public string PersonalWebSite { get; set; } = "";
+        public string? PersonalWebSite { get; set; } = "";
         public int TeachingType { get; set; }
         public int ExpYears { get; set; }
         public int AccreditedHours { get; set; }
@@ -40,6 +40,8 @@ namespace yoga.Models
         public decimal LicenseFeesPrice { get; set; } = 0;
         public string? ExamLocation { get; set; }
         public string? SerialNumber { get; set; }
+
+        public string? RejectReason { get; set; }
 
 
         [NotMapped]

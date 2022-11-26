@@ -165,4 +165,8 @@
     <value>تفاصيل</value>
     <comment/>
   </data>
+  <data name="FinalApprove" xml:space="preserve">
+    <value>الحالية النهائية</value>
+    <comment/>
+  </data>
 </root>

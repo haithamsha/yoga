@@ -25,6 +25,7 @@
                                                 <th>@localizer["TeachingType"]</th>
                                                 <th>@localizer["PayFees"]</th>
                                                 <th>@localizer["Status"]</th>
+                                                <th>@localizer["FinalApprove"]</th>
                                                 <th>@localizer["Actions"]</th>
 											</tr>
 										</thead>
@@ -61,7 +62,20 @@
                                             {
                                                         <td class="cell">Yes</td>
                                             }
-                                            @if (@item.FinalApprove)
+                                            @if (@item.Status == 2)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-success">Approved</span> </td>
+                                            }
+                                            else if(@item.Status == 1)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-info">Pending</span> </td>
+                                            }
+                                            else if(@item.Status == 3)
+                                            {
+                                                <td class="cell"> <span class="badge bg-danger">Rejected</span> </td>
+                                            }
+
+                                            @if (@item.FinalApprove == true)
                                             {
                                                         <td class="cell"> <span class="badge bg-success">Approved</span> </td>
                                             }

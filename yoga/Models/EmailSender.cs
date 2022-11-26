@@ -108,9 +108,10 @@ namespace yoga.Models
         {
             try
             {
-                    var apiKey = "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";
+                    //var apiKey = "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";
+                    var apiKey = "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";
                     var client = new SendGridClient(apiKey);
-                    var from = new EmailAddress("haithamshaabann@gmail.com", "SAUDI YOGA COMMITTEE");
+                    var from = new EmailAddress("greenlinedemo1@gmail.com", "SAUDI YOGA COMMITTEE");
                     var subject = emailMsg.Subject;
                     var to = new EmailAddress(emailMsg.ToEmailAddresses.FirstOrDefault().ToString(), emailMsg.ToEmailAddresses.FirstOrDefault().ToString());
                     var plainTextContent = emailMsg.Body;

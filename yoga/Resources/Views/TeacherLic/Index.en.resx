@@ -142,7 +142,7 @@
     <comment/>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>Status/Info</value>
     <comment/>
   </data>
   <data name="Actions" xml:space="preserve">
@@ -163,6 +163,10 @@
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
+    <comment/>
+  </data>
+  <data name="FinalApprove" xml:space="preserve">
+    <value>Final Approve</value>
     <comment/>
   </data>
 </root>
