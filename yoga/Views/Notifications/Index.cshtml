@@ -1,0 +1,61 @@
+@model IEnumerable<yoga.Models.Notification>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+
+<div class="d-lg-flex">
+    <partial name="_AdminMenu" />
+    <div class="account-container account-details">
+
+        <form method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <h2>Notifications</h2>
+        
+        <div id="myTabContent">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>User</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                        <td>@item.Title</td>
+                        <td>@item.Body</td>
+                        <td>@item.CreationDate</td>
+                        <td>@item.AppUser.FirstName @item.AppUser.LastName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+

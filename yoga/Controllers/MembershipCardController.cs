@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using yoga.Data;
+using yoga.Helpers;
 using yoga.Models;
 using yoga.ViewModels;
 
@@ -17,11 +18,14 @@ namespace yoga.Controllers
     {
         private readonly YogaAppDbContext _db;
         private readonly UserManager<AppUser> _userManager;
+
+        private readonly NotificationHelper _notificationHelper;
         // private readonly IEmailSender _emailSender;
         public MembershipCardController(YogaAppDbContext db, UserManager<AppUser> userManager)
         {
             _db = db;
             _userManager = userManager;
+            _notificationHelper = new NotificationHelper(_db);
         }
 
         public IActionResult Index()
@@ -140,7 +144,17 @@ namespace yoga.Controllers
 
                 // Generate pdf license
 
-                    
+                // Add notification
+                
+                _notificationHelper.AddNotify(new Notification
+                {
+                    AppUser = loggedUser,
+                    Body = content,
+                    Title = "Create Membership Card",
+                    CreationDate = DateTime.Now,
+                    IsRead = false
+                });
+                
                 _emailSender.SendEmailBySendGrid(emailMessage);
 
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
@@ -271,6 +285,16 @@ namespace yoga.Controllers
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     if(rowAffect == 1)
                     _emailSender.SendEmailBySendGrid(emailMessage);
+
+                    // add notification
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = memCard.AppUser,
+                        Body = "Congratuilation, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active",
+                        CreationDate = DateTime.Now,
+                        IsRead = false,
+                        Title = "Membership Card Approved"
+                    });
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)
@@ -305,6 +329,15 @@ namespace yoga.Controllers
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     if(rowAffect == 1) _emailSender.SendEmailBySendGrid(emailMessage);
+                     // add notification
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = memCard.AppUser,
+                        Body = content,
+                        CreationDate = DateTime.Now,
+                        IsRead = false,
+                        Title = "Membership Card Rejection"
+                    });
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)

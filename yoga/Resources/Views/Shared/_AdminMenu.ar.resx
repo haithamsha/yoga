@@ -141,4 +141,8 @@
     <value>النموذج</value>
     <comment/>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>التنبيهات</value>
+    <comment/>
+  </data>
 </root>

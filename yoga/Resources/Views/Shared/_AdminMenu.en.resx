@@ -141,4 +141,8 @@
     <value>Application</value>
     <comment/>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+    <comment/>
+  </data>
 </root>

@@ -12,6 +12,7 @@ using yoga.Data;
 using yoga.Models;
 using yoga.ViewModels;
 using System.Linq;
+using yoga.Helpers;
 
 namespace yoga.Controllers
 {
@@ -20,6 +21,7 @@ namespace yoga.Controllers
         private readonly YogaAppDbContext _db;
         private readonly ILogger<TeacherLicController> _logger;
         private readonly UserManager<AppUser> _userManager;
+        private readonly NotificationHelper _notificationHelper;
 
 
         public TeacherLicController(ILogger<TeacherLicController> logger, YogaAppDbContext db, UserManager<AppUser> userManager)
@@ -27,6 +29,7 @@ namespace yoga.Controllers
             _logger = logger;
             _db = db;
             _userManager = userManager;
+            _notificationHelper = new NotificationHelper(_db);
         }
 
         public IActionResult CreateDemo()
@@ -259,6 +262,16 @@ namespace yoga.Controllers
                 // Add user to Teacher role
                 await _userManager.AddToRoleAsync(loggedUser, "Teacher");
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+
+                // Add notification
+                _notificationHelper.AddNotify(new Notification
+                {
+                    AppUser = loggedUser,
+                    Body = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.",
+                    Title = "Create Teacher Licence",
+                    CreationDate = DateTime.Now,
+                    IsRead = false
+                });
                 return RedirectToAction("DataSaved");
             }
             obj.EducationLevels = getEducationLevels();
@@ -578,6 +591,16 @@ namespace yoga.Controllers
                     emailMessage.Body = content;
                     if(rowAffect == 1)
                     _emailSender.SendEmailBySendGrid(emailMessage);
+
+                    // Add notification
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = tech.AppUser,
+                        Body = content,
+                        Title = "Techer License",
+                        CreationDate = DateTime.Now,
+                        IsRead = false
+                    });
                     return RedirectToAction("Detail", "TeacherLic", new {id=MemId});
                 }
                 catch (System.Exception ex)
