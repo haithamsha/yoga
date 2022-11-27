@@ -1,0 +1,117 @@
+@model yoga.ViewModels.TechearMemberDataVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+
+<div class="d-lg-flex">
+    <partial name="_AdminMenu" />
+    <div class="account-container account-details">
+
+        <form method="post" enctype="multipart/form-data">
+    <div class="border p-3 mt-4">
+        <h2>Teacher Licence Application form</h2>
+        
+        <div id="myTabContent">
+            <div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="FirstName"></label>
+                    <label>@Model.FirstName</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="MiddleName"></label>
+                    <label>@Model.MiddleName</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="LastName"></label>
+                    <label>@Model.LastName</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="EducationLevel"></label>
+                    <label>@Model.EducationLevel</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="SocialMediaAccounts"></label>
+                    <label>@Model.SocialMediaAccounts</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="PersonalWebSite"></label>
+                    <label>@Model.PersonalWebSite</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="TeachingType"></label>
+                    <label>@Model.TeachingType</label>
+                </div>
+
+            </div>
+            <div>
+                
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="ExpYears"></label>
+                    <label>@Model.ExpYears</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="AccreditedHours"></label>
+                    <label>@Model.AccreditedHours</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="SchoolLocation"></label>
+                    <label>@Model.SchoolLocation</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="CertaficateDate"></label>
+                    <label>@Model.CertaficateDate</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="SchoolName"></label>
+                   <label>@Model.SchoolName</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="SchoolLink"></label>
+                    <label>@Model.SchoolLink</label>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold" asp-for="SchoolSocialMediaAccount"></label>
+                    <label>@Model.SchoolSocialMediaAccount</label>
+                </div>
+                <div class="mb-3">
+                    <label  class="fw-bold" asp-for="CertficateFiles"></label>
+                    @if(!string.IsNullOrEmpty(Model.CertficateFiles))
+                    {
+                        <div><a target="_blank" href="~/assets/images/@Model.CertficateFiles">Uploaded Certificate</a></div>
+                    }
+                    else{
+                        <span asp-validation-for="CertficateFiles" class="text-danger"></span>
+                    }
+                    
+                </div>
+            </div>
+
+            
+
+            
+        </div>
+        <button>Download</button>
+    </div>
+</form>
+    </div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+

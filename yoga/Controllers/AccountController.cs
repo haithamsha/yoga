@@ -1,8 +1,10 @@
+using IronPdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using yoga.Data;
 using yoga.Models;
 using yoga.ViewModels;
@@ -191,6 +193,114 @@ namespace yoga.Controllers
             return View(Input);
         }
 
+        [Authorize]
+        public IActionResult EditUser()
+        {
+            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _db.Users.Where(u=>u.Id == userId)
+            .Select(u => new RegisterModel
+            {
+                NationalId = u.NationalId,
+                Email = u.Email,
+                Phone = u.PhoneNumber,
+                CountryId = u.Country.CountryId,
+                FirstName = u.FirstName,
+                MiddleName = u.MiddleName,
+                LastName = u.LastName,
+                Image = u.UserImage
+            })
+            .FirstOrDefault();
+
+            if(user == null) return NotFound();
+
+            var countries = GetCountries();
+            user.Counries = countries;
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditUser(RegisterModel Input, IFormFile Image)
+        {
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
+            ModelState.Remove("ReturnUrl");
+            ModelState.Remove("Image");
+            ModelState.Remove("Counries");
+            if (ModelState.IsValid)
+            {
+                    // Upload image
+                    var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    var userData = _db.Users.Find(userId);
+                    
+                    string fileName = "";
+                    if(Image != null && Image.Length > 0)
+                    {
+                        fileName = Path.GetFileName(Image.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName);
+                        using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileSrteam);
+                        }
+                    }
+                    
+
+                var country = _db.Country.Find(Input.CountryId);
+
+                string _userImage = string.IsNullOrEmpty(fileName) ? userData.UserImage : fileName;
+
+                var user = new AppUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.Phone, NationalId = Input.NationalId, 
+                MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
+                FirstName = Input.FirstName, UserImage = _userImage, Country = country};
+
+                userData.NationalId = user.NationalId;
+                userData.Email = user.Email;
+                userData.PhoneNumber = user.PhoneNumber;
+                userData.Country = _db.Country.Find(Input.CountryId);
+                userData.FirstName = user.FirstName;
+                userData.MiddleName = user.MiddleName;
+                userData.LastName = user.LastName;
+                userData.UserImage = _userImage;
+
+                // Validate if user exists before
+                string validationError = "";
+
+                if(_db.Users.Where(u=>u.Email == user.Email &&u.Id != userId).ToList().Count >=1)
+                {
+                    validationError += " This Email used before!,";
+                }
+                if(_db.Users.Where(u=>u.PhoneNumber == user.PhoneNumber &&u.Id != userId).ToList().Count >=1)
+                {
+                    validationError += " This Phone used before!,";
+                }
+                if(_db.Users.Where(u=>u.NationalId == user.NationalId &&u.Id != userId).ToList().Count >=1)
+                {
+                    validationError += " This National Id used before!";
+                }
+
+                if(!string.IsNullOrEmpty(validationError))
+                {
+                    var _countries = GetCountries();
+                    Input.Counries = _countries;
+                    ModelState.AddModelError("", validationError);
+                    return View(Input);
+                }
+
+
+                _db.Users.Update(userData);
+                
+                _db.SaveChanges();
+                
+                return RedirectToAction("Settings");
+
+                }
+
+                // If we got this far, something failed, redisplay form
+                var countries = GetCountries();
+                Input.Counries = countries;
+                return View(Input);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
@@ -309,6 +419,20 @@ namespace yoga.Controllers
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult DownloadUserData(string x)
+        {
+            var htmlContent = "";
+            var Rendered = new ChromePdfRenderer(); 
+            using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+            string fileName = "techer_licnese{tech.SerialNumber}.pdf";
+            var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", fileName);
+            //var attachmentFile = $"G:/dev/ramz/yoga/sourcecode/yogamvccode/yoga/wwwroot/assets/{fileName}";
+
+            PDF.SaveAs(attachmentFile);
+
+            return View();                        
         }
     }
 }

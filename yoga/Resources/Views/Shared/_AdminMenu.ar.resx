@@ -137,4 +137,8 @@
     <value>بياناتي</value>
     <comment/>
   </data>
+  <data name="Application" xml:space="preserve">
+    <value>النموذج</value>
+    <comment/>
+  </data>
 </root>

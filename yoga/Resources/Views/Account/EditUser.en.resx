@@ -117,28 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Edit User</value>
     <comment/>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="NationalId" xml:space="preserve">
+    <value>National ID</value>
     <comment/>
   </data>
-  <data name="TeachersRequests" xml:space="preserve">
-    <value>Teachers Requests</value>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
     <comment/>
   </data>
-  <data name="Memberships" xml:space="preserve">
-    <value>Memberships</value>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
     <comment/>
   </data>
-  <data name="UserProfile" xml:space="preserve">
-    <value>User Profile</value>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
     <comment/>
   </data>
-  <data name="Application" xml:space="preserve">
-    <value>Application</value>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+    <comment/>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationality</value>
+    <comment/>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+    <comment/>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+    <comment/>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
+    <comment/>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+    <comment/>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Save</value>
+    <comment/>
+  </data>
+  <data name="Policy" xml:space="preserve">
+    <value> Your personal data will be used to support your experience throughout this website, to manage access to                 your                 account, and for other purposes described in our &lt;b&gt;privacy policy.&lt;/b&gt;</value>
     <comment/>
   </data>
 </root>

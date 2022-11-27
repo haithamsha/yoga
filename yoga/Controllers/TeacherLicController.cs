@@ -687,6 +687,108 @@ namespace yoga.Controllers
             return View();
         }
 
+        public IActionResult MemberData()
+        {
+            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _db.TechearMemberShips
+            .Include("AppUser")
+            .Where(t=>t.AppUser.Id == userId)
+            .Select( t => new TechearMemberDataVM{
+                FirstName = t.AppUser.FirstName,
+                MiddleName = t.AppUser.MiddleName,
+                LastName = t.AppUser.LastName,
+                Nationality = t.AppUser.Country.EnName,
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
+                ExpYears = t.ExpYears,
+                AccreditedHours= t.AccreditedHours,
+                EducationLevel = getEducationLevel((int)t.EducationLevel),
+                TeachingType = getTeachingType((int)t.TeachingType),
+                PayExamFees = t.PayExamFees == true ? "Yes": "No",
+                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                Status = getCurrentStatus(t.Status),
+                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
+                SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
+                ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
+                SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
+                PersonalWebSite = t.PersonalWebSite,
+                SchoolLocation = t.SchoolLocation,
+                CertaficateDate = t.CertaficateDate.ToShortDateString(),
+                SchoolName = t.SchoolName,
+                SchoolLink = t.SchoolLink,
+                SocialMediaAccounts = t.SocialMediaAccounts,
+                CertficateFiles = t.CertficateFiles
+            })
+            .FirstOrDefault();
+            
+            return View(result);
+        }
+
+        [HttpPost]
+        public IActionResult MemberData(string name)
+        {
+            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = _db.TechearMemberShips
+            .Include("AppUser")
+            .Where(t=>t.AppUser.Id == userId)
+            .Select( t => new TechearMemberDataVM{
+                FirstName = t.AppUser.FirstName,
+                MiddleName = t.AppUser.MiddleName,
+                LastName = t.AppUser.LastName,
+                Nationality = t.AppUser.Country.EnName,
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
+                ExpYears = t.ExpYears,
+                AccreditedHours= t.AccreditedHours,
+                EducationLevel = getEducationLevel((int)t.EducationLevel),
+                TeachingType = getTeachingType((int)t.TeachingType),
+                PayExamFees = t.PayExamFees == true ? "Yes": "No",
+                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                Status = getCurrentStatus(t.Status),
+                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
+                SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
+                ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
+                SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
+                PersonalWebSite = t.PersonalWebSite,
+                SchoolLocation = t.SchoolLocation,
+                CertaficateDate = t.CertaficateDate.ToShortDateString(),
+                SchoolName = t.SchoolName,
+                SchoolLink = t.SchoolLink,
+                SocialMediaAccounts = t.SocialMediaAccounts,
+                CertficateFiles = t.CertficateFiles
+            })
+            .FirstOrDefault();
+            
+
+            // Generete pdf file
+            var Rendered = new ChromePdfRenderer(); 
+            string htmlContent = $@"<div><div><div><h2>Teacher Licence Application form</h2><div><div><div><label><b>First Name</b>
+            </label><label>{result.FirstName}</label></div><div><label><b>Middle Name</b></label><label>{result.MiddleName}</label>
+            </div><div><label><b>LastName</b></label><label>{result.LastName}</label></div><div><label><b>Education Level</b>
+            </label><label>{result.EducationLevel}</label></div><div><label><b>Social Media Accounts</b></label><label>
+            {result.SocialMediaAccounts}</label></div><div><label><b>Personal WebSite</b></label><label>
+            {result.PersonalWebSite}</label></div><div><label><b>Teaching Type</b></label><label>
+            {result.TeachingType}</label></div></div><div><div><label><b>Years of experience</b></label><label>{result.ExpYears}</label>
+            </div><div><label><b>Accredited Hours</b></label><label>{result.AccreditedHours}</label></div><div>
+            <label><b>School Location</b></label><label>{result.SchoolLocation}</label></div><div><label>
+            <b>Certaficate Date</b></label><label>{result.CertaficateDate}</label></div><div><label><b>School Name</b>
+            </label><label>{result.SchoolName}</label></div><div><label><b>School Link</b></label><label>{result.SchoolLink}
+            </label></div><div><label><b>School Social Media Account</b></label><label>{result.SchoolSocialMediaAccount}
+            </label></div></div></div></div></div></div></div></div></div></div>";
+            using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+            string pdfName = $"Techers_Licenses_data_{result.FirstName}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.pdf";
+
+            // var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", pdfName);
+
+            // PDF.SaveAs(attachmentFile);
+            
+            // Response.Headers.Add($"Content-Disposition", "inline; filename={pdfName}");
+            
+            // return File(attachmentFile, "application/pdf");
+            return new FileStreamResult(PDF.Stream, "application/pdf")
+            {
+                FileDownloadName = pdfName
+            };
+        }
+
         public IActionResult ExportToExcel()
         {
             var result = _db.TechearMemberShips

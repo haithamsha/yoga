@@ -1,0 +1,75 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@model yoga.ViewModels.RegisterModel
+@{
+    @* ViewData["Title"] = "Register"; *@
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+
+<div class="d-lg-flex">
+    <partial name="_AdminMenu" />
+    <div class="account-container account-details">
+
+        <form method="post" enctype="multipart/form-data">
+
+            <div class="border p-3 mt-4">
+                <h2>@localizer["PageTitle"]</h2>
+       
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
+                <span asp-validation-for="NationalId" class="text-danger"></span>
+
+                <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
+                <span asp-validation-for="Email" class="text-danger"></span>
+
+                <input asp-for="Phone" type="text" placeholder='@localizer["Phone"] *' />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+
+
+                <select item class="form-control" name="CountryId" id="CountryId" asp-items="@Model.Counries"></select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+
+
+                <input asp-for="FirstName" type="text" placeholder='@localizer["FirstName"] *'/>
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                <input asp-for="MiddleName" type="text" placeholder='@localizer["MiddleName"] *' />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+
+                <input asp-for="LastName" type="text" placeholder='@localizer["LastName"] *' />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+
+
+                @if(!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img width="100" height="100" src="~/assets/images/@Model.Image">
+                }
+                <div id="upload-container" class="text-center">
+                    <label>
+                        <img src="~/assets/images/public/upload.png" />
+                        <br />
+                        @localizer["Image"]
+                        <input asp-for="Image" id="inputTag" class="upload-text" type="file" />
+                        <br />
+                        <p class="extensions" id="imageName">
+                            JPG , PNG , PFD
+                        </p>
+                    </label>
+                </div>
+
+                
+                <button class="btn btn-brown-primary w-100">@localizer["Submit"]</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<partial name="_ValidationScriptsPartial" />
+}
