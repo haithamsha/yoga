@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
-using IronPdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +12,7 @@ using yoga.Models;
 using yoga.ViewModels;
 using System.Linq;
 using yoga.Helpers;
+using IronPdf;
 
 namespace yoga.Controllers
 {
@@ -482,10 +482,9 @@ namespace yoga.Controllers
                         ";
 
                         var Rendered = new ChromePdfRenderer(); 
-                        using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                        var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
                         string fileName = $"techer_licnese{tech.SerialNumber}.pdf";
                         var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", fileName);
-                        //var attachmentFile = $"G:/dev/ramz/yoga/sourcecode/yogamvccode/yoga/wwwroot/assets/{fileName}";
 
                         PDF.SaveAs(attachmentFile);
                         emailMessage.AttachmentFile = attachmentFile;
