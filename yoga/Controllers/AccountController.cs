@@ -1,4 +1,3 @@
-using IronPdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -424,13 +423,13 @@ namespace yoga.Controllers
         public IActionResult DownloadUserData(string x)
         {
             var htmlContent = "";
-            var Rendered = new ChromePdfRenderer(); 
-            using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+            //1var Rendered = new ChromePdfRenderer(); 
+            //2using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
             string fileName = "techer_licnese{tech.SerialNumber}.pdf";
             var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", fileName);
-            //var attachmentFile = $"G:/dev/ramz/yoga/sourcecode/yogamvccode/yoga/wwwroot/assets/{fileName}";
+            //3var attachmentFile = $"G:/dev/ramz/yoga/sourcecode/yogamvccode/yoga/wwwroot/assets/{fileName}";
 
-            PDF.SaveAs(attachmentFile);
+            //4PDF.SaveAs(attachmentFile);
 
             return View();                        
         }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
-using IronPdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -264,19 +263,19 @@ namespace yoga.Controllers
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
 
                 //Generate pdf file
-                var Rendered = new ChromePdfRenderer(); 
-                using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                //1var Rendered = new ChromePdfRenderer(); 
+                //2using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
                 string PdffileName = $"MemberShip_Card{memCard.SerialNumber}.pdf";
                 var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
-                PDF.SaveAs(attachmentFile);
+                //3PDF.SaveAs(attachmentFile);
 
                 var emailMessage = new EmailMessage
                 {
                     ToEmailAddresses = new List<string> {memCard.AppUser.Email},
                     Subject = "SAUDI YOGA COMMITTEE",
                     Body = content,
-                    AttachmentFile = attachmentFile,
-                    FileName = PdffileName
+                    //4AttachmentFile = attachmentFile,
+                    //5FileName = PdffileName
                 };
 
                 try

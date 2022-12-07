@@ -12,7 +12,6 @@ using yoga.Models;
 using yoga.ViewModels;
 using System.Linq;
 using yoga.Helpers;
-using IronPdf;
 
 namespace yoga.Controllers
 {
@@ -481,14 +480,14 @@ namespace yoga.Controllers
 </div></div></div>
                         ";
 
-                        var Rendered = new ChromePdfRenderer(); 
-                        var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                        //1var Rendered = new ChromePdfRenderer(); 
+                        //2var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
                         string fileName = $"techer_licnese{tech.SerialNumber}.pdf";
                         var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", fileName);
 
-                        PDF.SaveAs(attachmentFile);
-                        emailMessage.AttachmentFile = attachmentFile;
-                        emailMessage.FileName = fileName;
+                        //3PDF.SaveAs(attachmentFile);
+                        //4emailMessage.AttachmentFile = attachmentFile;
+                        //5emailMessage.FileName = fileName;
                         
                         
 
@@ -781,7 +780,7 @@ namespace yoga.Controllers
             
 
             // Generete pdf file
-            var Rendered = new ChromePdfRenderer(); 
+            //1var Rendered = new ChromePdfRenderer(); 
             string htmlContent = $@"<div><div><div><h2>Teacher Licence Application form</h2><div><div><div><label><b>First Name</b>
             </label><label>{result.FirstName}</label></div><div><label><b>Middle Name</b></label><label>{result.MiddleName}</label>
             </div><div><label><b>LastName</b></label><label>{result.LastName}</label></div><div><label><b>Education Level</b>
@@ -795,20 +794,15 @@ namespace yoga.Controllers
             </label><label>{result.SchoolName}</label></div><div><label><b>School Link</b></label><label>{result.SchoolLink}
             </label></div><div><label><b>School Social Media Account</b></label><label>{result.SchoolSocialMediaAccount}
             </label></div></div></div></div></div></div></div></div></div></div>";
-            using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+            //2using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
             string pdfName = $"Techers_Licenses_data_{result.FirstName}{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.pdf";
 
-            // var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", pdfName);
+            //3 return new FileStreamResult(PDF.Stream, "application/pdf")
+            // {
+            //     FileDownloadName = pdfName
+            // };
 
-            // PDF.SaveAs(attachmentFile);
-            
-            // Response.Headers.Add($"Content-Disposition", "inline; filename={pdfName}");
-            
-            // return File(attachmentFile, "application/pdf");
-            return new FileStreamResult(PDF.Stream, "application/pdf")
-            {
-                FileDownloadName = pdfName
-            };
+            return View();
         }
 
         public IActionResult ExportToExcel()
