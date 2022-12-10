@@ -15,7 +15,7 @@ using yoga.Helpers;
 
 namespace yoga.Controllers
 {
-    public class TeacherLicController: Controller
+    public class TeacherLicController : Controller
     {
         private readonly YogaAppDbContext _db;
         private readonly ILogger<TeacherLicController> _logger;
@@ -47,73 +47,86 @@ namespace yoga.Controllers
             IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips.Include("AppUser");
             return View(lics);
         }
-        
+
         private List<SelectListItem> getEducationLevels()
         {
-            List<SelectListItem> levels =new List<SelectListItem>();
-            levels.Add(new SelectListItem{
+            List<SelectListItem> levels = new List<SelectListItem>();
+            levels.Add(new SelectListItem
+            {
                 Text = "Select Level",
                 Value = string.Empty
             });
 
-            levels.Add(new SelectListItem{
-            Text = "Level 1",
-            Value = "1"
+            levels.Add(new SelectListItem
+            {
+                Text = "Level 1",
+                Value = "1"
             });
 
-            levels.Add(new SelectListItem{
-            Text = "Level 2",
-            Value = "2"
+            levels.Add(new SelectListItem
+            {
+                Text = "Level 2",
+                Value = "2"
             });
 
-            levels.Add(new SelectListItem{
-            Text = "Level 3",
-            Value = "3"
+            levels.Add(new SelectListItem
+            {
+                Text = "Level 3",
+                Value = "3"
             });
             return levels;
         }
 
         private List<SelectListItem> getTeachingTypes()
         {
-            List<SelectListItem> t_Types =new List<SelectListItem>();
-            t_Types.Add(new SelectListItem{
+            List<SelectListItem> t_Types = new List<SelectListItem>();
+            t_Types.Add(new SelectListItem
+            {
                 Text = "Select Teaching Type",
                 Value = string.Empty
             });
 
-            t_Types.Add(new SelectListItem{
-            Text = "Yin",
-            Value = "1"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Yin",
+                Value = "1"
             });
 
-            t_Types.Add(new SelectListItem{
-            Text = "Prenatal",
-            Value = "2"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Prenatal",
+                Value = "2"
             });
 
-            t_Types.Add(new SelectListItem{
-            Text = "Therapy",
-            Value = "3"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Therapy",
+                Value = "3"
             });
-            t_Types.Add(new SelectListItem{
-            Text = "Aerial",
-            Value = "4"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Aerial",
+                Value = "4"
             });
-            t_Types.Add(new SelectListItem{
-            Text = "Hatha",
-            Value = "5"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Hatha",
+                Value = "5"
             });
-            t_Types.Add(new SelectListItem{
-            Text = "Ashtanga",
-            Value = "6"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Ashtanga",
+                Value = "6"
             });
-            t_Types.Add(new SelectListItem{
-            Text = "Vinyasa Flow",
-            Value = "7"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Vinyasa Flow",
+                Value = "7"
             });
-            t_Types.Add(new SelectListItem{
-            Text = "Iyengar",
-            Value = "8"
+            t_Types.Add(new SelectListItem
+            {
+                Text = "Iyengar",
+                Value = "8"
             });
             return t_Types;
         }
@@ -122,11 +135,11 @@ namespace yoga.Controllers
         public IActionResult Create()
         {
             var member = IfTeacherExists();
-            if(member != null) return View(member);
+            if (member != null) return View(member);
             var vm = new TechearMemberShipVM();
             vm.EducationLevels = getEducationLevels();
             vm.TeachingTypes = getTeachingTypes();
-            if(ViewData["SavedFiles"] != null)
+            if (ViewData["SavedFiles"] != null)
             {
                 vm.CertficateFiles = ViewData["SavedFiles"].ToString();
             }
@@ -146,42 +159,42 @@ namespace yoga.Controllers
             ModelState.Remove("SchoolSocialMediaAccount");
             ModelState.Remove("Name");
             ModelState.Remove("PersonalWebSite");
-            ModelState.Remove("EducationLevels"); 
+            ModelState.Remove("EducationLevels");
             ModelState.Remove("TeachingTypes");
             ModelState.Remove("Image");
             obj.Name = "tst";
 
-            if(obj.TeachingType == 0)
+            if (obj.TeachingType == 0)
             {
                 obj.EducationLevels = getEducationLevels();
                 obj.TeachingTypes = getTeachingTypes();
                 ModelState.AddModelError("TeachingType", " Teaching Type is required");
             }
-            if(obj.EducationLevel == 0)
+            if (obj.EducationLevel == 0)
             {
                 obj.EducationLevels = getEducationLevels();
                 obj.TeachingTypes = getTeachingTypes();
                 ModelState.AddModelError("EducationLevel", " Education Level is required");
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(!obj.Agreement)
+                if (!obj.Agreement)
                 {
                     obj.EducationLevels = getEducationLevels();
                     obj.TeachingTypes = getTeachingTypes();
                     ModelState.AddModelError("Agreement", " Terms Conditions and Acknowledged");
                     return View(obj);
                 }
-                
+
                 // Upload images
                 string fileName_cert = "";
-                
+
                 List<string> uploadFiles = new List<string>();
 
-                if(CertficateFiles != null && CertficateFiles.Count > 0)
+                if (CertficateFiles != null && CertficateFiles.Count > 0)
                 {
-                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(), 
+                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
                         "wwwroot/assets", "images");
 
                     foreach (IFormFile item in CertficateFiles)
@@ -194,25 +207,25 @@ namespace yoga.Controllers
                             uploadFiles.Add(fileName_cert);
                         }
                     }
-                    
+
                 }
-                
-                
+
+
                 // get logened user
                 string userId = _userManager.GetUserId(User);
-                var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
-                if(loggedUser == null)
+                var loggedUser = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (loggedUser == null)
                 {
                     ModelState.AddModelError("", "User Not Exist");
                     return View(obj);
                 }
 
                 // validate user image
-                if(string.IsNullOrEmpty(loggedUser.UserImage))
+                if (string.IsNullOrEmpty(loggedUser.UserImage))
                 {
                     // Upload image
                     string fileName = "";
-                    if(Image != null && Image.Length > 0)
+                    if (Image != null && Image.Length > 0)
                     {
                         fileName = Path.GetFileName(Image.FileName);
                         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName);
@@ -222,22 +235,22 @@ namespace yoga.Controllers
                         }
                         // update user image column
                         var user = _db.Users.Find(loggedUser.Id);
-                        if(user != null)
+                        if (user != null)
                         {
                             user.UserImage = fileName;
                             _db.Users.Update(user);
                             _db.SaveChanges();
                         }
                     }
-                    else 
+                    else
                     {
                         ModelState.AddModelError("Image", "Image is rquired");
                         obj.EducationLevels = getEducationLevels();
                         obj.TeachingTypes = getTeachingTypes();
-                        return View(obj);    
+                        return View(obj);
                     }
                 }
-                
+
                 TechearMemberShip entity = new TechearMemberShip();
                 entity.AppUser = loggedUser;
                 entity.Id = userId;
@@ -253,24 +266,47 @@ namespace yoga.Controllers
                 entity.SchoolLink = obj.SchoolLink;
                 entity.SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount;
                 entity.CertficateFiles = uploadFiles == null ? "" : string.Join(",", uploadFiles);
-                entity.Name =obj.Name;
+                entity.Name = obj.Name;
 
                 _db.TechearMemberShips.Add(entity);
-                _db.SaveChanges();
+                int rowAffect = _db.SaveChanges();
 
                 // Add user to Teacher role
                 await _userManager.AddToRoleAsync(loggedUser, "Teacher");
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
 
                 // Add notification
+                string body = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
                 _notificationHelper.AddNotify(new Notification
                 {
                     AppUser = loggedUser,
-                    Body = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.",
+                    Body = body,
                     Title = "Create Teacher Licence",
                     CreationDate = DateTime.Now,
                     IsRead = false
                 });
+
+                // Send Email
+                try
+                {
+                    var emailMessage = new EmailMessage
+                    {
+                        ToEmailAddresses = new List<string> { loggedUser.Email },
+                        Subject = "SAUDI YOGA COMMITTEE",
+                        Body = body
+                    };
+                    EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                    EmailSender _emailSender = new EmailSender(_emailConfiguration);
+                    emailMessage.Body = body;
+                    if (rowAffect == 1)
+                        _emailSender.SendEmailBySendGrid(emailMessage);
+                }
+                catch (System.Exception ex)
+                {
+
+                    throw;
+                }
+
                 return RedirectToAction("DataSaved");
             }
             obj.EducationLevels = getEducationLevels();
@@ -285,78 +321,80 @@ namespace yoga.Controllers
 
         private TechearMemberShip? IfTeacherExists()
         {
-            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if(string.IsNullOrEmpty(userId)) return null;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return null;
 
             var member = _db.TechearMemberShips.Where(t => t.AppUser.Id == userId).FirstOrDefault();
-            if(member != null) return member;
+            if (member != null) return member;
             return null;
         }
 
         public IActionResult Detail(int? id)
         {
-            if(id == null || id == 0) return NotFound();
-            var obj = _db.TechearMemberShips.Include("AppUser").Where(t=>t.MemId == id).SingleOrDefault();
+            if (id == null || id == 0) return NotFound();
+            var obj = _db.TechearMemberShips.Include("AppUser").Where(t => t.MemId == id).SingleOrDefault();
             obj.EducationLevel_String = getEducationLevel((int)obj.EducationLevel);
             obj.TeachingType_string = getTeachingType(obj.TeachingType);
-            if(obj == null) return NotFound();
+            if (obj == null) return NotFound();
 
             return View(obj);
         }
 
         static string getEducationLevel(int levelId)
         {
-            if(levelId == 1)
+            if (levelId == 1)
             {
                 return "Level1";
             }
-            else if(levelId == 2)
+            else if (levelId == 2)
             {
                 return "Level2";
             }
-            else if(levelId == 3)
+            else if (levelId == 3)
             {
                 return "Level3";
             }
-            else {
+            else
+            {
                 return "";
             }
         }
         static string getTeachingType(int typeId)
         {
-            if(typeId == 1)
+            if (typeId == 1)
             {
                 return "Yin";
             }
-            else if(typeId == 2)
+            else if (typeId == 2)
             {
                 return "Prenatal";
             }
-            else if(typeId == 3)
+            else if (typeId == 3)
             {
                 return "Therapy";
             }
-            else if(typeId == 4)
+            else if (typeId == 4)
             {
                 return "Aerial";
             }
-            else if(typeId == 5)
+            else if (typeId == 5)
             {
                 return "Hatha";
             }
-            else if(typeId == 6)
+            else if (typeId == 6)
             {
                 return "Ashtanga";
             }
-            else if(typeId == 7)
+            else if (typeId == 7)
             {
                 return "Vinyasa Flow";
             }
-            else if(typeId == 8)
+            else if (typeId == 8)
             {
                 return "Iyengar";
             }
-            else {
+            else
+            {
                 return "";
             }
         }
@@ -367,7 +405,7 @@ namespace yoga.Controllers
         public IActionResult Detail(string Approve, string reason, int Info, int PayExamFees, int PayLicFees, int TakeExam,
         int PassExam, int MemId, decimal LicFeesPrice, string ExamLocation)
         {
-            
+
 
             ModelState.Remove("Approve");
             ModelState.Remove("reason");
@@ -375,55 +413,55 @@ namespace yoga.Controllers
             ModelState.Remove("LicFeesPrice");
             ModelState.Remove("ExamLocation");
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string content = "";
                 string subject = "SAUDI YOGA COMMITTEE";
-                var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Include("AppUser").Where(m=>m.MemId == MemId).FirstOrDefault();
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var tech = _db.TechearMemberShips.Include("AppUser").Where(m => m.MemId == MemId).FirstOrDefault();
                 var emailMessage = new EmailMessage
                 {
-                    ToEmailAddresses = new List<string> {tech.AppUser.Email},
+                    ToEmailAddresses = new List<string> { tech.AppUser.Email },
                     Subject = subject,
                     Body = content
                 };
-                if(!string.IsNullOrEmpty(Approve))
+                if (!string.IsNullOrEmpty(Approve))
                 {
                     tech.RejectReason = "";
-                    if(PayExamFees == 2 || PayLicFees == 2)
+                    if (PayExamFees == 2 || PayLicFees == 2)
                     {
                         ModelState.AddModelError("", "You Must click reject button after type the reject reason");
                         return View(tech);
                     }
-                    if(Info == 1)
+                    if (Info == 1)
                     {
-                        
+
                         tech.Status = (int)StatusEnum.Approved;
                         tech.ExamLocation = ExamLocation;
                         content = $"Congratuilation, You information is approved, next step is take the exam please go to your profile and pay the exam fees. </p>";
                     }
-                    if(PayExamFees == 1)
+                    if (PayExamFees == 1)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before confirm the exam fees");
                             return View(tech);
                         }
-                        if(string.IsNullOrEmpty(ExamLocation) && PayExamFees == 1)
+                        if (string.IsNullOrEmpty(ExamLocation) && PayExamFees == 1)
                         {
                             ModelState.AddModelError("", "Please Insert The Exam Location and Date!");
                             return View(tech);
                         }
                         tech.PayExamFees = true;
-                        content  += "Your Exam Fees Approved, next step is take the exam at the below address.. ";
+                        content += "Your Exam Fees Approved, next step is take the exam at the below address.. ";
                         content += $" {ExamLocation}";
                         // update location in db
                         tech.ExamLocation = ExamLocation;
                     }
 
-                    if(PayLicFees == 1)
+                    if (PayLicFees == 1)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before confirm the license fees");
                             return View(tech);
@@ -431,11 +469,11 @@ namespace yoga.Controllers
                         tech.PayFees = true;
                         tech.FinalApprove = true;
                         tech.ExpireDate = DateTime.Now.AddYears(1);
-                         // Generate card serial
-                        var serials = _db.TechearMemberShips.Select(m=>m.SerialNumber).ToList();
+                        // Generate card serial
+                        var serials = _db.TechearMemberShips.Select(m => m.SerialNumber).ToList();
                         string serialNumber = YogaUtilities.GenerateSerialNumber(serials);
                         tech.SerialNumber = $"{tech.MemId}{serialNumber}";
-                        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", 
+                        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images",
                 tech.AppUser.UserImage);
                         var htmlContent = @$"<div>
                         </div>
@@ -488,14 +526,14 @@ namespace yoga.Controllers
                         //3PDF.SaveAs(attachmentFile);
                         //4emailMessage.AttachmentFile = attachmentFile;
                         //5emailMessage.FileName = fileName;
-                        
-                        
+
+
 
 
                     }
-                    if(TakeExam == 1) 
+                    if (TakeExam == 1)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before take the exam");
                             return View(tech);
@@ -503,14 +541,14 @@ namespace yoga.Controllers
                         content += "Thank you for taking the SAUDI YOGA COMMITTEE Teacher Licese exam. ";
                         tech.TakeExam = true;
                     }
-                    if(PassExam == 1)
+                    if (PassExam == 1)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass the exam");
                             return View(tech);
                         }
-                        if(LicFeesPrice <= 0)
+                        if (LicFeesPrice <= 0)
                         {
                             ModelState.AddModelError("", "Please Insert The License Fees!");
                             return View(tech);
@@ -519,15 +557,15 @@ namespace yoga.Controllers
                         tech.PassExam = true;
                         tech.LicenseFeesPrice = LicFeesPrice;
                     }
-                    else if(PassExam == 2)
+                    else if (PassExam == 2)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass the exam");
                             return View(tech);
                         }
-                        
-                        content = $"Unfortunately, Your Not Passed The SAUDI YOGA COMMITTEE Teacher license Exam. {reason}";
+
+                        content = $"Unfortunately, Your Not Passed The SAUDI YOGA COMMITTEE Teacher license Exam. {reason}, You me re the exam again";
                         tech.PassExam = false;
                         tech.TakeExam = false;
                         tech.PayExamFees = false;
@@ -535,60 +573,62 @@ namespace yoga.Controllers
                         tech.ReceiptCopyLic = "";
                         tech.LicenseFeesPrice = LicFeesPrice;
                     }
-                    
+
 
 
                 }
-                else {
-                    if(PayExamFees == 2 && PayLicFees == 2 && Info == 2)
+                else
+                {
+                    if (PayExamFees == 2 && PayLicFees == 2 && Info == 2)
                     {
                         ModelState.AddModelError("", "You must reject only one step");
                         return View(tech);
                     }
-                    if(PayExamFees == 2)
+                    if (PayExamFees == 2)
                     {
-                        if(tech.Status == (int)StatusEnum.Pending)
+                        if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass or not the exam");
                             return View(tech);
                         }
-                        
+
                         content = $"Unfortunately, Your Exam fees payment not accepted {reason}";
                         tech.PassExam = false;
                         tech.ReceiptCopy = "";
                     }
-                    else if(PayLicFees == 2)
+                    else if (PayLicFees == 2)
                     {
                         tech.PayFees = false;
                         tech.ReceiptCopyLic = "";
                         content = $"Unfortunately, Your license fees payment not accepted {reason}";
                     }
-                    else if(Info == 2)
+                    else if (Info == 2)
                     {
                         tech.Status = (int)StatusEnum.Rejected;
                         content = $"Sorry your data rejected for the below reason <p>{reason}</p>";
                     }
-                    else {
-
+                    else if(PassExam == 2)
+                    {
+                        content = $"Sorry your did not passed the exam, you must re the exam again";
                     }
                 }
 
-                
+
                 tech.RejectReason = reason;
                 _db.TechearMemberShips.Update(tech);
                 int rowAffect = _db.SaveChanges();
                 // Send email
-                var memUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
-                
-                
-                
+                var memUser = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+
+
                 try
                 {
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     emailMessage.Body = content;
-                    if(rowAffect == 1)
-                    _emailSender.SendEmailBySendGrid(emailMessage);
+                    if (rowAffect == 1)
+                        _emailSender.SendEmailBySendGrid(emailMessage);
 
                     // Add notification
                     _notificationHelper.AddNotify(new Notification
@@ -599,15 +639,15 @@ namespace yoga.Controllers
                         CreationDate = DateTime.Now,
                         IsRead = false
                     });
-                    return RedirectToAction("Detail", "TeacherLic", new {id=MemId});
+                    return RedirectToAction("Detail", "TeacherLic", new { id = MemId });
                 }
                 catch (System.Exception ex)
                 {
-                    
+
                     ModelState.AddModelError("Error, Please Try Again ", ex.Message);
                     return View(tech);
                 }
-                
+
             }
             return View();
         }
@@ -616,11 +656,12 @@ namespace yoga.Controllers
         public IActionResult PayExamFees()
         {
             TechearMemberShipVM vm = new TechearMemberShipVM();
-            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var tech = _db.TechearMemberShips.Include("AppUser")
-            .Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+            .Where(m => m.AppUser.Id == userId).FirstOrDefault();
 
-            if(tech == null){
+            if (tech == null)
+            {
                 return NotFound();
             }
 
@@ -633,10 +674,10 @@ namespace yoga.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PayExamFees(IFormFile Receit)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string fileName_rec = "";
-                if(Receit != null && Receit.Length > 0)
+                if (Receit != null && Receit.Length > 0)
                 {
                     fileName_rec = Path.GetFileName(Receit.FileName);
                     var filePath_rec = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName_rec);
@@ -646,13 +687,50 @@ namespace yoga.Controllers
                     }
                 }
 
-                var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Where(t=>t.Id == userId).FirstOrDefault();
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
                 //tech.PayExamFees = true;
-                tech.ReceiptCopy  = fileName_rec;
+                tech.ReceiptCopy = fileName_rec;
                 _db.TechearMemberShips.Update(tech);
-                _db.SaveChanges();
+                int rowAffect = _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
+
+                try
+                {
+                    // Send Email
+                    // get admin emails
+
+                    List<string> adminEamils = getAdminEmails();
+
+                    var emailMessage = new EmailMessage
+                    {
+                        ToEmailAddresses = adminEamils,
+                        Subject = "Saudi Yoga Committe",
+                        Body = "User has been payed the exam fees!"
+                    };
+
+                    EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                    EmailSender _emailSender = new EmailSender(_emailConfiguration);
+
+                    if (rowAffect == 1)
+                        _emailSender.SendEmailBySendGrid(emailMessage);
+
+                    // Add notification
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = tech.AppUser,
+                        Body = emailMessage.Body,
+                        Title = "Techer License - Pay exam fees",
+                        CreationDate = DateTime.Now,
+                        IsRead = false
+                    });
+                }
+                catch (System.Exception ex)
+                {
+
+                    ModelState.AddModelError("Error, Please Try Again ", ex.Message);
+                    return View(tech);
+                }
                 return RedirectToAction("Confirmation");
             }
             return View();
@@ -668,12 +746,27 @@ namespace yoga.Controllers
             return View();
         }
 
+        private List<string> getAdminEmails()
+        {
+            // Get a list of users in the role
+            var usersWithPermission = _userManager.GetUsersInRoleAsync("Admin").Result;
+
+            var users = usersWithPermission.OfType<AppUser>();
+
+            List<string> emails = new List<string>();
+            foreach (var item in users)
+            {
+                emails.Add(item.Email);
+            }
+            return emails;
+        }
+
         public IActionResult PayLicFees()
         {
             TechearMemberShipVM vm = new TechearMemberShipVM();
-            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var tech = _db.TechearMemberShips.Where(t=>t.Id == userId).FirstOrDefault();
-            if(tech == null ) return NotFound();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
+            if (tech == null) return NotFound();
             vm.LicenseFeesPrice = tech.LicenseFeesPrice;
             return View(vm);
         }
@@ -682,10 +775,10 @@ namespace yoga.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PayLicFees(IFormFile Receit)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 string fileName_rec = "";
-                if(Receit != null && Receit.Length > 0)
+                if (Receit != null && Receit.Length > 0)
                 {
                     fileName_rec = Path.GetFileName(Receit.FileName);
                     var filePath_rec = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName_rec);
@@ -695,39 +788,75 @@ namespace yoga.Controllers
                     }
                 }
 
-                var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Where(t=>t.Id == userId).FirstOrDefault();
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
                 //tech.PayExamFees = true;
-                tech.ReceiptCopyLic  = fileName_rec;
+                tech.ReceiptCopyLic = fileName_rec;
                 _db.TechearMemberShips.Update(tech);
-                _db.SaveChanges();
+                int rowAffect = _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
+                try
+                {
+                    // Send Email
+                    // get admin emails
+
+                    List<string> adminEamils = getAdminEmails();
+
+                    var emailMessage = new EmailMessage
+                    {
+                        ToEmailAddresses = adminEamils,
+                        Subject = "Saudi Yoga Committe",
+                        Body = "User has been payed the licence fees!"
+                    };
+
+                    EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                    EmailSender _emailSender = new EmailSender(_emailConfiguration);
+
+                    if (rowAffect == 1)
+                        _emailSender.SendEmailBySendGrid(emailMessage);
+
+                    // Add notification
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = tech.AppUser,
+                        Body = emailMessage.Body,
+                        Title = "Techer License - Pay licence fees",
+                        CreationDate = DateTime.Now,
+                        IsRead = false
+                    });
+                }
+                catch (System.Exception ex)
+                {
+
+                    ModelState.AddModelError("Error, Please Try Again ", ex.Message);
+                    return View(tech);
+                }
                 return RedirectToAction("Confirmation");
-                return View();
             }
             return View();
         }
 
         public IActionResult MemberData()
         {
-            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _db.TechearMemberShips
             .Include("AppUser")
-            .Where(t=>t.AppUser.Id == userId)
-            .Select( t => new TechearMemberDataVM{
+            .Where(t => t.AppUser.Id == userId)
+            .Select(t => new TechearMemberDataVM
+            {
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
                 Nationality = t.AppUser.Country.EnName,
-                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExpYears = t.ExpYears,
-                AccreditedHours= t.AccreditedHours,
+                AccreditedHours = t.AccreditedHours,
                 EducationLevel = getEducationLevel((int)t.EducationLevel),
                 TeachingType = getTeachingType((int)t.TeachingType),
-                PayExamFees = t.PayExamFees == true ? "Yes": "No",
-                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                PayExamFees = t.PayExamFees == true ? "Yes" : "No",
+                PayLicFees = t.PayFees == true ? "Yes" : "No",
                 Status = getCurrentStatus(t.Status),
-                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
+                FinalApprove = t.FinalApprove == false ? "Pending" : "Approved",
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
@@ -740,31 +869,32 @@ namespace yoga.Controllers
                 CertficateFiles = t.CertficateFiles
             })
             .FirstOrDefault();
-            
+
             return View(result);
         }
 
         [HttpPost]
         public IActionResult MemberData(string name)
         {
-            var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = _db.TechearMemberShips
             .Include("AppUser")
-            .Where(t=>t.AppUser.Id == userId)
-            .Select( t => new TechearMemberDataVM{
+            .Where(t => t.AppUser.Id == userId)
+            .Select(t => new TechearMemberDataVM
+            {
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
                 Nationality = t.AppUser.Country.EnName,
-                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExpYears = t.ExpYears,
-                AccreditedHours= t.AccreditedHours,
+                AccreditedHours = t.AccreditedHours,
                 EducationLevel = getEducationLevel((int)t.EducationLevel),
                 TeachingType = getTeachingType((int)t.TeachingType),
-                PayExamFees = t.PayExamFees == true ? "Yes": "No",
-                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                PayExamFees = t.PayExamFees == true ? "Yes" : "No",
+                PayLicFees = t.PayFees == true ? "Yes" : "No",
                 Status = getCurrentStatus(t.Status),
-                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
+                FinalApprove = t.FinalApprove == false ? "Pending" : "Approved",
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
@@ -777,7 +907,7 @@ namespace yoga.Controllers
                 CertficateFiles = t.CertficateFiles
             })
             .FirstOrDefault();
-            
+
 
             // Generete pdf file
             //1var Rendered = new ChromePdfRenderer(); 
@@ -809,21 +939,22 @@ namespace yoga.Controllers
         {
             var result = _db.TechearMemberShips
             .Include("AppUser")
-            .Select( t => new {
+            .Select(t => new
+            {
                 UserId = t.MemId,
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
                 Nationality = t.AppUser.Country.EnName,
-                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString(): "",
+                IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExperienceYears = t.ExpYears,
-                AccreditedHours= t.AccreditedHours,
+                AccreditedHours = t.AccreditedHours,
                 EducationLevel = getEducationLevel((int)t.EducationLevel),
                 TeachingType = getTeachingType((int)t.TeachingType),
-                PayExamFees = t.PayExamFees == true ? "Yes": "No",
-                PayLicFees = t.PayFees  == true ? "Yes": "No",
+                PayExamFees = t.PayExamFees == true ? "Yes" : "No",
+                PayLicFees = t.PayFees == true ? "Yes" : "No",
                 Status = getCurrentStatus(t.Status),
-                FinalApprove = t.FinalApprove == false  ? "Pending" : "Approved",
+                FinalApprove = t.FinalApprove == false ? "Pending" : "Approved",
                 CurrentInformationStatus = getCurrentStatus(t.Status),
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : ""
@@ -837,7 +968,7 @@ namespace yoga.Controllers
                 worksheet.Cells.LoadFromCollection(result, true);
                 package.Save();
             }
-            stream.Position= 0;
+            stream.Position = 0;
             string excelName = $"Techers Licenses data {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
@@ -850,9 +981,9 @@ namespace yoga.Controllers
 
         static string getCurrentStatus(int statusId)
         {
-            if(statusId == 1) return "Pending";
-            if(statusId == 2) return "Approved";
-            if(statusId == 3) return "Rejected";
+            if (statusId == 1) return "Pending";
+            if (statusId == 2) return "Approved";
+            if (statusId == 3) return "Rejected";
             return "Pending";
         }
 
@@ -860,14 +991,14 @@ namespace yoga.Controllers
         public IActionResult Edit()
         {
             var member = IfTeacherExists();
-            if(member == null) throw new Exception("Teacher Not Found!");
+            if (member == null) throw new Exception("Teacher Not Found!");
             var vm = new TechearMemberShip_EditVM();
             vm.EducationLevels = getEducationLevels();
             vm.TeachingTypes = getTeachingTypes();
             vm.AccreditedHours = member.AccreditedHours;
             vm.CertaficateDate = member.CertaficateDate;
             vm.CertficateFiles = member.CertficateFiles;
-            vm.EducationLevel =  (int)member.EducationLevel;
+            vm.EducationLevel = (int)member.EducationLevel;
             vm.ExamDetails = !string.IsNullOrEmpty(member.ExamLocation) ? member.ExamLocation : "";
             vm.ExpYears = member.ExpYears;
             vm.PersonalWebSite = member.PersonalWebSite;
@@ -875,7 +1006,7 @@ namespace yoga.Controllers
             vm.SchoolLocation = member.SchoolLocation;
             vm.SchoolName = member.SchoolName;
             vm.SchoolSocialMediaAccount = member.SchoolSocialMediaAccount;
-            vm.SocialMediaAccounts =  member.SchoolSocialMediaAccount;
+            vm.SocialMediaAccounts = member.SchoolSocialMediaAccount;
             vm.TeachingType = member.TeachingType;
             return View(vm);
         }
@@ -891,13 +1022,13 @@ namespace yoga.Controllers
             ModelState.Remove("SchoolSocialMediaAccount");
             ModelState.Remove("Name");
             ModelState.Remove("PersonalWebSite");
-            ModelState.Remove("EducationLevels"); 
-            ModelState.Remove("TeachingTypes"); 
+            ModelState.Remove("EducationLevels");
+            ModelState.Remove("TeachingTypes");
             ModelState.Remove("Image");
             obj.Name = "tst";
-            
+
             var member = IfTeacherExists();
-            
+
             // if(obj.TeachingType == 0)
             // {
             //     obj.EducationLevels = getEducationLevels();
@@ -912,7 +1043,7 @@ namespace yoga.Controllers
             //     ModelState.AddModelError("EducationLevel", " Education Level is required");
             //     return View(obj);
             // }CertficateFiles != null && CertficateFiles.Count > 0
-            if(string.IsNullOrEmpty(member.CertficateFiles) && CertficateFiles == null)
+            if (string.IsNullOrEmpty(member.CertficateFiles) && CertficateFiles == null)
             {
                 obj.EducationLevels = getEducationLevels();
                 obj.TeachingTypes = getTeachingTypes();
@@ -920,14 +1051,14 @@ namespace yoga.Controllers
                 return View(obj);
             }
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Upload images
                 string fileName_rec = "";
                 string fileName_cert = "";
-                
 
-                if(CertficateFiles != null && CertficateFiles.Length > 0)
+
+                if (CertficateFiles != null && CertficateFiles.Length > 0)
                 {
                     fileName_cert = Path.GetFileName(CertficateFiles.FileName);
                     var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName_cert);
@@ -936,17 +1067,17 @@ namespace yoga.Controllers
                         await CertficateFiles.CopyToAsync(fileSrteam);
                     }
                 }
-                
+
                 // get logened user
                 string userId = _userManager.GetUserId(User);
-                var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
-                if(loggedUser == null)
+                var loggedUser = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (loggedUser == null)
                 {
                     ModelState.AddModelError("", "User Not Exist");
                     return View(obj);
                 }
 
-                var entity =_db.TechearMemberShips.Where(m=> m.MemId == member.MemId).FirstOrDefault();
+                var entity = _db.TechearMemberShips.Where(m => m.MemId == member.MemId).FirstOrDefault();
 
                 entity.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
                 entity.SocialMediaAccounts = obj.SocialMediaAccounts;
@@ -960,11 +1091,23 @@ namespace yoga.Controllers
                 entity.SchoolLink = obj.SchoolLink;
                 entity.SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount;
                 entity.CertficateFiles = string.IsNullOrEmpty(CertficateFiles?.FileName) ? "" : CertficateFiles.FileName;
-                entity.Name =obj.Name;
+                entity.Name = obj.Name;
                 entity.Status = (int)StatusEnum.Pending;
 
                 _db.TechearMemberShips.Update(entity);
-                _db.SaveChanges();
+                int rowAffect = _db.SaveChanges();
+                // add notification
+                if (rowAffect == 1)
+                {
+                    _notificationHelper.AddNotify(new Notification
+                    {
+                        AppUser = loggedUser,
+                        Body = "User Re Submitted his rejected rquest.",
+                        Title = "Re Submit",
+                        CreationDate = DateTime.Now,
+                        IsRead = false
+                    });
+                }
                 return RedirectToAction("DataSaved");
             }
             obj.EducationLevels = getEducationLevels();
