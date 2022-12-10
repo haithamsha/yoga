@@ -31,9 +31,9 @@
                     {
                         <tr>
                         <td>@item.Title</td>
-                        <td>@item.Body</td>
+                        <td>@Html.Raw(@item.Body)</td>
                         <td>@item.CreationDate</td>
-                        <td>@item.AppUser.FirstName @item.AppUser.LastName</td>
+                        <td>@item.AppUser?.FirstName @item.AppUser?.LastName</td>
                         </tr>
                     }
                 </tbody>

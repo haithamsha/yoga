@@ -688,7 +688,7 @@ namespace yoga.Controllers
                 }
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
+                var tech = _db.TechearMemberShips.Include("AppUser").Where(t => t.Id == userId).FirstOrDefault();
                 //tech.PayExamFees = true;
                 tech.ReceiptCopy = fileName_rec;
                 _db.TechearMemberShips.Update(tech);

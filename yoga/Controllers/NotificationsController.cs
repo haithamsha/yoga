@@ -25,7 +25,10 @@ namespace yoga.Controllers
 
             if(!User.IsInRole("Admin"))
             {
-                result = result.Where(n=>n.AppUser.Id == userId);
+                result = result.Include("AppUser").Where(n=>n.AppUser.Id == userId);
+            }
+            else {
+                result = result.Include("AppUser");
             }
             
 
