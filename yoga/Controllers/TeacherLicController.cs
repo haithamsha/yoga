@@ -557,29 +557,14 @@ namespace yoga.Controllers
                         tech.PassExam = true;
                         tech.LicenseFeesPrice = LicFeesPrice;
                     }
-                    else if (PassExam == 2)
-                    {
-                        if (tech.Status == (int)StatusEnum.Pending)
-                        {
-                            ModelState.AddModelError("", "Information Must approved first before pass the exam");
-                            return View(tech);
-                        }
-
-                        content = $"Unfortunately, Your Not Passed The SAUDI YOGA COMMITTEE Teacher license Exam. {reason}, You me re the exam again";
-                        tech.PassExam = false;
-                        tech.TakeExam = false;
-                        tech.PayExamFees = false;
-                        tech.ReceiptCopy = "";
-                        tech.ReceiptCopyLic = "";
-                        tech.LicenseFeesPrice = LicFeesPrice;
-                    }
+                    
 
 
 
                 }
                 else
                 {
-                    if (PayExamFees == 2 && PayLicFees == 2 && Info == 2)
+                    if (PayExamFees == 2 && PayLicFees == 2 && Info == 2 && TakeExam == 2)
                     {
                         ModelState.AddModelError("", "You must reject only one step");
                         return View(tech);
@@ -607,9 +592,22 @@ namespace yoga.Controllers
                         tech.Status = (int)StatusEnum.Rejected;
                         content = $"Sorry your data rejected for the below reason <p>{reason}</p>";
                     }
-                    else if(PassExam == 2)
+                    
+                    else if (PassExam == 2)
                     {
-                        content = $"Sorry your did not passed the exam, you must re the exam again";
+                        if (tech.Status == (int)StatusEnum.Pending)
+                        {
+                            ModelState.AddModelError("", "Information Must approved first before pass the exam");
+                            return View(tech);
+                        }
+
+                        content = $"Unfortunately, Your Not Passed The SAUDI YOGA COMMITTEE Teacher license Exam. {reason}, You me re the exam again";
+                        tech.PassExam = false;
+                        tech.TakeExam = false;
+                        tech.PayExamFees = false;
+                        tech.ReceiptCopy = "";
+                        tech.ReceiptCopyLic = "";
+                        tech.LicenseFeesPrice = LicFeesPrice;
                     }
                 }
 
