@@ -81,5 +81,11 @@ namespace yoga.ViewModels
 
         [Display(Name = "Expire Date")]
         public string ExpireDate { get; set; }
+
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
     }
 }

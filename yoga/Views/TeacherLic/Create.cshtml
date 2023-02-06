@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @model yoga.ViewModels.TechearMemberShipVM
 @{
     ViewData["Title"] = "Index";
@@ -115,10 +117,11 @@
                             <span asp-validation-for="SchoolLocation" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="CertaficateDate"></label>
+                            <label asp-for="CertaficateDate"></label>(<span class="fw-bold">@localizer["certNote"]</span>)
                             <input type="text"  asp-for="CertaficateDate" asp-format="yyyy-mm-dd"
                                 class="form-control" />
                             <span asp-validation-for="CertaficateDate" class="text-danger"></span>
+                            
                         </div>
                         <div class="mb-3">
                             <label asp-for="SchoolName"></label>

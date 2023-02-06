@@ -169,4 +169,8 @@
     <value> Your personal data will be used to support your experience throughout this website, to manage access to                 your                 account, and for other purposes described in our &lt;b&gt;privacy policy.&lt;/b&gt;</value>
     <comment/>
   </data>
+  <data name="imageNote" xml:space="preserve">
+    <value>This is a personal photo and will appear in the membeship card.</value>
+    <comment/>
+  </data>
 </root>

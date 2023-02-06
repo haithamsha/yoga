@@ -59,19 +59,19 @@ namespace yoga.Controllers
 
             levels.Add(new SelectListItem
             {
-                Text = "Level 1",
+                Text = "Level 1 - 100 hrs",
                 Value = "1"
             });
 
             levels.Add(new SelectListItem
             {
-                Text = "Level 2",
+                Text = "Level 2 - 200 hrs",
                 Value = "2"
             });
 
             levels.Add(new SelectListItem
             {
-                Text = "Level 3",
+                Text = "Level 3 - 300 hrs",
                 Value = "3"
             });
             return levels;
@@ -344,15 +344,15 @@ namespace yoga.Controllers
         {
             if (levelId == 1)
             {
-                return "Level1";
+                return "Level 1 - 100 hrs";
             }
             else if (levelId == 2)
             {
-                return "Level2";
+                return "Level 2 - 200 hrs";
             }
             else if (levelId == 3)
             {
-                return "Level3";
+                return "Level 3 - 300 hrs";
             }
             else
             {
@@ -845,6 +845,8 @@ namespace yoga.Controllers
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
+                Phone = t.AppUser.PhoneNumber,
+                Email = t.AppUser.Email,
                 Nationality = t.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExpYears = t.ExpYears,
@@ -883,6 +885,8 @@ namespace yoga.Controllers
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
+                Phone = t.AppUser.PhoneNumber,
+                Email = t.AppUser.Email,
                 Nationality = t.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExpYears = t.ExpYears,
@@ -943,6 +947,8 @@ namespace yoga.Controllers
                 FirstName = t.AppUser.FirstName,
                 MiddleName = t.AppUser.MiddleName,
                 LastName = t.AppUser.LastName,
+                Phone = t.AppUser.PhoneNumber,
+                Email = t.AppUser.Email,
                 Nationality = t.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExperienceYears = t.ExpYears,

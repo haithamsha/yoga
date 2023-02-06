@@ -117,60 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PageTitle" xml:space="preserve">
-    <value>تسجيل</value>
-    <comment/>
-  </data>
-  <data name="NationalId" xml:space="preserve">
-    <value>رقم الهوية</value>
-    <comment/>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>البريد الالكتروني</value>
-    <comment/>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>كلمة المرور</value>
-    <comment/>
-  </data>
-  <data name="ConfirmPassword" xml:space="preserve">
-    <value>تأكيد كلمة المرور</value>
-    <comment/>
-  </data>
-  <data name="Phone" xml:space="preserve">
-    <value>الجوال</value>
-    <comment/>
-  </data>
-  <data name="Nationality" xml:space="preserve">
-    <value>الجنسية</value>
-    <comment/>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>الاسم الاول</value>
-    <comment/>
-  </data>
-  <data name="MiddleName" xml:space="preserve">
-    <value>الاسم الاوسط</value>
-    <comment/>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>اللقب</value>
-    <comment/>
-  </data>
-  <data name="Image" xml:space="preserve">
-    <value>صورة</value>
-    <comment/>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>تسجيل</value>
-    <comment/>
-  </data>
-  <data name="Policy" xml:space="preserve">
-    <value> سيتم استخدام بياناتك الشخصية لدعم تجربتك في جميع أنحاء هذا الموقع ، وإدارة الوصول إلى حسابك ، ولأغراض أخرى موصوفة في                     &lt;b&gt;                     سياسة الخصوصية                      الخاصة بنا.</value>
-    <comment/>
-  </data>
-  <data name="imageNote" xml:space="preserve">
-    <value>هذه هي الصورة الشخصية وسوف تظهر في بطاقات العضوية</value>
+  <data name="certNote" xml:space="preserve">
+    <value>هذا التاريخ يجب ان يكون تاريخ اول شهادة سيتم رفعها</value>
     <comment/>
   </data>
 </root>
