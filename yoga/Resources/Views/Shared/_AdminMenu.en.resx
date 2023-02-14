@@ -145,4 +145,8 @@
     <value>Notification</value>
     <comment/>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+    <comment/>
+  </data>
 </root>

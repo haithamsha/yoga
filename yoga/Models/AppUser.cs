@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace yoga.Models
@@ -9,6 +10,7 @@ namespace yoga.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string UserImage { get; set; }
+        public string NationalIdImage { get; set; }
         public string Discriminator { get; set; } = "Default";
         public Country? Country {get;set;}    
     }

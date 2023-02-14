@@ -169,4 +169,8 @@
     <value> سيتم استخدام بياناتك الشخصية لدعم تجربتك في جميع أنحاء هذا الموقع ، وإدارة الوصول إلى حسابك ، ولأغراض أخرى موصوفة في                     &lt;b&gt;                     سياسة الخصوصية                      الخاصة بنا.</value>
     <comment/>
   </data>
+  <data name="NationalIdImage" xml:space="preserve">
+    <value>صورة الهوية</value>
+    <comment/>
+  </data>
 </root>

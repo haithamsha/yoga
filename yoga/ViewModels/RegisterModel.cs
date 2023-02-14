@@ -54,6 +54,11 @@ namespace yoga.ViewModels
         [DataType(DataType.Upload)]
         public string Image { get; set; }
 
+        [Display(Name = "National Id Image")]
+        [DataType(DataType.Upload)]
+        public string NationalIdImage { get; set; }
+        
+
         [Display(Name = "Nationality")]
         public int CountryId { get; set; }
         public List<SelectListItem> Counries { get; set; }

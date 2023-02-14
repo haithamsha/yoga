@@ -59,6 +59,23 @@
                     </label>
                 </div>
 
+                @if(!string.IsNullOrEmpty(Model.NationalIdImage))
+                {
+                    <img width="100" height="100" src="~/assets/images/@Model.NationalIdImage">
+                }
+                <div id="upload-container" class="text-center">
+                    <label>
+                        <img src="~/assets/images/public/upload.png" />
+                        <br />
+                        @localizer["NationalIdImage"]
+                        <input asp-for="NationalIdImage" id="inputTag_NationalId" class="upload-text" type="file" />
+                        <br />
+                        <p class="extensions" id="imageName">
+                            JPG , PNG , PFD
+                        </p>
+                    </label>
+                </div>
+
                 
                 <button class="btn btn-brown-primary w-100">@localizer["Submit"]</button>
             </div>

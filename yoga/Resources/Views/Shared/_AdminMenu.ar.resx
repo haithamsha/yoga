@@ -145,4 +145,8 @@
     <value>التنبيهات</value>
     <comment/>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>المتستخدمين</value>
+    <comment/>
+  </data>
 </root>

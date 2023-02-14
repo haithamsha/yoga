@@ -173,4 +173,8 @@
     <value>هذه هي الصورة الشخصية وسوف تظهر في بطاقات العضوية</value>
     <comment/>
   </data>
+  <data name="NationalIdImage" xml:space="preserve">
+    <value>صورة الهوية</value>
+    <comment/>
+  </data>
 </root>

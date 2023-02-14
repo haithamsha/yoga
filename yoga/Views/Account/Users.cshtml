@@ -1,0 +1,81 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] ="Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+<div class="d-lg-flex">
+                <partial name="_AdminMenu" />
+                <div class="account-container account-details">
+                    <h2 class="header page-header">@localizer["PageTitle"]</h2>
+                    <a asp-controller="TeacherLic" asp-action="ExportToExcel">@localizer["Export"]</a>
+
+					<div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+                                                <th>@localizer["FirstName"]</th>
+                                                <th>@localizer["MiddleName"]</th>
+                                                <th>@localizer["LastName"]</th>
+                                                <th>@localizer["NationalId"]</th>
+                                                <th>@localizer["Email"]</th>
+                                                <th>@localizer["Phone"]</th>
+                                                <th>@localizer["Nationality"]</th>
+                                                <th>@localizer["Actions"]</th>
+											</tr>
+										</thead>
+										<tbody>
+											@* <tr>
+												<td class="cell">#15346</td>
+												<td class="cell"><span class="truncate">Lorem ipsum dolor sit amet eget volutpat erat</span></td>
+												<td class="cell">John Sanders</td>
+												<td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
+												<td class="cell"><span class="badge bg-success">Paid</span></td>
+												<td class="cell">$259.35</td>
+												<td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+											</tr> *@
+                                    @foreach (var item in Model)
+                                    {
+                                                <tr>
+                                                    <td class="cell">
+                                                @item.FirstName
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.MiddleName
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.LastName
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.NationalId
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.Email
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.PhoneNumber
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.Country.EnName
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="w-75 btn-group" role="group">
+                                                            <a class="btn-sm app-btn-secondary" asp-controller="Account" asp-action="EditUser"
+                                                            asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                    }
+		
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+                </div>
+</div>

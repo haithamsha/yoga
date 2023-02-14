@@ -26,6 +26,18 @@
                             <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
                         </li>
                         }
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="selected-item">
+                            <div>
+                                <a asp-controller="Account" asp-action="Users">
+                                    <img src="~/assets/images/accountdetails/users.png" />
+                                    @localizer["Users"]
+                                </a>
+                            </div>
+                            <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
+                        </li>
+                        }
                         <li class="selected-item">
                             <div>
                             <a asp-controller="Account" asp-action="Settings"><img src="~/assets/images/accountdetails/users.png" />

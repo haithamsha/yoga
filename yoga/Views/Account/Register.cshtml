@@ -57,6 +57,20 @@
                 </label>
             </div>
 
+            <div id="upload-container" class="text-center">
+                <label>
+                    <img src="~/assets/images/public/upload.png" />
+                    <br />
+                    @localizer["NationalIdImage"]
+                    <input asp-for="NationalIdImage" id="inputTag_NationalIdImage" class="upload-text" type="file" />
+                    <br />
+                    <p class="extensions" id="imageName">
+                        JPG , PNG , PFD
+                    </p>
+                    
+                </label>
+            </div>
+
             <p class="register-info">
                
             </p>
