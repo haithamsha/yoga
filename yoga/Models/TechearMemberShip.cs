@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -5,6 +6,11 @@ namespace yoga.Models
 {
     public class TechearMemberShip
     {
+        public TechearMemberShip()
+        {
+            TechearMemberShipTests = new List<TechearMemberShipTest>();
+        }
+        
         [Key]
         public int MemId { get; set; }
         public EducationLevelEnum EducationLevel { get; set; }
@@ -42,6 +48,8 @@ namespace yoga.Models
         public string? SerialNumber { get; set; }
 
         public string? RejectReason { get; set; }
+
+        public List<TechearMemberShipTest> TechearMemberShipTests { get; set; }
 
 
         [NotMapped]
