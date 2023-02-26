@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using yoga.Data;
 
@@ -11,9 +12,11 @@ using yoga.Data;
 namespace yoga.Migrations
 {
     [DbContext(typeof(YogaAppDbContext))]
-    partial class YogaAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230225164204_addMultiTests")]
+    partial class addMultiTests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -492,7 +495,7 @@ namespace yoga.Migrations
                     b.Property<bool>("TakeExam")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("TeachingType")
+                    b.Property<int>("TeachingType")
                         .HasColumnType("int");
 
                     b.HasKey("MemId");
@@ -512,9 +515,6 @@ namespace yoga.Migrations
 
                     b.Property<string>("ExamLocation")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ExpireDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("FinalApprove")
                         .HasColumnType("bit");

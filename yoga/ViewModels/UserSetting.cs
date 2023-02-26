@@ -1,3 +1,5 @@
+using yoga.Models;
+
 namespace yoga.ViewModels
 {
     public class UserSetting
@@ -11,6 +13,8 @@ namespace yoga.ViewModels
         public virtual UserSubscribtions? User_Subscribtions { get; set; }
         public virtual MemCardStatusVM? MemshipCard { get; set; }
         public virtual TeacherLicStatusVM? TeacherLic { get; set; }
+
+        public List<TechearMemberShipTest>? TechearMemberShipTest { get; set; }
         
     }
 }

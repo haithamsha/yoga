@@ -19,6 +19,7 @@ namespace yoga.ViewModels
 
         [Required(ErrorMessage = "Teaching Type Is Required")]
         public int? TeachingType { get; set; }
+        public string TeachingTypesList { get; set; }
         public List<SelectListItem> TeachingTypes{get;set;}
 
         [Required(ErrorMessage = "Years of experience required.")]

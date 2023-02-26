@@ -24,6 +24,8 @@ namespace yoga.Models
 
         public string? RejectReason { get; set; }
 
+        public DateTime? ExpireDate { get; set; }
+
 
 
         

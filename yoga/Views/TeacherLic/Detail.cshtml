@@ -1,4 +1,4 @@
-@model TechearMemberShip
+@model TechearMemberShipTest
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,6 +9,7 @@
 <form method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input asp-for="MemId" hidden/>
+    <input asp-for="TestId" hidden/>
     <div class="border p-3 mt-4">
         <h2>Teacher Licence Issue</h2>
         <ul class="nav nav-tabs">
@@ -30,28 +31,28 @@
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active show" id="home">
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="Name"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.Name"></label>
                     <div>
-                        <label>@Model.AppUser.FirstName @Model.AppUser.MiddleName @Model.AppUser.LastName</label>
+                        <label>@Model.TechearMemberShip.AppUser.FirstName @Model.TechearMemberShip.AppUser.MiddleName @Model.TechearMemberShip.AppUser.LastName</label>
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="EducationLevel"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.EducationLevel"></label>
                     
                    <div>
-                        @Model.EducationLevel_String
+                        @Model.TechearMemberShip.EducationLevel_String
                    </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="SocialMediaAccounts"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.SocialMediaAccounts"></label>
                     <div>
-                        @Model.SocialMediaAccounts
+                        @Model.TechearMemberShip.SocialMediaAccounts
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="PersonalWebSite"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.PersonalWebSite"></label>
                     <div>
-                        @Model.PersonalWebSite
+                        @Model.TechearMemberShip.PersonalWebSite
                     </div>
                 </div>
                 <div class="mb-3">
@@ -65,54 +66,54 @@
             </div>
             <div class="tab-pane fade" id="profile">
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="ExpYears"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.ExpYears"></label>
                     <div>
-                        @Model.ExpYears
+                        @Model.TechearMemberShip.ExpYears
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="AccreditedHours"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.AccreditedHours"></label>
                     <div>
-                        @Model.AccreditedHours
+                        @Model.TechearMemberShip.AccreditedHours
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="SchoolLocation"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolLocation"></label>
                     <div>
-                        @Model.SchoolLocation
+                        @Model.TechearMemberShip.SchoolLocation
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="CertaficateDate"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.CertaficateDate"></label>
                     <div>
-                        @Model.CertaficateDate
+                        @Model.TechearMemberShip.CertaficateDate
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="SchoolName"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolName"></label>
                     <div>
-                        @Model.SchoolName
+                        @Model.TechearMemberShip.SchoolName
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="SchoolLink"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolLink"></label>
                     <div>
-                        @Model.SchoolLink
+                        @Model.TechearMemberShip.SchoolLink
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="SchoolSocialMediaAccount"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolSocialMediaAccount"></label>
                     <div>
-                        @Model.SchoolSocialMediaAccount
+                        @Model.TechearMemberShip.SchoolSocialMediaAccount
                     </div>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="CertficateFiles"></label>
+                    <label class="fw-bold" asp-for="@Model.TechearMemberShip.CertficateFiles"></label>
                     <div>
                         @{
-                            if(!string.IsNullOrEmpty(Model.CertficateFiles))
+                            if(!string.IsNullOrEmpty(Model.TechearMemberShip.CertficateFiles))
                             {
-                                foreach (var item in Model.CertficateFiles.Split(','))
+                                foreach (var item in Model.TechearMemberShip.CertficateFiles.Split(','))
                                 {
                                     <div><a target="_blank" href="~/assets/images/@item" alt="CertficateFiles">@item</a></div>    
                                 }

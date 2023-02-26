@@ -13,6 +13,7 @@
 
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="~/chosen_v1.8.7/chosen.css">
 
 
 <div class="d-lg-flex">
@@ -76,10 +77,16 @@
                         </div>
                         <div class="mb-3">
                             <label asp-for="TeachingType"></label>
-                            <select asp-for="TeachingType" asp-items="@Model.TeachingTypes" class="form-control">
-
+                            <p>Note: You will have a test for each teaching type you select.</p>
+                        </div>
+                        <div class="mb-3">
+                            
+                            <select  data-placeholder="Select Teaching types"
+                            multiple class="chosen-select form-control"
+                            tabindex="8" asp-for="TeachingTypesList" asp-items="@Model.TeachingTypes">
                             </select>
-                            <span asp-validation-for="TeachingType" class="text-danger"></span>
+                            <span asp-validation-for="TeachingTypesList" class="text-danger"></span>
+
                         </div>
                         @if (string.IsNullOrEmpty(imagePath))
                         {
@@ -183,13 +190,22 @@
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="~/chosen_v1.8.7/chosen.jquery.js" type="text/javascript"></script>
+  <script src="~/chosen_v1.8.7/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 
 <partial name="_ValidationScriptsPartial" />
 
 <script>
-    $( "#CertaficateDate").datepicker({
+    $(function(){
+        $( "#CertaficateDate").datepicker({
         dateFormat: "yy-mm-dd"
+        });
+
+        
     });
+
+    
+
 </script>
 
 }

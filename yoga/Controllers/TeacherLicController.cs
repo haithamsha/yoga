@@ -44,7 +44,9 @@ namespace yoga.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips.Include("AppUser");
+            IEnumerable<TechearMemberShipTest> lics = _db.techearMemberShipTests
+            .Include("TechearMemberShip")
+            .Include(t=>t.TechearMemberShip.AppUser);
             return View(lics);
         }
 
@@ -80,11 +82,11 @@ namespace yoga.Controllers
         private List<SelectListItem> getTeachingTypes()
         {
             List<SelectListItem> t_Types = new List<SelectListItem>();
-            t_Types.Add(new SelectListItem
-            {
-                Text = "Select Teaching Type",
-                Value = string.Empty
-            });
+            // t_Types.Add(new SelectListItem
+            // {
+            //     Text = "Select Teaching Type",
+            //     Value = string.Empty
+            // });
 
             t_Types.Add(new SelectListItem
             {
@@ -150,7 +152,8 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(TechearMemberShipVM obj, List<IFormFile> CertficateFiles, IFormFile Image)
+        public async Task<IActionResult> Create(TechearMemberShipVM obj, List<IFormFile> CertficateFiles,
+        IFormFile Image, string[] TeachingTypesList)
         {
             ModelState.Remove("ReceiptCopy");
             ModelState.Remove("CertficateFiles");
@@ -162,9 +165,10 @@ namespace yoga.Controllers
             ModelState.Remove("EducationLevels");
             ModelState.Remove("TeachingTypes");
             ModelState.Remove("Image");
+            ModelState.Remove("TeachingType");
             obj.Name = "tst";
 
-            if (obj.TeachingType == 0)
+            if (TeachingTypesList.Count() == 0)
             {
                 obj.EducationLevels = getEducationLevels();
                 obj.TeachingTypes = getTeachingTypes();
@@ -257,7 +261,7 @@ namespace yoga.Controllers
                 entity.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
                 entity.SocialMediaAccounts = obj.SocialMediaAccounts;
                 entity.PersonalWebSite = obj.PersonalWebSite;
-                entity.TeachingType = obj.TeachingType.Value;
+                if(entity.TeachingType != null) entity.TeachingType = obj.TeachingType.Value;
                 entity.ExpYears = obj.ExpYears.Value;
                 entity.AccreditedHours = obj.AccreditedHours.Value;
                 entity.SchoolLocation = obj.SchoolLocation;
@@ -268,7 +272,12 @@ namespace yoga.Controllers
                 entity.CertficateFiles = uploadFiles == null ? "" : string.Join(",", uploadFiles);
                 entity.Name = obj.Name;
 
-                _db.TechearMemberShips.Add(entity);
+                foreach (var item in TeachingTypesList)
+                {
+                    entity.TechearMemberShipTests.Add(new TechearMemberShipTest{TeachingType = int.Parse(item)});
+                }
+                
+                _db.TechearMemberShips.Add(entity); 
                 int rowAffect = _db.SaveChanges();
 
                 // Add user to Teacher role
@@ -327,17 +336,6 @@ namespace yoga.Controllers
             var member = _db.TechearMemberShips.Where(t => t.AppUser.Id == userId).FirstOrDefault();
             if (member != null) return member;
             return null;
-        }
-
-        public IActionResult Detail(int? id)
-        {
-            if (id == null || id == 0) return NotFound();
-            var obj = _db.TechearMemberShips.Include("AppUser").Where(t => t.MemId == id).SingleOrDefault();
-            obj.EducationLevel_String = getEducationLevel((int)obj.EducationLevel);
-            obj.TeachingType_string = getTeachingType(obj.TeachingType);
-            if (obj == null) return NotFound();
-
-            return View(obj);
         }
 
         static string getEducationLevel(int levelId)
@@ -399,11 +397,29 @@ namespace yoga.Controllers
             }
         }
 
+        public IActionResult Detail(int? id)
+        {
+            if (id == null || id == 0) return NotFound();
+            var obj = _db.techearMemberShipTests
+            .Include(t=>t.TechearMemberShip)
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t => t.TestId == id)
+            .SingleOrDefault();
+
+            obj.TechearMemberShip.EducationLevel_String = getEducationLevel((int)obj.TechearMemberShip.EducationLevel);
+            obj.TeachingType_string = getTeachingType(obj.TeachingType);
+            if (obj == null) return NotFound();
+
+            return View(obj);
+        }
+
+        
+
         //Post
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Detail(string Approve, string reason, int Info, int PayExamFees, int PayLicFees, int TakeExam,
-        int PassExam, int MemId, decimal LicFeesPrice, string ExamLocation)
+        int PassExam, int MemId, decimal LicFeesPrice, string ExamLocation, int TestId)
         {
 
 
@@ -418,10 +434,16 @@ namespace yoga.Controllers
                 string content = "";
                 string subject = "SAUDI YOGA COMMITTEE";
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Include("AppUser").Where(m => m.MemId == MemId).FirstOrDefault();
+
+                var tech = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Include(t=>t.TechearMemberShip.AppUser)
+                .Where(t=>t.TestId == TestId)
+                .FirstOrDefault();
+
                 var emailMessage = new EmailMessage
                 {
-                    ToEmailAddresses = new List<string> { tech.AppUser.Email },
+                    ToEmailAddresses = new List<string> { tech.TechearMemberShip.AppUser.Email },
                     Subject = subject,
                     Body = content
                 };
@@ -470,11 +492,11 @@ namespace yoga.Controllers
                         tech.FinalApprove = true;
                         tech.ExpireDate = DateTime.Now.AddYears(1);
                         // Generate card serial
-                        var serials = _db.TechearMemberShips.Select(m => m.SerialNumber).ToList();
+                        var serials = _db.techearMemberShipTests.Select(m => m.SerialNumber).ToList();
                         string serialNumber = YogaUtilities.GenerateSerialNumber(serials);
-                        tech.SerialNumber = $"{tech.MemId}{serialNumber}";
+                        tech.SerialNumber = $"{tech.TestId}{serialNumber}";
                         string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images",
-                tech.AppUser.UserImage);
+                tech.TechearMemberShip.AppUser.UserImage);
                         var htmlContent = @$"<div>
                         </div>
                         <div style='text-align: center; width:200px;height: 270px; padding:30px;
@@ -488,7 +510,8 @@ namespace yoga.Controllers
         </div>
        <div >
         <div>
-            {tech.AppUser.FirstName} {tech.AppUser.LastName}
+            {tech.TechearMemberShip.AppUser.FirstName} {tech.TechearMemberShip
+            .AppUser.LastName}
         </div>
         <div>
             ID: {serialNumber}
@@ -508,7 +531,7 @@ namespace yoga.Controllers
         </div>
        <div >
         <div>
-            {tech.AppUser.FirstName} {tech.AppUser.LastName}
+            {tech.TechearMemberShip.AppUser.FirstName} {tech.TechearMemberShip.AppUser.LastName}
         </div>
         <div>
             ID: {serialNumber}
@@ -613,7 +636,7 @@ namespace yoga.Controllers
 
 
                 tech.RejectReason = reason;
-                _db.TechearMemberShips.Update(tech);
+                _db.techearMemberShipTests.Update(tech);
                 int rowAffect = _db.SaveChanges();
                 // Send email
                 var memUser = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
@@ -631,13 +654,13 @@ namespace yoga.Controllers
                     // Add notification
                     _notificationHelper.AddNotify(new Notification
                     {
-                        AppUser = tech.AppUser,
+                        AppUser = tech.TechearMemberShip.AppUser,
                         Body = content,
                         Title = "Techer License",
                         CreationDate = DateTime.Now,
                         IsRead = false
                     });
-                    return RedirectToAction("Detail", "TeacherLic", new { id = MemId });
+                    return RedirectToAction("Detail", "TeacherLic", new { id = TestId });
                 }
                 catch (System.Exception ex)
                 {
@@ -655,8 +678,10 @@ namespace yoga.Controllers
         {
             TechearMemberShipVM vm = new TechearMemberShipVM();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var tech = _db.TechearMemberShips.Include("AppUser")
-            .Where(m => m.AppUser.Id == userId).FirstOrDefault();
+            var tech = _db.techearMemberShipTests
+            .Include(t=>t.TechearMemberShip)
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(m => m.TechearMemberShip.AppUser.Id == userId).FirstOrDefault();
 
             if (tech == null)
             {
@@ -686,10 +711,14 @@ namespace yoga.Controllers
                 }
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Include("AppUser").Where(t => t.Id == userId).FirstOrDefault();
+                var tech = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Include(t=>t.TechearMemberShip.AppUser)
+                .Where(t => t.TechearMemberShip.AppUser.Id == userId)
+                .FirstOrDefault();
                 //tech.PayExamFees = true;
                 tech.ReceiptCopy = fileName_rec;
-                _db.TechearMemberShips.Update(tech);
+                _db.techearMemberShipTests.Update(tech);
                 int rowAffect = _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
 
@@ -716,7 +745,7 @@ namespace yoga.Controllers
                     // Add notification
                     _notificationHelper.AddNotify(new Notification
                     {
-                        AppUser = tech.AppUser,
+                        AppUser = tech.TechearMemberShip.AppUser,
                         Body = emailMessage.Body,
                         Title = "Techer License - Pay exam fees",
                         CreationDate = DateTime.Now,
@@ -763,7 +792,9 @@ namespace yoga.Controllers
         {
             TechearMemberShipVM vm = new TechearMemberShipVM();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
+            var tech = _db.techearMemberShipTests
+            .Where(t => t.TechearMemberShip.AppUser.Id == userId)
+            .FirstOrDefault();
             if (tech == null) return NotFound();
             vm.LicenseFeesPrice = tech.LicenseFeesPrice;
             return View(vm);
@@ -787,10 +818,13 @@ namespace yoga.Controllers
                 }
 
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                var tech = _db.TechearMemberShips.Where(t => t.Id == userId).FirstOrDefault();
+                var tech = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Where(t => t.TechearMemberShip.Id == userId)
+                .FirstOrDefault();
                 //tech.PayExamFees = true;
                 tech.ReceiptCopyLic = fileName_rec;
-                _db.TechearMemberShips.Update(tech);
+                _db.techearMemberShipTests.Update(tech);
                 int rowAffect = _db.SaveChanges();
                 ViewData["Saved"] = "Thank you, We going to review your informatino ASAP.";
                 try
@@ -816,7 +850,7 @@ namespace yoga.Controllers
                     // Add notification
                     _notificationHelper.AddNotify(new Notification
                     {
-                        AppUser = tech.AppUser,
+                        AppUser = tech.TechearMemberShip.AppUser,
                         Body = emailMessage.Body,
                         Title = "Techer License - Pay licence fees",
                         CreationDate = DateTime.Now,

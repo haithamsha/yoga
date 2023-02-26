@@ -15,5 +15,6 @@ namespace yoga.ViewModels
         public string Serial { get; set; }
         public string ExamLocation { get; set; }
         public string RejectReason { get; set; }
+        public List<TechearMemberShipTestVM> TechearMemberShipTests { get; set; }
     }
 }

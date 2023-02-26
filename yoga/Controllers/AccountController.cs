@@ -28,7 +28,60 @@ namespace yoga.Controllers
         }
 
         [Authorize]
+        public IActionResult Index()
+        {
+            string userId =  _userManager.GetUserId(User);
+
+            IEnumerable<TechearMemberShipTest> lics = _db.techearMemberShipTests
+            .Include("TechearMemberShip")
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t=>t.TechearMemberShip.AppUser.Id == userId);
+            
+            return View(lics);
+        }
+
+        [Authorize]
         public IActionResult UserProfile()
+        {
+            string userId =  _userManager.GetUserId(User);
+
+            List<TechearMemberShipTest> techLics = _db.techearMemberShipTests
+            .Include("TechearMemberShip")
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t=>t.TechearMemberShip.AppUser.Id == userId).ToList();
+
+            var userSetting = new UserSetting();
+            userSetting.TechearMemberShipTest = techLics;
+
+            var _userSubscribtions = new UserSubscribtions();
+
+
+            if(techLics != null)
+            {
+                userSetting.User_Subscribtions.HasTeacherLic = true;
+
+                
+
+            } 
+
+            var mem = _db.MembershipCards.Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+
+            if(mem != null)
+            {
+                userSetting.User_Subscribtions.HasMemberShip = true;
+                var memC = _db.MembershipCards.Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+                userSetting.MemshipCard.Active = memC.Active;
+                userSetting.MemshipCard.ExpireDate = memC.ExpireDate.HasValue ? memC.ExpireDate.Value.ToShortDateString() : "";
+                userSetting.MemshipCard.Status = memC.Status;
+                userSetting.MemshipCard.Id = memC.CardId;
+            }                
+
+            return View(userSetting);
+
+        }
+
+        [Authorize]
+        public IActionResult UserProfileDetail(int? Id)
         {
             var userSetting = new UserSetting();
 
@@ -38,13 +91,20 @@ namespace yoga.Controllers
             string userId =  _userManager.GetUserId(User);
 
             //var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
-            var techLics = _db.TechearMemberShips.Include("AppUser").Where(m=>m.AppUser.Id == userId)
+            var techLics = _db.techearMemberShipTests
+            .Include(t=>t.TechearMemberShip)
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t=>t.TestId == Id)
             .SingleOrDefault();
 
             if(techLics != null)
             {
                 userSetting.User_Subscribtions.HasTeacherLic = true;
-                var tlic = _db.TechearMemberShips.Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+                var tlic = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Where(m=>m.TestId == Id)
+                .FirstOrDefault();
+
                 userSetting.TeacherLic.ExpireDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.TeacherLic.IssueDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.AddYears(-1).ToShortDateString() : "";
                 userSetting.TeacherLic.FinalApprove = tlic.FinalApprove;

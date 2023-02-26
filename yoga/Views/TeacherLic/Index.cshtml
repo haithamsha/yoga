@@ -1,6 +1,6 @@
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-@model IEnumerable<TechearMemberShip>
+@model IEnumerable<TechearMemberShipTest>
 @{
     ViewData["Title"] ="Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,13 +43,13 @@
                                     {
                                                 <tr>
                                                     <td class="cell">
-                                                @item.AppUser.FirstName  @item.AppUser.MiddleName @item.AppUser.LastName
+                                                @item.TechearMemberShip.AppUser.FirstName  @item.TechearMemberShip.AppUser.MiddleName @item.TechearMemberShip.AppUser.LastName
                                                     </td>
                                                     <td class="cell">
-                                                @item.ExpYears
+                                                @item.TechearMemberShip.ExpYears
                                                     </td>
                                                     <td class="cell">
-                                                @item.AccreditedHours
+                                                @item.TechearMemberShip.AccreditedHours
                                                     </td>
                                                     <td class="cell">
                                                 @item.TeachingType
@@ -100,7 +100,7 @@
                                                     <td>
                                                         <div class="w-75 btn-group" role="group">
                                                             <a class="btn-sm app-btn-secondary" asp-controller="TeacherLic" asp-action="Detail"
-                                                            asp-route-id="@item.MemId"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
+                                                            asp-route-id="@item.TestId"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
                                                         </div>
                                                     </td>
 
