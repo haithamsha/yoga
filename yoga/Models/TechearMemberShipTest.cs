@@ -31,5 +31,7 @@ namespace yoga.Models
         
         [NotMapped]
         public string TeachingType_string { get; set; }
+        [NotMapped]
+        public string UserName { get; set; }
     }
 }

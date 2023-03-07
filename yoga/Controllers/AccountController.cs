@@ -56,11 +56,13 @@ namespace yoga.Controllers
             var _userSubscribtions = new UserSubscribtions();
 
 
-            if(techLics != null)
+            if(techLics.Count > 0 )
             {
                 userSetting.User_Subscribtions.HasTeacherLic = true;
-
-                
+                foreach (var item in techLics)
+                {
+                    item.TeachingType_string = GlobalHelpers.getTeachingType(item.TeachingType);
+                }
 
             } 
 

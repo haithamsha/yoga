@@ -407,7 +407,7 @@ namespace yoga.Controllers
             .SingleOrDefault();
 
             obj.TechearMemberShip.EducationLevel_String = getEducationLevel((int)obj.TechearMemberShip.EducationLevel);
-            obj.TeachingType_string = getTeachingType(obj.TeachingType);
+            obj.TeachingType_string =GlobalHelpers.getTeachingType(obj.TeachingType);
             if (obj == null) return NotFound();
 
             return View(obj);
@@ -886,7 +886,7 @@ namespace yoga.Controllers
                 ExpYears = t.ExpYears,
                 AccreditedHours = t.AccreditedHours,
                 EducationLevel = getEducationLevel((int)t.EducationLevel),
-                TeachingType = getTeachingType((int)t.TeachingType),
+                TeachingType =GlobalHelpers.getTeachingType((int)t.TeachingType),
                 PayExamFees = t.PayExamFees == true ? "Yes" : "No",
                 PayLicFees = t.PayFees == true ? "Yes" : "No",
                 Status = getCurrentStatus(t.Status),
