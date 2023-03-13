@@ -695,7 +695,7 @@ namespace yoga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PayExamFees(IFormFile Receit)
+        public async Task<IActionResult> PayExamFees(IFormFile Receit, int TestId)
         {
             if (ModelState.IsValid)
             {
@@ -714,7 +714,7 @@ namespace yoga.Controllers
                 var tech = _db.techearMemberShipTests
                 .Include(t=>t.TechearMemberShip)
                 .Include(t=>t.TechearMemberShip.AppUser)
-                .Where(t => t.TechearMemberShip.AppUser.Id == userId)
+                .Where(t => t.TechearMemberShip.AppUser.Id == userId && t.TestId == TestId) 
                 .FirstOrDefault();
                 //tech.PayExamFees = true;
                 tech.ReceiptCopy = fileName_rec;
@@ -802,7 +802,7 @@ namespace yoga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PayLicFees(IFormFile Receit)
+        public async Task<IActionResult> PayLicFees(IFormFile Receit, int TestId)
         {
             if (ModelState.IsValid)
             {
@@ -820,7 +820,7 @@ namespace yoga.Controllers
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 var tech = _db.techearMemberShipTests
                 .Include(t=>t.TechearMemberShip)
-                .Where(t => t.TechearMemberShip.Id == userId)
+                .Where(t => t.TechearMemberShip.Id == userId && t.TestId == TestId)
                 .FirstOrDefault();
                 //tech.PayExamFees = true;
                 tech.ReceiptCopyLic = fileName_rec;

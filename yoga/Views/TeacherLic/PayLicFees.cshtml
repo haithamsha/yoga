@@ -31,6 +31,7 @@
             <input type="file" name="Receit" class="form-control" />
         </div>
         <div class="mb-3">
+            <input type="hidden" value='@(ViewContext.RouteData.Values["Id"])' name="TestId">
             <button class="btn btn-success" >Submit</button>
         </div>
 

@@ -145,7 +145,7 @@
 							{
 								@if (Model.TeacherLic.PayExamFees == false && string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopy))
 								{
-									<a class="btn btn-success" asp-controller="TeacherLic" asp-action="payexamfees">Pay The Exam
+									<a class="btn btn-success" asp-controller="TeacherLic" asp-action="payexamfees" asp-route-id='@ViewContext.RouteData.Values["Id"]'>Pay The Exam
 										Fees</a>
 								}
 							}
@@ -201,7 +201,7 @@
 									@if (Model.TeacherLic.PayFees == false && string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopyLic))
 									{
 										<div>
-											<a class="btn btn-success" asp-action="PayLicFees" asp-controller="TeacherLic">Pay
+											<a class="btn btn-success" asp-action="PayLicFees" asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]'>Pay
 												License Fees</a>
 										</div>
 									}
