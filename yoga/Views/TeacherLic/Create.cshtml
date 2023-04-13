@@ -35,10 +35,10 @@
                 <h2>Teacher Licence Issue</h2>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                    <li class="nav-item" id="li_Home">
                         <a class="nav-link active" data-bs-toggle="tab" id="liHome" href="#home">Basic Information</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" id="li_Exp">
                         <a class="nav-link" data-bs-toggle="tab" id="liProfile" href="#profile">Expreience</a>
                     </li>
                     @* <li class="nav-item"> *@
@@ -81,7 +81,7 @@
                         </div>
                         <div class="mb-3">
                             
-                            <select  data-placeholder="Select Teaching types"
+                            <select id="TeachingTypesList" data-placeholder="Select Teaching types"
                             multiple class="chosen-select form-control"
                             tabindex="8" asp-for="TeachingTypesList" asp-items="@Model.TeachingTypes">
                             </select>
@@ -200,6 +200,17 @@
         $( "#CertaficateDate").datepicker({
         dateFormat: "yy-mm-dd"
         });
+
+            $("#TeachingTypesList").change(function(){
+                //console.log("TeachingTypesList Val: ", $("#TeachingTypesList div ul li").text());
+               // console.log($(this).text());
+
+                $("#TeachingTypesList .chosen-container .chosen-choices").each(function () {
+                    var foo = $(this).find(".search-choice .search-choice-close").text();
+                    console.log('span value: ', foo);
+                });
+
+            });
 
         
     });
