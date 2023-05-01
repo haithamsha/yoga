@@ -15,6 +15,7 @@ namespace yoga.ViewModels
         public virtual TeacherLicStatusVM? TeacherLic { get; set; }
 
         public List<TechearMemberShipTest>? TechearMemberShipTest { get; set; }
+
         
     }
 }

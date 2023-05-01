@@ -498,12 +498,32 @@ namespace yoga.Controllers
             if(techLics != null)
             {
                 userSetting.User_Subscribtions.HasTeacherLic = true;
-                var tlic = _db.TechearMemberShips.Where(m=>m.AppUser.Id == userId).FirstOrDefault();
+                var tlic = _db.TechearMemberShips
+                .Include("TechearMemberShipTests")
+                .Where(m=>m.AppUser.Id == userId).FirstOrDefault();
                 userSetting.TeacherLic.ExpireDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.ToShortDateString() : "";
                 userSetting.TeacherLic.FinalApprove = tlic.FinalApprove;
                 userSetting.TeacherLic.Status = tlic.Status;
                 userSetting.TeacherLic.Serial = tlic.SerialNumber;
-                userSetting.TeacherLic.IssueDate = tlic.ExpireDate.HasValue ?   tlic.ExpireDate.Value.AddYears(-1).ToShortDateString() : "";
+                
+                var vmTestsList = new List<TechearMemberShipTestVM>();
+                if(tlic != null)
+                {
+                    vmTestsList = tlic.TechearMemberShipTests.Select(v => new TechearMemberShipTestVM {
+                    ExpireDate = v.ExpireDate.HasValue ?  v.ExpireDate.Value.ToShortDateString() : "",
+                    FinalApprove = v.FinalApprove,
+                    Status = v.Status,
+                    Serial = v.SerialNumber,
+                    TeachingType_String = GlobalHelpers.getTeachingType(v.TeachingType)
+
+                }).ToList();
+                }
+                
+                
+                
+
+                if(tlic != null)userSetting.TeacherLic.CreationDate = tlic.CertaficateDate.HasValue ? tlic.CertaficateDate.Value.ToShortDateString(): "";
+                if(tlic != null)userSetting.TeacherLic.TechearMemberShipTests = vmTestsList;
 
 
             } 

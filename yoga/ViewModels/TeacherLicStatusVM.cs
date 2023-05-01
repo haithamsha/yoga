@@ -2,6 +2,10 @@ namespace yoga.ViewModels
 {
     public class TeacherLicStatusVM
     {
+        public TeacherLicStatusVM()
+        {
+            TechearMemberShipTests = new List<TechearMemberShipTestVM>();
+        }
         public int Status { get; set; }
         public bool FinalApprove { get; set; }
         public string? ExpireDate { get; set; }
@@ -16,5 +20,6 @@ namespace yoga.ViewModels
         public string ExamLocation { get; set; }
         public string RejectReason { get; set; }
         public List<TechearMemberShipTestVM> TechearMemberShipTests { get; set; }
+        public string CreationDate { get; set; }
     }
 }

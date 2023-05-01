@@ -26,8 +26,15 @@ namespace yoga.Models
 
         public DateTime? ExpireDate { get; set; }
 
+        public int AccreditedHours { get; set; }
 
+        public string SchoolLocation { get; set; } = "";
 
+        public DateTime CertaficateDate { get; set; }
+        public string SchoolName { get; set; } = "";
+        public string SchoolLink { get; set; } = "";
+        public string? SchoolSocialMediaAccount { get; set; } = "";
+        public string? CertficateFiles { get; set; } = "d";
         
         [NotMapped]
         public string TeachingType_string { get; set; }

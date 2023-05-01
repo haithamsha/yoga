@@ -169,4 +169,8 @@
     <value>الحالية النهائية</value>
     <comment/>
   </data>
+  <data name="TestId" xml:space="preserve">
+    <value>رقم الطلب</value>
+    <comment/>
+  </data>
 </root>

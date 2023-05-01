@@ -27,6 +27,7 @@
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
+												<th>@localizer["RequestId"]</th>
                                                 <th>@localizer["UserName"]</th>
                                                 <th>@localizer["ExpYears"]</th>
                                                 <th>@localizer["AccreditedHours"]</th>
@@ -50,6 +51,9 @@
                                     @foreach (var item in Model.TechearMemberShipTest)
                                     {
                                                 <tr>
+													<td class="cell">
+														@item.TestId
+													</td>
                                                     <td class="cell">
                                                 @item.TechearMemberShip.AppUser.FirstName  @item.TechearMemberShip.AppUser.MiddleName @item.TechearMemberShip.AppUser.LastName
                                                     </td>
@@ -57,18 +61,18 @@
                                                 @item.TechearMemberShip.ExpYears
                                                     </td>
                                                     <td class="cell">
-                                                @item.TechearMemberShip.AccreditedHours
+                                                @item.AccreditedHours
                                                     </td>
                                                     <td class="cell">
                                                 @item.TeachingType_string
                                                     </td>
                                             @if (@item.PayFees == false)
                                             {
-                                                        <td class="cell">No</td>
+                                                        <td class="cell">Not Paid</td>
                                             }
                                             else
                                             {
-                                                        <td class="cell">Yes</td>
+                                                        <td class="cell">Paid</td>
                                             }
                                             @if (@item.Status == 2)
                                             {

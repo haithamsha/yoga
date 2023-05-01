@@ -14,17 +14,17 @@ namespace yoga.Models
         [Key]
         public int MemId { get; set; }
         public EducationLevelEnum EducationLevel { get; set; }
-        public string SocialMediaAccounts { get; set; } = "";
+        public string? SocialMediaAccounts { get; set; } = "";
         public string? PersonalWebSite { get; set; } = "";
         public int? TeachingType { get; set; }
         public int ExpYears { get; set; }
-        public int AccreditedHours { get; set; }
-        public string SchoolLocation { get; set; } = "";
-        public DateTime CertaficateDate { get; set; }
-        public string SchoolName { get; set; }
-        public string SchoolLink { get; set; } = "";
-        public string? SchoolSocialMediaAccount { get; set; } = "";
-        public string CertficateFiles { get; set; }
+        public int? AccreditedHours { get; set; } = 0;
+        public string? SchoolLocation { get; set; } = "d";
+        public DateTime? CertaficateDate { get; set; } = DateTime.Now;
+        public string? SchoolName { get; set; } = "d";
+        public string? SchoolLink { get; set; } = "d";
+        public string? SchoolSocialMediaAccount { get; set; } = "d";
+        public string? CertficateFiles { get; set; }= "f";
         public int Status { get; set; } = (int)StatusEnum.Pending;
         
         public string? ReceiptCopy { get; set; }

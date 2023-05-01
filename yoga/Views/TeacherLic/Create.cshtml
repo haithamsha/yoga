@@ -17,7 +17,7 @@
 
 
 <div class="d-lg-flex">
-    <partial name="_AdminMenu" />
+    @* <partial name="_AdminMenu" /> *@
     <div class="account-container account-details">
 
         <form method="post" enctype="multipart/form-data">
@@ -45,8 +45,8 @@
                     @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
                     @* </li> *@
                     @* <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#status">Status</a>
-                        </li> *@
+                    <a class="nav-link" data-bs-toggle="tab" href="#status">Status</a>
+                    </li> *@
 
                 </ul>
                 <div id="myTabContent" class="tab-content">
@@ -58,12 +58,12 @@
                                 asp-for="EducationLevel" asp-items="@Model.EducationLevels">
                             </select>
                             @* <select asp-for="EducationLevel"name="EducationLevel" id="EducationLevel"
-                                class="form-control">
-                                <option value="0">Select ...</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                </select> *@
+                            class="form-control">
+                            <option value="0">Select ...</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            </select> *@
                             <span asp-validation-for="EducationLevel" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
@@ -75,19 +75,18 @@
                             <label asp-for="PersonalWebSite"></label>
                             <input asp-for="PersonalWebSite" class="form-control" />
                         </div>
-                        <div class="mb-3">
+                        @* <div class="mb-3">
                             <label asp-for="TeachingType"></label>
                             <p>Note: You will have a test for each teaching type you select.</p>
-                        </div>
-                        <div class="mb-3">
-                            
-                            <select id="TeachingTypesList" data-placeholder="Select Teaching types"
-                            multiple class="chosen-select form-control"
-                            tabindex="8" asp-for="TeachingTypesList" asp-items="@Model.TeachingTypes">
-                            </select>
-                            <span asp-validation-for="TeachingTypesList" class="text-danger"></span>
+                        </div> *@
 
+
+                        <div class="mb-3">
+                            <label asp-for="ExpYears"></label>
+                            <input asp-for="ExpYears" class="form-control" />
+                            <span asp-validation-for="ExpYears" class="text-danger"></span>
                         </div>
+
                         @if (string.IsNullOrEmpty(imagePath))
                         {
                             <div class="mb-3">
@@ -108,59 +107,119 @@
 
                     </div>
                     <div class="tab-pane fade" id="profile">
-                        <div class="mb-3">
-                            <label asp-for="ExpYears"></label>
-                            <input asp-for="ExpYears" class="form-control" />
-                            <span asp-validation-for="ExpYears" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="AccreditedHours"></label>
-                            <input asp-for="AccreditedHours" class="form-control" />
-                            <span asp-validation-for="AccreditedHours" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="SchoolLocation"></label>
-                            <input asp-for="SchoolLocation" class="form-control" />
-                            <span asp-validation-for="SchoolLocation" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="CertaficateDate"></label>(<span class="fw-bold">@localizer["certNote"]</span>)
-                            <input type="text"  asp-for="CertaficateDate" asp-format="yyyy-mm-dd"
-                                class="form-control" />
-                            <span asp-validation-for="CertaficateDate" class="text-danger"></span>
-                            
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="SchoolName"></label>
-                            <input asp-for="SchoolName" class="form-control" />
-                            <span asp-validation-for="SchoolName" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="SchoolLink"></label>
-                            <input asp-for="SchoolLink" class="form-control" />
-                            <span asp-validation-for="SchoolLink" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="SchoolSocialMediaAccount"></label>
-                            <input asp-for="SchoolSocialMediaAccount" class="form-control" />
-                            <span asp-validation-for="SchoolSocialMediaAccount" class="text-danger"></span>
-                        </div>
-                        <div class="mb-3">
-                            <label asp-for="CertficateFiles"></label>
-                            <input id="CertficateFiles" type="file" multiple asp-for="CertficateFiles"
-                                class="form-control" />
-                            <span asp-validation-for="CertficateFiles" class="text-danger"></span>
-                            <span>You can select more than file.</span>
-                        </div>
-                        <div class="mb-3">
-                            <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree on
-                                Terms and Conditions and
-                                Acknowledged</span>
+                        <table id="ExpTable">
+                            <thead>
+                                <tr>
+                                    <th>Teaching Type</th>
+                                    <th>Accredited Hours</th>
+                                    <th>School Location</th>
+                                    <th>Certaficate Date</th>
+                                    <th>School Name</th>
+                                    <th>School link</th>
+                                    <th>School Social MediaA ccount</th>
+                                    <th>Certificate File</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.TechearMemberShipTestVMs.Count; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            @* <label>You can add multi experience</label> *@
+                                            <select id="TeachingTypesList" class="form-control"
+                                                data-placeholder="Select Teaching types" asp-for="@Model.TechearMemberShipTestVMs[i].TeachingType"
+                                            asp-items="@Model.TeachingTypes">
+                                            </select>
+                                            @* <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].TeachingType" class="text-danger"></span> *@
+
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="AccreditedHours"></label> *@
+                                            @* <input asp-for="AccreditedHours" id="AccreditedHours" class="form-control" />
+                                        *@
+                                            @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].AccreditedHours,
+                                        new {htmlAttributes = new {@class = "form-control"}})
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].AccreditedHours" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="SchoolLocation"></label> *@
+                                            @* <input asp-for="SchoolLocation" id="SchoolLocation" class="form-control" />
+                                        *@
+                                            @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].SchoolLocation,
+                                        new {htmlAttributes = new {@class = "form-control"}})
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolLocation" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="CertaficateDate"></label> *@
+                                            <input type="text" asp-for="TechearMemberShipTestVMs[i].CertaficateDate" asp-format="yyyy-mm-dd"
+                                        class="form-control CertaficateDate"  />
+
+                                            
+
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].CertaficateDate" class="text-danger"></span>
+                                            @* <span class="fw-bold">@localizer["certNote"]</span> *@
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="SchoolName"></label> *@
+                                            @* <input asp-for="SchoolName" id="SchoolName" class="form-control" /> *@
+                                            @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].SchoolName,
+                                        new {htmlAttributes = new {@class = "form-control"}})
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolName" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="SchoolLink"></label> *@
+                                            @* <input asp-for="SchoolLink" id="SchoolLink" class="form-control" /> *@
+                                            @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].SchoolLink,
+                                        new {htmlAttributes = new {@class = "form-control"}})
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolLink" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="SchoolSocialMediaAccount"></label> *@
+                                            @* <input asp-for="SchoolSocialMediaAccount" id="SchoolSocialMediaAccount"
+                                        class="form-control" /> *@
+                                            @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].SchoolSocialMediaAccount,
+                                        new {htmlAttributes = new {@class = "form-control"}})
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolSocialMediaAccount" class="text-danger"></span>
+                                        </td>
+                                        <td>
+                                            @* <label asp-for="CertficateFiles"></label> *@
+                                            <input id="CertficateFiles" type="file" 
+                                            asp-for="CertficateFiles" class="form-control"/>
+                                            @* @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].CertficateFiles,
+                                        new {htmlAttributes = new {@class = "form-control"}}) *@
+
+                                            @* <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].CertficateFiles" class="text-danger"></span> *@
+
+                                        </td>
+                                        <td>
+                                            <button onclick="AddItem(this)" id="btnAdd-@i" type="button"
+                                                class="visible">Add</button>
+                                            <button id="btnRemove-@i" type="button" onclick="DeleteItem(this)"
+                                                class="invisible">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <input type="hidden" id="hdnLastIndex" value="0">
+
+                        <div class="row">
+
+
+                            <div class="mb-3">
+                                <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree
+                                    on
+                                    Terms and Conditions and
+                                    Acknowledged</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <button type="submit" id="btnSubmit"
+                                    class="btn btn-brown-outline about-btn">Submit</button>
+                              
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-brown-outline about-btn">Submit</button>
-                        </div>
                     </div>
 
                 </div>
@@ -178,32 +237,25 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="~/assets/js/jquery-3.6.0.js"></script>
+    <script src="~/assets/js/jquery-ui.js"></script>
     <script src="~/chosen_v1.8.7/chosen.jquery.js" type="text/javascript"></script>
-  <script src="~/chosen_v1.8.7/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+    <script src="~/chosen_v1.8.7/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 
-<script>
-    $(function(){
-        $( "#CertaficateDate").datepicker({
-        dateFormat: "yy-mm-dd"
-        });
+    <script>
+        $(function () {
+            $(".CertaficateDate").datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                clearBtn: true
+            });
 
-            $("#TeachingTypesList").change(function(){
+            $("#TeachingTypesList").change(function () {
                 //console.log("TeachingTypesList Val: ", $("#TeachingTypesList div ul li").text());
-               // console.log($(this).text());
+                // console.log($(this).text());
 
                 $("#TeachingTypesList .chosen-container .chosen-choices").each(function () {
                     var foo = $(this).find(".search-choice .search-choice-close").text();
@@ -212,11 +264,70 @@
 
             });
 
-        
-    });
 
-    
+            var TechearMemberShipTest = {};
+            var TechearMemberShipTests = [];
 
-</script>
+
+            $("#tblExp").on("click", "#btnDel", function () {
+                if (confirm('Are you sure to delete this certificate data?')) {
+                    $(this).closest("tr").remove();
+                }
+            });
+
+
+
+
+
+
+        });
+
+        function AddItem(btn) {
+
+            $(".CertaficateDate").datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                clearBtn: true
+            });
+            
+            var table = document.getElementById("ExpTable");
+            var rows = table.getElementsByTagName("tr")
+            var rowOuterHtml = rows[rows.length - 1].outerHTML;
+
+            var lastrowIdx = document.getElementById('hdnLastIndex').value;
+
+            var nextrowIdx = eval(lastrowIdx) + 1;
+
+            document.getElementById('hdnLastIndex').value = nextrowIdx;
+
+
+            rowOuterHtml = rowOuterHtml.replaceAll('_' + lastrowIdx + '_', '_' + nextrowIdx + '_');
+            rowOuterHtml = rowOuterHtml.replaceAll('[' + lastrowIdx + ']', '[' + nextrowIdx + ']');
+            rowOuterHtml = rowOuterHtml.replaceAll('-' + lastrowIdx, '-' + nextrowIdx);
+
+            var newRow = table.insertRow();
+            newRow.innerHTML = rowOuterHtml;
+
+            var btnAddID = btn.id;
+            var btnDeleteid = btnAddID.replaceAll('btnAdd', 'btnRemove');
+            var delbtn = document.getElementById(btnDeleteid);
+            delbtn.classList.add('visible');
+            delbtn.classList.remove('invisible');
+
+            var addbtn = document.getElementById(btnAddID);
+            addbtn.classList.remove('visible');
+            addbtn.classList.add('invisible');
+        }
+
+        function DeleteItem(btn)
+        {
+            $(btn).closest('tr').remove();
+        }
+
+
+
+
+
+    </script>
 
 }

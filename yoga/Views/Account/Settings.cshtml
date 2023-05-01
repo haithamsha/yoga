@@ -54,7 +54,7 @@
                 <p>You have no any Subscriptions</p>
             }
         </div>
-        
+        <div>Teacher Licences</div>
         <table class="table">
             <thead>
                 <tr>
@@ -68,22 +68,26 @@
             <tbody>
                 @if(Model.User_Subscribtions.HasTeacherLic)
                 {
-                    <tr>
-                    <td>Teacher Licence</td>
-                    <td>@Model.TeacherLic.IssueDate</td>
-                    <td>@Model.TeacherLic.ExpireDate</td>
-                    @if (Model.TeacherLic.FinalApprove)
+                    @foreach (var item in Model.TeacherLic.TechearMemberShipTests)
                     {
-                        <td class="col approved">Active</td>
+                        <tr>
+                            <td>@item.TeachingType_String</td>
+                            <td>@Model.TeacherLic.CreationDate</td>
+                            <td>@item.ExpireDate</td>
+                            @if (@item.FinalApprove)
+                            {
+                                <td class="col approved">Active</td>
+                            }
+                            else
+                            {
+                                <td class="col pending">Not Active</td>
+                            }
+                            <td>
+                                <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">Download</a>
+                            </td>
+                        </tr>
                     }
-                    else
-                    {
-                        <td class="col pending">Not Active</td>
-                    }
-                    <td>
-                        <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">Download</a>
-                    </td>
-                    </tr>
+                    
                 }
                 @if(Model.User_Subscribtions.HasMemberShip)
                 {

@@ -42,9 +42,17 @@ namespace yoga.Controllers
             return View(obj);
         }
 
-        public IActionResult Index()
+        public IActionResult PreIndex()
+        {
+            IEnumerable<TechearMemberShip> lics = _db.TechearMemberShips
+            .Include("TechearMemberShipTests")
+            .Include(t=>t.AppUser);
+            return View(lics);
+        }
+        public IActionResult Index(int MemId)
         {
             IEnumerable<TechearMemberShipTest> lics = _db.techearMemberShipTests
+            .Where(m=>m.MemId == MemId)
             .Include("TechearMemberShip")
             .Include(t=>t.TechearMemberShip.AppUser);
             return View(lics);
@@ -79,7 +87,7 @@ namespace yoga.Controllers
             return levels;
         }
 
-        private List<SelectListItem> getTeachingTypes()
+        public List<SelectListItem> getTeachingTypes()
         {
             List<SelectListItem> t_Types = new List<SelectListItem>();
             // t_Types.Add(new SelectListItem
@@ -136,15 +144,18 @@ namespace yoga.Controllers
         [Authorize]
         public IActionResult Create()
         {
-            var member = IfTeacherExists();
+            var member = IfTeacherExists(0);
             if (member != null) return View(member);
             var vm = new TechearMemberShipVM();
             vm.EducationLevels = getEducationLevels();
             vm.TeachingTypes = getTeachingTypes();
-            if (ViewData["SavedFiles"] != null)
-            {
-                vm.CertficateFiles = ViewData["SavedFiles"].ToString();
-            }
+            ViewBag.TeachingTypes = getTeachingTypes();
+            
+            // if (ViewData["SavedFiles"] != null)
+            // {
+            //     vm.CertficateFiles = ViewData["SavedFiles"].ToString();
+            // }
+            vm.TechearMemberShipTestVMs.Add(new TechearMemberShipTestVM{ExamDetails = "", AccreditedHours = 0});
             return View(vm);
         }
 
@@ -152,7 +163,7 @@ namespace yoga.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create(TechearMemberShipVM obj, List<IFormFile> CertficateFiles,
+        public async Task<IActionResult> Create(TechearMemberShipVM obj, IFormFile CertficateFiles,
         IFormFile Image, string[] TeachingTypesList)
         {
             ModelState.Remove("ReceiptCopy");
@@ -167,13 +178,19 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             ModelState.Remove("TeachingType");
             obj.Name = "tst";
-
-            if (TeachingTypesList.Count() == 0)
+            foreach (var item in obj.TechearMemberShipTestVMs)
             {
-                obj.EducationLevels = getEducationLevels();
-                obj.TeachingTypes = getTeachingTypes();
-                ModelState.AddModelError("TeachingType", " Teaching Type is required");
+                ModelState.Remove("ExamDetails");
+                ModelState.Remove("TeachingTypes");
+                ModelState.Remove("TeachingTypesList");
             }
+
+            // if (TeachingTypesList.Count() == 0)
+            // {
+            //     obj.EducationLevels = getEducationLevels();
+            //     obj.TeachingTypes = getTeachingTypes();
+            //     ModelState.AddModelError("TeachingType", " Teaching Type is required");
+            // }
             if (obj.EducationLevel == 0)
             {
                 obj.EducationLevels = getEducationLevels();
@@ -191,28 +208,7 @@ namespace yoga.Controllers
                     return View(obj);
                 }
 
-                // Upload images
-                string fileName_cert = "";
-
-                List<string> uploadFiles = new List<string>();
-
-                if (CertficateFiles != null && CertficateFiles.Count > 0)
-                {
-                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
-                        "wwwroot/assets", "images");
-
-                    foreach (IFormFile item in CertficateFiles)
-                    {
-                        fileName_cert = Path.GetFileName(item.FileName);
-                        using (var fileSrteam = new FileStream(Path.Combine(filePath_cert, fileName_cert), FileMode.Create))
-                        {
-                            // await CertficateFiles.CopyToAsync(fileSrteam);
-                            item.CopyTo(fileSrteam);
-                            uploadFiles.Add(fileName_cert);
-                        }
-                    }
-
-                }
+                
 
 
                 // get logened user
@@ -263,18 +259,39 @@ namespace yoga.Controllers
                 entity.PersonalWebSite = obj.PersonalWebSite;
                 if(entity.TeachingType != null) entity.TeachingType = obj.TeachingType.Value;
                 entity.ExpYears = obj.ExpYears.Value;
-                entity.AccreditedHours = obj.AccreditedHours.Value;
-                entity.SchoolLocation = obj.SchoolLocation;
-                entity.CertaficateDate = obj.CertaficateDate.Value;
-                entity.SchoolName = obj.SchoolName;
-                entity.SchoolLink = obj.SchoolLink;
-                entity.SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount;
-                entity.CertficateFiles = uploadFiles == null ? "" : string.Join(",", uploadFiles);
+                
+                //entity.CertficateFiles = uploadFiles == null ? "" : string.Join(",", uploadFiles);
                 entity.Name = obj.Name;
 
-                foreach (var item in TeachingTypesList)
+                foreach (var item in obj.TechearMemberShipTestVMs)
                 {
-                    entity.TechearMemberShipTests.Add(new TechearMemberShipTest{TeachingType = int.Parse(item)});
+                    // Upload images
+                string fileName_cert = "";
+
+                List<string> uploadFiles = new List<string>();
+
+                if (CertficateFiles != null)
+                {
+                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot/assets", "images");
+                    IFormFile fileItem = CertficateFiles;
+
+                    fileName_cert = Path.GetFileName(fileItem.FileName);
+                    using (var fileSrteam = new FileStream(Path.Combine(filePath_cert, fileName_cert), FileMode.Create))
+                    {
+                        // await CertficateFiles.CopyToAsync(fileSrteam);
+                        fileItem.CopyTo(fileSrteam);
+                        uploadFiles.Add(fileName_cert);
+                    }
+
+                }
+
+                    entity.TechearMemberShipTests.Add(new TechearMemberShipTest{TeachingType = item.TeachingType.Value,
+                    AccreditedHours = item.AccreditedHours, CertaficateDate = item.CertaficateDate, CertficateFiles = fileName_cert,
+                    SchoolLocation =  item.SchoolLocation, SchoolName = item.SchoolName, SchoolLink = item.SchoolLink, 
+                    SchoolSocialMediaAccount = item.SchoolSocialMediaAccount});
+
+                
                 }
                 
                 _db.TechearMemberShips.Add(entity); 
@@ -323,19 +340,31 @@ namespace yoga.Controllers
             return View(obj);
         }
 
+
+        [HttpPost]
+        public JsonResult createAjax(TestVM testVM)
+        {
+            return Json(testVM);
+        }
+
         public IActionResult DataSaved()
         {
             return View();
         }
 
-        private TechearMemberShip? IfTeacherExists()
+        private TechearMemberShipTest? IfTeacherExists(int testId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId)) return null;
 
-            var member = _db.TechearMemberShips.Where(t => t.AppUser.Id == userId).FirstOrDefault();
+            var member = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Where(t => t.TechearMemberShip.Id == userId && t.TestId == testId)
+                .FirstOrDefault();
             if (member != null) return member;
             return null;
+
+            
         }
 
         static string getEducationLevel(int levelId)
@@ -896,7 +925,7 @@ namespace yoga.Controllers
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
                 PersonalWebSite = t.PersonalWebSite,
                 SchoolLocation = t.SchoolLocation,
-                CertaficateDate = t.CertaficateDate.ToShortDateString(),
+                CertaficateDate = t.CertaficateDate.Value.ToShortDateString(),
                 SchoolName = t.SchoolName,
                 SchoolLink = t.SchoolLink,
                 SocialMediaAccounts = t.SocialMediaAccounts,
@@ -936,7 +965,7 @@ namespace yoga.Controllers
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
                 PersonalWebSite = t.PersonalWebSite,
                 SchoolLocation = t.SchoolLocation,
-                CertaficateDate = t.CertaficateDate.ToShortDateString(),
+                CertaficateDate = t.CertaficateDate.Value.ToShortDateString(),
                 SchoolName = t.SchoolName,
                 SchoolLink = t.SchoolLink,
                 SocialMediaAccounts = t.SocialMediaAccounts,
@@ -1026,9 +1055,9 @@ namespace yoga.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit()
+        public IActionResult Edit(int Id)
         {
-            var member = IfTeacherExists();
+            var member = IfTeacherExists(Id);
             if (member == null) throw new Exception("Teacher Not Found!");
             var vm = new TechearMemberShip_EditVM();
             vm.EducationLevels = getEducationLevels();
@@ -1036,10 +1065,10 @@ namespace yoga.Controllers
             vm.AccreditedHours = member.AccreditedHours;
             vm.CertaficateDate = member.CertaficateDate;
             vm.CertficateFiles = member.CertficateFiles;
-            vm.EducationLevel = (int)member.EducationLevel;
+            vm.EducationLevel = (int)member.TechearMemberShip.EducationLevel;
             vm.ExamDetails = !string.IsNullOrEmpty(member.ExamLocation) ? member.ExamLocation : "";
-            vm.ExpYears = member.ExpYears;
-            vm.PersonalWebSite = member.PersonalWebSite;
+            vm.ExpYears = member.TechearMemberShip.ExpYears;
+            vm.PersonalWebSite = member.TechearMemberShip.PersonalWebSite;
             vm.SchoolLink = member.SchoolLink;
             vm.SchoolLocation = member.SchoolLocation;
             vm.SchoolName = member.SchoolName;
@@ -1065,7 +1094,7 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             obj.Name = "tst";
 
-            var member = IfTeacherExists();
+            var member = IfTeacherExists(int.Parse(RouteData.Values["Id"].ToString()));
 
             // if(obj.TeachingType == 0)
             // {
@@ -1115,13 +1144,18 @@ namespace yoga.Controllers
                     return View(obj);
                 }
 
-                var entity = _db.TechearMemberShips.Where(m => m.MemId == member.MemId).FirstOrDefault();
+                var entity = _db.techearMemberShipTests
+                .Include(t=>t.TechearMemberShip)
+                .Where(m => m.TestId == member.TestId)
+                .FirstOrDefault();
 
-                entity.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
-                entity.SocialMediaAccounts = obj.SocialMediaAccounts;
-                entity.PersonalWebSite = obj.PersonalWebSite;
+                
+
+                entity.TechearMemberShip.EducationLevel = (EducationLevelEnum)obj.EducationLevel;
+                entity.TechearMemberShip.SocialMediaAccounts = obj.SocialMediaAccounts;
+                entity.TechearMemberShip.PersonalWebSite = obj.PersonalWebSite;
                 entity.TeachingType = obj.TeachingType.Value;
-                entity.ExpYears = obj.ExpYears.Value;
+                entity.TechearMemberShip.ExpYears = obj.ExpYears.Value;
                 entity.AccreditedHours = obj.AccreditedHours.Value;
                 entity.SchoolLocation = obj.SchoolLocation;
                 entity.CertaficateDate = obj.CertaficateDate.Value;
@@ -1129,13 +1163,13 @@ namespace yoga.Controllers
                 entity.SchoolLink = obj.SchoolLink;
                 entity.SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount;
                 entity.CertficateFiles = string.IsNullOrEmpty(CertficateFiles?.FileName) ? "" : CertficateFiles.FileName;
-                entity.Name = obj.Name;
+                entity.TechearMemberShip.Name = obj.Name;
                 entity.Status = (int)StatusEnum.Pending;
 
-                _db.TechearMemberShips.Update(entity);
+                _db.techearMemberShipTests.Update(entity);
                 int rowAffect = _db.SaveChanges();
                 // add notification
-                if (rowAffect == 1)
+                if (rowAffect == 1 || rowAffect > 1)
                 {
                     _notificationHelper.AddNotify(new Notification
                     {
