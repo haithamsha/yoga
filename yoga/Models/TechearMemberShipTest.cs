@@ -7,8 +7,11 @@ namespace yoga.Models
     {
         [Key]
         public int TestId { get; set; }
-        public TechearMemberShip TechearMemberShip { get; set; }
+       
         public int MemId { get; set; }
+
+        public TechearMemberShip TechearMemberShip { get; set; }
+
         public int TeachingType { get; set; }
         public int Status { get; set; } = (int)StatusEnum.Pending;
         public string? ReceiptCopy { get; set; }

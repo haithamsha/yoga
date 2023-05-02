@@ -49,12 +49,19 @@ namespace yoga.Controllers
             .Include(t=>t.AppUser);
             return View(lics);
         }
-        public IActionResult Index(int MemId)
+        public IActionResult Index(int Id)
         {
             IEnumerable<TechearMemberShipTest> lics = _db.techearMemberShipTests
-            .Where(m=>m.MemId == MemId)
             .Include("TechearMemberShip")
-            .Include(t=>t.TechearMemberShip.AppUser);
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(m=>m.TechearMemberShip.MemId == Id)
+            .ToList();
+
+            foreach (var item in lics)
+            {
+                item.TeachingType_string = GlobalHelpers.getTeachingType(item.TeachingType);
+                //item.MemId = 
+            }
             return View(lics);
         }
 

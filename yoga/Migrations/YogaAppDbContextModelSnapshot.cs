@@ -283,7 +283,7 @@ namespace yoga.Migrations
 
                     b.HasKey("CountryId");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("yoga.Models.MembershipCard", b =>
@@ -323,7 +323,7 @@ namespace yoga.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("MembershipCards");
+                    b.ToTable("MembershipCards", (string)null);
                 });
 
             modelBuilder.Entity("yoga.Models.Notification", b =>
@@ -353,7 +353,7 @@ namespace yoga.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("Notification");
+                    b.ToTable("Notification", (string)null);
                 });
 
             modelBuilder.Entity("yoga.Models.Platform", b =>
@@ -393,7 +393,7 @@ namespace yoga.Migrations
 
                     b.HasKey("PlatformId");
 
-                    b.ToTable("Platforms");
+                    b.ToTable("Platforms", (string)null);
                 });
 
             modelBuilder.Entity("yoga.Models.TechearMemberShip", b =>
@@ -498,7 +498,7 @@ namespace yoga.Migrations
 
                     b.HasIndex("AppUserId");
 
-                    b.ToTable("TechearMemberShips");
+                    b.ToTable("TechearMemberShips", (string)null);
                 });
 
             modelBuilder.Entity("yoga.Models.TechearMemberShipTest", b =>
@@ -586,7 +586,7 @@ namespace yoga.Migrations
 
                     b.HasIndex("TechearMemberShipMemId");
 
-                    b.ToTable("techearMemberShipTests");
+                    b.ToTable("techearMemberShipTests", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
