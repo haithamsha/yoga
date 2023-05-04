@@ -162,7 +162,7 @@ namespace yoga.Controllers
             // {
             //     vm.CertficateFiles = ViewData["SavedFiles"].ToString();
             // }
-            vm.TechearMemberShipTestVMs.Add(new TechearMemberShipTestVM{ExamDetails = "", AccreditedHours = 0});
+            vm.TechearMemberShipTestVMs.Add(new TechearMemberShipTestVM{TestId=1,ExamDetails = "", AccreditedHours = 0});
             return View(vm);
         }
 
@@ -1007,26 +1007,33 @@ namespace yoga.Controllers
             return View();
         }
 
-        public IActionResult ExportToExcel()
+        public IActionResult ExportToExcel(int Id)
         {
-            var result = _db.TechearMemberShips
-            .Include("AppUser")
+            
+            // var result = _db.techearMemberShipTests
+            // .Include("TechearMemberShip")
+            // .Include(t=>t.TechearMemberShip.AppUser)
+            // .Where(m=>m.TechearMemberShip.MemId == Id)
+            // .ToList();
+
+            var result = _db.techearMemberShipTests
+            .Include("TechearMemberShip")
             .Select(t => new
             {
-                UserId = t.MemId,
-                FirstName = t.AppUser.FirstName,
-                MiddleName = t.AppUser.MiddleName,
-                LastName = t.AppUser.LastName,
-                Phone = t.AppUser.PhoneNumber,
-                Email = t.AppUser.Email,
-                Nationality = t.AppUser.Country.EnName,
+                UserId = t.TestId,
+                FirstName = t.TechearMemberShip.AppUser.FirstName,
+                MiddleName = t.TechearMemberShip.AppUser.MiddleName,
+                LastName = t.TechearMemberShip.AppUser.LastName,
+                Phone = t.TechearMemberShip.AppUser.PhoneNumber,
+                Email = t.TechearMemberShip.AppUser.Email,
+                Nationality = t.TechearMemberShip.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
-                ExperienceYears = t.ExpYears,
+                ExperienceYears = t.TechearMemberShip.ExpYears,
                 AccreditedHours = t.AccreditedHours,
-                EducationLevel = getEducationLevel((int)t.EducationLevel),
+                EducationLevel = getEducationLevel((int)t.TechearMemberShip.EducationLevel),
                 TeachingType = getTeachingType((int)t.TeachingType),
-                PayExamFees = t.PayExamFees == true ? "Yes" : "No",
-                PayLicFees = t.PayFees == true ? "Yes" : "No",
+                PayExamFees = t.PayExamFees == true ? "Paid" : "Not Paid",
+                PayLicFees = t.PayFees == true ? "Paid" : "Not Paid",
                 Status = getCurrentStatus(t.Status),
                 FinalApprove = t.FinalApprove == false ? "Pending" : "Approved",
                 CurrentInformationStatus = getCurrentStatus(t.Status),
@@ -1035,6 +1042,8 @@ namespace yoga.Controllers
             })
             .ToList();
             var stream = new MemoryStream();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (var package = new ExcelPackage(stream))
             {

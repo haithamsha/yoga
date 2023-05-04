@@ -32,6 +32,7 @@
                                                 <th>@localizer["ExpYears"]</th>
                                                 <th>@localizer["AccreditedHours"]</th>
                                                 <th>@localizer["TeachingType"]</th>
+												<th>@localizer["PayeExamFees"]</th>
                                                 <th>@localizer["PayFees"]</th>
                                                 <th>@localizer["Status"]-Info</th>
                                                 <th>@localizer["FinalApprove"]</th>
@@ -66,6 +67,14 @@
                                                     <td class="cell">
                                                 @item.TeachingType_string
                                                     </td>
+                                            @if (@item.PayExamFees == false)
+                                            {
+                                                        <td class="cell">Not Paid</td>
+                                            }
+                                            else
+                                            {
+                                                        <td class="cell">Paid</td>
+                                            }
                                             @if (@item.PayFees == false)
                                             {
                                                         <td class="cell">Not Paid</td>

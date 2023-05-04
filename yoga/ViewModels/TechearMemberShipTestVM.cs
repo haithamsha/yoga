@@ -5,6 +5,7 @@ namespace yoga.ViewModels
 {
     public class TechearMemberShipTestVM
     {
+        public int? TestId { get; set; }
         [Required(ErrorMessage = "Teaching Type Is Required")]
         public int? TeachingType { get; set; }
 

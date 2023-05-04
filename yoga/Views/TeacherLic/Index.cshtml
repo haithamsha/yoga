@@ -14,7 +14,7 @@
                 <div class="account-container account-details">
                     @* <h2 class="header page-header">@localizer["PageTitle"]</h2> *@
                     <h2 class="header page-header">Teacher Licences</h2>
-                    <a asp-controller="TeacherLic" asp-action="ExportToExcel">@localizer["Export"]</a>
+                    <a asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]' asp-action="ExportToExcel">@localizer["Export"]</a>
 
 					<div class="table-responsive">
 							        <table class="table app-table-hover mb-0 text-left">
@@ -25,7 +25,8 @@
                                                 <th>@localizer["ExpYears"]</th>
                                                 <th>@localizer["AccreditedHours"]</th>
                                                 <th>@localizer["TeachingType"]</th>
-                                                <th>@localizer["PayFees"]</th>
+                                                <th>@localizer["PayTestFees"]</th>
+                                                <th>@localizer["PayLicenceFees"]</th>
                                                 <th>@localizer["Status"]</th>
                                                 <th>@localizer["FinalApprove"]</th>
                                                 <th>@localizer["Actions"]</th>
@@ -59,13 +60,21 @@
                                                     <td class="cell">
                                                 @item.TeachingType_string
                                                     </td>
-                                            @if (@item.PayFees == false)
+                                            @if (@item.PayExamFees == false)
                                             {
-                                                        <td class="cell">No</td>
+                                                        <td class="cell">Not Paid</td>
                                             }
                                             else
                                             {
-                                                        <td class="cell">Yes</td>
+                                                        <td class="cell">Paid</td>
+                                            }
+                                            @if (@item.PayFees == false)
+                                            {
+                                                        <td class="cell">Not Paid</td>
+                                            }
+                                            else
+                                            {
+                                                        <td class="cell">Paid</td>
                                             }
                                             @if (@item.Status == 2)
                                             {

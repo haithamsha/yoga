@@ -151,12 +151,14 @@
                                         </td>
                                         <td>
                                             @* <label asp-for="CertaficateDate"></label> *@
-                                            <input type="text" asp-for="TechearMemberShipTestVMs[i].CertaficateDate" asp-format="yyyy-mm-dd"
+                                            <input type="text" id="CertaficateDate_@Model.TechearMemberShipTestVMs[i]"
+                                            asp-for="TechearMemberShipTestVMs[i].CertaficateDate" asp-format="yyyy-mm-dd"
                                         class="form-control CertaficateDate"  />
 
                                             
 
-                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].CertaficateDate" class="text-danger"></span>
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].CertaficateDate"
+                                             class="text-danger"></span>
                                             @* <span class="fw-bold">@localizer["certNote"]</span> *@
                                         </td>
                                         <td>
@@ -247,11 +249,29 @@
 
     <script>
         $(function () {
-            $(".CertaficateDate").datepicker({
-                format: "yyyy-mm-dd",
-                autoclose: true,
-                clearBtn: true
+    
+            /* $('.CertaficateDate').each(function() {
+                $(this).datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true,
+                    clearBtn: true
+                });
+            }); */
+
+            $("input[id*='CertaficateDate_']").datepicker("option", "dateFormat", "yyy-mm-dd");
+            $("input[id*='CertaficateDate_']").datepicker({
+                changeMonth: true,
+                changeYear: true
             });
+            $("input[id*='CertaficateDate_']").change(function(){
+                var date = $(this).val();
+                $("input[id*='CertaficateDate_']").each(function(){
+                    $(this).val(date);
+                    $(this).datepicker();
+                })
+            });
+            
+            
 
             $("#TeachingTypesList").change(function () {
                 //console.log("TeachingTypesList Val: ", $("#TeachingTypesList div ul li").text());
@@ -275,21 +295,23 @@
                 }
             });
 
-
-
-
-
-
         });
+
+        @* function SelectDate(btn) {
+            var txtSelectDate = btn.id;
+            var selectTxt = document.getElementById(txtSelectDate);
+
+            console.log(txtSelectDate);
+            //$("sdfsdfksdfhsdfhsdf ")
+            $('#' + txtSelectDate).datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true,
+                clearBtn: false
+            });
+        } *@
 
         function AddItem(btn) {
 
-            $(".CertaficateDate").datepicker({
-                format: "yyyy-mm-dd",
-                autoclose: true,
-                clearBtn: true
-            });
-            
             var table = document.getElementById("ExpTable");
             var rows = table.getElementsByTagName("tr")
             var rowOuterHtml = rows[rows.length - 1].outerHTML;
@@ -323,10 +345,6 @@
         {
             $(btn).closest('tr').remove();
         }
-
-
-
-
 
     </script>
 
