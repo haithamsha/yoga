@@ -151,9 +151,11 @@
                                         </td>
                                         <td>
                                             @* <label asp-for="CertaficateDate"></label> *@
-                                            <input type="text" id="CertaficateDate_@Model.TechearMemberShipTestVMs[i]"
+                                            <div class="saveCanInput EventDateInput">
+                                                <input type="date" 
                                             asp-for="TechearMemberShipTestVMs[i].CertaficateDate" asp-format="yyyy-mm-dd"
-                                        class="form-control CertaficateDate"  />
+                                        class="form-control Datepicker" />
+                                            </div>
 
                                             
 
@@ -250,26 +252,10 @@
     <script>
         $(function () {
     
-            /* $('.CertaficateDate').each(function() {
-                $(this).datepicker({
-                    format: "yyyy-mm-dd",
-                    autoclose: true,
-                    clearBtn: true
-                });
-            }); */
+            
+            
 
-            $("input[id*='CertaficateDate_']").datepicker("option", "dateFormat", "yyy-mm-dd");
-            $("input[id*='CertaficateDate_']").datepicker({
-                changeMonth: true,
-                changeYear: true
-            });
-            $("input[id*='CertaficateDate_']").change(function(){
-                var date = $(this).val();
-                $("input[id*='CertaficateDate_']").each(function(){
-                    $(this).val(date);
-                    $(this).datepicker();
-                })
-            });
+           
             
             
 
