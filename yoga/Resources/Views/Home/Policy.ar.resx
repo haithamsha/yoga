@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PageTitle" xml:space="preserve">
+    <value>سياسة استخدام موقع اللجنة السعودية لليوغا اللكتروني:</value>
+    <comment/>
+  </data>
+  <data name="desc" xml:space="preserve">
+    <value>يخضع دخولك واستخدامك لهذا الوقع "موقع اللجنة السعودية لليوغا اللكتروني" لبنود وشروط الستخدام هذه، ولنظمة الملكة العربية السعودية، وكذلك يعد وصولك ودخولك إلى الوقع موافقة من قبلك دون قيد مسجلً أم ً أو شرط على بنود وشروط الستخدام، سواء أكنت مستخدما من تاريخ أول استخدام لك لهذه ً لم تكن، وتسري هذه الوافقة اعتبارا البوابة. باستخدامك موقع اللجنة السعودية لليوغا، تقر بالمتناع عما يلي: توفير أو تحميل ملفات تحتوى على برمجيات أو مواد أو بيانات أو بشأنها. ً معلومات أخرى ليست مملوكة لك أو ل تملك ترخيصا استخدام هذا الوقع بأي طريقة لرسال أي بريد إلكتروني تجاري أو غير مرغوب فيه، أو أي إساءة استخدام من هذا النوع لوقع اللجنة السعودية لليوغا. توفير أو تحميل ملفات على هذا الوقع تحتوى على فيروسات أو بيانات تالفة. ً نشر أو إعلن أو توزيع أو تعميم مواد أو معلومات تحتوي تشويها للقواني، أو مواد إباحية، أو بذيئة، أو مخالفة للداب ً للسمعة أو انتهاكا العامة، أو أي مواد أو معلومات غير قانونية من خلل موقع اللجنة السعودية لليوغا . الشتراك من خلل موقع اللجنة السعودية لليوغا في أنشطة غير مشروعة أو غير قانونية في الملكة العربية السعودية. العلن -على موقع اللجنة السعودية لليوغا- عن أي منتج أو خدمة تجعلنا في وضع انتهاك لي قانون أو نظام مطبق في أي مجال. استخدام أي وسيلة أو برنامج أو إجراء لعتراض أو محاولة اعتراض التشغيل الصحيح لوقع اللجنة السعودية لليوغا . غير معقول أو كبير بصورة غير مناسبة القيام بأي إجراء يفرض حملً على البنية التحتية للموقع. التسجيل: بعض أجزاء الوقع غير متاحة إل للعضاء السجلي و/أو تتيح عبر إدخال العلومات ً للمستخدم طلب الدعم أو الخدمات إلكترونيا الشخصية. أنت تقر على أن أي معلومات تقدم لنا عبر تلك الجزاء هي اسم ً معلومات كاملة ودقيقة وصحيحة، ولن تحاول دخول الوقع مستخدما شخص آخر. السرية والخصوصية: يلتزم هذا الوقع بتوفير حماية كافية للمعلومات التي تقدمها لنا ولن تكون معلوماتك الشخصية متاحة إل لوظفي اللجنة السعودية لليوغا الذين تقتضي ظروف عملهم الطلع على تلك العلومات، ولن تكون تلك العلومات متاحة لطلع الجمهور من دون موافقتك، ولن يتم السماح بالوصول إلى العلومات إل من قبل الشخاص الؤهلي والختصي. الحساب: أنت مسؤول عن الحفاظ على سرية حسابك وكلمة الرور وتقييد الوصول إلى جهاز الكمبيوتر الخاص بك. أنت توافق على قبول السؤولية عن جميع النشطة التي تحدث تحت حسابك أو كلمة مرورك. وننصحك بأن بتشغيل برنامج مضاد للفيروسات على كل الواد التي يتم ً تقوم دائما إنزالها من النترنت، ونحن ل نعتبر مسؤولي عن أي خسارة أو انقطاع أو تلف لبياناتك أو جهاز الحاسب لديك، والذي قد يحدث أثناء التصال بهذه البوابة، أو عند استخدام مادة واردة من هذا الوقع. الحتوى الستخدم: قد يطلب منك موقع اللجنة السعودية لليوغا اللكتروني بإرسال الحتوى أو تحميله أو نشره أو إتاحته بأي طريقة أخرى، بما في ذلك على سبيل الثال ل الحصر النصوص والصور ومقاطع الفيديو والصوت (يشار إليها مجتمعة باسم "محتوى الستخدم"). أنت تحتفظ بجميع الحقوق في محتوى الستخدم الذي تتيحه من خلل موقع اللجنة السعودية لليوغا وتكون مسؤولً وحدك عن ذلك. حقوق اللكية: إن موقع اللجنة السعودية لليوغا ومحتواه الصلي وميزاته ووظائفه مملوكة بشكل كامل للجنة السعودية لليوغا وهي محمية بموجب القانون تعديل الشروط: قا لتقديرها الخاص، في تعديل ً تحتفظ اللجنة السعودية لليوغا بالحق، وف أو استبدال هذه الشروط او جزء منها في أي وقت. إخلء السؤولية: يتم استخدام موقع اللجنة السعودية لليوغا اللكتروني "كما هو" دون أي ًا، بما في ذلك على سبيل حا أو ضمني ً ضمان من أي نوع، سواء صري الثال ل الحصر أي ضمان للمعلومات أو الخدمات أو النتجات القدمة من خلل أو فيما يتعلق بموقع الويب وأي ضمانات ضمنية تتعلق بالتسويق، اللءمة لغرض معي، أو عدم النتهاك. حدود السؤولية: لن يكون موقع اللجنة السعودية لليوغا اللكتروني بأي حال من الحوال عن أي أضرار، بما في ذلك، على سبيل الثال ل الحصر، مسؤولً الضرار الباشرة أو غير الباشرة أو العرضية أو الخاصة أو التبعية أو العقابية، الناشئة عن استخدام أو عدم القدرة على استخدام الوقع أو أي محتوى مستخدم يتم إرساله أو نشره أو نقله عبر الوقع، أو لي مطالبة أخرى تتعلق بأي شكل من الشكال باستخدامك للموقع. وعليه، فإن اللجوء إلى هذا الوقع يظل على مسؤوليتك الخاصة، ونحن ل نكون بأي حال من الحوال مسؤولي عن أية خسارة أو ضرر من أي نوع قد تتكبده بسبب استخدامك أو زيارتك للموقع، أو اعتمادك على أي بيان أو رأي أو إعلن في للموقع، أو ينجم عن أي تأخير في التشغيل، أو تعثر التصال، أو مشاكل الدخول إلى شبكة النترنت، أو أعطال العدات، أو البرامج، أو سلوك أو أفكار أي شخص يدخل إلى هذا الوقع. وبهذا تقر هنا وتوافق على أن وسيلتك الحصرية والوحيدة لعلج أي ضرر أو خسارة قد تحدث نتيجة دخولك أو استخدامك لهذا الوقع هي المتناع عن استخدامه أو الدخول إليه أو عدم الستمرار في ذلك. التعويض: بهذا تقر بعدم اتخاذ أي إجراء ضد اللجنة السعودية لليوغا أو أي من إدارتها وتعويضها وتأمينها من السؤولية، وكذلك أية جهات أو موظفي أو وكلء يكونون مسؤولي عن إدارة أو صيانة أو تحديث موقع اللجنة السعودية لليوغا، وذلك من أي وجميع اللتزامات والسؤوليات التي قد تطرأ فيما يتصل بأية مطالبة تنشأ عن أي إخلل من جانبك ببنود وشروط الستخدام، أو أي من القواني السارية سواء في الملكة العربية السعودية أو الكان الذي تقيم فيه. القانون الحاكم: تخضع كافة الجراءات القانونية التعلقة والناشئة عن الوقع اللكتروني للقواني العمول بها في الملكة العربية السعودية، وتخضع كافة النازعات والطالبات والجراءات القانونية التي تنشأ فيما يتعلق الوقع اللكتروني للختصاص الحصري للمحاكم في الملكة العربية السعودية. إنهاء الستخدام : يجوز للجنة السعودية لليوغا إنهاء وصولك إلى الوقع، دون سبب أو إشعار، مما قد يؤدي إلى مصادرة وتدمير جميع العلومات الرتبطة بحسابك. يجب أن تظل جميع أحكام هذه الشروط والحكام التي يجب أن تظل بطبيعتها سارية الفعول سارية الفعول، بما في ذلك، على سبيل الثال ل الحصر، أحكام اللكية وإخلء السؤولية عن الضمان والتعويض وحدود السؤولية.بالتسجيل في هذا الوقع، فإنك توافق على تلقي اتصالت من ممثلي اللجنة السعودية لليوغا، بما في ذلك على سبيل الثال ل الحصر رسائل البريد اللكتروني والرسائل الخبارية والواد الترويجية. تغييرات على الشروط والحكام: يجوز للجنة السعودية لليوغا إجراء تغييرات على هذه الشروط والحكام من وقت لخر و استمرار استخدامك للموقع بعد إجراء أي تغييرات يشكل موافقتك على الشروط والحكام الجديدة.</value>
+    <comment/>
+  </data>
+</root>

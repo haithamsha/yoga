@@ -33,6 +33,11 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Policy()
+    {
+        return View();
+    }
+
     public IActionResult PrivacyAr()
     {
         return View();

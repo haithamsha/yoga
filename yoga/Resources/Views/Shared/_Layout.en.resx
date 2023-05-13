@@ -209,4 +209,8 @@
     <value>CONNECT</value>
     <comment/>
   </data>
+  <data name="Policy" xml:space="preserve">
+    <value>Website Usage Policy</value>
+    <comment/>
+  </data>
 </root>
