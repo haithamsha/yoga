@@ -1,8 +1,11 @@
 :root {
-    --brown: #B07B57;
+    --oldbrown:#B07B57;
+    --brown: #12311E;
     --green: #577232;
     --green-darker: #5C6146;
-    --mobile-padding: -12px
+    --mobile-padding: -12px;
+    --green-level1: #12311E;
+    --green-level2: #0E5B40;
 }
 
 @font-face {
@@ -379,7 +382,7 @@ header img {
 footer {
     /* background-color: #D7DAC7; */
     /* background-color:#B07B57; */
-    background-image: linear-gradient(to right, #12311E, #0E5B40);
+    background-image: linear-gradient(to right, var(--green-level1), var(--green-level2));
     padding-top: 52px;
 }
 
