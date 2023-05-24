@@ -80,40 +80,40 @@
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolLocation"></label>
                     <div>
-                        @Model.TechearMemberShip.SchoolLocation
+                        @Model.SchoolLocation
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.CertaficateDate"></label>
                     <div>
-                        @Model.TechearMemberShip.CertaficateDate
+                        @Model.CertaficateDate
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolName"></label>
                     <div>
-                        @Model.TechearMemberShip.SchoolName
+                        @Model.SchoolName
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolLink"></label>
                     <div>
-                        @Model.TechearMemberShip.SchoolLink
+                        @Model.SchoolLink
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.SchoolSocialMediaAccount"></label>
                     <div>
-                        @Model.TechearMemberShip.SchoolSocialMediaAccount
+                        @Model.SchoolSocialMediaAccount
                     </div>
                 </div>
                 <div class="mb-3">
                     <label class="fw-bold" asp-for="@Model.TechearMemberShip.CertficateFiles"></label>
                     <div>
                         @{
-                            if(!string.IsNullOrEmpty(Model.TechearMemberShip.CertficateFiles))
+                            if(!string.IsNullOrEmpty(Model.CertficateFiles))
                             {
-                                foreach (var item in Model.TechearMemberShip.CertficateFiles.Split(','))
+                                foreach (var item in Model.CertficateFiles.Split(','))
                                 {
                                     <div><a target="_blank" href="~/assets/images/@item" alt="CertficateFiles">@item</a></div>    
                                 }
