@@ -15,8 +15,10 @@
     font-family: Tajawal;
     font-weight: 400;
     font-size: 20px;
-    line-height: 26px;
+    /* line-height: 26px; */
     color: var(--green-darker);
+    overflow-y: scroll;
+    height: 700px;
 }
 .advantage-title{
     font-family: zaridSerif;

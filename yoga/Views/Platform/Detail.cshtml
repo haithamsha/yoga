@@ -15,105 +15,105 @@
 
 
 
- <div id="platform-page-container">
-                <div id="platform-page">
-                    <div class="platform-page-content container order-1">
+<div id="platform-page-container">
+    <div id="platform-page">
+        <div class="platform-page-content container order-1">
 
-                        <div class="platform-page-title">
-                            @if(culture.RequestCulture.UICulture.Name == "en")
-                            {
-                                @Model.Title
-                            }
-                            else
-                            {
-                                @Model.TitleAr
-                            }
-                        </div>
-                        <div class="platform-page-desc">
-                            @if(culture.RequestCulture.UICulture.Name == "en")
-                            {
-                                @Model.Summury
-                            }
-                            else
-                            {
-                                @Model.SummuryAr
-                            }
-                        </div>
-
-                        <a asp-controller="Account" asp-action="Register"
-                        type="button" class="btn btn-brown-primary ">@localizer["SubscribeNow"]</a>
-
-                    </div>
-                    <img src="~/assets/images/platform/@Model.Image" class="order-0">
-                </div>
+            <div class="platform-page-title">
+                @if (culture.RequestCulture.UICulture.Name == "en")
+                {
+                    @Model.Title
+                }
+                else
+                {
+                    @Model.TitleAr
+                }
             </div>
-            <div id="advanatage-desktop-container">
-                <div id="advantage-container">
-                    <div id="objectives" class="container">
+            <div class="platform-page-desc">
+                @if (culture.RequestCulture.UICulture.Name == "en")
+                {
+                    @Model.Summury
+                }
+                else
+                {
+                    @Model.SummuryAr
+                }
+            </div>
 
-                      
-                        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-                            <div class="col-lg-4 text-center">
-                                <img src="~/assets/images/platform/advantages.png" />
-                            </div>
-                            <div>
-                                <div class="advantage-content">
-                                    <h3 class="advantage-title">@localizer["Advantages"]</h3>
-                                    @if(culture.RequestCulture.UICulture.Name == "en")
-                                    {
-                                        if(!string.IsNullOrEmpty(Model.Detail) )
-                                        {
-                                            var detailsItem = Model.Detail.Split('.');
-                                            foreach (var item in detailsItem)
-                                            {
-                                                <div class="advantage-item">
-                                                    <img src="~/assets/images/platform/certified.png" />
-                                                    <p>@item</p>
-                                                </div>
-                                            }
-                                        }
-                                    }
-                                    else 
-                                    {
-                                        if(!string.IsNullOrEmpty(Model.DetailAr) )
-                                        {
-                                            var detailsItem = Model.DetailAr.Split('.');
-                                            foreach (var item in detailsItem)
-                                            {
-                                                <div class="advantage-item">
-                                                    <img src="~/assets/images/platform/certified.png" />
-                                                    <p>@item</p>
-                                                </div>
-                                            }
-                                        }
-                                    }
+            <a asp-controller="Account" asp-action="Register" type="button"
+                class="btn btn-brown-primary ">@localizer["SubscribeNow"]</a>
 
-                                    
-                                </div>
-                                @if(!string.IsNullOrEmpty(Model.Requirements))
+        </div>
+        <img src="~/assets/images/platform/@Model.Image" class="order-0">
+    </div>
+</div>
+<div id="advanatage-desktop-container">
+    <div id="advantage-container">
+        <div id="objectives" class="container">
+
+
+            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
+                <div class="col-lg-4 text-center">
+                    <img src="~/assets/images/platform/advantages.png" />
+                </div>
+                <div>
+                    <div class="advantage-content">
+                        <h3 class="advantage-title">@localizer["Advantages"]</h3>
+                        @if (culture.RequestCulture.UICulture.Name == "en")
+                        {
+                            if (!string.IsNullOrEmpty(Model.Detail))
+                            {
+                                var detailsItem = Model.Detail.Split('.');
+                                foreach (var item in detailsItem)
                                 {
-                                    <div class="advantage-content">
-                                    <h3 class="advantage-title">Requirements</h3>
                                     <div class="advantage-item">
-                                        <img src="~/assets/images/platform/requirments.png" />
-                                        <p>
-                                            @if(culture.RequestCulture.UICulture.Name == "en")
-                                            {
-                                                @Model.Requirements
-                                            }
-                                            else
-                                            {
-                                                @Model.Requirements_Ar
-                                            }
-                                        </p>
+                                        <img src="~/assets/images/platform/certified.png" />
+                                        <p>@item</p>
                                     </div>
-
-                                </div>
                                 }
+                            }
+                        }
+                        else
+                        {
+                            if (!string.IsNullOrEmpty(Model.DetailAr))
+                            {
+                                var detailsItem = Model.DetailAr.Split('.');
+                                foreach (var item in detailsItem)
+                                {
+                                    <div class="advantage-item">
+                                        <img src="~/assets/images/platform/certified.png" />
+                                        <p>@item</p>
+                                    </div>
+                                }
+                            }
+                        }
+
+
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.Requirements))
+                    {
+                        <div class="advantage-content">
+                            <h3 class="advantage-title">Requirements</h3>
+                            <div class="advantage-item">
+                                <img src="~/assets/images/platform/requirments.png" />
+                                <p>
+                                    @if (culture.RequestCulture.UICulture.Name == "en")
+                                    {
+                                        @Model.Requirements
+                                    }
+                                    else
+                                    {
+                                        @Model.Requirements_Ar
+                                    }
+                                </p>
                             </div>
 
                         </div>
-
-                    </div>
+                    }
                 </div>
+
             </div>
+
+        </div>
+    </div>
+</div>

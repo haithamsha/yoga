@@ -4,89 +4,75 @@
 }
 
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/assets/css/platform.css" rel="stylesheet">
-<link href="~/assets/css/related-news.css" rel="stylesheet">
 
-<div class="yog-layout">
-    
-</div>
+@* <div class="yog-layout"> *@
+
 
 <div id="platform-page-container">
-                <div id="platform-page">
-                    <div class="platform-page-content container order-1">
-                        @* <a type="button" class="btn btn-brown-outline ">@localizer["AboutUsTitle"]</a> *@
-                        <div class="platform-page-title">@localizer["WhoWeAre"]</div>
-                        <div class="platform-page-desc">
+    <div id="platform-page">
+        <div class="platform-page-content container order-1">
+            @* <a type="button" class="btn btn-brown-outline ">@localizer["AboutUsTitle"]</a> *@
+            <div class="platform-page-title">@localizer["WhoWeAre"]</div>
+            <div class="platform-page-desc">
+                @localizer["AboutUsBody"]
+            </div>
+        </div>
+        <img src="~/assets/images/platform/platform-clubs.png" class="order-0">
+    </div>
+</div>
+<div id="objective-desktop-container">
+    <div id="objective-container">
+        <div class="container">
 
-                            @* @localizer["AboutUsBody"] *@
-
-                            @if(culture.RequestCulture.UICulture.Name == "en")
-                            {
-                                  <div>
-                                    The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sport professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.  The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sport professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.  The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sport professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.  The Saudi Yoga Committee is a sports committee that operates under the Saudi Arabian Olympic Committee, which is affiliated with the Ministry of Sports. The Committee was formed in 2021 to respond to the growing popularity of this sport in Saudi Arabia. Yoga has a large fan base across the country, and there is a genuine desire to supervise and develop its activities, as well as to support and improve the performance of yogis and sport professionals. A true desire exists to improve training quality and activate national participation in future international yoga tournaments and competitions.
-                                  </div>
-                            }
-                            else{
-                                  <div>اللجنة السعودية لليوغا هي لجنة رياضية تحت مظلة اللجنة الأولمبية العربية السعودية التابعة لوزارة الرياضة، تأسست في العام 2021م، وجاء تأسيس اللجنة نظراً لشعبية رياضة اليوغا وانتشارها الواسع في المملكة العربية السعودية، ووجود قاعدة جماهيرية لها، والرغبة الجادة في الإشراف على أنشطة هذه الرياضة في المملكة والعمل على تطويرها ودعم ممارسيها ومحترفيها، لتطوير أدائهم وتحسين جودة التدريب في المملكة لتحسين وتفعيل المشاركة الوطنية في البطولات والمسابقات الدولية الخاصة برياضة اليوغا مستقبلاً.  اللجنة السعودية لليوغا هي لجنة رياضية تحت مظلة اللجنة الأولمبية العربية السعودية التابعة لوزارة الرياضة، تأسست في العام 2021م، وجاء تأسيس اللجنة نظراً لشعبية رياضة اليوغا وانتشارها الواسع في المملكة العربية السعودية، ووجود قاعدة جماهيرية لها، والرغبة الجادة في الإشراف على أنشطة هذه الرياضة في المملكة والعمل على تطويرها ودعم ممارسيها ومحترفيها، لتطوير أدائهم وتحسين جودة التدريب في المملكة لتحسين وتفعيل المشاركة الوطنية في البطولات والمسابقات الدولية الخاصة برياضة اليوغا مستقبلاً.  </div>
-                            }
-                            
-
-                        </div>
-                    </div>
-                    <img src="~/assets/images/platform/platform-clubs.png" class="order-0">
+            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
+                <div class="col-lg-4">
+                    <img src="~/assets/images/platform/platform-advantages.png" />
+                </div>
+                <div class="objective-content">
+                    <a class="btn btn-white-outline">@localizer["VisitonMissionTitle"]</a>
+                    <h3 class="objective-title">@localizer["OurObjectiveTitle"]</h3>
+                    <p class="objective-desc">@localizer["OurObjectiveBody"]</p>
                 </div>
             </div>
-            <div id="objective-desktop-container">
-                <div id="objective-container">
-                    <div class="container">
-
-                        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-center">
-                            <div class="col-lg-4">
-                                <img src="~/assets/images/platform/platform-advantages.png" />
-                            </div>
-                            <div class="objective-content">
-                                <a class="btn btn-white-outline">@localizer["VisitonMissionTitle"]</a>
-                                <h3 class="objective-title">@localizer["OurObjectiveTitle"]</h3>
-                                <p class="objective-desc">@localizer["OurObjectiveBody"]</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="teacher-list">
-                <h1 class="page-header">@localizer["BoardofDirectors"]</h1>
-                
-                <div class="row row-cols-lg-3 row-cols-1">
-                    <div class="col teacher-item">
-                        <img src="~/assets/images/related-news/nouf.png" />
-                        <div class="teacher-details">
-                            <p class="teacher-position">@localizer["t_nouf_job"]</p>
-                            <p class="teacher-name">@localizer["t_nouf"]</p>
-                        </div>
-                    </div>
-                    <div class="col teacher-item">
-                        <img src="~/assets/images/related-news/ahmed.png" />
-                        <div class="teacher-details">
-                            <p class="teacher-position">@localizer["t_ahmed_job"]</p>
-                            <p class="teacher-name">@localizer["t_ahmed"]</p>
-                        </div>
-                    </div>
-                    @* <div class="col teacher-item">
-                        <img src="~/assets/images/related-news/instructor.png" />
-                        <div class="teacher-details">
-                            <p class="teacher-position">EXECUTIVE DIRECTOR OF SAUDI YOGA COMMITTEE</p>
-                            <p class="teacher-name">Eng. Ahmed Mohammed Alsadi</p>
-                        </div>
-                    </div> *@
-                </div>
-                <p class="page-desc">@localizer["team_names"]</p>
-            </div>
-
 
         </div>
+    </div>
+</div>
 
+<div class="teacher-list">
+    <h1 class="page-header">@localizer["BoardofDirectors"]</h1>
+
+    <div class="row row-cols-lg-3 row-cols-1">
+        <div class="col teacher-item">
+            <img src="~/assets/images/related-news/nouf.png" />
+            <div class="teacher-details">
+                <p class="teacher-position">@localizer["t_nouf_job"]</p>
+                <p class="teacher-name">@localizer["t_nouf"]</p>
+            </div>
+        </div>
+        <div class="col teacher-item">
+            <img src="~/assets/images/related-news/ahmed.png" />
+            <div class="teacher-details">
+                <p class="teacher-position">@localizer["t_ahmed_job"]</p>
+                <p class="teacher-name">@localizer["t_ahmed"]</p>
+            </div>
+        </div>
+        @* <div class="col teacher-item">
+        <img src="~/assets/images/related-news/instructor.png" />
+        <div class="teacher-details">
+        <p class="teacher-position">EXECUTIVE DIRECTOR OF SAUDI YOGA COMMITTEE</p>
+        <p class="teacher-name">Eng. Ahmed Mohammed Alsadi</p>
+        </div>
+        </div> *@
+    </div>
+    <p class="page-desc">@localizer["team_names"]</p>
+</div>
+
+
+@* </div> *@
+
+@* </div> *@
