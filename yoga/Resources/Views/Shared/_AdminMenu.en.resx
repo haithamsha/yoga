@@ -149,4 +149,8 @@
     <value>Users</value>
     <comment/>
   </data>
+  <data name="Managers" xml:space="preserve">
+    <value>Managers</value>
+    <comment/>
+  </data>
 </root>

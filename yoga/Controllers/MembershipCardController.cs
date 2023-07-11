@@ -215,7 +215,7 @@ namespace yoga.Controllers
 
                 string content = @$"<div>
                         <p>
-                        Congratuilation, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active.
+                        Congratulations, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active.
                         </p>
                         </div>
                         <div style='text-align: center; width:200px;height: 270px; padding:30px;
@@ -289,7 +289,7 @@ namespace yoga.Controllers
                     _notificationHelper.AddNotify(new Notification
                     {
                         AppUser = memCard.AppUser,
-                        Body = "Congratuilation, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active",
+                        Body = "Congratulations, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active",
                         CreationDate = DateTime.Now,
                         IsRead = false,
                         Title = "Membership Card Approved"

@@ -496,7 +496,7 @@ namespace yoga.Controllers
 
                         tech.Status = (int)StatusEnum.Approved;
                         tech.ExamLocation = ExamLocation;
-                        content = $"Congratuilation, You information is approved, next step is take the exam please go to your profile and pay the exam fees. </p>";
+                        content = $"Congratulation, Your information is approved, next step is take the exam please go to your profile and pay the exam fees. </p>";
                     }
                     if (PayExamFees == 1)
                     {
@@ -597,7 +597,7 @@ namespace yoga.Controllers
                             ModelState.AddModelError("", "Information Must approved first before take the exam");
                             return View(tech);
                         }
-                        content += "Thank you for taking the SAUDI YOGA COMMITTEE Teacher Licese exam. ";
+                        content += "Thank you for taking the SAUDI YOGA COMMITTEE Teacher License  exam. ";
                         tech.TakeExam = true;
                     }
                     if (PassExam == 1)
@@ -612,7 +612,7 @@ namespace yoga.Controllers
                             ModelState.AddModelError("", "Please Insert The License Fees!");
                             return View(tech);
                         }
-                        content = "Congratuilation, Your Are Passed The SAUDI YOGA COMMITTEE Teacher license exam. ";
+                        content = "Congratulations, You Have Passed The SAUDI YOGA COMMITTEE Teacher licence exam. ";
                         tech.PassExam = true;
                         tech.LicenseFeesPrice = LicFeesPrice;
                     }
@@ -660,7 +660,7 @@ namespace yoga.Controllers
                             return View(tech);
                         }
 
-                        content = $"Unfortunately, Your Not Passed The SAUDI YOGA COMMITTEE Teacher license Exam. {reason}, You me re the exam again";
+                        content = $"Unfortunately, You Did Not Pass The SAUDI YOGA COMMITTEE Teacher licence Exam. {reason}, You me re the exam again";
                         tech.PassExam = false;
                         tech.TakeExam = false;
                         tech.PayExamFees = false;

@@ -149,4 +149,8 @@
     <value>المتستخدمين</value>
     <comment/>
   </data>
+  <data name="Managers" xml:space="preserve">
+    <value>المديرين</value>
+    <comment/>
+  </data>
 </root>
