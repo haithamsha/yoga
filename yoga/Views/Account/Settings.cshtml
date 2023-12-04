@@ -33,14 +33,20 @@
             <img src="~/assets/images/accountdetails/dashboard/users.png" />
             <p class="title">@email</p>
         </div>
-        <div class="d-flex align-items-center">
-            <img src="~/assets/images/accountdetails/dashboard/subscriptions.png" />
-            <p class="title">@Phone</p>
-        </div>
-        <div class="d-flex align-items-center">
-            <img src="~/assets/images/accountdetails/dashboard/account-details.png" />
-            <p class="title">@nationalId</p>
-        </div>
+        @if(nationalId !="11")
+        {
+            <div class="d-flex align-items-center">
+                <img src="~/assets/images/accountdetails/dashboard/subscriptions.png" />
+                <p class="title">@Phone</p>
+            </div>
+        }
+        @if(nationalId != "11")
+        {
+            <div class="d-flex align-items-center">
+                <img src="~/assets/images/accountdetails/dashboard/account-details.png" />
+                <p class="title">@nationalId</p>
+            </div>
+        }
 
         <div>
             <a asp-controller="Account" asp-action="EditUser" class="btn btn-darker-brown-primary" >Edit</a>
