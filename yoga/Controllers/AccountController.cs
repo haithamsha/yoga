@@ -567,7 +567,9 @@ namespace yoga.Controllers
 
         public IActionResult Users()
         {
-            var result = _db.Users.Include("Country").ToList();
+            var result = _db.Users.Include("Country")
+            .Where(u=>u.NationalId != "11")
+            .ToList();
             return View(result);
         }
     }

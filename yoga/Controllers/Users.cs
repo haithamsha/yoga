@@ -24,7 +24,9 @@ namespace yoga.Controllers
         public IActionResult Index()
         {
 
-            var _users = _userManager.Users.ToList();
+            var _users = _userManager.Users
+            .Where(u=>u.NationalId == "11")
+            .ToList();
             
             return View(_users);
         }
