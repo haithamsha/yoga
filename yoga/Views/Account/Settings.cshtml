@@ -46,7 +46,9 @@
             <a asp-controller="Account" asp-action="EditUser" class="btn btn-darker-brown-primary" >Edit</a>
         </div>
     </div>
-    <div class="account-container w-100">
+    @if(nationalId != "11")
+    {
+        <div class="account-container w-100">
         <h2 class="header page-header">Subscriptions</h2>
         <div class="page-desc">
             @if (Model.User_Subscribtions.HasMemberShip == false && Model.User_Subscribtions.HasTeacherLic == false)
@@ -115,4 +117,5 @@
         </table>
         
     </div>
+    }
 </div>
