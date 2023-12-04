@@ -48,9 +48,13 @@
             </div>
         }
 
-        <div>
-            <a asp-controller="Account" asp-action="EditUser" class="btn btn-darker-brown-primary" >Edit</a>
-        </div>
+        @if(nationalId != "11")
+        {
+            <div>
+                <a asp-controller="Account" asp-action="EditUser" class="btn btn-darker-brown-primary">Edit</a>
+            </div>
+        }
+        
     </div>
     @if(nationalId != "11")
     {
