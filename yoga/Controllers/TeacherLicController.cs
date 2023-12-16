@@ -21,14 +21,17 @@ namespace yoga.Controllers
         private readonly ILogger<TeacherLicController> _logger;
         private readonly UserManager<AppUser> _userManager;
         private readonly NotificationHelper _notificationHelper;
+        private readonly IWFHistoryManager _wfHistoryManager;
 
-
-        public TeacherLicController(ILogger<TeacherLicController> logger, YogaAppDbContext db, UserManager<AppUser> userManager)
+        public TeacherLicController(ILogger<TeacherLicController> logger,
+        YogaAppDbContext db, UserManager<AppUser> userManager, 
+        IWFHistoryManager wfHistoryManager)
         {
             _logger = logger;
             _db = db;
             _userManager = userManager;
             _notificationHelper = new NotificationHelper(_db);
+            _wfHistoryManager = wfHistoryManager;
         }
 
         public IActionResult CreateDemo()
@@ -465,11 +468,15 @@ namespace yoga.Controllers
             ModelState.Remove("LicFeesPrice");
             ModelState.Remove("ExamLocation");
 
+            //wf history
+            WFHistory wfHistory = new WFHistory();
+
             if (ModelState.IsValid)
             {
                 string content = "";
                 string subject = "SAUDI YOGA COMMITTEE";
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
 
                 var tech = _db.techearMemberShipTests
                 .Include(t=>t.TechearMemberShip)
@@ -497,6 +504,9 @@ namespace yoga.Controllers
                         tech.Status = (int)StatusEnum.Approved;
                         tech.ExamLocation = ExamLocation;
                         content = $"Congratulation, Your information is approved, next step is take the exam please go to your profile and pay the exam fees. </p>";
+                        // wfhistory
+                        wfHistory.Description = "Approve Information Confirmation";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step1_BasicInformation;
                     }
                     if (PayExamFees == 1)
                     {
@@ -515,6 +525,10 @@ namespace yoga.Controllers
                         content += $" {ExamLocation}";
                         // update location in db
                         tech.ExamLocation = ExamLocation;
+
+                        // wfhistory
+                        wfHistory.Description = "Approve Pay Exam Fees";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step2_PayExamFees;
                     }
 
                     if (PayLicFees == 1)
@@ -586,6 +600,9 @@ namespace yoga.Controllers
                         //4emailMessage.AttachmentFile = attachmentFile;
                         //5emailMessage.FileName = fileName;
 
+                        // wfhistory
+                        wfHistory.Description = "Approve Pay license Fees";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step5_PayLicenceFees;
 
 
 
@@ -599,6 +616,10 @@ namespace yoga.Controllers
                         }
                         content += "Thank you for taking the SAUDI YOGA COMMITTEE Teacher License  exam. ";
                         tech.TakeExam = true;
+
+                        // wfhistory
+                        wfHistory.Description = "Approve Take Exam";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step3_TakeTheExam;
                     }
                     if (PassExam == 1)
                     {
@@ -615,6 +636,10 @@ namespace yoga.Controllers
                         content = "Congratulations, You Have Passed The SAUDI YOGA COMMITTEE Teacher licence exam. ";
                         tech.PassExam = true;
                         tech.LicenseFeesPrice = LicFeesPrice;
+
+                        // wfhistory
+                        wfHistory.Description = "Approve Pass Exam";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step4_PassTheExam;
                     }
                     
 
@@ -639,17 +664,28 @@ namespace yoga.Controllers
                         content = $"Unfortunately, Your Exam fees payment not accepted {reason}";
                         tech.PassExam = false;
                         tech.ReceiptCopy = "";
+
+                        // wfhistory
+                        wfHistory.Description = "Reject Pay Exam Fees";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step2_2_PayExamFees;
                     }
                     else if (PayLicFees == 2)
                     {
                         tech.PayFees = false;
                         tech.ReceiptCopyLic = "";
                         content = $"Unfortunately, Your license fees payment not accepted {reason}";
+
+                        // wfhistory
+                        wfHistory.Description = "Reject Pay License Fees";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.RejecteacherLicense_step5_5_PayLicenceFees;
                     }
                     else if (Info == 2)
                     {
                         tech.Status = (int)StatusEnum.Rejected;
                         content = $"Sorry your data rejected for the below reason <p>{reason}</p>";
+                        // wfhistory
+                        wfHistory.Description = "Reject Information";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step1_1_BasicInformation;
                     }
                     
                     else if (PassExam == 2)
@@ -667,6 +703,9 @@ namespace yoga.Controllers
                         tech.ReceiptCopy = "";
                         tech.ReceiptCopyLic = "";
                         tech.LicenseFeesPrice = LicFeesPrice;
+                        // wfhistory
+                        wfHistory.Description = "Reject Pass Exam";
+                        wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step4_4_PassTheExam;
                     }
                 }
 
@@ -696,6 +735,15 @@ namespace yoga.Controllers
                         CreationDate = DateTime.Now,
                         IsRead = false
                     });
+
+                    // wf history
+                    
+                    wfHistory.AppUser = loggedUser;
+                    wfHistory.CreationDate = DateTime.Now;
+                    wfHistory.ModuleName = "TeacherLic";
+                    wfHistory.RecordId = TestId;
+                    int wfSaved = _wfHistoryManager.Save(wfHistory);
+
                     return RedirectToAction("Detail", "TeacherLic", new { id = TestId });
                 }
                 catch (System.Exception ex)

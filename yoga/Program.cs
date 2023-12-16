@@ -35,8 +35,11 @@ builder.Services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddLocalization(opt => {opt.ResourcesPath = "Resources";});
-builder.Services.AddMvc().AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
+builder.Services.AddMvc()
+.AddViewLocalization(Microsoft.AspNetCore.Mvc.Razor.LanguageViewLocationExpanderFormat.Suffix)
 .AddDataAnnotationsLocalization();
+
+builder.Services.AddScoped<IWFHistoryManager, WFHistoryManager>();
 
 builder.Services.Configure<RequestLocalizationOptions> (
     opt => 

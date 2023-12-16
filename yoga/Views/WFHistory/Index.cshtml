@@ -1,0 +1,69 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@model IEnumerable<yoga.ViewModels.WFHistoryVM>
+@{
+    ViewData["Title"] ="Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/assets/css/account-details.css" rel="stylesheet">
+
+<div class="d-lg-flex">
+                <partial name="_AdminMenu" />
+                <div class="account-container account-details">
+                    @* <h2 class="header page-header">@localizer["PageTitle"]</h2> *@
+                    <h2 class="header page-header"> History</h2>
+
+					<div class="table-responsive">
+							        <table class="table app-table-hover mb-0 text-left">
+										<thead>
+											<tr>
+                                                <th>@localizer["HistoryId"]</th>
+                                                <th>@localizer["HistoryType"]</th>
+                                                <th>@localizer["ModuleName"]</th>
+                                                <th>@localizer["Description"]</th>
+                                                <th>@localizer["UserName"]</th>
+                                                <th>@localizer["CreationDate"]</th>
+                                                <th></th>
+                                                
+											</tr>
+										</thead>
+										<tbody>
+											
+                                    @foreach (var item in Model)
+                                    {
+                                                <tr>
+                                                    <td class="cell">
+                                                @item.HistoryId
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.HistoryType
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.ModuleName
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.Description
+                                                    </td>
+                                                    <td class="cell">
+                                                @item.UserName
+                                                    </td>
+                                                    <td>
+                                                        @item.CreationDate
+                                                    </td>
+                                                    <td>
+                                                        <div class="w-75 btn-group" role="group">
+                                                            <a class="btn-sm app-btn-secondary" asp-controller="TeacherLic" asp-action="Detail"
+                                                            asp-route-id="@item.HistoryId"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                    }
+		
+										</tbody>
+									</table>
+						        </div><!--//table-responsive-->
+                </div>
+</div>

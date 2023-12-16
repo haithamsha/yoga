@@ -17,5 +17,6 @@ namespace yoga.Data
         public DbSet<MembershipCard> MembershipCards { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<Notification> Notification { get; set; }
+        public DbSet<WFHistory> WFHistory { get; set; }
     }
 }

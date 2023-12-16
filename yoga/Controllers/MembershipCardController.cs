@@ -19,12 +19,17 @@ namespace yoga.Controllers
         private readonly UserManager<AppUser> _userManager;
 
         private readonly NotificationHelper _notificationHelper;
+
+        private readonly IWFHistoryManager _wfHistoryManager;
         // private readonly IEmailSender _emailSender;
-        public MembershipCardController(YogaAppDbContext db, UserManager<AppUser> userManager)
+        public MembershipCardController(YogaAppDbContext db, 
+        UserManager<AppUser> userManager, IWFHistoryManager wfHistoryManager
+        )
         {
             _db = db;
             _userManager = userManager;
             _notificationHelper = new NotificationHelper(_db);
+            _wfHistoryManager = wfHistoryManager;
         }
 
         public IActionResult Index()
@@ -294,6 +299,16 @@ namespace yoga.Controllers
                         IsRead = false,
                         Title = "Membership Card Approved"
                     });
+
+                    // add wfhistory
+                    WFHistory wfHistory = new WFHistory();
+                    wfHistory.AppUser = loggedUser;
+                    wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveMembership;
+                    wfHistory.RecordId = id;
+                    wfHistory.CreationDate = DateTime.Now;
+                    wfHistory.ModuleName = "Membership";
+                    wfHistory.Description = "Approve membership card";
+                    int wfSaved = _wfHistoryManager.Save(wfHistory);
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)
@@ -337,6 +352,17 @@ namespace yoga.Controllers
                         IsRead = false,
                         Title = "Membership Card Rejection"
                     });
+
+                    // add wfhistory
+                    WFHistory wfHistory = new WFHistory();
+                    wfHistory.AppUser = loggedUser;
+                    wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectMembership;
+                    wfHistory.RecordId = id;
+                    wfHistory.CreationDate = DateTime.Now;
+                    wfHistory.ModuleName = "Membership";
+                    wfHistory.Description = "Reject membership card";
+                    int wfSaved = _wfHistoryManager.Save(wfHistory);
+
                     return RedirectToAction("Index", "MembershipCard");
                 }
                 catch (System.Exception ex)
