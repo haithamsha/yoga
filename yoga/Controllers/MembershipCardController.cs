@@ -158,7 +158,17 @@ namespace yoga.Controllers
                     CreationDate = DateTime.Now,
                     IsRead = false
                 });
-                
+
+                // add wfhistory
+                WFHistory wfHistory = new WFHistory();
+                wfHistory.AppUser = loggedUser;
+                wfHistory.WFHistoryType = WFHistoryTypeEnum.CreateMembership;
+                wfHistory.RecordId = id;
+                wfHistory.CreationDate = DateTime.Now;
+                wfHistory.ModuleName = "Membership";
+                wfHistory.Description = "Create membership card";
+                int wfSaved = _wfHistoryManager.Save(wfHistory);
+            
                 _emailSender.SendEmailBySendGrid(emailMessage);
 
                 ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";

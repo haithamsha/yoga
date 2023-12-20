@@ -44,7 +44,7 @@ namespace yoga.Controllers
         public async Task<IActionResult> Create(RegisterModel user)
         {
             var newUser = new AppUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.Phone, 
-                Discriminator = "Default", FirstName=user.Email, LastName = user.Email, NationalId="11", MiddleName = "dd",
+                Discriminator = "Default", FirstName=user.FirstName, LastName = user.Email, NationalId="11", MiddleName = "dd",
                 UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn" };
 
             // Validate if user exists before

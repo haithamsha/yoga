@@ -8,6 +8,7 @@
 @{
     var user = await userManager.GetUserAsync(User);
     var displayName = $"{user.FirstName} {user.MiddleName} { user.LastName}";
+    var userName = user.FirstName;
     var email = user.Email;
     var Phone = user.PhoneNumber;
     var imagePath = user.UserImage;
@@ -26,7 +27,14 @@
         <h2 class="header page-header">Hello</h2>
         <div class="d-flex align-items-center">
             <img src="~/assets/images/accountdetails/dashboard/profile.png" />
-            <p class="title">@displayName</p>
+            @if(@nationalId == "11")
+            {
+                <p class="title">@userName</p>
+            }
+            else {
+                <p class="title">@displayName</p>
+            }
+            
         </div>
         <h2 class="header"> </h2>
         <div class="d-flex align-items-center">

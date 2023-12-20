@@ -322,6 +322,16 @@ namespace yoga.Controllers
                     IsRead = false
                 });
 
+                // add wfhistory
+                WFHistory wfHistory = new WFHistory();
+                wfHistory.AppUser = loggedUser;
+                wfHistory.WFHistoryType = WFHistoryTypeEnum.CreatTeacherLicense;
+                wfHistory.RecordId = rowAffect;
+                wfHistory.CreationDate = DateTime.Now;
+                wfHistory.ModuleName = "TeacherLic";
+                wfHistory.Description = "Create TeacherLicense";
+                int wfSaved = _wfHistoryManager.Save(wfHistory);
+
                 // Send Email
                 try
                 {

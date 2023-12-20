@@ -15,5 +15,8 @@ namespace yoga.Models
         RejectTeacherLicense_step3_3_TakeTheExam = 10,
         RejectTeacherLicense_step4_4_PassTheExam = 11,
         RejecteacherLicense_step5_5_PayLicenceFees = 12,
+
+        CreateMembership =13,
+        CreatTeacherLicense = 14
     }
 }

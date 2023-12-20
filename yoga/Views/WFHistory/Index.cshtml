@@ -20,7 +20,7 @@
 										<thead>
 											<tr>
                                                 <th>@localizer["HistoryId"]</th>
-                                                <th>@localizer["HistoryType"]</th>
+                                                @* <th>@localizer["HistoryType"]</th> *@
                                                 <th>@localizer["ModuleName"]</th>
                                                 <th>@localizer["Description"]</th>
                                                 <th>@localizer["UserName"]</th>
@@ -37,9 +37,9 @@
                                                     <td class="cell">
                                                 @item.HistoryId
                                                     </td>
-                                                    <td class="cell">
+                                                    @* <td class="cell">
                                                 @item.HistoryType
-                                                    </td>
+                                                    </td> *@
                                                     <td class="cell">
                                                 @item.ModuleName
                                                     </td>
@@ -53,10 +53,10 @@
                                                         @item.CreationDate
                                                     </td>
                                                     <td>
-                                                        <div class="w-75 btn-group" role="group">
+                                                        @* <div class="w-75 btn-group" role="group">
                                                             <a class="btn-sm app-btn-secondary" asp-controller="TeacherLic" asp-action="Detail"
                                                             asp-route-id="@item.HistoryId"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
-                                                        </div>
+                                                        </div> *@
                                                     </td>
 
                                                 </tr>
