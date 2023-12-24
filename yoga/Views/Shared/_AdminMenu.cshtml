@@ -2,7 +2,7 @@
 
 <div class="account-items col-lg-3">
                     <ul>
-                        @if(User.IsInRole("Admin"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="selected-item">
                             <div>
@@ -14,7 +14,7 @@
                             <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
                             </li>
                         }
-                        @if(User.IsInRole("Admin"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="selected-item">
                             <div>
@@ -26,7 +26,7 @@
                             <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
                         </li>
                         }
-                        @if(User.IsInRole("Admin"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="selected-item">
                             <div>
@@ -38,7 +38,7 @@
                             <img class="arrow" src="~/assets/images/accountdetails/arrow.png" />
                         </li>
                         }
-                        @if(User.IsInRole("Admin"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="selected-item">
                             <div>
@@ -51,7 +51,7 @@
                         </li>
                         }
 
-                        @if(User.IsInRole("Admin"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                         {
                             <li class="selected-item">
                             <div>

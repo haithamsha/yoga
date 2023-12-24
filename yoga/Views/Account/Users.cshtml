@@ -6,6 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    
+}
 
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
@@ -22,9 +27,9 @@
                                                 <th>@localizer["FirstName"]</th>
                                                 <th>@localizer["MiddleName"]</th>
                                                 <th>@localizer["LastName"]</th>
-                                                <th>@localizer["NationalId"]</th>
+                                                @* <th>@localizer["NationalId"]</th> *@
                                                 <th>@localizer["Email"]</th>
-                                                <th>@localizer["Phone"]</th>
+                                                @* <th>@localizer["Phone"]</th> *@
                                                 @* <th>@localizer["Nationality"]</th> *@
                                                 <th>@localizer["Actions"]</th>
 											</tr>
@@ -51,15 +56,15 @@
                                                     <td class="cell">
                                                 @item.LastName
                                                     </td>
-                                                    <td class="cell">
+                                                    @* <td class="cell">
                                                 @item.NationalId
-                                                    </td>
+                                                    </td> *@
                                                     <td class="cell">
                                                 @item.Email
                                                     </td>
-                                                    <td class="cell">
+                                                    @* <td class="cell">
                                                 @item.PhoneNumber
-                                                    </td>
+                                                    </td> *@
                                                     <td class="cell">
                                                 @* @item.Country.EnName *@
                                                     </td>
@@ -69,6 +74,16 @@
                                                             <a class="btn-sm app-btn-secondary" asp-controller="Account" asp-action="EditUser"
                                                             asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
                                                         </div>
+                                                        
+                                                    </td>
+                                                    <td>
+                                                        @if(User.IsInRole("Admin"))
+                                                        {
+                                                            <div class="w-75 btn-group" role="group">
+                                                            <a class="btn-sm app-btn-secondary" asp-controller="Account" asp-action="ChangePassword"
+                                                            asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["ChangePassword"]</a>
+                                                            </div>
+                                                        }
                                                     </td>
 
                                                 </tr>

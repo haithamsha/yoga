@@ -287,11 +287,11 @@ namespace yoga.Controllers
                 Email = u.Email,
                 Phone = u.PhoneNumber,
                 CountryId = u.Country.CountryId,
-                FirstName = u.FirstName,
                 MiddleName = u.MiddleName,
                 LastName = u.LastName,
                 Image = u.UserImage,
-                NationalIdImage = u.NationalIdImage
+                NationalIdImage = u.NationalIdImage,
+                FirstName = u.UserName
             })
             .FirstOrDefault();
 
@@ -307,6 +307,13 @@ namespace yoga.Controllers
         public async Task<IActionResult> EditUser(RegisterModel Input, IFormFile Image, IFormFile NationalIdImage,
         string? Id = "")
         {
+            string userId_nat = _userManager.GetUserId(User);
+            var loggedUser = _db.Users.Where(u=>u.Id == userId_nat).FirstOrDefault();
+            if(loggedUser.NationalId == "11")
+            {
+                ModelState.Remove("NationalId");
+            }
+
             ModelState.Remove("Password");
             ModelState.Remove("ConfirmPassword");
             ModelState.Remove("ReturnUrl");
@@ -360,7 +367,15 @@ namespace yoga.Controllers
                 MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
                 FirstName = Input.FirstName, UserImage = _userImage, Country = country, NationalIdImage = _userImage_NationalId};
 
-                userData.NationalId = user.NationalId;
+                if(loggedUser.NationalId != "11")
+                {
+                    userData.NationalId = user.NationalId;
+                }
+                else
+                {
+                    userData.NationalId = "11";
+                }
+                
                 userData.Email = user.Email;
                 userData.PhoneNumber = user.PhoneNumber;
                 userData.Country = _db.Country.Find(Input.CountryId);
@@ -421,6 +436,77 @@ namespace yoga.Controllers
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
             return View(result.Succeeded ? nameof(ConfirmEmail) : "Error");
+        }
+
+
+        [Authorize]
+        public IActionResult ChangePassword(string? Id = "")
+        {
+            string userId = "";
+            if(!string.IsNullOrEmpty(Id))
+            {
+                userId = Id;
+            }
+            else 
+            {
+                userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
+            }
+            var user = _db.Users.Where(u=>u.Id == userId)
+            .Select(u => new ChangePasswordVM
+            {
+                
+            })
+            .FirstOrDefault();
+
+            if(user == null) return NotFound();
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordVM Input, string? Id = "")
+        {
+            string userId_nat = _userManager.GetUserId(User);
+            var loggedUser = _db.Users.Where(u=>u.Id == userId_nat).FirstOrDefault();
+            
+            if (ModelState.IsValid)
+            {
+                    string userId =  "";
+                    if(!string.IsNullOrEmpty(Id))
+                    {
+                        userId = Id;
+                    }
+                    else 
+                    {
+                        userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    }
+
+                    var userData = _db.Users.Find(userId);
+
+
+                var result = await _userManager.ChangePasswordAsync(userData, Input.OldPassword, Input.Password);
+                
+                if(result.Errors.Count() > 0)
+                {
+                    ModelState.AddModelError("OldPassword", "Old Password is incorrect");
+                    return View(Input);
+                }
+                
+                if(!string.IsNullOrEmpty(Id)) 
+                {
+                    if(userData.NationalId == "11")
+                    {
+                        return RedirectToAction("Index", "Users");
+                    }
+                
+                }
+                
+                return RedirectToAction("Settings");
+
+                }   
+
+                return View(Input);
         }
 
         [HttpGet]

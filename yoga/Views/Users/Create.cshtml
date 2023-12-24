@@ -8,10 +8,14 @@
 
 <div class="yoga-layout">
     <div class="container public-pages">
-        <h1 class="page-header text-center">@localizer["PageTitle"]</h1>
+        @* <h1 class="page-header text-center">@localizer["PageTitle"]</h1> *@
+        <h1 class="page-header text-center">Create Admin / Manager</h1> 
 
         <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
+
+            <select item class="form-control" name="RoleId" id="RoleId" asp-items="@Model.Roles"></select>
+            <span asp-validation-for="RoleId" class="text-danger"></span>
 
             <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
             <span asp-validation-for="Email" class="text-danger"></span>

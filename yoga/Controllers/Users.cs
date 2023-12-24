@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using yoga.Data;
 using yoga.Models;
@@ -24,17 +25,43 @@ namespace yoga.Controllers
         public IActionResult Index()
         {
 
-            var _users = _userManager.Users
+            var _users  = _userManager.Users.ToList();
+            string userId = _userManager.GetUserId(User);
+
+            if(User.IsInRole("Admin"))
+            {
+                _users = _userManager.Users
             .Where(u=>u.NationalId == "11")
             .ToList();
+            }
+            else {
+                _users = _userManager.Users
+            .Where(u=>u.NationalId == "11" && u.Id == userId)
+            .ToList();
+            }
             
             return View(_users);
         }
 
+        private List<SelectListItem> GetRoles()
+            {
+                var roles = _db.Roles
+                .Where(r=> r.Name == "Admin" || r.Name == "Manager")
+                .Select(r=>new SelectListItem() {
+                            Value = r.Name.ToString(),
+                            Text = r.Name})
+                .ToList();
+                return roles;
+                    
+            }
+
         [Authorize]
         public IActionResult Create()
-        {    
+        {   
+            var roles = GetRoles();
             var vm = new RegisterModel();
+            vm.Roles = roles;
+            
             return View(vm);
         }
 
@@ -43,6 +70,7 @@ namespace yoga.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RegisterModel user)
         {
+            ModelState.Remove("Roles");
             var newUser = new AppUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.Phone, 
                 Discriminator = "Default", FirstName=user.FirstName, LastName = user.Email, NationalId="11", MiddleName = "dd",
                 UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn" };
@@ -68,8 +96,8 @@ namespace yoga.Controllers
                 var result = await _userManager.CreateAsync(newUser, user.Password);
                 if(result.Succeeded)
                 {
-                    // Add user to Teacher role
-                    await _userManager.AddToRoleAsync(newUser, "Admin");
+                    // Add user to role
+                    await _userManager.AddToRoleAsync(newUser, user.RoleId);
                     return RedirectToAction("Index");
                 }
 
@@ -97,6 +125,7 @@ namespace yoga.Controllers
                 NationalId = u.NationalId,
                 Email = u.Email,
                 Phone = u.PhoneNumber,
+                FirstName = u.UserName
             })
             .FirstOrDefault();
 

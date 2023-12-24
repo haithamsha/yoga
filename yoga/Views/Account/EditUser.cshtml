@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    var displayName = $"{user.FirstName} {user.MiddleName} { user.LastName}";
+    var userName = user.FirstName;
+    var email = user.Email;
+    var Phone = user.PhoneNumber;
+    var imagePath = user.UserImage;
+    var nationalId = user.NationalId;
+}
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
 
@@ -18,8 +28,11 @@
                 <h2>@localizer["PageTitle"]</h2>
        
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
-                <span asp-validation-for="NationalId" class="text-danger"></span>
+                @if(@nationalId != "11")
+                {
+                    <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
+                    <span asp-validation-for="NationalId" class="text-danger"></span>
+                }
 
                 <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
                 <span asp-validation-for="Email" class="text-danger"></span>
