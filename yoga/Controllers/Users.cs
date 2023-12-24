@@ -25,22 +25,45 @@ namespace yoga.Controllers
         public IActionResult Index()
         {
 
-            var _users  = _userManager.Users.ToList();
+            //var _users  = new List<UserVM>();
             string userId = _userManager.GetUserId(User);
 
             if(User.IsInRole("Admin"))
             {
-                _users = _userManager.Users
-            .Where(u=>u.NationalId == "11")
-            .ToList();
+                // var _users = _userManager.Users
+                // .Where(u=>u.NationalId == "11")
+                // .Select(u=>new UserVM {
+                // Id=u.Id,
+                // FirstName = u.FirstName,
+                // Email = u.Email,
+                // PhoneNumber = u.PhoneNumber,
+                // RoleNames =string.Join(",", _userManager.GetRolesAsync(u).Result.ToArray())
+                // })
+                // .ToList();
+                // return View(_users);
+
+                var _users = _db.Users
+                .Join(_db.UserRoles, u => u.Id, ur => ur.UserId, (u, ur) => new { u, ur })
+                .Join(_db.Roles, ur => ur.ur.RoleId, r => r.Id, (ur, r) => new { ur, r })
+                .Where(u => u.ur.u.NationalId ==  "11")
+                .ToList()
+                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email }).Select(r => new UserVM()
+                {
+                    FirstName = r.Key.UserName,
+                    Email = r.Key.Email,
+                    RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray())
+                })
+                .ToList();
+                
+                return View(_users);
             }
             else {
-                _users = _userManager.Users
-            .Where(u=>u.NationalId == "11" && u.Id == userId)
-            .ToList();
+            //     _users = _userManager.Users
+            // .Where(u=>u.NationalId == "11" && u.Id == userId)
+            // .ToList();
             }
             
-            return View(_users);
+            return View();
         }
 
         private List<SelectListItem> GetRoles()

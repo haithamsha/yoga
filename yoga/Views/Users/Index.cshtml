@@ -1,6 +1,6 @@
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 
-@model IEnumerable<AppUser>
+@model IEnumerable<UserVM>
 @{
     ViewData["Title"] ="Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,8 +23,10 @@
 											<tr>
                                                 <th>@localizer["UserName"]</th>
                                                 <th>@localizer["Email"]</th>
-                                                <th>@localizer["PhoneNumber"]</th>
+                                                @* <th>@localizer["PhoneNumber"]</th> *@
+                                                <th>role</th>
                                                 <th>@localizer["Actions"]</th>
+                                                <th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -38,9 +40,10 @@
                                             <td class="cell">
                                         @item.Email
                                             </td>
-                                            <td class="cell">
+                                            @* <td class="cell">
                                         @item.PhoneNumber
-                                            </td>
+                                            </td> *@
+                                            <td>@item.RoleNames</td>
                                             
                                             <td>
                                                 <div class="w-75 btn-group" role="group">
@@ -49,6 +52,7 @@
                                                 </div>
                                                 
                                             </td>
+                                            
                                             <td>
                                                 @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                                                     {
