@@ -170,7 +170,7 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             ModelState.Remove("NationalIdImage");
             ModelState.Remove("Counries");
-            ModelState.Remove("Role");
+            ModelState.Remove("RoleId");
             ModelState.Remove("Roles");
             if (ModelState.IsValid)
             {
