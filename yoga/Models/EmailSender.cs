@@ -109,7 +109,7 @@ namespace yoga.Models
             try
             {
                    
-                    var apiKey = Environment.GetEnvironmentVariable("SENDGRIDKEY");
+                    var apiKey = Environment.GetEnvironmentVariable("SENDGRIDKEY2");
                     var client = new SendGridClient(apiKey);
                     var from = new EmailAddress("greenlinedemo1@gmail.com", "SAUDI YOGA COMMITTEE");
                     var subject = emailMsg.Subject;
