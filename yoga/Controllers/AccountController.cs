@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using yoga.Data;
 using yoga.Models;
@@ -149,12 +150,27 @@ namespace yoga.Controllers
             
         }
 
+        private List<SelectListItem> GetCities(int countryId)
+        {
+            var cities =  _db.Cities
+                        .Where(c=>c.CountryId == countryId)
+                        .Select(r=>new SelectListItem() {
+                            Value = r.CityId.ToString(),
+                            Text = r.EnName
+                        })
+                        .ToList();
+            return cities;
+            
+        }
+
         [AllowAnonymous]
         public IActionResult Register()
         {
             var countries = GetCountries();
+            var cities = GetCities(1);
             var vm = new RegisterModel();
             vm.Counries = countries;
+            vm.Cities = cities;
             return View(vm);
         }
 
@@ -170,6 +186,7 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             ModelState.Remove("NationalIdImage");
             ModelState.Remove("Counries");
+            ModelState.Remove("Cities");
             ModelState.Remove("RoleId");
             ModelState.Remove("Roles");
             if (ModelState.IsValid)
@@ -185,6 +202,15 @@ namespace yoga.Controllers
                             await Image.CopyToAsync(fileSrteam);
                         }
                     }
+                    else 
+                    {
+                        var _countries = GetCountries();
+                        var _cities = GetCities(Input.CountryId);
+                        Input.Counries = _countries;
+                        Input.Cities = _cities;
+                        ModelState.AddModelError("Image", "Image Required");
+                        return View(Input);
+                    }
 
                     // Upload NationalId image
                     string fileName_nationalId = "";
@@ -197,13 +223,23 @@ namespace yoga.Controllers
                             await NationalIdImage.CopyToAsync(fileSrteam);
                         }
                     }
+                    else {
+                        var _countries = GetCountries();
+                        Input.Counries = _countries;
+                        var _cities = GetCities(Input.CountryId);
+                        Input.Cities = _cities;
+                        ModelState.AddModelError("NationalIdImage", "National Id required");
+                        return View(Input);
+                    }
                     
 
                 var country = _db.Country.Find(Input.CountryId);
+                var city = _db.Cities.Find(Input.CityId);
 
                 var user = new AppUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.Phone, NationalId = Input.NationalId, 
                 MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
-                FirstName = Input.FirstName, UserImage = fileName, Country = country, NationalIdImage = fileName_nationalId};
+                FirstName = Input.FirstName, UserImage = fileName, 
+                Country = country, City= city, NationalIdImage = fileName_nationalId};
 
                 // Validate if user exists before
                 string validationError = "";
@@ -225,6 +261,8 @@ namespace yoga.Controllers
                 {
                     var _countries = GetCountries();
                     Input.Counries = _countries;
+                    var _cities = GetCities(Input.CountryId);
+                    Input.Cities = _cities;
                     ModelState.AddModelError("", validationError);
                     return View(Input);
                 }
@@ -267,6 +305,8 @@ namespace yoga.Controllers
             // If we got this far, something failed, redisplay form
             var countries = GetCountries();
             Input.Counries = countries;
+            var cities = GetCities(Input.CountryId);
+            Input.Cities = cities;
             return View(Input);
         }
 
@@ -293,7 +333,8 @@ namespace yoga.Controllers
                 LastName = u.LastName,
                 Image = u.UserImage,
                 NationalIdImage = u.NationalIdImage,
-                FirstName = u.UserName
+                FirstName = u.UserName,
+                CityId = u.City.CityId
             })
             .FirstOrDefault();
 
@@ -301,6 +342,8 @@ namespace yoga.Controllers
 
             var countries = GetCountries();
             user.Counries = countries;
+            var cities = GetCities(1);
+            user.Cities = cities;
             return View(user);
         }
 
@@ -322,6 +365,9 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             ModelState.Remove("NationalIdImage");
             ModelState.Remove("Counries");
+            ModelState.Remove("Cities");
+            ModelState.Remove("RoleId");
+            ModelState.Remove("Roles");
             if (ModelState.IsValid)
             {
                     string userId =  "";
@@ -361,6 +407,7 @@ namespace yoga.Controllers
                     
 
                 var country = _db.Country.Find(Input.CountryId);
+                var city = _db.Cities.Find(Input.CityId);
 
                 string _userImage = string.IsNullOrEmpty(fileName) ? userData.UserImage : fileName;
                 string _userImage_NationalId = string.IsNullOrEmpty(fileName_nationalId) ? userData.NationalIdImage : fileName_nationalId;
@@ -369,9 +416,9 @@ namespace yoga.Controllers
                 MiddleName = Input.MiddleName, Discriminator = "Default", LastName = Input.LastName, 
                 FirstName = Input.FirstName, UserImage = _userImage, Country = country, NationalIdImage = _userImage_NationalId};
 
-                if(loggedUser.NationalId != "11")
+                if(userData.NationalId != "11")
                 {
-                    userData.NationalId = user.NationalId;
+                    userData.NationalId = Input.NationalId;
                 }
                 else
                 {
@@ -381,6 +428,7 @@ namespace yoga.Controllers
                 userData.Email = user.Email;
                 userData.PhoneNumber = user.PhoneNumber;
                 userData.Country = _db.Country.Find(Input.CountryId);
+                userData.City = _db.Cities.Find(Input.CityId);
                 userData.FirstName = user.FirstName;
                 userData.MiddleName = user.MiddleName;
                 userData.LastName = user.LastName;
@@ -407,6 +455,8 @@ namespace yoga.Controllers
                 {
                     var _countries = GetCountries();
                     Input.Counries = _countries;
+                    var cities = GetCities(Input.CountryId);
+                    Input.Cities = cities;
                     ModelState.AddModelError("", validationError);
                     return View(Input);
                 }
@@ -425,6 +475,8 @@ namespace yoga.Controllers
                 // If we got this far, something failed, redisplay form
                 var countries = GetCountries();
                 Input.Counries = countries;
+                var _cities = GetCities(Input.CountryId);
+                Input.Cities = _cities;
                 return View(Input);
         }
 

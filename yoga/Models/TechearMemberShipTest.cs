@@ -43,5 +43,8 @@ namespace yoga.Models
         public string TeachingType_string { get; set; }
         [NotMapped]
         public string UserName { get; set; }
+        [NotMapped]
+        [Display(Name = "City")]
+        public string City_String { get; set; }
     }
 }

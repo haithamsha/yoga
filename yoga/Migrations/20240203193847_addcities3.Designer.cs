@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using yoga.Data;
 
@@ -11,9 +12,11 @@ using yoga.Data;
 namespace yoga.Migrations
 {
     [DbContext(typeof(YogaAppDbContext))]
-    partial class YogaAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203193847_addcities3")]
+    partial class addcities3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,9 +166,6 @@ namespace yoga.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -242,8 +242,6 @@ namespace yoga.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("CountryId");
 
@@ -713,15 +711,9 @@ namespace yoga.Migrations
 
             modelBuilder.Entity("yoga.Models.AppUser", b =>
                 {
-                    b.HasOne("yoga.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId");
-
                     b.HasOne("yoga.Models.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
-
-                    b.Navigation("City");
 
                     b.Navigation("Country");
                 });

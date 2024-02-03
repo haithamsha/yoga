@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @model yoga.ViewModels.TechearMemberShipVM
 @{
     ViewData["Title"] = "Index";
@@ -24,6 +26,8 @@
                     <span>@Model.LicenseFeesPrice SAR</span>
                 }
             </p>
+        </div>
+        <div class="alert alert-danger"><span class="fw-bold">@localizer["BillNoteTitle"]</span> @localizer["BillNote"]
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">

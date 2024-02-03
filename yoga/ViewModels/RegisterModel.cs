@@ -62,9 +62,13 @@ namespace yoga.ViewModels
         [Display(Name = "Nationality")]
         public int CountryId { get; set; }
 
+        [Display(Name = "City")]
+        public int CityId { get; set; }
+
         [Display(Name = "Role")]
         public string RoleId { get; set; }
         public List<SelectListItem> Counries { get; set; }
+        public List<SelectListItem> Cities { get; set; }
         public List<SelectListItem> Roles { get; set; }
     }
 }

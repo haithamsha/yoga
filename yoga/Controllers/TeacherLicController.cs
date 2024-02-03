@@ -273,28 +273,37 @@ namespace yoga.Controllers
                 //entity.CertficateFiles = uploadFiles == null ? "" : string.Join(",", uploadFiles);
                 entity.Name = obj.Name;
 
+                // validate innter cert items
+                if(obj.TechearMemberShipTestVMs.Count != Request.Form.Files.Count)
+                {
+                    ModelState.AddModelError("", "Certification file is required for each certaficate");
+                    obj.EducationLevels = getEducationLevels();
+                    obj.TeachingTypes = getTeachingTypes();
+                    return View(obj);
+                }
+
                 foreach (var item in obj.TechearMemberShipTestVMs)
                 {
                     // Upload images
-                string fileName_cert = "";
+                    string fileName_cert = "";
 
-                List<string> uploadFiles = new List<string>();
+                    List<string> uploadFiles = new List<string>();
 
-                if (CertficateFiles != null)
-                {
-                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
-                        "wwwroot/assets", "images");
-                    IFormFile fileItem = CertficateFiles;
-
-                    fileName_cert = Path.GetFileName(fileItem.FileName);
-                    using (var fileSrteam = new FileStream(Path.Combine(filePath_cert, fileName_cert), FileMode.Create))
+                    if (CertficateFiles != null)
                     {
-                        // await CertficateFiles.CopyToAsync(fileSrteam);
-                        fileItem.CopyTo(fileSrteam);
-                        uploadFiles.Add(fileName_cert);
-                    }
+                        var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
+                            "wwwroot/assets", "images");
+                        IFormFile fileItem = CertficateFiles;
 
-                }
+                        fileName_cert = Path.GetFileName(fileItem.FileName);
+                        using (var fileSrteam = new FileStream(Path.Combine(filePath_cert, fileName_cert), FileMode.Create))
+                        {
+                            // await CertficateFiles.CopyToAsync(fileSrteam);
+                            fileItem.CopyTo(fileSrteam);
+                            uploadFiles.Add(fileName_cert);
+                        }
+
+                    }
 
                     entity.TechearMemberShipTests.Add(new TechearMemberShipTest{TeachingType = item.TeachingType.Value,
                     AccreditedHours = item.AccreditedHours, CertaficateDate = item.CertaficateDate, CertficateFiles = fileName_cert,
@@ -457,6 +466,15 @@ namespace yoga.Controllers
 
             obj.TechearMemberShip.EducationLevel_String = getEducationLevel((int)obj.TechearMemberShip.EducationLevel);
             obj.TeachingType_string =GlobalHelpers.getTeachingType(obj.TeachingType);
+
+            // get user city
+            var cityId = _db.Users
+            .Where(u=>u.Id ==  obj.TechearMemberShip.AppUser.Id)
+            .Include("City")
+            .SingleOrDefault()?.City?.CityId;
+            
+            var city = _db.Cities.Find(cityId).EnName;
+            obj.City_String = city;
             if (obj == null) return NotFound();
 
             return View(obj);
@@ -477,6 +495,8 @@ namespace yoga.Controllers
             ModelState.Remove("PayLicFees");
             ModelState.Remove("LicFeesPrice");
             ModelState.Remove("ExamLocation");
+
+            string notifyBody = "";
 
             //wf history
             WFHistory wfHistory = new WFHistory();
@@ -517,6 +537,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Approve Information Confirmation";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step1_BasicInformation;
+                        notifyBody = "Approve Basic information";
                     }
                     if (PayExamFees == 1)
                     {
@@ -539,6 +560,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Approve Pay Exam Fees";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step2_PayExamFees;
+                        notifyBody = "Approve pay exam fees.";
                     }
 
                     if (PayLicFees == 1)
@@ -613,7 +635,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Approve Pay license Fees";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step5_PayLicenceFees;
-
+                        notifyBody =  "Approve Pay licence Fees";
 
 
                     }
@@ -630,6 +652,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Approve Take Exam";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step3_TakeTheExam;
+                        notifyBody = "Approve Take Exam";
                     }
                     if (PassExam == 1)
                     {
@@ -650,6 +673,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Approve Pass Exam";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.ApproveTeacherLicense_step4_PassTheExam;
+                        notifyBody = "Approve Pass the Exam";
                     }
                     
 
@@ -678,6 +702,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Reject Pay Exam Fees";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step2_2_PayExamFees;
+                        notifyBody = "Reject Pay Exam Fees";
                     }
                     else if (PayLicFees == 2)
                     {
@@ -688,6 +713,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Reject Pay License Fees";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.RejecteacherLicense_step5_5_PayLicenceFees;
+                        notifyBody = "Reject Pay License Fees";
                     }
                     else if (Info == 2)
                     {
@@ -696,6 +722,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Reject Information";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step1_1_BasicInformation;
+                        notifyBody = "Reject Information";
                     }
                     
                     else if (PassExam == 2)
@@ -716,6 +743,7 @@ namespace yoga.Controllers
                         // wfhistory
                         wfHistory.Description = "Reject Pass Exam";
                         wfHistory.WFHistoryType = WFHistoryTypeEnum.RejectTeacherLicense_step4_4_PassTheExam;
+                        notifyBody = "Reject Pass Exam";
                     }
                 }
 
@@ -741,9 +769,10 @@ namespace yoga.Controllers
                     {
                         AppUser = tech.TechearMemberShip.AppUser,
                         Body = content,
-                        Title = "Techer License",
+                        Title = notifyBody,
                         CreationDate = DateTime.Now,
-                        IsRead = false
+                        IsRead = false,
+                        AdminUser = loggedUser
                     });
 
                     // wf history
@@ -753,6 +782,8 @@ namespace yoga.Controllers
                     wfHistory.ModuleName = "TeacherLic";
                     wfHistory.RecordId = TestId;
                     int wfSaved = _wfHistoryManager.Save(wfHistory);
+
+
 
                     return RedirectToAction("Detail", "TeacherLic", new { id = TestId });
                 }

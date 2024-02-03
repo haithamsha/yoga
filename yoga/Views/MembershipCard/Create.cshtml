@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @model yoga.ViewModels.MembershipCardVM
 @{
     ViewData["Title"] = "Index";
@@ -26,24 +28,27 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <h2>ٍMembership Card -- Apply your card now!</h2>
+            <h2>@localizer["PageTitle"]</h2>
+
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="border p-3 mt-4">
                 <div class="alert alert-info">Please Send <span class="fw-bold">150</span> SAR to the below bank account
                 </div>
+                <div class="alert alert-danger"><span class="fw-bold">@localizer["BillNoteTitle"]</span> @localizer["BillNote"]
+                </div>
 
                 <div class="mb-3">
-                    <label class="fw-bold">ٍMembership Card Price</label>
+                    <label class="fw-bold">@localizer["Price"]</label>
                     <label>150 ريال سعودي</label>
                 </div>
 
                 <div class="mb-3">
-                    <label class="fw-bold">IBAN</label>
+                    <label class="fw-bold">@localizer["IBAN"]</label>
                     <label>SA5865000000101459418001</label>
                 </div>
 
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="RecietCopy"></label>
+                    <label class="fw-bold" asp-for="RecietCopy">@localizer["BankReceitCopy"]</label>
                     <input type="file" asp-for="RecietCopy" class="form-control" />
                     <span asp-validation-for="RecietCopy" class="text-danger"></span>
                 </div>
@@ -67,7 +72,7 @@
                             </div>
                         }
 
-                <button type="submit" class="btn btn-brown-outline about-btn">Apply</button>
+                <button type="submit" class="btn btn-brown-outline about-btn">@localizer["Apply"]</button>
         </form>
     </div>
 </div>

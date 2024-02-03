@@ -11,6 +11,7 @@ namespace yoga.Models
         public DateTime CreationDate { get; set; }
         public bool IsRead { get; set; } = false;
         public AppUser AppUser { get; set; }
+        public AppUser? AdminUser { get; set; }
         
     }
 }

@@ -56,5 +56,6 @@ namespace yoga.Models
         public string EducationLevel_String { get; set; }
         [NotMapped]
         public string TeachingType_string { get; set; }
+        
     }
 }

@@ -28,11 +28,13 @@
                 <h2>@localizer["PageTitle"]</h2>
        
                 <div asp-validation-summary="All" class="text-danger"></div>
-                @if(@nationalId != "11")
+                @* @if(@nationalId != "11")
                 {
                     <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
                     <span asp-validation-for="NationalId" class="text-danger"></span>
-                }
+                } *@
+                <input asp-for="NationalId" type="text" placeholder='@localizer["NationalId"] *' />
+                <span asp-validation-for="NationalId" class="text-danger"></span>
 
                 <input asp-for="Email" type="text" placeholder='@localizer["Email"] *' />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -43,6 +45,9 @@
 
                 <select item class="form-control" name="CountryId" id="CountryId" asp-items="@Model.Counries"></select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
+
+                <select item class="form-control" name="CityId" id="CityId" asp-items="@Model.Cities"></select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
 
 
                 <input asp-for="FirstName" type="text" placeholder='@localizer["FirstName"] *'/>

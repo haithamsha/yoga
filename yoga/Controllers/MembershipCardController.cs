@@ -307,7 +307,8 @@ namespace yoga.Controllers
                         Body = "Congratulations, Your SAUDI YOGA COMMITTEE Membership Card Is Now Active",
                         CreationDate = DateTime.Now,
                         IsRead = false,
-                        Title = "Membership Card Approved"
+                        Title = "Membership Card Approved",
+                        AdminUser = loggedUser
                     });
 
                     // add wfhistory
@@ -360,7 +361,8 @@ namespace yoga.Controllers
                         Body = content,
                         CreationDate = DateTime.Now,
                         IsRead = false,
-                        Title = "Membership Card Rejection"
+                        Title = "Membership Card Rejection",
+                        AdminUser = loggedUser
                     });
 
                     // add wfhistory

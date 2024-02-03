@@ -16,6 +16,7 @@ namespace yoga.Data
         public DbSet<Platform> Platforms{get;set;}
         public DbSet<MembershipCard> MembershipCards { get; set; }
         public DbSet<Country> Country { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<WFHistory> WFHistory { get; set; }
     }
