@@ -54,13 +54,13 @@
                                             </td>
                                             
                                             <td>
-                                                @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
+                                                @* @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
                                                     {
                                                         <div class="w-75 btn-group" role="group">
                                                             <a class="btn-sm app-btn-secondary" asp-controller="Account" asp-action="ChangePassword"
                                                             asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["ChangePassword"]</a>
                                                         </div>
-                                                    }
+                                                    } *@
                                             </td>
 
                                         </tr>

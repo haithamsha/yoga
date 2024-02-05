@@ -117,32 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BillNoteTitle" xml:space="preserve">
-    <value>Note</value>
-    <comment/>
-  </data>
-  <data name="BillNote" xml:space="preserve">
-    <value>The name of the person on the receipt must be identical to the name of the applicant, otherwise the regulations and provisions will apply.</value>
-    <comment/>
-  </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Membership Card -- Apply your card now!</value>
+    <value>بيانات المستخدم</value>
     <comment/>
   </data>
-  <data name="Price" xml:space="preserve">
-    <value>Membership Card Price</value>
+  <data name="Subscriptions" xml:space="preserve">
+    <value>الاشتراكات</value>
     <comment/>
   </data>
-  <data name="IBAN" xml:space="preserve">
-    <value>IBAN</value>
+  <data name="YoHaveNo" xml:space="preserve">
+    <value>ليس لديك اي اشتراكات حتي الان</value>
     <comment/>
   </data>
-  <data name="BankReceitCopy" xml:space="preserve">
-    <value>Bank Receipt Copy</value>
+  <data name="LicTitle" xml:space="preserve">
+    <value>رخصة المدربين</value>
     <comment/>
   </data>
-  <data name="Apply" xml:space="preserve">
-    <value>Apply</value>
+  <data name="Plan" xml:space="preserve">
+    <value>الخطة</value>
+    <comment/>
+  </data>
+  <data name="IssueDate" xml:space="preserve">
+    <value>تاريخ الاشتراك</value>
+    <comment/>
+  </data>
+  <data name="Expires" xml:space="preserve">
+    <value>تنتهي في</value>
+    <comment/>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
+    <comment/>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>نشطة</value>
+    <comment/>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>تحميل</value>
+    <comment/>
+  </data>
+  <data name="NotActive" xml:space="preserve">
+    <value>غير نشطة</value>
+    <comment/>
+  </data>
+  <data name="MembershipCard" xml:space="preserve">
+    <value>كارت العضوية</value>
     <comment/>
   </data>
 </root>

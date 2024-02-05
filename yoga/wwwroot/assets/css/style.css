@@ -995,11 +995,11 @@ textarea {
 }
 
 .btn {
-    height: 52px;
+    /* height: 52px; */
     font-family: Tajawal;
-    text-transform: uppercase;
-    border-radius: 100px;
-    line-height: 38px;
+    /* text-transform: uppercase; */
+    /* border-radius: 100px; */
+    /* line-height: 38px; */
 }
 
 .btn-brown-primary,

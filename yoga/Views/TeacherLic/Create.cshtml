@@ -34,6 +34,7 @@
             <div class="border p-3 mt-4">
                 <h2>Teacher Licence Issue</h2>
                 <div asp-validation-summary="All" class="text-danger"></div>
+                <span class="text-danger" id="spAgreement"></span>
                 <ul class="nav nav-tabs">
                     <li class="nav-item" id="li_Home">
                         <a class="nav-link active" data-bs-toggle="tab" id="liHome" href="#home">Basic Information</a>
@@ -211,24 +212,28 @@
 
 
                             <div class="mb-3">
-                                <input asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree
+                                <input id="ckAgreement" asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree
                                     on
                                     Terms and Conditions and
                                     Acknowledged</span>
+                                <span asp-validation-for="@Model.Agreement" class="text-danger"></span>
+
                             </div>
 
-                            <div class="mb-3">
-                                <button type="submit" id="btnSubmit"
-                                    class="btn btn-brown-outline about-btn">Submit</button>
-                              
-                            </div>
+                            
                         </div>
 
                     </div>
 
                 </div>
-            </div>
 
+                <div class="mb-3">
+                                <button type="submit" id="btnSubmit"
+                                    class="btn btn-brown-outline about-btn">Submit</button>
+                              
+                            </div>
+            </div>
+             
 
         </form>
     </div>
@@ -247,10 +252,15 @@
     <script src="~/chosen_v1.8.7/chosen.jquery.js" type="text/javascript"></script>
     <script src="~/chosen_v1.8.7/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <partial name="_ValidationScriptsPartial" />
 
     <script>
+        
+
         $(function () {
+
+            $.validator.unobtrusive.adapters.addBool("checkboxrequired", "required");
 
             $("#TeachingTypesList").change(function () {
                 //console.log("TeachingTypesList Val: ", $("#TeachingTypesList div ul li").text());
@@ -289,7 +299,10 @@
             });
         } *@
 
+        
+
         function AddItem(btn) {
+            
 
             var table = document.getElementById("ExpTable");
             var rows = table.getElementsByTagName("tr")
@@ -309,6 +322,9 @@
             var newRow = table.insertRow();
             newRow.innerHTML = rowOuterHtml;
 
+            console.log('nextrowIdx: ', nextrowIdx);
+            clearNextRowData(nextrowIdx);
+                                
             var btnAddID = btn.id;
             var btnDeleteid = btnAddID.replaceAll('btnAdd', 'btnRemove');
             var delbtn = document.getElementById(btnDeleteid);
@@ -323,6 +339,14 @@
         function DeleteItem(btn)
         {
             $(btn).closest('tr').remove();
+        }
+        function clearNextRowData(indx)
+        {
+            $("input[name='TechearMemberShipTestVMs["+indx+"].AccreditedHours']").val(0);
+            $("input[name='TechearMemberShipTestVMs["+indx+"].SchoolLocation']").val('');
+            $("input[name='TechearMemberShipTestVMs["+indx+"].SchoolName']").val('');
+            $("input[name='TechearMemberShipTestVMs["+indx+"].SchoolLink']").val('');
+            $("input[name='TechearMemberShipTestVMs["+indx+"].SchoolSocialMediaAccount']").val('');
         }
 
     </script>

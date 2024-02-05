@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using yoga.Helpers;
 using yoga.Models;
 
 namespace yoga.ViewModels
@@ -37,6 +38,8 @@ namespace yoga.ViewModels
         
         
         public string Name { get; set; }
+        
+        [CheckBoxRequired(ErrorMessage = "Please accept the terms and condition.")]
         public bool Agreement { get; set; }
 
         public string ExamDetails { get; set; }

@@ -95,10 +95,21 @@ namespace yoga.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RegisterModel user)
         {
+            ModelState.Remove("ReturnUrl");
+            ModelState.Remove("NationalId");
+            ModelState.Remove("MiddleName");
+            ModelState.Remove("LastName");
+            ModelState.Remove("Image");
+            ModelState.Remove("NationalIdImage");
+            ModelState.Remove("Counries");
+            ModelState.Remove("Cities");
             ModelState.Remove("Roles");
+
+            // get default city
+            var city = _db.Cities.Find(1);
             var newUser = new AppUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.Phone, 
                 Discriminator = "Default", FirstName=user.FirstName, LastName = user.Email, NationalId="11", MiddleName = "dd",
-                UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn" };
+                UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn", City = city };
 
             // Validate if user exists before
                 string validationError = "";
@@ -118,7 +129,16 @@ namespace yoga.Controllers
                     return View(user);
                 }
 
-                var result = await _userManager.CreateAsync(newUser, user.Password);
+                var result = new IdentityResult();
+                try
+                {
+                    result = await _userManager.CreateAsync(newUser, user.Password);
+                }
+                catch (System.Exception ex)
+                {
+                    
+                    //TODO refactor
+                }
                 if(result.Succeeded)
                 {
                     // Add user to role
@@ -137,7 +157,7 @@ namespace yoga.Controllers
         [Authorize]
         public IActionResult Edit(string? Id = "")
         {
-
+           
             string userId = "";
             if(!string.IsNullOrEmpty(Id))
             {
@@ -162,6 +182,9 @@ namespace yoga.Controllers
         [HttpPost]
         public IActionResult Edit(RegisterModel user, string Id)
         {
+             ModelState.Remove("RoleId");
+            ModelState.Remove("Cities");
+            ModelState.Remove("Roles");
             ModelState.Remove("ReturnUrl");
             ModelState.Remove("NationalId");
             ModelState.Remove("FirstName");

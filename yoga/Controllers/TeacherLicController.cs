@@ -188,6 +188,7 @@ namespace yoga.Controllers
             ModelState.Remove("Image");
             ModelState.Remove("TeachingType");
             obj.Name = "tst";
+            ModelState.Remove("TeachingTypesList");
             foreach (var item in obj.TechearMemberShipTestVMs)
             {
                 ModelState.Remove("ExamDetails");
@@ -468,19 +469,24 @@ namespace yoga.Controllers
             obj.TeachingType_string =GlobalHelpers.getTeachingType(obj.TeachingType);
 
             // get user city
-            var cityId = _db.Users
-            .Where(u=>u.Id ==  obj.TechearMemberShip.AppUser.Id)
-            .Include("City")
-            .SingleOrDefault()?.City?.CityId;
             
-            var city = _db.Cities.Find(cityId).EnName;
-            obj.City_String = city;
+            obj.City_String = getCity(obj.TechearMemberShip.AppUser.Id);
             if (obj == null) return NotFound();
 
             return View(obj);
         }
 
-        
+        string getCity(string userId)
+        {
+            var cityId = _db.Users
+            .Where(u=>u.Id ==  userId)
+            .Include("City")
+            .SingleOrDefault()?.City?.CityId;
+            
+            var city = _db.Cities.Find(cityId).EnName;
+
+            return city;
+        }
 
         //Post
         [HttpPost]
@@ -526,6 +532,7 @@ namespace yoga.Controllers
                     if (PayExamFees == 2 || PayLicFees == 2)
                     {
                         ModelState.AddModelError("", "You Must click reject button after type the reject reason");
+                        tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                         return View(tech);
                     }
                     if (Info == 1)
@@ -544,11 +551,13 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before confirm the exam fees");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         if (string.IsNullOrEmpty(ExamLocation) && PayExamFees == 1)
                         {
                             ModelState.AddModelError("", "Please Insert The Exam Location and Date!");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         tech.PayExamFees = true;
@@ -568,6 +577,7 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before confirm the license fees");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         tech.PayFees = true;
@@ -644,6 +654,7 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before take the exam");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         content += "Thank you for taking the SAUDI YOGA COMMITTEE Teacher License  exam. ";
@@ -659,11 +670,13 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass the exam");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         if (LicFeesPrice <= 0)
                         {
                             ModelState.AddModelError("", "Please Insert The License Fees!");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
                         content = "Congratulations, You Have Passed The SAUDI YOGA COMMITTEE Teacher licence exam. ";
@@ -685,6 +698,7 @@ namespace yoga.Controllers
                     if (PayExamFees == 2 && PayLicFees == 2 && Info == 2 && TakeExam == 2)
                     {
                         ModelState.AddModelError("", "You must reject only one step");
+                        tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                         return View(tech);
                     }
                     if (PayExamFees == 2)
@@ -692,6 +706,7 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass or not the exam");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
 
@@ -730,6 +745,7 @@ namespace yoga.Controllers
                         if (tech.Status == (int)StatusEnum.Pending)
                         {
                             ModelState.AddModelError("", "Information Must approved first before pass the exam");
+                            tech.City_String = getCity(tech.TechearMemberShip.AppUser.Id);
                             return View(tech);
                         }
 

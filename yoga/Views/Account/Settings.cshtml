@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @using System.Net
 @model yoga.ViewModels.UserSetting;
 @{
@@ -24,9 +26,9 @@
 <div class="d-lg-flex">
     <partial name="_AdminMenu" />
     <div class="account-container account-details">
-        <h2 class="header page-header">Hello</h2>
+        <h2 class="header page-header">@localizer["PageTitle"]</h2>
         <div class="d-flex align-items-center">
-            <img src="~/assets/images/accountdetails/dashboard/profile.png" />
+            <img src="~/assets/images/accountdetails/dashboard/user.png" />
             @if(@nationalId == "11")
             {
                 <p class="title">@userName</p>
@@ -38,51 +40,51 @@
         </div>
         <h2 class="header"> </h2>
         <div class="d-flex align-items-center">
-            <img src="~/assets/images/accountdetails/dashboard/users.png" />
+            <img src="~/assets/images/accountdetails/dashboard/mail.png" />
             <p class="title">@email</p>
         </div>
         @if(nationalId !="11")
         {
             <div class="d-flex align-items-center">
-                <img src="~/assets/images/accountdetails/dashboard/subscriptions.png" />
+                <img src="~/assets/images/accountdetails/dashboard/phone.png" />
                 <p class="title">@Phone</p>
             </div>
         }
         @if(nationalId != "11")
         {
             <div class="d-flex align-items-center">
-                <img src="~/assets/images/accountdetails/dashboard/account-details.png" />
+                <img src="~/assets/images/accountdetails/dashboard/id-card.png" />
                 <p class="title">@nationalId</p>
             </div>
         }
 
-        @* @if(nationalId != "11")
-        { *@
+        @if(nationalId == "11")
+        { 
             <div>
                 <a asp-controller="Account" asp-action="EditUser" class="btn btn-darker-brown-primary">Edit</a>
             </div>
-        @* } *@
+         } 
         
     </div>
     @if(nationalId != "11")
     {
         <div class="account-container w-100">
-        <h2 class="header page-header">Subscriptions</h2>
+        <h2 class="header page-header">@localizer["Subscriptions"]</h2>
         <div class="page-desc">
             @if (Model.User_Subscribtions.HasMemberShip == false && Model.User_Subscribtions.HasTeacherLic == false)
             {
-                <p>You have no any Subscriptions</p>
+                <p>@localizer["YoHaveNo"]</p>
             }
         </div>
-        <div>Teacher Licences</div>
+        <div>@localizer["LicTitle"]</div>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Plan</th>
-                    <th>Issue Date</th>
-                    <th>Expires</th>
-                    <th>Status</th>
-                    <th>Download</th>
+                    <th>@localizer["Plan"]</th>
+                    <th>@localizer["IssueDate"]</th>
+                    <th>@localizer["Expires"]</th>
+                    <th>@localizer["Status"]</th>
+                    <th>@localizer["Download"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -96,14 +98,14 @@
                             <td>@item.ExpireDate</td>
                             @if (@item.FinalApprove)
                             {
-                                <td class="col approved">Active</td>
+                                <td class="col approved">@localizer["Active"]</td>
                             }
                             else
                             {
-                                <td class="col pending">Not Active</td>
+                                <td class="col pending">@localizer["Not Active"]</td>
                             }
                             <td>
-                                <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">Download</a>
+                                <a target="_blank" href="~/assets/techer_licnese@(Model.TeacherLic.Serial).pdf">@localizer["Download"]</a>
                             </td>
                         </tr>
                     }
@@ -112,21 +114,21 @@
                 @if(Model.User_Subscribtions.HasMemberShip)
                 {
                     <tr>
-                    <td>Membership Card</td>
+                    <td>@localizer["MembershipCard"]</td>
                     <td>@Model.MemshipCard.IssueDate</td>
                     <td>@Model.MemshipCard.ExpireDate</td>
                    @if (Model.MemshipCard.Active.Value)
                     {
-                        <td class="col approved">Active</td>
+                        <td class="col approved">@localizer["Active"]</td>
                     }
                     else
                     {
-                        <td class="col pending">Not Active</td>
+                        <td class="col pending">@localizer["NotActive"]</td>
                     }
                     <td>
                         @if(Model.MemshipCard.Active.Value)
                         {
-                            <a target="_blank" href="~/assets/MemberShip_Card@(Model.MemshipCard.Serial).pdf">Download</a>
+                            <a target="_blank" href="~/assets/MemberShip_Card@(Model.MemshipCard.Serial).pdf">@localizer["Download"]</a>
                         }
                     </td>
                     </tr>

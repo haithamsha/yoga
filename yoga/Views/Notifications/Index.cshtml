@@ -13,7 +13,7 @@
 
         <form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
-        <h2>Notifications</h2>
+        <h2>Notification Center</h2>
         
         <div id="myTabContent">
             <table class="table">
@@ -23,7 +23,11 @@
                         <th>Description</th>
                         <th>Date</th>
                         <th>User</th>
-                        <th>Admin/Manager</th>
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <th>Admin/Manager</th>
+                        }
+
                         
                     </tr>
                 </thead>
@@ -35,7 +39,11 @@
                         <td>@Html.Raw(@item.Body)</td>
                         <td>@item.CreationDate</td>
                         <td>@item.AppUser?.FirstName @item.AppUser?.LastName</td>
-                        <td>@item.AdminUser?.FirstName @item.AdminUser?.LastName</td>
+                        @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <td>@item.AdminUser?.FirstName @item.AdminUser?.LastName</td>
+                        }
+                        
                         </tr>
                     }
                 </tbody>

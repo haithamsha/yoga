@@ -28,11 +28,11 @@
                 }
             </p> *@
         </div>
-        <div class="alert alert-danger"><span class="fw-bold">@localizer["BillNoteTitle"]</span> @localizer["BillNote"]
-        </div>
+        @* <div class="alert alert-danger"><span class="fw-bold">@localizer["BillNoteTitle"]</span> @localizer["BillNote"]
+        </div> *@
         <div class="mb-3">
             <input type="hidden" value='@(ViewContext.RouteData.Values["Id"])' name="TestId">
-            <label>Receit</label>
+            <label>Receipt </label>
             <input type="file" name="Receit" class="form-control" />
         </div>
         <div class="mb-3">

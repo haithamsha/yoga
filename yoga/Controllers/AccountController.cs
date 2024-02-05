@@ -712,5 +712,31 @@ namespace yoga.Controllers
             .ToList();
             return View(result);
         }
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            
+            return View();
+        }
+
+        public ActionResult ResetPassword(string code, string email)  
+        {  
+            
+            return View();  
+        }  
+
+        [HttpPost]     
+        public ActionResult ResetPassword()  
+        {  
+            
+            return View();  
+        } 
+
     }
 }

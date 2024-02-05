@@ -58,7 +58,7 @@ namespace yoga.Controllers
                 string fileName = "";
                 if(RecietCopy == null || RecietCopy.Length == 0)
                 {
-                    ModelState.AddModelError("RecietCopy", "Reciet Copy Is required");
+                    ModelState.AddModelError("RecietCopy", "Receipt Copy Is required");
                     return View(obj);
                 }
                 if(RecietCopy != null && RecietCopy.Length > 0)
@@ -133,11 +133,12 @@ namespace yoga.Controllers
                 // Add user to member role
                 await _userManager.AddToRoleAsync(loggedUser, "Member");
                 
-                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                string confirmationMessage = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                ViewData["Saved"] = confirmationMessage;
                 EmailConfiguration _emailConfiguration = new EmailConfiguration();
                 EmailSender _emailSender = new EmailSender(_emailConfiguration);
                     
-                string content = $"Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                string content = $"Dear {loggedUser.UserName}, We hope this message finds you in good health. We are delighted to inform you that we have successfully received your request for a membership card. Our dedicated team is currently reviewing and processing your application, ensuring that it receives the attention and efficiency it deserves.Upon approval of your membership card request, you will gain access to an array of exclusive benefits, services, and opportunities available to esteemed members of our community.If any additional information is required to complete the process, one of our representatives will promptly reach out to you for further details.We sincerely appreciate your interest in joining as a member, and we eagerly look forward to welcoming you to our organization. If you have any questions or concerns, please do not hesitate to contact our customer support team at info@yoga.sa.Thank you for selecting us as your preferred organization. We strive to make your membership experience truly fulfilling.Warm regards, Membership Services Team";
                 
                 var emailMessage = new EmailMessage
                 {
@@ -171,7 +172,7 @@ namespace yoga.Controllers
             
                 _emailSender.SendEmailBySendGrid(emailMessage);
 
-                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                ViewData["Saved"] = confirmationMessage;
                 return RedirectToAction("DataSaved");
             }
             return View();

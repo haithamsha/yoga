@@ -66,17 +66,14 @@
                                                 @item.PhoneNumber
                                                     </td> *@
                                                     <td class="cell">
-                                                @* @item.Country.EnName *@
-                                                    </td>
-
-                                                    <td>
                                                         <div class="w-75 btn-group" role="group">
                                                             <a class="btn-sm app-btn-secondary" asp-controller="Account" asp-action="EditUser"
                                                             asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
                                                         </div>
-                                                        
                                                     </td>
-                                                    <td>
+
+                                                   
+                                                    @* <td>
                                                         @if(User.IsInRole("Admin"))
                                                         {
                                                             <div class="w-75 btn-group" role="group">
@@ -84,7 +81,7 @@
                                                             asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["ChangePassword"]</a>
                                                             </div>
                                                         }
-                                                    </td>
+                                                    </td> *@
 
                                                 </tr>
                                     }
