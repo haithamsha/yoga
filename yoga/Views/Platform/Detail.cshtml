@@ -36,10 +36,17 @@
                 @if (culture.RequestCulture.UICulture.Name == "en")
                 {
                     @Model.Summury
+                    <div>
+                        <div style="padding-top: 50px;"><a asp-controller="Account" asp-action="Register" class="btn btn-darker-brown-primary">Register Now</a></div>
+                    </div>
                 }
                 else
                 {
                     @Model.SummuryAr
+                    
+                    <div>
+                        <div style="padding-top: 50px;"><a asp-controller="Account" asp-action="Register" class="btn btn-darker-brown-primary">سجل الان</a></div>
+                    </div>
                 }
             </div>
 
@@ -75,6 +82,7 @@
                                     </div>
                                 }
                             }
+                            
                         }
                         else
                         {
@@ -96,7 +104,15 @@
                     @if (!string.IsNullOrEmpty(Model.Requirements))
                     {
                         <div class="advantage-content">
-                            <h3 class="advantage-title">Requirements</h3>
+                            
+                                @if(culture.RequestCulture.UICulture.Name == "en")
+                                {
+                                    <h3 class="advantage-title">Requirements</h3>
+                                }
+                                else {
+                                    <h3 class="advantage-title">متطلبات</h3>
+                                }
+                            
                             <div class="advantage-item">
                                 <img src="~/assets/images/platform/requirments.png" />
                                 <p>

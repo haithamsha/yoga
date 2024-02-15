@@ -8,7 +8,7 @@
 
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
-<h1>User Profile</h1>
+@* <h1>User Profile</h1> *@
 <div class="d-lg-flex">
 
 
@@ -21,7 +21,7 @@
 		<div class="row g-4 mb-4">
 			@if (Model.User_Subscribtions.HasTeacherLic)
 			{
-				<h4>Your Teacher Licences Status</h4>
+				<h4>@localizer["LicStatus"]</h4>
 				<div class="col-6 col-lg-12">
 					<div class="table-responsive">
 							        <table class="table app-table-hover mb-0 text-left">
@@ -145,20 +145,20 @@
 	<div class="row gx-5 gy-3">
 		@if (Model.User_Subscribtions.HasMemberShip && !User.IsInRole("Admin") && !User.IsInRole("Manager"))
 		{
-			<h4>Your Member Card Status</h4>
+			<h4>@localizer["CardStatus"]</h4>
 			<div>
 				@if (Model.MemshipCard.Status == (int)StatusEnum.Pending)
 				{
-					<strong>Status: </strong> <span class="badge bg-info">Pending</span>
+					<strong>@localizer["Status"] </strong> <span class="badge bg-info">@localizer["Pending"]</span>
 				}
 				else if (Model.MemshipCard.Status == (int)StatusEnum.Approved)
 				{
-					<strong>Status: </strong> <span class="badge bg-success">Approved</span>
+					<strong>@localizer["Status"] </strong> <span class="badge bg-success">@localizer["Approved"]</span>
 				}
 				else
 				{
-					<strong>Status: </strong> <span class="badge bg-danger">Rejected</span>
-					<a class="btn btn-primary" asp-controller="MembershipCard" asp-action="Create" asp-route-id="@Model.MemshipCard.Id" >Re Submit</a>
+					<strong>@localizer["Status"] </strong> <span class="badge bg-danger">@localizer["Rejected"]</span>
+					<a class="btn btn-primary" asp-controller="MembershipCard" asp-action="Create" asp-route-id="@Model.MemshipCard.Id" >@localizer["ReSubmit"]</a>
 				}
 			</div>
 		}
@@ -170,7 +170,7 @@
 				
 			}
 			else {
-				<p>You Can Subscribte to one of Our Services</p>
+				<p>@localizer["OurServices"]</p>
 			}
 
 		}
@@ -189,7 +189,7 @@
 							<path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
 							<path fill-rule="evenodd"
 							d="M8 6a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 10.293V6.5A.5.5 0 0 1 8 6z" />
-						</svg>Get Membership Card</a>
+						</svg>@localizer["GetCard"]</a>
 
 
 				</div>
@@ -212,7 +212,7 @@
 							<path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
 							<path fill-rule="evenodd"
 							d="M8 6a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 10.293V6.5A.5.5 0 0 1 8 6z" />
-						</svg>Get Teacher Licence</a>
+						</svg>@localizer["GetLic"]</a>
 				</div>
 			}
 		}

@@ -1012,21 +1012,22 @@ namespace yoga.Controllers
         public IActionResult MemberData()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = _db.TechearMemberShips
-            .Include("AppUser")
-            .Where(t => t.AppUser.Id == userId)
+            var result = _db.techearMemberShipTests
+            .Include(t=>t.TechearMemberShip)
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t => t.TechearMemberShip.Id == userId)
             .Select(t => new TechearMemberDataVM
             {
-                FirstName = t.AppUser.FirstName,
-                MiddleName = t.AppUser.MiddleName,
-                LastName = t.AppUser.LastName,
-                Phone = t.AppUser.PhoneNumber,
-                Email = t.AppUser.Email,
-                Nationality = t.AppUser.Country.EnName,
+                FirstName = t.TechearMemberShip.AppUser.FirstName ,
+                MiddleName = t.TechearMemberShip.AppUser.MiddleName,
+                LastName = t.TechearMemberShip.AppUser.LastName,
+                Phone = t.TechearMemberShip.AppUser.PhoneNumber,
+                Email = t.TechearMemberShip.AppUser.Email,
+                Nationality = t.TechearMemberShip.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
-                ExpYears = t.ExpYears,
+                ExpYears = t.TechearMemberShip.ExpYears,
                 AccreditedHours = t.AccreditedHours,
-                EducationLevel = getEducationLevel((int)t.EducationLevel),
+                EducationLevel = getEducationLevel((int)t.TechearMemberShip.EducationLevel),
                 TeachingType =GlobalHelpers.getTeachingType((int)t.TeachingType),
                 PayExamFees = t.PayExamFees == true ? "Yes" : "No",
                 PayLicFees = t.PayFees == true ? "Yes" : "No",
@@ -1035,12 +1036,12 @@ namespace yoga.Controllers
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
-                PersonalWebSite = t.PersonalWebSite,
+                PersonalWebSite = t.TechearMemberShip.PersonalWebSite,
                 SchoolLocation = t.SchoolLocation,
-                CertaficateDate = t.CertaficateDate.Value.ToShortDateString(),
+                CertaficateDate = t.CertaficateDate.ToShortDateString(),
                 SchoolName = t.SchoolName,
                 SchoolLink = t.SchoolLink,
-                SocialMediaAccounts = t.SocialMediaAccounts,
+                SocialMediaAccounts = t.TechearMemberShip.SocialMediaAccounts,
                 CertficateFiles = t.CertficateFiles
             })
             .FirstOrDefault();
@@ -1052,22 +1053,23 @@ namespace yoga.Controllers
         public IActionResult MemberData(string name)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = _db.TechearMemberShips
-            .Include("AppUser")
-            .Where(t => t.AppUser.Id == userId)
+            var result = _db.techearMemberShipTests
+            .Include(t=>t.TechearMemberShip)
+            .Include(t=>t.TechearMemberShip.AppUser)
+            .Where(t => t.TechearMemberShip.Id == userId)
             .Select(t => new TechearMemberDataVM
             {
-                FirstName = t.AppUser.FirstName,
-                MiddleName = t.AppUser.MiddleName,
-                LastName = t.AppUser.LastName,
-                Phone = t.AppUser.PhoneNumber,
-                Email = t.AppUser.Email,
-                Nationality = t.AppUser.Country.EnName,
+                FirstName = t.TechearMemberShip.AppUser.FirstName ,
+                MiddleName = t.TechearMemberShip.AppUser.MiddleName,
+                LastName = t.TechearMemberShip.AppUser.LastName,
+                Phone = t.TechearMemberShip.AppUser.PhoneNumber,
+                Email = t.TechearMemberShip.AppUser.Email,
+                Nationality = t.TechearMemberShip.AppUser.Country.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
-                ExpYears = t.ExpYears,
+                ExpYears = t.TechearMemberShip.ExpYears,
                 AccreditedHours = t.AccreditedHours,
-                EducationLevel = getEducationLevel((int)t.EducationLevel),
-                TeachingType = getTeachingType((int)t.TeachingType),
+                EducationLevel = getEducationLevel((int)t.TechearMemberShip.EducationLevel),
+                TeachingType =GlobalHelpers.getTeachingType((int)t.TeachingType),
                 PayExamFees = t.PayExamFees == true ? "Yes" : "No",
                 PayLicFees = t.PayFees == true ? "Yes" : "No",
                 Status = getCurrentStatus(t.Status),
@@ -1075,12 +1077,12 @@ namespace yoga.Controllers
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
                 ExpireDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.ToShortDateString() : "",
                 SchoolSocialMediaAccount = t.SchoolSocialMediaAccount,
-                PersonalWebSite = t.PersonalWebSite,
+                PersonalWebSite = t.TechearMemberShip.PersonalWebSite,
                 SchoolLocation = t.SchoolLocation,
-                CertaficateDate = t.CertaficateDate.Value.ToShortDateString(),
+                CertaficateDate = t.CertaficateDate.ToShortDateString(),
                 SchoolName = t.SchoolName,
                 SchoolLink = t.SchoolLink,
-                SocialMediaAccounts = t.SocialMediaAccounts,
+                SocialMediaAccounts = t.TechearMemberShip.SocialMediaAccounts,
                 CertficateFiles = t.CertficateFiles
             })
             .FirstOrDefault();
@@ -1132,6 +1134,7 @@ namespace yoga.Controllers
                 Phone = t.TechearMemberShip.AppUser.PhoneNumber,
                 Email = t.TechearMemberShip.AppUser.Email,
                 Nationality = t.TechearMemberShip.AppUser.Country.EnName,
+                City = t.TechearMemberShip.AppUser.City.EnName,
                 IssueDate = t.ExpireDate.HasValue == true ? t.ExpireDate.Value.AddYears(-1).ToShortDateString() : "",
                 ExperienceYears = t.TechearMemberShip.ExpYears,
                 AccreditedHours = t.AccreditedHours,

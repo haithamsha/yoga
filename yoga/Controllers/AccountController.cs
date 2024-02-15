@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OfficeOpenXml;
 using System.Security.Claims;
 using yoga.Data;
 using yoga.Models;
@@ -737,6 +738,38 @@ namespace yoga.Controllers
             
             return View();  
         } 
+
+        public IActionResult ExportToExcel(int Id)
+        {
+            
+            var result = _db.Users
+            
+            .Select(t => new
+            {
+                UserId = t.Id,
+                FirstName = t.FirstName,
+                MiddleName = t.MiddleName,
+                LastName = t.LastName,
+                Phone = t.PhoneNumber,
+                Email = t.Email,
+                Nationality = t.Country.EnName,
+                City = t.City.EnName
+            })
+            .ToList();
+            var stream = new MemoryStream();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var package = new ExcelPackage(stream))
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+                worksheet.Cells.LoadFromCollection(result, true);
+                package.Save();
+            }
+            stream.Position = 0;
+            string excelName = $"Users data {DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
+        }
 
     }
 }

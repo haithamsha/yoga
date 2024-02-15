@@ -9,6 +9,7 @@ namespace yoga.Models
         public TechearMemberShip()
         {
             TechearMemberShipTests = new List<TechearMemberShipTest>();
+            AppUser = new AppUser();
         }
 
         [Key]

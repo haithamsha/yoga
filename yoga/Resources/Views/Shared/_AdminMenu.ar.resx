@@ -146,11 +146,11 @@
     <comment/>
   </data>
   <data name="Users" xml:space="preserve">
-    <value>المتستخدمين</value>
+    <value>المستخدمين</value>
     <comment/>
   </data>
   <data name="Managers" xml:space="preserve">
-    <value>المديرين</value>
+    <value>المدراء</value>
     <comment/>
   </data>
 </root>

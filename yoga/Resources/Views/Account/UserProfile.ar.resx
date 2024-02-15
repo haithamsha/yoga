@@ -117,32 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BillNoteTitle" xml:space="preserve">
-    <value>ملحوظة:</value>
+  <data name="LicStatus" xml:space="preserve">
+    <value>حالة رخصة المدرب</value>
     <comment/>
   </data>
-  <data name="BillNote" xml:space="preserve">
-    <value>اسم الشخص في الايصال يجب ان يكون مطابق لإسم مقدم الطلب والا سوف تطبق اللوائح والاحكام.</value>
+  <data name="CardStatus" xml:space="preserve">
+    <value>حالة العضوية</value>
     <comment/>
   </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>بطاقة العضوية - قدم طلبك الان</value>
+  <data name="Status" xml:space="preserve">
+    <value>الحالة</value>
     <comment/>
   </data>
-  <data name="Price" xml:space="preserve">
-    <value>تكلفة اصدار البطاقة</value>
+  <data name="Pending" xml:space="preserve">
+    <value>قيد التقدم</value>
     <comment/>
   </data>
-  <data name="IBAN" xml:space="preserve">
-    <value>ايبان</value>
+  <data name="Approved" xml:space="preserve">
+    <value>مؤكدة</value>
     <comment/>
   </data>
-  <data name="BankReceitCopy" xml:space="preserve">
-    <value>صورة ايصال التحويل</value>
+  <data name="Rejected" xml:space="preserve">
+    <value>مرفوضة</value>
     <comment/>
   </data>
-  <data name="Apply" xml:space="preserve">
-    <value>إرسال</value>
+  <data name="ReSubmit" xml:space="preserve">
+    <value>اعادة التسجيل</value>
+    <comment/>
+  </data>
+  <data name="OurServices" xml:space="preserve">
+    <value>تستطيع الاشتراك في احدي الخدمات التالية</value>
+    <comment/>
+  </data>
+  <data name="GetCard" xml:space="preserve">
+    <value>احصل علي بطاقة العضوية</value>
+    <comment/>
+  </data>
+  <data name="GetLic" xml:space="preserve">
+    <value>احصل علي رخصة مدرب</value>
     <comment/>
   </data>
 </root>
