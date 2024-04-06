@@ -28,6 +28,7 @@
                                                 <th>@localizer["PayTestFees"]</th>
                                                 <th>@localizer["PayLicenceFees"]</th>
                                                 <th>@localizer["Status"]</th>
+                                                <th>@localizer["PassExam"]</th>
                                                 <th>@localizer["FinalApprove"]</th>
                                                 <th>@localizer["Actions"]</th>
 											</tr>
@@ -88,6 +89,16 @@
                                             {
                                                 <td class="cell"> <span class="badge bg-danger">Rejected</span> </td>
                                             }
+
+                                            @if (@item.PassExam == true)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-success">Yes</span> </td>
+                                            }
+                                            else if(@item.PassExam == false)
+                                            {
+                                                        <td class="cell"> <span class="badge bg-danger">No</span> </td>
+                                            }
+                                            
 
                                             @if (@item.FinalApprove == true)
                                             {

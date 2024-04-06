@@ -145,4 +145,12 @@
     <value>Apply</value>
     <comment/>
   </data>
+  <data name="plzSend" xml:space="preserve">
+    <value>Please Send</value>
+    <comment/>
+  </data>
+  <data name="sar" xml:space="preserve">
+    <value>SAR to the below bank account</value>
+    <comment/>
+  </data>
 </root>

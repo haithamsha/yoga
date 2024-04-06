@@ -145,4 +145,12 @@
     <value>إرسال</value>
     <comment/>
   </data>
+  <data name="plzSend" xml:space="preserve">
+    <value>من فضلك ارسل</value>
+    <comment/>
+  </data>
+  <data name="sar" xml:space="preserve">
+    <value>ريال الي الحساب التالي</value>
+    <comment/>
+  </data>
 </root>

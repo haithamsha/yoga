@@ -1143,6 +1143,7 @@ namespace yoga.Controllers
                 PayExamFees = t.PayExamFees == true ? "Paid" : "Not Paid",
                 PayLicFees = t.PayFees == true ? "Paid" : "Not Paid",
                 Status = getCurrentStatus(t.Status),
+                PassExam = t.PassExam == true ? "Yes" : "No",
                 FinalApprove = t.FinalApprove == false ? "Pending" : "Approved",
                 CurrentInformationStatus = getCurrentStatus(t.Status),
                 SerialNumber = string.IsNullOrEmpty(t.SerialNumber) ? "Not Generated Yet" : t.SerialNumber,
