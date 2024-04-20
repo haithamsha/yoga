@@ -50,6 +50,9 @@ namespace yoga.ViewModels
         public string? Serial { get; set; }
         public string? TeachingType_String { get; set; }
 
+        public List<SelectListItem>? TeachingTypes{get;set;}
+
+
 
     }
 }

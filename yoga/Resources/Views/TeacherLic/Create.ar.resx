@@ -121,4 +121,84 @@
     <value>هذا التاريخ يجب ان يكون تاريخ اول شهادة سيتم رفعها</value>
     <comment/>
   </data>
+  <data name="BasicInfo" xml:space="preserve">
+    <value>بيانات اساسية</value>
+    <comment/>
+  </data>
+  <data name="Exp" xml:space="preserve">
+    <value>الخبرات</value>
+    <comment/>
+  </data>
+  <data name="EducationLevel" xml:space="preserve">
+    <value>مستوي التعليم</value>
+    <comment/>
+  </data>
+  <data name="SelectLevel" xml:space="preserve">
+    <value>اختار المستوي</value>
+    <comment/>
+  </data>
+  <data name="SocialMediaAccounts" xml:space="preserve">
+    <value>حسابات التواصل الاجتماعي</value>
+    <comment/>
+  </data>
+  <data name="PersonalWebSite" xml:space="preserve">
+    <value>الموقع الالكتروني</value>
+    <comment/>
+  </data>
+  <data name="YearsOfExperience" xml:space="preserve">
+    <value>سنوات الخبرة</value>
+    <comment/>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>حفظ</value>
+    <comment/>
+  </data>
+  <data name="TeachingType" xml:space="preserve">
+    <value>نوع التعليم</value>
+    <comment/>
+  </data>
+  <data name="AccreditedHours" xml:space="preserve">
+    <value>الساعات المعتمدة</value>
+    <comment/>
+  </data>
+  <data name="SchoolLocation" xml:space="preserve">
+    <value>مكان المدرسة</value>
+    <comment/>
+  </data>
+  <data name="CertaficateDate" xml:space="preserve">
+    <value>تاريخ الشهادة</value>
+    <comment/>
+  </data>
+  <data name="SchoolName" xml:space="preserve">
+    <value>اسم المدرسة</value>
+    <comment/>
+  </data>
+  <data name="Schoollink" xml:space="preserve">
+    <value>موقع المدرسة</value>
+    <comment/>
+  </data>
+  <data name="SchoolSocialMediaAccount" xml:space="preserve">
+    <value>حساب التواصل الاجتماعي للمدرسة</value>
+    <comment/>
+  </data>
+  <data name="CertificateFile" xml:space="preserve">
+    <value>ملف الشهادة</value>
+    <comment/>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+    <comment/>
+  </data>
+  <data name="Agreement" xml:space="preserve">
+    <value>الموافقة على الشروط والأحكام والإقرار بها</value>
+    <comment/>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>طلب رخصة معلم</value>
+    <comment/>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>الانتقال الي حسابك لمشاهدة حالة الرخصة</value>
+    <comment/>
+  </data>
 </root>

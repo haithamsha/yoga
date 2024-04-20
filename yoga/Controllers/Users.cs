@@ -111,6 +111,7 @@ namespace yoga.Controllers
                 Discriminator = "Default", FirstName=user.FirstName, LastName = user.Email, NationalId="11", MiddleName = "dd",
                 UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn", City = city };
 
+            var roles = GetRoles();
             // Validate if user exists before
                 string validationError = "";
 
@@ -126,6 +127,8 @@ namespace yoga.Controllers
                 if(!string.IsNullOrEmpty(validationError))
                 {
                     ModelState.AddModelError("", validationError);
+                    
+                    user.Roles = roles;
                     return View(user);
                 }
 
@@ -136,8 +139,9 @@ namespace yoga.Controllers
                 }
                 catch (System.Exception ex)
                 {
-                    
-                    //TODO refactor
+                    ModelState.AddModelError("", ex.Message);
+                    user.Roles = roles;
+                    return View(user);
                 }
                 if(result.Succeeded)
                 {
@@ -150,7 +154,7 @@ namespace yoga.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
-
+                user.Roles = roles;
                 return View(user);
         }
 

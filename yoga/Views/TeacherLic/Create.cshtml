@@ -25,22 +25,22 @@
             @if (ViewData["Saved"] != null)
             {
                 <div class="alert alert-success">@ViewData["Saved"]</div>
-                <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a>
+                <div><a asp-controller="Account" asp-action="UserProfile">@localizer["ProfileTitle"]</a>
                 </div>
             }
 
 
 
             <div class="border p-3 mt-4">
-                <h2>Teacher Licence Issue</h2>
+                <h2>@localizer["PageTitle"]</h2>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <span class="text-danger" id="spAgreement"></span>
                 <ul class="nav nav-tabs">
                     <li class="nav-item" id="li_Home">
-                        <a class="nav-link active" data-bs-toggle="tab" id="liHome" href="#home">Basic Information</a>
+                        <a class="nav-link active" data-bs-toggle="tab" id="liHome" href="#home">@localizer["BasicInfo"]</a>
                     </li>
                     <li class="nav-item" id="li_Exp">
-                        <a class="nav-link" data-bs-toggle="tab" id="liProfile" href="#profile">Expreience</a>
+                        <a class="nav-link" data-bs-toggle="tab" id="liProfile" href="#profile">@localizer["Exp"]</a>
                     </li>
                     @* <li class="nav-item"> *@
                     @* <a class="nav-link" data-bs-toggle="tab" href="#payfees">Pay Fees</a> *@
@@ -54,7 +54,7 @@
                     <div class="tab-pane fade active show" id="home">
 
                         <div class="mb-3">
-                            <label asp-for="EducationLevel"></label>
+                            <label asp-for="EducationLevel">@localizer["EducationLevel"]</label>
                             <select name="EducationLevel" id="EducationLevel" class="form-control"
                                 asp-for="EducationLevel" asp-items="@Model.EducationLevels">
                             </select>
@@ -68,12 +68,12 @@
                             <span asp-validation-for="EducationLevel" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="SocialMediaAccounts"></label>
+                            <label asp-for="SocialMediaAccounts">@localizer["SocialMediaAccounts"]</label>
                             <input asp-for="SocialMediaAccounts" class="form-control" />
                             <span asp-validation-for="SocialMediaAccounts" class="text-danger"></span>
                         </div>
                         <div class="mb-3">
-                            <label asp-for="PersonalWebSite"></label>
+                            <label asp-for="PersonalWebSite">@localizer["PersonalWebSite"]</label>
                             <input asp-for="PersonalWebSite" class="form-control" />
                         </div>
                         @* <div class="mb-3">
@@ -83,7 +83,7 @@
 
 
                         <div class="mb-3">
-                            <label asp-for="ExpYears"></label>
+                            <label asp-for="ExpYears">@localizer["YearsOfExperience"]</label>
                             <input asp-for="ExpYears" class="form-control" />
                             <span asp-validation-for="ExpYears" class="text-danger"></span>
                         </div>
@@ -111,14 +111,14 @@
                         <table id="ExpTable">
                             <thead>
                                 <tr>
-                                    <th>Teaching Type</th>
-                                    <th>Accredited Hours</th>
-                                    <th>School Location</th>
-                                    <th>Certaficate Date</th>
-                                    <th>School Name</th>
-                                    <th>School link</th>
-                                    <th>School Social MediaA ccount</th>
-                                    <th>Certificate File</th>
+                                    <th>@localizer["TeachingType"]</th>
+                                    <th>@localizer["AccreditedHours"]</th>
+                                    <th>@localizer["SchoolLocation"]</th>
+                                    <th>@localizer["CertaficateDate"]</th>
+                                    <th>@localizer["SchoolName"]</th>
+                                    <th>@localizer["Schoollink"]</th>
+                                    <th>@localizer["SchoolSocialMediaAccount"]</th>
+                                    <th>@localizer["CertificateFile"]</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -184,7 +184,8 @@
                                         class="form-control" /> *@
                                             @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].SchoolSocialMediaAccount,
                                         new {htmlAttributes = new {@class = "form-control"}})
-                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolSocialMediaAccount" class="text-danger"></span>
+                                            <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].SchoolSocialMediaAccount"
+                                            class="text-danger"></span>
                                         </td>
                                         <td>
                                             @* <label asp-for="CertficateFiles"></label> *@
@@ -198,9 +199,9 @@
                                         </td>
                                         <td>
                                             <button onclick="AddItem(this)" id="btnAdd-@i" type="button"
-                                                class="visible">Add</button>
+                                                class="visible">@localizer["Add"]</button>
                                             <button id="btnRemove-@i" type="button" onclick="DeleteItem(this)"
-                                                class="invisible">Delete</button>
+                                                class="invisible">@localizer["Delete"]</button>
                                         </td>
                                     </tr>
                                 }
@@ -212,10 +213,9 @@
 
 
                             <div class="mb-3">
-                                <input id="ckAgreement" asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">Agree
-                                    on
-                                    Terms and Conditions and
-                                    Acknowledged</span>
+                                <input id="ckAgreement" asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">
+                                    @localizer["Agreement"]
+                                    </span>
                                 <span asp-validation-for="@Model.Agreement" class="text-danger"></span>
 
                             </div>
@@ -229,11 +229,9 @@
 
                 <div class="mb-3">
                                 <button type="submit" id="btnSubmit"
-                                    class="btn btn-brown-outline about-btn">Submit</button>
-                              
+                                    class="btn btn-brown-outline about-btn">@localizer["Submit"]</button>
                             </div>
             </div>
-             
 
         </form>
     </div>

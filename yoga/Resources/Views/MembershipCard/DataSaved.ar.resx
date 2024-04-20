@@ -117,88 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="certNote" xml:space="preserve">
-    <value>This date should be for the first uploaded certificate</value>
+  <data name="ConfirmMessage" xml:space="preserve">
+    <value>تم ارسال طلبك بنجاح</value>
     <comment/>
   </data>
-  <data name="BasicInfo" xml:space="preserve">
-    <value>Basic Information</value>
-    <comment/>
-  </data>
-  <data name="Exp" xml:space="preserve">
-    <value>Experience</value>
-    <comment/>
-  </data>
-  <data name="EducationLevel" xml:space="preserve">
-    <value>Education Level</value>
-    <comment/>
-  </data>
-  <data name="SelectLevel" xml:space="preserve">
-    <value>Select Level</value>
-    <comment/>
-  </data>
-  <data name="SocialMediaAccounts" xml:space="preserve">
-    <value>Social Media Accounts</value>
-    <comment/>
-  </data>
-  <data name="PersonalWebSite" xml:space="preserve">
-    <value>Personal Web Site</value>
-    <comment/>
-  </data>
-  <data name="YearsOfExperience" xml:space="preserve">
-    <value>Years Of Experience</value>
-    <comment/>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-    <comment/>
-  </data>
-  <data name="TeachingType" xml:space="preserve">
-    <value>Teaching Type	</value>
-    <comment/>
-  </data>
-  <data name="AccreditedHours" xml:space="preserve">
-    <value>Accredited Hours</value>
-    <comment/>
-  </data>
-  <data name="SchoolLocation" xml:space="preserve">
-    <value>School Location</value>
-    <comment/>
-  </data>
-  <data name="CertaficateDate" xml:space="preserve">
-    <value>Certaficate Date</value>
-    <comment/>
-  </data>
-  <data name="SchoolName" xml:space="preserve">
-    <value>School  Name</value>
-    <comment/>
-  </data>
-  <data name="Schoollink" xml:space="preserve">
-    <value>School link</value>
-    <comment/>
-  </data>
-  <data name="SchoolSocialMediaAccount" xml:space="preserve">
-    <value>School Social Media Account</value>
-    <comment/>
-  </data>
-  <data name="CertificateFile" xml:space="preserve">
-    <value>Certificate File</value>
-    <comment/>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-    <comment/>
-  </data>
-  <data name="Agreement" xml:space="preserve">
-    <value> Agree on Terms and Conditions and Acknowledged</value>
-    <comment/>
-  </data>
-  <data name="ProfileTitle" xml:space="preserve">
-    <value>Go to Your profile to see the licence status</value>
-    <comment/>
-  </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Teacher License Issue</value>
+  <data name="backBtn" xml:space="preserve">
+    <value>متابعة الطلب</value>
     <comment/>
   </data>
 </root>

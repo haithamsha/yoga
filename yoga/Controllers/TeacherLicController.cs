@@ -12,6 +12,7 @@ using yoga.Models;
 using yoga.ViewModels;
 using System.Linq;
 using yoga.Helpers;
+using System.Globalization;
 
 namespace yoga.Controllers
 {
@@ -70,10 +71,12 @@ namespace yoga.Controllers
 
         private List<SelectListItem> getEducationLevels()
         {
+            var culture = Request.HttpContext.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+
             List<SelectListItem> levels = new List<SelectListItem>();
             levels.Add(new SelectListItem
             {
-                Text = "Select Level",
+                Text = culture.RequestCulture.UICulture.Name == "en" ? "Select Level" : "اختر المستوي",
                 Value = string.Empty
             });
 
@@ -176,6 +179,7 @@ namespace yoga.Controllers
         public async Task<IActionResult> Create(TechearMemberShipVM obj, IFormFile CertficateFiles,
         IFormFile Image, string[] TeachingTypesList)
         {
+            ModelState.Remove("TeachingTypes");
             ModelState.Remove("ReceiptCopy");
             ModelState.Remove("CertficateFiles");
             ModelState.Remove("Agreement");
@@ -184,7 +188,6 @@ namespace yoga.Controllers
             ModelState.Remove("Name");
             ModelState.Remove("PersonalWebSite");
             ModelState.Remove("EducationLevels");
-            ModelState.Remove("TeachingTypes");
             ModelState.Remove("Image");
             ModelState.Remove("TeachingType");
             obj.Name = "tst";
@@ -375,6 +378,176 @@ namespace yoga.Controllers
         public JsonResult createAjax(TestVM testVM)
         {
             return Json(testVM);
+        }
+
+        public IActionResult CreateSingleLic()
+        {
+            var member = IfTeacherExists(0);
+            if (member != null) return View(member);
+            var vm = new TechearMemberShipTestVM();
+            vm.TeachingTypes = getTeachingTypes();
+            ViewBag.TeachingTypes = getTeachingTypes();
+            
+            vm.TestId=1; vm.ExamDetails = ""; vm.AccreditedHours = 0;
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> CreateSingleLic(TechearMemberShipTestVM obj, IFormFile CertficateFiles,
+        IFormFile Image, string[] TeachingTypesList, int memId)
+        {
+            ModelState.Remove("ReceiptCopy");
+            ModelState.Remove("CertficateFiles");
+            ModelState.Remove("ExamDetails");
+            ModelState.Remove("SchoolSocialMediaAccount");
+            ModelState.Remove("Name");
+            ModelState.Remove("TeachingTypes");
+            ModelState.Remove("Image");
+            ModelState.Remove("TeachingType");
+            ModelState.Remove("TeachingTypesList");
+            ModelState.Remove("ExamDetails");
+            ModelState.Remove("TeachingTypes");
+            ModelState.Remove("TeachingTypesList");
+
+            if (ModelState.IsValid)
+            {
+                // get logened user
+                string userId = _userManager.GetUserId(User);
+                var loggedUser = _db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (loggedUser == null)
+                {
+                    ModelState.AddModelError("", "User Not Exist");
+                    return View(obj);
+                }
+
+                if (obj.TeachingType == 0)
+                {
+                    obj.TeachingTypes = getTeachingTypes();
+                    ModelState.AddModelError("TeachingType", " Teaching Type is required");
+                }
+
+                // validate user image
+                if (string.IsNullOrEmpty(loggedUser.UserImage))
+                {
+                    // Upload image
+                    string fileName = "";
+                    if (Image != null && Image.Length > 0)
+                    {
+                        fileName = Path.GetFileName(Image.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/images", fileName);
+                        using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(fileSrteam);
+                        }
+                        // update user image column
+                        var user = _db.Users.Find(loggedUser.Id);
+                        if (user != null)
+                        {
+                            user.UserImage = fileName;
+                            _db.Users.Update(user);
+                            _db.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Image", "Image is rquired");
+                        return View(obj);
+                    }
+                }
+
+                var entity = _db.TechearMemberShips
+                .Where(m=>m.MemId == memId)
+                .Include(m=> m.AppUser)
+                .SingleOrDefault();
+
+                // validate innter cert items
+                if(Request.Form.Files.Count == 0)
+                {
+                    ModelState.AddModelError("", "Certification file is required for each certaficate");
+                    return View(obj);
+                }
+
+                // Upload images
+                string fileName_cert = "";
+
+                List<string> uploadFiles = new List<string>();
+
+                if (CertficateFiles != null)
+                {
+                    var filePath_cert = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot/assets", "images");
+                    IFormFile fileItem = CertficateFiles;
+
+                    fileName_cert = Path.GetFileName(fileItem.FileName);
+                    using (var fileSrteam = new FileStream(Path.Combine(filePath_cert, fileName_cert), FileMode.Create))
+                    {
+                        // await CertficateFiles.CopyToAsync(fileSrteam);
+                        fileItem.CopyTo(fileSrteam);
+                        uploadFiles.Add(fileName_cert);
+                    }
+
+                }
+
+                entity.TechearMemberShipTests.Add(new TechearMemberShipTest{TeachingType = obj.TeachingType.Value,
+                AccreditedHours = obj.AccreditedHours, CertaficateDate = obj.CertaficateDate, CertficateFiles = fileName_cert,
+                SchoolLocation =  obj.SchoolLocation, SchoolName = obj.SchoolName, SchoolLink = obj.SchoolLink, 
+                SchoolSocialMediaAccount = obj.SchoolSocialMediaAccount});
+                
+                _db.TechearMemberShips.Update(entity); 
+                int rowAffect = _db.SaveChanges();
+
+                // Add user to Teacher role
+                await _userManager.AddToRoleAsync(loggedUser, "Teacher");
+                ViewData["Saved"] = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+
+                // Add notification
+                string body = "Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.";
+                _notificationHelper.AddNotify(new Notification
+                {
+                    AppUser = loggedUser,
+                    Body = body,
+                    Title = "Create Teacher Licence",
+                    CreationDate = DateTime.Now,
+                    IsRead = false
+                });
+
+                // add wfhistory
+                WFHistory wfHistory = new WFHistory();
+                wfHistory.AppUser = loggedUser;
+                wfHistory.WFHistoryType = WFHistoryTypeEnum.CreatTeacherLicense;
+                wfHistory.RecordId = rowAffect;
+                wfHistory.CreationDate = DateTime.Now;
+                wfHistory.ModuleName = "TeacherLic";
+                wfHistory.Description = "Add New Certificate to  TeacherLicense";
+                int wfSaved = _wfHistoryManager.Save(wfHistory);
+
+                // Send Email
+                try
+                {
+                    var emailMessage = new EmailMessage
+                    {
+                        ToEmailAddresses = new List<string> { loggedUser.Email },
+                        Subject = "SAUDI YOGA COMMITTEE",
+                        Body = body
+                    };
+                    EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                    EmailSender _emailSender = new EmailSender(_emailConfiguration);
+                    emailMessage.Body = body;
+                    if (rowAffect == 1)
+                        _emailSender.SendEmailBySendGrid(emailMessage);
+                }
+                catch (System.Exception ex)
+                {
+
+                    throw;
+                }
+
+                return RedirectToAction("DataSaved");
+            }
+            obj.TeachingTypes = getTeachingTypes();
+            return View(obj);
         }
 
         public IActionResult DataSaved()

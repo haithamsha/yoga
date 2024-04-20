@@ -1,0 +1,137 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
+@model yoga.ViewModels.TechearMemberShipTestVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject UserManager<AppUser> userManager
+@{
+    var user = await userManager.GetUserAsync(User);
+    var imagePath = user.UserImage;
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="~/chosen_v1.8.7/chosen.css">
+
+<div class="yoga-layout">
+    <div class="public-pages">
+        <form method="post" enctype="multipart/form-data">
+
+            @if (ViewData["Saved"] != null)
+            {
+                <div class="alert alert-success">@ViewData["Saved"]</div>
+                <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the licence status</a>
+                </div>
+            }
+
+
+
+                <h2>Teacher Licence Item</h2>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <span class="text-danger" id="spAgreement"></span>
+
+
+                    <div class="formgroup">
+                        <label>Teaching type</label>
+                        <select id="TeachingTypesList" class="form-control" data-placeholder="Select Teaching types"
+                            asp-for="@Model.TeachingType" asp-items="@Model.TeachingTypes">
+                        </select>
+                        @* <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].TeachingType"
+                        class="text-danger"></span> *@
+
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="AccreditedHours">Accredited Hours</label>
+                        <input asp-for="AccreditedHours" id="AccreditedHours" class="form-control" />
+                        
+                        @* @Html.EditorFor(x => x.AccreditedHours,
+                                 new { htmlAttributes = new { @class = "form-control" } }) *@
+                        <span asp-validation-for="@Model.AccreditedHours" class="text-danger"></span>
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="SchoolLocation"> School Location </label>
+                        <input asp-for="SchoolLocation" id="SchoolLocation" class="form-control" />
+                       
+                        @* @Html.EditorFor(x => x.SchoolLocation,
+                                 new { htmlAttributes = new { @class = "form-control" } }) *@
+                        <span asp-validation-for="@Model.SchoolLocation" class="text-danger"></span>
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="CertaficateDate">Certaficate Date </label>
+                        <div class="saveCanInput EventDateInput">
+                            <input type="date" asp-for="CertaficateDate" asp-format="yyyy-mm-dd"
+                                class="form-control Datepicker" />
+                        </div>
+
+
+
+                        <span asp-validation-for="@Model.CertaficateDate" class="text-danger"></span>
+                        @* <span class="fw-bold">@localizer["certNote"]</span> *@
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="SchoolName">School Name</label>
+                        <input asp-for="SchoolName" id="SchoolName" class="form-control" />
+                        @* @Html.EditorFor(x => x.SchoolName,
+                                 new { htmlAttributes = new { @class = "form-control" } }) *@
+                        <span asp-validation-for="@Model.SchoolName" class="text-danger"></span>
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="SchoolLink">School Link</label>
+                        <input asp-for="SchoolLink" id="SchoolLink" class="form-control" />
+                        @* @Html.EditorFor(x => x.SchoolLink,
+                                 new { htmlAttributes = new { @class = "form-control" } }) *@
+                        <span asp-validation-for="@Model.SchoolLink" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="SchoolSocialMediaAccount">School Social Media Account</label>
+                        <input asp-for="SchoolSocialMediaAccount" id="SchoolSocialMediaAccount"
+                        class="form-control" />
+                        @* @Html.EditorFor(x => x.SchoolSocialMediaAccount,
+                                 new { htmlAttributes = new { @class = "form-control" } }) *@
+                        <span asp-validation-for="@Model.SchoolSocialMediaAccount" class="text-danger"></span>
+                    </div>
+                    <div class="formgroup">
+                        <label asp-for="CertficateFiles">Certficate Files</label>
+                        <input id="CertficateFiles" type="file" asp-for="CertficateFiles" class="form-control" />
+                        @* @Html.EditorFor(x=> x.TechearMemberShipTestVMs[i].CertficateFiles,
+                        new {htmlAttributes = new {@class = "form-control"}}) *@
+
+                        @* <span asp-validation-for="@Model.TechearMemberShipTestVMs[i].CertficateFiles"
+                        class="text-danger"></span> *@
+                    </div>
+                    <div class="formgroup">
+                        <label></label>
+                        <div></div>
+                        <button type="submit" id="btnSubmit" class="btn btn-brown-outline about-btn">Submit</button>
+                    </div>
+                
+                    <input type="hidden" id="hdnLastIndex" value="0">
+
+
+
+
+                
+
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    <script src="~/assets/js/jquery-3.6.0.js"></script>
+    <script src="~/assets/js/jquery-ui.js"></script>
+    <script src="~/chosen_v1.8.7/chosen.jquery.js" type="text/javascript"></script>
+    <script src="~/chosen_v1.8.7/docsupport/init.js" type="text/javascript" charset="utf-8"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+
+    
+
+}

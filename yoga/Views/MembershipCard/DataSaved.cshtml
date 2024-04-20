@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,8 +13,8 @@
 
 
     
-        <div class="alert alert-success">Your request has been sent successfully. Our team will review it and approve it as soon as possible. Thank you.</div>
-        <div><a asp-controller="Account" asp-action="UserProfile">Go to Your profile to see the membership card status</a></div>
+        <div class="alert alert-success">@localizer["ConfirmMessage"]</div>
+        <div><a asp-controller="Account" asp-action="UserProfile">@localizer["backBtn"]</a></div>
 
 
 </div>
