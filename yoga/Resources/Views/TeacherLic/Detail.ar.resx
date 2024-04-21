@@ -117,36 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PageTitle" xml:space="preserve">
-    <value>طلبات العضويات</value>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
     <comment/>
   </data>
-  <data name="Export" xml:space="preserve">
-    <value>تصدير البيانات</value>
+  <data name="TeacherLicenceIssue" xml:space="preserve">
+    <value>طلب رخصة مدرب</value>
     <comment/>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>المستخدم</value>
+  <data name="Expreience" xml:space="preserve">
+    <value>الخبرات</value>
     <comment/>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>البريد الالكتروني</value>
+  <data name="BasicInformation" xml:space="preserve">
+    <value>بيانات اساسية</value>
     <comment/>
   </data>
-  <data name="CardSerial" xml:space="preserve">
-    <value>رقم العضوية</value>
-    <comment/>
-  </data>
-  <data name="PayFees" xml:space="preserve">
-    <value>المصاريف</value>
+  <data name="Fees" xml:space="preserve">
+    <value>الرسوم</value>
     <comment/>
   </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
     <comment/>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>اجراءات</value>
+  <data name="Name" xml:space="preserve">
+    <value>الاسم</value>
+    <comment/>
+  </data>
+  <data name="EducationLevel" xml:space="preserve">
+    <value>مستوي التعليم</value>
+    <comment/>
+  </data>
+  <data name="SocialMediaAccounts" xml:space="preserve">
+    <value>حسابات التواصل الاجتماعي</value>
+    <comment/>
+  </data>
+  <data name="PersonalWebSite" xml:space="preserve">
+    <value>الموقع الشخصي</value>
+    <comment/>
+  </data>
+  <data name="TeachingType" xml:space="preserve">
+    <value>مستوي التعليم</value>
+    <comment/>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>المدينة</value>
     <comment/>
   </data>
   <data name="ExpYears" xml:space="preserve">
@@ -154,39 +170,163 @@
     <comment/>
   </data>
   <data name="AccreditedHours" xml:space="preserve">
-    <value>الساعات التراكمية</value>
+    <value>الساعات المعتمدة</value>
     <comment/>
   </data>
-  <data name="TeachingType" xml:space="preserve">
-    <value>نوع التدريب</value>
+  <data name="SchoolLocation" xml:space="preserve">
+    <value>موقع المدرسة</value>
+    <comment/>
+  </data>
+  <data name="CertaficateDate" xml:space="preserve">
+    <value>تاريخ الشهادة</value>
+    <comment/>
+  </data>
+  <data name="SchoolName" xml:space="preserve">
+    <value>اسم المدرسة</value>
+    <comment/>
+  </data>
+  <data name="SchoolLink" xml:space="preserve">
+    <value>رابط المدرسة</value>
+    <comment/>
+  </data>
+  <data name="SchoolSocialMediaAccount" xml:space="preserve">
+    <value>حساب التواصل الاجتماعي للمدرسة</value>
+    <comment/>
+  </data>
+  <data name="CertficateFiles" xml:space="preserve">
+    <value>ملفات الشهادة</value>
+    <comment/>
+  </data>
+  <data name="ExamFees" xml:space="preserve">
+    <value>رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>تحذير: قام المستخدم بأرسال ايصال الدفع رجاء التأكيد علي عملية الدفع</value>
+    <comment/>
+  </data>
+  <data name="TeacherPay" xml:space="preserve">
+    <value>دفع المدرب رسوم الاختبار من فضلك قم بمراجعة ايصال الدفع بالاسفل</value>
+    <comment/>
+  </data>
+  <data name="NotPaidYet" xml:space="preserve">
+    <value>غير مدفوع</value>
+    <comment/>
+  </data>
+  <data name="LicenceFees" xml:space="preserve">
+    <value>رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="WarningApprove" xml:space="preserve">
+    <value>تحذير: قام المستخدم بأرسال ايصال الدفع رجاء التأكيد علي عملية الدفع</value>
+    <comment/>
+  </data>
+  <data name="InformationCompleted" xml:space="preserve">
+    <value>حالة البيانات</value>
+    <comment/>
+  </data>
+  <data name="PayExamFees" xml:space="preserve">
+    <value>رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="TakeTheExam" xml:space="preserve">
+    <value>قام بالاختبار</value>
+    <comment/>
+  </data>
+  <data name="PassTheExam" xml:space="preserve">
+    <value>اجتاز الاختبار</value>
+    <comment/>
+  </data>
+  <data name="PayLicenceFees" xml:space="preserve">
+    <value>دفع رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>قيد التقدم</value>
+    <comment/>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>اختر</value>
+    <comment/>
+  </data>
+  <data name="Markasapproved" xml:space="preserve">
+    <value>تم التأكيد</value>
+    <comment/>
+  </data>
+  <data name="MarkasRejected" xml:space="preserve">
+    <value>مرفوضة</value>
+    <comment/>
+  </data>
+  <data name="Rejected" xml:space="preserve">
+    <value>مرفوضة</value>
+    <comment/>
+  </data>
+  <data name="Approved" xml:space="preserve">
+    <value>تم التأكيد</value>
+    <comment/>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>لا</value>
+    <comment/>
+  </data>
+  <data name="Markaspaidexamfees" xml:space="preserve">
+    <value>تم دفع رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="RejectPayment" xml:space="preserve">
+    <value>رفض عملية دفع الرسوم</value>
     <comment/>
   </data>
   <data name="Details" xml:space="preserve">
     <value>تفاصيل</value>
     <comment/>
   </data>
-  <data name="FinalApprove" xml:space="preserve">
-    <value>الحالية النهائية</value>
+  <data name="ExamDetails" xml:space="preserve">
+    <value>تفاصيل الاختبار(التاريخ - الوقت)</value>
     <comment/>
   </data>
-  <data name="TestId" xml:space="preserve">
-    <value>رقم الطلب</value>
+  <data name="Markastaketheexam" xml:space="preserve">
+    <value>تم حضور الاختبار</value>
     <comment/>
   </data>
-  <data name="TeacherLicences" xml:space="preserve">
-    <value>رخص المدربين</value>
+  <data name="Yes" xml:space="preserve">
+    <value>نعم</value>
     <comment/>
   </data>
-  <data name="PassExam" xml:space="preserve">
-    <value>إجتاز الاختبار</value>
+  <data name="Markaspasstheexam" xml:space="preserve">
+    <value>تم إجتياز الاختبار</value>
     <comment/>
   </data>
-  <data name="PayTestFees" xml:space="preserve">
-    <value>دفع رسوم الاختبار</value>
+  <data name="NotPassed" xml:space="preserve">
+    <value>لم يتم تجاوز الاختبار</value>
     <comment/>
   </data>
-  <data name="PayLicenceFees" xml:space="preserve">
-    <value>دفع رسوم الرخصة</value>
+  <data name="PleaseInsertLicenseFees" xml:space="preserve">
+    <value>من فضلك ادخل رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="MarkaspaidLicensefees" xml:space="preserve">
+    <value>تم دفع رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>تأكيد</value>
+    <comment/>
+  </data>
+  <data name="RejectReason" xml:space="preserve">
+    <value>سبب الرفض</value>
+    <comment/>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>رفض</value>
+    <comment/>
+  </data>
+  <data name="Agree" xml:space="preserve">
+    <value>الموافقة على الشروط والأحكام والإقرار بها</value>
+    <comment/>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>رخصة المدربين</value>
     <comment/>
   </data>
 </root>

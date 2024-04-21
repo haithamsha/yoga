@@ -13,7 +13,7 @@
                 <partial name="_AdminMenu" />
                 <div class="account-container account-details">
                     @* <h2 class="header page-header">@localizer["PageTitle"]</h2> *@
-                    <h2 class="header page-header">Teacher Licences</h2>
+                    <h2 class="header page-header">@localizer["TeacherLicences"]</h2>
                     <a asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]' asp-action="ExportToExcel">@localizer["Export"]</a>
 
 					<div class="table-responsive">

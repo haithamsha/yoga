@@ -153,4 +153,8 @@
     <value>المدراء</value>
     <comment/>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>السجل</value>
+    <comment/>
+  </data>
 </root>

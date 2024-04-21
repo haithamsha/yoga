@@ -153,4 +153,8 @@
     <value>Managers</value>
     <comment/>
   </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+    <comment/>
+  </data>
 </root>

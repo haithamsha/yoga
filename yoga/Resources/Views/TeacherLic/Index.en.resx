@@ -121,4 +121,20 @@
     <value>RequestId</value>
     <comment/>
   </data>
+  <data name="Teacher Licences" xml:space="preserve">
+    <value>Teacher Licences</value>
+    <comment/>
+  </data>
+  <data name="PassExam" xml:space="preserve">
+    <value>Pass Exam</value>
+    <comment/>
+  </data>
+  <data name="PayTestFees" xml:space="preserve">
+    <value>Pay Exam Fees </value>
+    <comment/>
+  </data>
+  <data name="PayLicenceFees" xml:space="preserve">
+    <value>Pay Licence Fees</value>
+    <comment/>
+  </data>
 </root>

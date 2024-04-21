@@ -1,3 +1,4 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model MembershipCard;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,15 +15,15 @@
             {
                 <div class="alert alert-success">@ViewData["Saved"]</div>
             }
-            <h2>ٍMembership Card Details</h2>
+            <h2>@localizer["MembershipCardDetails"]</h2>
             <div class="border p-3 mt-4">
                 <div class="mb-3">
-                    <label class="fw-bold">Name</label>
+                    <label class="fw-bold">@localizer["Name"]</label>
                     <label>@Model?.AppUser.FirstName</label> <label>@Model?.AppUser.MiddleName</label> <label>@Model?.AppUser.LastName</label>
                 </div>
 
                 <div class="mb-3">
-                    <label class="fw-bold">ٍMembership Card Price</label>
+                    <label class="fw-bold">@localizer["MembershipCardPrice"]</label>
                     <label>150 ريال سعودي</label>
                 </div>
 
@@ -31,18 +32,18 @@
                     <label>SA5865000000101459418001</label>
                 </div>
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="RecietCopy"></label>
+                    <label class="fw-bold" asp-for="RecietCopy">@localizer["RecietCopy"]</label>
                     <img width="400" height="400" src="~/assets/images/@Model?.RecietCopy" alt="">
                 </div>
 
                 <div class="mb-3">
-                    <label class="fw-bold" asp-for="Active"></label>
+                    <label class="fw-bold" asp-for="Active">@localizer["Active"]</label>
                     <label>
                         @if(@Model?.Active== true){
-                            <span class="badge bg-success">Yes</span>
+                            <span class="badge bg-success">@localizer["Yes"]</span>
                         }
                         else {
-                            <span class="badge bg-danger">No</span>
+                            <span class="badge bg-danger">@localizer["No"]</span>
                         }
                     </label>
                 </div>
@@ -51,10 +52,10 @@
                 @if(@Model.Status != (int)StatusEnum.Approved)
                 {
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-success" id="Approve" name="Approve" value="approve">Approve</button>
+                            <button type="submit" class="btn btn-success" id="Approve" name="Approve" value="approve">@localizer["Approve"]</button>
                         </div>
                         <div class="mb-3">
-                            <label>Reject Reason</label>
+                            <label>@localizer["RejectReason"]</label>
 
                         </div>
                         <div class="mb-3">
@@ -62,7 +63,7 @@
 
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-danger" value="reject" id="Reject" name="Reject">Reject</button>
+                            <button type="submit" class="btn btn-danger" value="reject" id="Reject" name="Reject">@localizer["Reject"]</button>
                         </div>
                 }
                 </form>

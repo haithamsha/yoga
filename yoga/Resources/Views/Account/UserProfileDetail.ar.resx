@@ -118,75 +118,107 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PageTitle" xml:space="preserve">
-    <value>طلبات العضويات</value>
+    <value>تفاصيل الرخصة</value>
     <comment/>
   </data>
-  <data name="Export" xml:space="preserve">
-    <value>تصدير البيانات</value>
+  <data name="InformationStatus" xml:space="preserve">
+    <value>حالة البيانات</value>
     <comment/>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>المستخدم</value>
+  <data name="Approved" xml:space="preserve">
+    <value>مؤكد</value>
     <comment/>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>البريد الالكتروني</value>
+  <data name="Pending" xml:space="preserve">
+    <value>قيد التقدم</value>
     <comment/>
   </data>
-  <data name="CardSerial" xml:space="preserve">
-    <value>رقم العضوية</value>
+  <data name="Reviewing" xml:space="preserve">
+    <value>نقوم بمراجعة بياناتك الان</value>
     <comment/>
   </data>
-  <data name="PayFees" xml:space="preserve">
-    <value>المصاريف</value>
+  <data name="Unfortunately" xml:space="preserve">
+    <value>للاسف</value>
+    <comment/>
+  </data>
+  <data name="InfoRejected" xml:space="preserve">
+    <value>تم رفض بياناتك , من فضلك قم بمراجعة بياناتك مرة اخري</value>
+    <comment/>
+  </data>
+  <data name="RejectReason" xml:space="preserve">
+    <value>اخر سبب للرفض:</value>
+    <comment/>
+  </data>
+  <data name="Fees" xml:space="preserve">
+    <value>الرسوم</value>
+    <comment/>
+  </data>
+  <data name="ExamFees" xml:space="preserve">
+    <value>رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="PaymentReview" xml:space="preserve">
+    <value>قيد التقدم, نقوم مراجعة بيانات الدفع الخاصة بك</value>
+    <comment/>
+  </data>
+  <data name="LicenceFees" xml:space="preserve">
+    <value>رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>مدفوع</value>
+    <comment/>
+  </data>
+  <data name="NotPaid" xml:space="preserve">
+    <value>غير مدفوع</value>
+    <comment/>
+  </data>
+  <data name="PayTheExam" xml:space="preserve">
+    <value>دفع رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="ExamTaken" xml:space="preserve">
+    <value>حالة الاختبار</value>
+    <comment/>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>تم بنجاح</value>
+    <comment/>
+  </data>
+  <data name="NotYet" xml:space="preserve">
+    <value>ليس بعد</value>
+    <comment/>
+  </data>
+  <data name="ExamDetails" xml:space="preserve">
+    <value>تفاصيل الاختبار:</value>
+    <comment/>
+  </data>
+  <data name="PassTheExam" xml:space="preserve">
+    <value>حالة اجتياز الاختبار</value>
+    <comment/>
+  </data>
+  <data name="Congratiolation" xml:space="preserve">
+    <value>تهانينا, تم اجتياز الاختبار</value>
+    <comment/>
+  </data>
+  <data name="LicenseFees" xml:space="preserve">
+    <value>رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="YourMemberCardStatus" xml:space="preserve">
+    <value>حالة الرخصة</value>
     <comment/>
   </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
     <comment/>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>اجراءات</value>
+  <data name="Rejected" xml:space="preserve">
+    <value>مرفوض</value>
     <comment/>
   </data>
-  <data name="ExpYears" xml:space="preserve">
-    <value>سنوات الخبرة</value>
-    <comment/>
-  </data>
-  <data name="AccreditedHours" xml:space="preserve">
-    <value>الساعات التراكمية</value>
-    <comment/>
-  </data>
-  <data name="TeachingType" xml:space="preserve">
-    <value>نوع التدريب</value>
-    <comment/>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>تفاصيل</value>
-    <comment/>
-  </data>
-  <data name="FinalApprove" xml:space="preserve">
-    <value>الحالية النهائية</value>
-    <comment/>
-  </data>
-  <data name="TestId" xml:space="preserve">
-    <value>رقم الطلب</value>
-    <comment/>
-  </data>
-  <data name="TeacherLicences" xml:space="preserve">
-    <value>رخص المدربين</value>
-    <comment/>
-  </data>
-  <data name="PassExam" xml:space="preserve">
-    <value>إجتاز الاختبار</value>
-    <comment/>
-  </data>
-  <data name="PayTestFees" xml:space="preserve">
-    <value>دفع رسوم الاختبار</value>
-    <comment/>
-  </data>
-  <data name="PayLicenceFees" xml:space="preserve">
-    <value>دفع رسوم الرخصة</value>
+  <data name="ReSubmit" xml:space="preserve">
+    <value>اعادة ارسال</value>
     <comment/>
   </data>
 </root>

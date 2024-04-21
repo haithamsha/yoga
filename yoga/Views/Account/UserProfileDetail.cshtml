@@ -1,3 +1,5 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+
 @model yoga.ViewModels.UserSetting;
 @{
 	ViewData["Title"] = "My Account";
@@ -6,7 +8,7 @@
 
 <link href="~/assets/css/account-details.css" rel="stylesheet">
 
-<h1>Licence Details</h1>
+<h1>@localizer["PageTitle"]</h1>
 <div class="d-lg-flex">
 
 
@@ -19,37 +21,37 @@
 		<div class="row g-4 mb-4">
 			@if (Model.User_Subscribtions.HasTeacherLic)
 			{
-				<h4>Your Teacher Licence Status</h4>
+				<h4>@localizer["YourMemberCardStatus"]</h4>
 				<div class="col-6 col-lg-3">
 					<div class="app-card app-card-stat shadow-sm h-100">
 						<div class="app-card-body p-3 p-lg-4">
-							<h4 class="stats-type mb-1">Information Status</h4>
+							<h4 class="stats-type mb-1">@localizer["InformationStatus"]</h4>
 
 
 							<div>
 								@if (Model.TeacherLic.Status == (int)StatusEnum.Approved)
 								{
-									<span class="badge bg-success">Approved</span>
+									<span class="badge bg-success">@localizer["Approved"]</span>
 									
 
 								}
 								else if (Model.TeacherLic.Status == (int)StatusEnum.Pending)
 								{
-									<span class="badge bg-info">Pending</span>
+									<span class="badge bg-info">@localizer["Pending"]</span>
 									<div class="stats-meta text-success">
 										
 									</div>
-									<div>We are reviewing your information.</div>
+									<div>@localizer["Reviewing"]</div>
 								}
 								else
 								{
-									<span class="badge bg-danger">Rejected</span>
+									<span class="badge bg-danger">@localizer["Rejected"]</span>
 									<div class="stats-meta text-success">
 										
 									</div>
-									<div><b>Unfortunately</b>, Your information Rejected, Please Review Your Information
+									<div><b>@localizer["Unfortunately"]</b>, @localizer["InfoRejected"]
 									
-										<a class="btn btn-danger" asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]' asp-action="Edit">here</a>
+										<a class="btn btn-danger" asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]' asp-action="Edit">@localizer["here"]</a>
 									</div>
 								}
 							</div>
@@ -57,7 +59,7 @@
 						<div>
 							@if(!string.IsNullOrEmpty(Model.TeacherLic.RejectReason))
 							{
-								<div><span class="text-danger">Last Reject Reason: </span> @Model.TeacherLic.RejectReason</div>
+								<div><span class="text-danger">@localizer["RejectReason"] </span> @Model.TeacherLic.RejectReason</div>
 							}
 						</div>
 						<!--//app-card-body-->
@@ -70,23 +72,23 @@
 				<div class="col-6 col-lg-3">
 					<div class="app-card app-card-stat shadow-sm h-100">
 						<div class="app-card-body p-3 p-lg-4">
-							<h4 class="stats-type mb-1">Fees</h4>
+							<h4 class="stats-type mb-1">@localizer["Fees"]</h4>
 							<div>
 								<p>
-									<span><b>Exam Fees</b></span>
+									<span><b>@localizer["ExamFees"]</b></span>
 								</p>
 								@if (Model.TeacherLic.PayExamFees)
 								{
-									<span class="badge bg-success">Paid</span>
+									<span class="badge bg-success">@localizer["Paid"]</span>
 								}
 								else
 								{
 									@if(string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopy))
 									{
-										<span class="badge bg-danger">Not Paid</span>
+										<span class="badge bg-danger">@localizer["NotPaid"]</span>
 									}
 									else {
-										<span class="badge bg-info">Pending, We are reviewing your payment</span>
+										<span class="badge bg-info">@localizer["PaymentReview"]</span>
 									}
 								}
 							</div>
@@ -95,20 +97,20 @@
 							</div>
 							<div>
 								<p>
-									<span><b>Licence Fees</b></span>
+									<span><b>@localizer["LicenceFees"]</b></span>
 								</p>
 								@if (Model.TeacherLic.PayFees)
 								{
-									<span class="badge bg-success">Paid</span>
+									<span class="badge bg-success">@localizer["Paid"]</span>
 								}
 								else
 								{
 									@if(string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopyLic))
 									{
-										<span class="badge bg-danger">Not Paid</span>
+										<span class="badge bg-danger">@localizer["NotPaid"]</span>
 									}
 									else {
-										<span class="badge bg-info">Pending, We are reviewing your payment</span>
+										<span class="badge bg-info">@localizer["PaymentReview"]</span>
 									}
 								}
 							</div>
@@ -124,8 +126,7 @@
 								@if (Model.TeacherLic.PayExamFees == false && string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopy))
 								{
 									<a class="btn btn-success" asp-controller="TeacherLic" asp-action="payexamfees" 
-									asp-route-id='@ViewContext.RouteData.Values["Id"]'>Pay The Exam
-										Fees</a>
+									asp-route-id='@ViewContext.RouteData.Values["Id"]'>@localizer["PayTheExam"]</a>
 								}
 							}
 						</div>
@@ -136,18 +137,18 @@
 				<div class="col-6 col-lg-3">
 					<div class="app-card app-card-stat shadow-sm h-100">
 						<div class="app-card-body p-3 p-lg-4">
-							<h4 class="stats-type mb-1">Exam Taken</h4>
+							<h4 class="stats-type mb-1">@localizer["ExamTaken"]</h4>
 							<div>
 								@if (Model.TeacherLic.TakeExam)
 								{
-									<span class="badge bg-success">Done</span>
+									<span class="badge bg-success">@localizer["Done"]</span>
 								}
 								else
 								{
-									<span class="badge bg-danger">Not Yet</span>
+									<span class="badge bg-danger">@localizer["NotYet"]</span>
 									@if(Model.TeacherLic.PayExamFees)
 									{
-										<div><b>Exam Details:</b> </div>
+										<div><b>@localizer["ExamDetails"]</b> </div>
 										<p>
 											
 											@Model.TeacherLic.ExamLocation
@@ -168,22 +169,22 @@
 				<div class="col-6 col-lg-3">
 					<div class="app-card app-card-stat shadow-sm h-100">
 						<div class="app-card-body p-3 p-lg-4">
-							<h4 class="stats-type mb-1">Pass The Exam</h4>
+							<h4 class="stats-type mb-1">@localizer["PassTheExam"]</h4>
 							<div>
 								@if (Model.TeacherLic.PassExam)
 								{
-									<span class="badge bg-success">Congratiolation, You have passed the exam</span>
+									<span class="badge bg-success">@localizer["Congratiolation"]</span>
 									@if (Model.TeacherLic.PayFees == false && string.IsNullOrEmpty(Model.TeacherLic.ReceiptCopyLic))
 									{
 										<div>
 											<a class="btn btn-success" asp-action="PayLicFees" asp-controller="TeacherLic" asp-route-id='@ViewContext.RouteData.Values["Id"]'>Pay
-												License Fees</a>
+												@localizer["LicenseFees"]</a>
 										</div>
 									}
 								}
 								else
 								{
-									<span class="badge bg-danger">Not Yet</span>
+									<span class="badge bg-danger">@localizer["NotYet"]</span>
 								}
 							</div>
 							<div class="stats-meta"></div>
@@ -207,20 +208,20 @@
 	<div class="row gx-5 gy-3">
 		@if (Model.User_Subscribtions.HasMemberShip && !User.IsInRole("Admin"))
 		{
-			<h4>Your Member Card Status</h4>
+			<h4>@localizer["YourMemberCardStatus"]</h4>
 			<div>
 				@if (Model.MemshipCard.Status == (int)StatusEnum.Pending)
 				{
-					<strong>Status: </strong> <span class="badge bg-info">Pending</span>
+					<strong>@localizer["Status"]: </strong> <span class="badge bg-info">@localizer["Pending"]</span>
 				}
 				else if (Model.MemshipCard.Status == (int)StatusEnum.Approved)
 				{
-					<strong>Status: </strong> <span class="badge bg-success">Approved</span>
+					<strong>@localizer["Status"]: </strong> <span class="badge bg-success">@localizer["Approved"]</span>
 				}
 				else
 				{
-					<strong>Status: </strong> <span class="badge bg-danger">Rejected</span>
-					<a class="btn btn-primary" asp-controller="MembershipCard" asp-action="Create" asp-route-id="@Model.MemshipCard.Id" >Re Submit</a>
+					<strong>Status: </strong> <span class="badge bg-danger">@localizer["Rejected"]</span>
+					<a class="btn btn-primary" asp-controller="MembershipCard" asp-action="Create" asp-route-id="@Model.MemshipCard.Id" >@localizer["ReSubmit"]</a>
 				}
 			</div>
 		}

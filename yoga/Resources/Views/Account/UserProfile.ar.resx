@@ -157,4 +157,44 @@
     <value>احصل علي رخصة مدرب</value>
     <comment/>
   </data>
+  <data name="RequestId" xml:space="preserve">
+    <value>مسلسل</value>
+    <comment/>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+    <comment/>
+  </data>
+  <data name="ExpYears" xml:space="preserve">
+    <value>سنوات الخبرة</value>
+    <comment/>
+  </data>
+  <data name="AccreditedHours" xml:space="preserve">
+    <value>الساعات المعتمدة</value>
+    <comment/>
+  </data>
+  <data name="TeachingType" xml:space="preserve">
+    <value>نوع التعليم</value>
+    <comment/>
+  </data>
+  <data name="PayeExamFees" xml:space="preserve">
+    <value>رسوم الاختبار</value>
+    <comment/>
+  </data>
+  <data name="PayFees" xml:space="preserve">
+    <value>رسوم الرخصة</value>
+    <comment/>
+  </data>
+  <data name="FinalApprove" xml:space="preserve">
+    <value>الموافقة النهائية</value>
+    <comment/>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>خيارات</value>
+    <comment/>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
+    <comment/>
+  </data>
 </root>
