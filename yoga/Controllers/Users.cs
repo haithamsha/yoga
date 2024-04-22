@@ -15,10 +15,13 @@ namespace yoga.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly YogaAppDbContext _db;
+        private readonly DateTime EndDate;
+
         public Users(UserManager<AppUser> userManager, YogaAppDbContext db)
         {
             _userManager = userManager;
             _db = db;
+            EndDate = new DateTime(2222, 06, 06);
         }
 
         [Authorize]
@@ -35,12 +38,13 @@ namespace yoga.Controllers
                 .Join(_db.Roles, ur => ur.ur.RoleId, r => r.Id, (ur, r) => new { ur, r })
                 .Where(u => u.ur.u.NationalId ==  "11")
                 .ToList()
-                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email, uv.ur.u.Id }).Select(r => new UserVM()
+                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email, uv.ur.u.Id, uv.ur.u.LockoutEnd }).Select(r => new UserVM()
                 {
                     FirstName = r.Key.UserName,
                     Email = r.Key.Email,
                     RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray()),
-                    Id = r.Key.Id
+                    Id = r.Key.Id,
+                    Status = r.Key.LockoutEnd == null ? true : false
                 })
                 .ToList();
                 
@@ -53,19 +57,19 @@ namespace yoga.Controllers
                 .Join(_db.Roles, ur => ur.ur.RoleId, r => r.Id, (ur, r) => new { ur, r })
                 .Where(u => u.ur.u.NationalId ==  "11" && u.ur.u.Id == userId)
                 .ToList()
-                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email , uv.ur.u.Id}).Select(r => new UserVM()
+                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email , uv.ur.u.Id, uv.ur.u.LockoutEnd}).Select(r => new UserVM()
                 {
                     FirstName = r.Key.UserName,
                     Email = r.Key.Email,
                     RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray()),
-                    Id = r.Key.Id
+                    Id = r.Key.Id,
+                    Status = r.Key.LockoutEnd == null ? false : true
                 })
                 .ToList();
                 
                 return View(_users);
             }
             
-            return View();
         }
 
         private List<SelectListItem> GetRoles()
@@ -222,6 +226,43 @@ namespace yoga.Controllers
             return View(user);
         }
 
+        public async Task<IActionResult> LockUser(string email, DateTime? endDate)
+        {
+            if (endDate == null)
+                endDate = EndDate;
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            var lockUserTask = await _userManager.SetLockoutEnabledAsync(user, true);
+
+            var lockDateTask =await _userManager.SetLockoutEndDateAsync(user, endDate);
+
+            if(lockDateTask.Succeeded) return RedirectToAction("Index", "Users");
+
+            ViewBag.Error = $"Error while Update user data {lockDateTask.Errors?.FirstOrDefault()?.Description}";
+
+            return RedirectToAction("Index", "Users");
+            
+        }
+
+        public async Task<IActionResult> UnLockUser(string email, DateTime? endDate)
+        {
+            if (endDate == null)
+                endDate = EndDate;
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            var lockUserTask = await _userManager.SetLockoutEnabledAsync(user, false);
+
+            var lockDateTask =await _userManager.SetLockoutEndDateAsync(user, DateTime.Now - TimeSpan.FromMinutes(1));
+
+            if(lockDateTask.Succeeded) return RedirectToAction("Index", "Users");
+
+            ViewBag.Error = $"Error while Update user data {lockDateTask.Errors?.FirstOrDefault()?.Description}";
+
+            return RedirectToAction("Index", "Users");
+            
+        }
 
 
 

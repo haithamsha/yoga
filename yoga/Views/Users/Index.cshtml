@@ -12,19 +12,27 @@
 <div class="d-lg-flex">
                 <partial name="_AdminMenu" />
                 <div class="account-container account-details">
-                    <h2 class="header page-header">Managers</h2>
+                    <div>
+                        @if(@ViewBag.Error != null)
+                        {
+                            @ViewBag.Error
+                        }
+                    </div>
+                    <h2 class="header page-header">@localizer["Managers"]</h2>
                     @if(User.IsInRole("Admin"))
                     {
-                        <a href='@Url.Action("Create", "Users")'>Add Manager / Admin</a>
+                        <a href='@Url.Action("Create", "Users")'>@localizer["PageTitle"]</a>
                     }
 					<div class="table-responsive">
 							        <table class="table app-table-hover mb-0 text-left">
 										<thead>
 											<tr>
+                                                <th style="display: none;">@localizer["Id"]</th>
                                                 <th>@localizer["UserName"]</th>
                                                 <th>@localizer["Email"]</th>
                                                 @* <th>@localizer["PhoneNumber"]</th> *@
-                                                <th>role</th>
+                                                <th>@localizer["Role"]</th>
+                                                 <th>@localizer["Status"]</th>
                                                 <th>@localizer["Actions"]</th>
                                                 <th></th>
 											</tr>
@@ -34,6 +42,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td style="display: none;">@item.Id</td>
                                             <td class="cell">
                                         @item.FirstName
                                             </td>
@@ -44,14 +53,27 @@
                                         @item.PhoneNumber
                                             </td> *@
                                             <td>@item.RoleNames</td>
-                                            
+                                            <td>
+                                                @if(@item.Status)
+                                                {
+                                                    <span class="padge padge-success">Active</span>
+                                                }
+                                                else {
+                                                    <span class="padge padge-danger">Not Active</span>  
+                                                }
+                                            </td>
                                             <td>
                                                 <div class="w-75 btn-group" role="group">
                                                     <a class="btn-sm app-btn-secondary" asp-controller="Users" asp-action="Edit"
                                                     asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
+
+                                                    <a class="btn-sm app-btn-secondary btn-danger" asp-controller="Users" asp-action="LockUser"
+                                                    asp-route-email="@item.Email"><i class="fa-solid fa-memo-circle-info"></i>@localizer["LockUser"]</a>
                                                 </div>
                                                 
+                                                
                                             </td>
+                                            
                                             
                                             <td>
                                                 @* @if(User.IsInRole("Admin") || User.IsInRole("Manager"))
