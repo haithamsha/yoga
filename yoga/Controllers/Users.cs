@@ -38,9 +38,9 @@ namespace yoga.Controllers
                 .Join(_db.Roles, ur => ur.ur.RoleId, r => r.Id, (ur, r) => new { ur, r })
                 .Where(u => u.ur.u.NationalId ==  "11")
                 .ToList()
-                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email, uv.ur.u.Id, uv.ur.u.LockoutEnd }).Select(r => new UserVM()
+                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email, uv.ur.u.Id, uv.ur.u.LockoutEnd, uv.ur.u.FirstName, uv.ur.u.LastName }).Select(r => new UserVM()
                 {
-                    FirstName = r.Key.UserName,
+                    FirstName = $"{r.Key.FirstName} {r.Key?.LastName}",
                     Email = r.Key.Email,
                     RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray()),
                     Id = r.Key.Id,
@@ -57,13 +57,14 @@ namespace yoga.Controllers
                 .Join(_db.Roles, ur => ur.ur.RoleId, r => r.Id, (ur, r) => new { ur, r })
                 .Where(u => u.ur.u.NationalId ==  "11" && u.ur.u.Id == userId)
                 .ToList()
-                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email , uv.ur.u.Id, uv.ur.u.LockoutEnd}).Select(r => new UserVM()
+                .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email , uv.ur.u.Id, uv.ur.u.LockoutEnd, uv.ur.u.FirstName, uv.ur.u.LastName }).Select(r => new UserVM()
                 {
-                    FirstName = r.Key.UserName,
+                    FirstName = $"{r.Key.FirstName} {r.Key?.LastName}",
                     Email = r.Key.Email,
                     RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray()),
                     Id = r.Key.Id,
-                    Status = r.Key.LockoutEnd == null ? false : true
+                    Status = r.Key.LockoutEnd == null ? false : true,
+
                 })
                 .ToList();
                 

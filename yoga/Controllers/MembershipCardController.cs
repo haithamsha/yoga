@@ -279,19 +279,20 @@ namespace yoga.Controllers
                 var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
 
                 //Generate pdf file
-                //1var Rendered = new ChromePdfRenderer(); 
-                //2using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                var Rendered = new ChromePdfRenderer();
+                using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+
                 string PdffileName = $"MemberShip_Card{memCard.SerialNumber}.pdf";
                 var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
-                //3PDF.SaveAs(attachmentFile);
+                PDF.SaveAs(attachmentFile);
 
                 var emailMessage = new EmailMessage
                 {
                     ToEmailAddresses = new List<string> {memCard.AppUser.Email},
                     Subject = "SAUDI YOGA COMMITTEE",
                     Body = content,
-                    //4AttachmentFile = attachmentFile,
-                    //5FileName = PdffileName
+                    AttachmentFile = attachmentFile,
+                    FileName = PdffileName
                 };
 
                 try
