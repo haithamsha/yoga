@@ -226,8 +226,7 @@ namespace yoga.Controllers
                 int rowAffect = _db.SaveChanges();
                 // Send Email to the user(Congratuilation, Your Membership card is active now until {expire date}, Your)
                 // Card Serial Number "999"
-                string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", 
-                memCard.AppUser.UserImage);
+                string userImage = memCard?.AppUser?.UserImage;
 
                 string content = @$"<div>
                         <p>
@@ -252,7 +251,10 @@ namespace yoga.Controllers
 </div></div></div>
                         ";
 
-                        string htmlContent = @$"<div>
+                string domainName = Request.Host.Value;
+                string imgPath = $"{domainName}/assets/{userImage}";
+
+                string htmlContent = @$"<div>
                         
                         </div>
                         <div style='text-align: center; width:200px;height: 270px; padding:30px;
@@ -262,7 +264,7 @@ namespace yoga.Controllers
             alt='Yoga'> 
         </div>
         <div>
-            <img width='80px' height='80px' src='{userImage}' alt='Yoga'>
+            <img width='80px' height='80px' src='{imgPath}' alt='Yoga'>
         </div>
        <div >
         <div>
