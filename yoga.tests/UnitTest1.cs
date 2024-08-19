@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using Mailjet.Client.Resources;
 using System.Threading.Tasks;
 using Mailjet.Client.TransactionalEmails;
+using System.IO;
+using System;
 
 namespace yoga.tests;
 
@@ -145,6 +147,50 @@ public class UnitTest1
             Body = content
         };
         _emailSender.SendEmailBySendGrid(emailMessage);
+    }
+
+    [Fact]
+    public void GeneratePdfFromHtml()
+    {
+        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images",
+                "1517009970083.jpg");
+
+        string htmlContent = @$"<div>
+                        
+                        </div>
+                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
+    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
+        <div style='padding-bottom: 20px;'>
+            <img width='80px' src='https://iili.io/r1zcZb.png'
+            alt='Yoga'> 
+        </div>
+        <div>
+            <img width='80px' height='80px' src='{userImage}' alt='Yoga'>
+        </div>
+       <div >
+        <div>
+            haitham abdelrady
+        </div>
+        <div>
+            ID: 123456
+        </div>
+        <div>
+            Validity: {DateTime.Now.AddYears(1)}
+</div></div></div>
+                        ";
+
+
+        string PdffileName = $"MemberShip_Card_testPDF.pdf";
+        //var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
+        var attachmentFile = @$"C:\work\dev\ramz\ramz\yoga\sourcecode\yogamvccode\yoga\wwwroot\assets\images\{PdffileName}";
+
+        PDFConverter pdfconv = new PDFConverter();
+
+        pdfconv.GeneratePdfFile(htmlContent, attachmentFile);
+
+        
+
+        //Assert.Null(result);
     }
 
 }

@@ -207,7 +207,7 @@ namespace yoga.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Detail(int id, string Approve, string reason)
+        public async Task<IActionResult> Detail(int id, string Approve, string reason)
         {
             if(!string.IsNullOrEmpty(Approve))
             {
@@ -275,16 +275,15 @@ namespace yoga.Controllers
             Validity: {DateTime.Now.AddYears(1)}
 </div></div></div>
                         ";
-                string userId = _userManager.GetUserId(User);
-                var loggedUser = _db.Users.Where(u=>u.Id == userId).FirstOrDefault();
 
                 //Generate pdf file
-                var Rendered = new ChromePdfRenderer();
-                using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
-
                 string PdffileName = $"MemberShip_Card{memCard.SerialNumber}.pdf";
                 var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
-                PDF.SaveAs(attachmentFile);
+                PDFConverter PC = new PDFConverter();
+               int gReult = await PC.GeneratePdfFile(htmlContent, attachmentFile);
+
+                string userId = _userManager.GetUserId(User);
+                var loggedUser = await _db.Users.Where(u=>u.Id == userId).FirstOrDefaultAsync();
 
                 var emailMessage = new EmailMessage
                 {
@@ -299,7 +298,7 @@ namespace yoga.Controllers
                 {
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
-                    if(rowAffect == 1)
+                    if(rowAffect == 1 && gReult == 1)
                     _emailSender.SendEmailBySendGrid(emailMessage);
 
                     // add notification
