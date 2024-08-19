@@ -252,6 +252,7 @@ namespace yoga.Controllers
                         ";
 
                 string domainName = Request.Host.Value;
+
                 string imgPath = $"{domainName}/assets/{userImage}";
 
                 string htmlContent = @$"<div>
