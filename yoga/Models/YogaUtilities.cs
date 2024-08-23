@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 
 
@@ -36,13 +35,8 @@ namespace yoga.Models
 
         public static void GeneratePdfFile(string htmlContent, string attachmentFile)
         {
-            //var Rendered = new ChromePdfRenderer();
-            //using var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
-
-            //PDF.SaveAs(attachmentFile);
-
-            //string pdfPath = attachmentFile;
-            //using (PdfWriter writer = new PdfWriter(pdfPath))
+            //string pdfPath = "MyPDF.pdf";
+            //using (PdfWriter writer = new PdfWriter(attachmentFile))
             //{
             //    using (PdfDocument pdf = new PdfDocument(writer))
             //    {
@@ -52,29 +46,36 @@ namespace yoga.Models
             //    }
             //}
 
+           
 
-            string htmlFilePath = "temp.html";
-            System.IO.File.WriteAllText(htmlFilePath, htmlContent);
 
-            // Define the output PDF file path
-            string pdfFilePath = "invoice.pdf";
+            //string htmlFilePath = $"{attachmentFile}\\temp.html";
+            //System.IO.File.WriteAllText(htmlFilePath, htmlContent);
 
-            // Use wkhtmltopdf to convert HTML to PDF
-            ProcessStartInfo processStartInfo = new ProcessStartInfo
-            {
-                FileName = "wkhtmltopdf",
-                Arguments = $"{htmlFilePath} {pdfFilePath}",
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
+            //// Define the output PDF file path
+            //string pdfFilePath = $"{attachmentFile}\\invoice.pdf";
 
-            Process process = new Process { StartInfo = processStartInfo };
-            process.Start();
-            process.WaitForExit();
+            //// Use wkhtmltopdf to convert HTML to PDF
+            //ProcessStartInfo processStartInfo = new ProcessStartInfo
+            //{
+            //    FileName = pdfFilePath,
+            //    Arguments = $"{htmlFilePath} {pdfFilePath}",
+            //    RedirectStandardOutput = true,
+            //    UseShellExecute = false,
+            //    CreateNoWindow = true
+            //};
 
-            // Clean up the temporary HTML file
-            System.IO.File.Delete(htmlFilePath);
+            //Process process = new Process { StartInfo = processStartInfo };
+            //process.Start();
+            //process.WaitForExit();
+
+            //// Clean up the temporary HTML file
+            //System.IO.File.Delete(htmlFilePath);
+
+
+
+            //quest
+
         }
     }
 }
