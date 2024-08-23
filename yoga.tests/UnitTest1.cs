@@ -152,8 +152,10 @@ public class UnitTest1
     [Fact]
     public void GeneratePdfFromHtml()
     {
-        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images",
+        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "images",
                 "1517009970083.jpg");
+
+        string logo = Path.Combine(Directory.GetCurrentDirectory(), "images", "yogalogoforpdf.png");
 
         string htmlContent = @$"<div>
                         
@@ -184,11 +186,37 @@ public class UnitTest1
         //var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
         var attachmentFile = @$"C:\work\dev\ramz\ramz\yoga\sourcecode\yogamvccode\yoga\wwwroot\assets\images\{PdffileName}";
 
-        PDFConverter pdfconv = new PDFConverter();
+        //PDFConverter pdfconv = new PDFConverter();
 
-        pdfconv.GeneratePdfFile(htmlContent, attachmentFile);
+        //yoga.Models.YogaUtilities.GeneratePdfFile(htmlContent, attachmentFile);
+
+        QuestDoc QD = new QuestDoc();
+        QD.GeneratePDF(htmlContent, attachmentFile, userImage, logo);
+
+        //Assert.Null(result);
+    }
+
+    [Fact]
+    public void GeneratePDFA5Test()
+    {
+        string userImage = Path.Combine(Directory.GetCurrentDirectory(), "images",
+                "1517009970083.jpg");
+
+        string logo = Path.Combine(Directory.GetCurrentDirectory(), "images", "yogalogoforpdf.png");
 
         
+
+
+        string PdffileName = $"MemberShip_Card_testPDF.pdf";
+        //var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
+        var attachmentFile = @$"C:\work\dev\ramz\ramz\yoga\sourcecode\yogamvccode\yoga\wwwroot\assets\images\{PdffileName}";
+
+        //PDFConverter pdfconv = new PDFConverter();
+
+        //yoga.Models.YogaUtilities.GeneratePdfFile(htmlContent, attachmentFile);
+
+        QuestDoc QD = new QuestDoc();
+        QD.GeneratePDFA5("Haitham AbdElRady", "123456", attachmentFile, userImage);
 
         //Assert.Null(result);
     }

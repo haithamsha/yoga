@@ -762,29 +762,7 @@ namespace yoga.Controllers
                         tech.SerialNumber = $"{tech.TestId}{serialNumber}";
                         string userImage = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images",
                 tech.TechearMemberShip.AppUser.UserImage);
-                        var htmlContent = @$"<div>
-                        </div>
-                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
-    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
-        <div style='padding-bottom: 20px;'>
-            <img width='80px' src='https://iili.io/r1zcZb.png'
-            alt='Yoga'> 
-        </div>
-        <div>
-            <img width='80px' height='80px' src='{userImage}' alt='Yoga'>
-        </div>
-       <div >
-        <div>
-            {tech.TechearMemberShip.AppUser.FirstName} {tech.TechearMemberShip
-            .AppUser.LastName}
-        </div>
-        <div>
-            ID: {serialNumber}
-        </div>
-        <div>
-            Validity: {DateTime.Now.AddYears(1).ToShortDateString()}
-</div></div></div>
-                        ";
+                        
                         content += @$"<div>
                         <p>Congratulation, You have licensed SAUDI YOGA COMMITTEE Teacher</p>
                         </div>
@@ -806,14 +784,17 @@ namespace yoga.Controllers
 </div></div></div>
                         ";
 
-                        //1var Rendered = new ChromePdfRenderer(); 
-                        //2var PDF = Rendered.RenderHtmlAsPdf(htmlContent);
+                        //Generate PDF
+                        string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", userImage);
                         string fileName = $"techer_licnese{tech.SerialNumber}.pdf";
                         var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", fileName);
 
-                        //3PDF.SaveAs(attachmentFile);
-                        //4emailMessage.AttachmentFile = attachmentFile;
-                        //5emailMessage.FileName = fileName;
+
+                        QuestDoc QD = new QuestDoc();
+                        QD.GeneratePDFA5($"{tech.TechearMemberShip.AppUser.FirstName} {tech.TechearMemberShip.AppUser.LastName}", tech?.TechearMemberShip?.SerialNumber, attachmentFile, imgPath);
+
+                        emailMessage.AttachmentFile = attachmentFile;
+                        emailMessage.FileName = fileName;
 
                         // wfhistory
                         wfHistory.Description = "Approve Pay license Fees";

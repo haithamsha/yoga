@@ -251,39 +251,44 @@ namespace yoga.Controllers
 </div></div></div>
                         ";
 
-                string domainName = Request.Host.Value;
 
-                string imgPath = $"{domainName}/assets/{userImage}";
 
-                string htmlContent = @$"<div>
+                string imgPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets\\images", userImage);
+
+                #region oldcodehtml content
+//                string htmlContent = @$"<div>
                         
-                        </div>
-                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
-    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
-        <div style='padding-bottom: 20px;'>
-            <img width='80px' src='https://iili.io/r1zcZb.png'
-            alt='Yoga'> 
-        </div>
-        <div>
-            <img width='80px' height='80px' src='{imgPath}' alt='Yoga'>
-        </div>
-       <div >
-        <div>
-            {memCard.AppUser.FirstName} {memCard.AppUser.LastName}
-        </div>
-        <div>
-            ID: {serialNumber}
-        </div>
-        <div>
-            Validity: {DateTime.Now.AddYears(1)}
-</div></div></div>
-                        ";
+//                        </div>
+//                        <div style='text-align: center; width:200px;height: 270px; padding:30px;
+//    background-color: #efece5;color:#b77b57;font-family: 'Courier New', Courier, monospace;'>
+//        <div style='padding-bottom: 20px;'>
+//            <img width='80px' src='https://iili.io/r1zcZb.png'
+//            alt='Yoga'> 
+//        </div>
+//        <div>
+//            <img width='80px' height='80px' src='{imgPath}' alt='Yoga'>
+//        </div>
+//       <div >
+//        <div>
+//            {memCard.AppUser.FirstName} {memCard.AppUser.LastName}
+//        </div>
+//        <div>
+//            ID: {serialNumber}
+//        </div>
+//        <div>
+//            Validity: {DateTime.Now.AddYears(1)}
+//</div></div></div>
+//                        ";
+                #endregion
 
                 //Generate pdf file
                 string PdffileName = $"MemberShip_Card{memCard.SerialNumber}.pdf";
                 var attachmentFile = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\assets", PdffileName);
-                PDFConverter PC = new PDFConverter();
-               int gReult = await PC.GeneratePdfFile(htmlContent, attachmentFile);
+               // PDFConverter PC = new PDFConverter();
+               //int gReult = await PC.GeneratePdfFile(htmlContent, attachmentFile);
+
+                QuestDoc QD = new QuestDoc();
+                QD.GeneratePDFA5($"{memCard.AppUser.FirstName} {memCard.AppUser.LastName}", memCard.SerialNumber, attachmentFile, imgPath);
 
                 string userId = _userManager.GetUserId(User);
                 var loggedUser = await _db.Users.Where(u=>u.Id == userId).FirstOrDefaultAsync();
@@ -301,7 +306,7 @@ namespace yoga.Controllers
                 {
                     EmailConfiguration _emailConfiguration = new EmailConfiguration();
                     EmailSender _emailSender = new EmailSender(_emailConfiguration);
-                    if(rowAffect == 1 && gReult == 1)
+                    if(rowAffect == 1)
                     _emailSender.SendEmailBySendGrid(emailMessage);
 
                     // add notification
