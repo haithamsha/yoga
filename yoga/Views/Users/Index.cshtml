@@ -67,8 +67,18 @@
                                                     <a class="btn-sm app-btn-secondary" asp-controller="Users" asp-action="Edit"
                                                     asp-route-id="@item.Id"><i class="fa-solid fa-memo-circle-info"></i>@localizer["Details"]</a>
 
-                                                    <a class="btn-sm app-btn-secondary btn-danger" asp-controller="Users" asp-action="LockUser"
-                                                    asp-route-email="@item.Email"><i class="fa-solid fa-memo-circle-info"></i>@localizer["LockUser"]</a>
+                                    @if (@item.Status)
+                                    {
+                                        <a class="btn-sm app-btn-secondary btn-danger" asp-controller="Users" asp-action="LockUser"
+                                        asp-route-email="@item.Email"><i class="fa-solid fa-memo-circle-info"></i>@localizer["LockUser"]</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn-sm app-btn-secondary btn-success" asp-controller="Users" asp-action="LockUser"
+                                           asp-route-email="@item.Email"><i class="fa-solid fa-memo-circle-info"></i>@localizer["UNLockUser"]</a>
+                                    }
+
+
                                                 </div>
                                                 
                                                 

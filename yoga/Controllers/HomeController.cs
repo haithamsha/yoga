@@ -76,6 +76,23 @@ public class HomeController : Controller
         return View();
     }
 
+    // Download file from the server
+    public async Task<IActionResult> Download(string filename)
+    {
+        if (filename == null)
+            return Content("filename is not available");
+
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/assets/Handbooks", filename);
+
+        var memory = new MemoryStream();
+        using (var stream = new FileStream(path, FileMode.Open))
+        {
+            await stream.CopyToAsync(memory);
+        }
+        memory.Position = 0;
+        return File(memory, "application/pdf", Path.GetFileName(path));
+    }
+
     public IActionResult DownloadsAr()
     {
         return View();

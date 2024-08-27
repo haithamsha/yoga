@@ -214,7 +214,7 @@
 
                             <div class="mb-3">
                                 <input id="ckAgreement" asp-for="Agreement" name="Agreement" type="checkbox"> <span class="fw-bold">
-                                    @localizer["Agreement"]
+                                    <a target="_blank" asp-action="Policy" asp-controller="Home">@localizer["Agreement"]</a>
                                     </span>
                                 <span asp-validation-for="@Model.Agreement" class="text-danger"></span>
 

@@ -40,7 +40,7 @@ namespace yoga.Controllers
                 .ToList()
                 .GroupBy(uv => new { uv.ur.u.UserName, uv.ur.u.Email, uv.ur.u.Id, uv.ur.u.LockoutEnd, uv.ur.u.FirstName, uv.ur.u.LastName }).Select(r => new UserVM()
                 {
-                    FirstName = $"{r.Key.FirstName} {r.Key?.LastName}",
+                    FirstName = $"{r.Key.FirstName}",
                     Email = r.Key.Email,
                     RoleNames = string.Join(",", r.Select(c => c.r.Name).ToArray()),
                     Id = r.Key.Id,
@@ -113,7 +113,7 @@ namespace yoga.Controllers
             // get default city
             var city = _db.Cities.Find(1);
             var newUser = new AppUser { UserName = user.Email, Email = user.Email, PhoneNumber = user.Phone, 
-                Discriminator = "Default", FirstName=user.FirstName, LastName = user.Email, NationalId="11", MiddleName = "dd",
+                Discriminator = "Default", FirstName=user.FirstName, LastName = "NA", NationalId="11", MiddleName = "dd",
                 UserImage = "ii", EmailConfirmed = true, NationalIdImage = "nn", City = city };
 
             var roles = GetRoles();
