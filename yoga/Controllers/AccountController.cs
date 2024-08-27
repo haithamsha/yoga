@@ -746,6 +746,20 @@ namespace yoga.Controllers
                     // Log the password reset link
                     //logger.Log(LogLevel.Warning, passwordResetLink);
 
+                    EmailConfiguration _emailConfiguration = new EmailConfiguration();
+                    EmailSender _emailSender = new EmailSender(_emailConfiguration);
+
+                    string content = $"To Reset Your Password Please click here <a href='{passwordResetLink}'>Clicking Here</a>";
+                    var emailMessage = new EmailMessage
+                    {
+                        ToEmailAddresses = new List<string> { user.Email },
+                        Subject = "SAUDI YOGA COMMITTEE - Reset Password",
+                        Body = content
+                    };
+
+                    _emailSender.SendEmailBySendGrid(emailMessage);
+
+
                     // Send the user to Forgot Password Confirmation view
                     return View("ForgotPasswordConfirmation");
                 }
