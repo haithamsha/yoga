@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.LexicalAnalysis;
 using System.Security.Claims;
 using yoga.Data;
 using yoga.Models;
 using yoga.ViewModels;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace yoga.Controllers
 {
@@ -714,29 +716,94 @@ namespace yoga.Controllers
             return View(result);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult ForgotPassword(string email)
+        [AllowAnonymous]
+        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
-            
+
+            if (ModelState.IsValid)
+            {
+                // Find the user by email
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                // If the user is found AND Email is confirmed
+                if (user != null && await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    // Generate the reset password token
+                    //var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    // Build the password reset link
+                    var passwordResetLink = Url.Action("ResetPassword", "Account",
+                            new { email = model.Email, token = token }, Request.Scheme);
+
+                    // Log the password reset link
+                    //logger.Log(LogLevel.Warning, passwordResetLink);
+
+                    // Send the user to Forgot Password Confirmation view
+                    return View("ForgotPasswordConfirmation");
+                }
+
+                // To avoid account enumeration and brute force attacks, don't
+                // reveal that the user does not exist or is not confirmed
+                return View("ForgotPasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string token, string email)  
+        {
+            // If password reset token or email is null, most likely the
+            // user tried to tamper the password reset link
+            if (token == null || email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
             return View();
         }
 
-        public ActionResult ResetPassword(string code, string email)  
-        {  
-            
-            return View();  
-        }  
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)  
+        {
 
-        [HttpPost]     
-        public ActionResult ResetPassword()  
-        {  
-            
-            return View();  
+            if (ModelState.IsValid)
+            {
+                // Find the user by email
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    // reset the user password
+                    var result = await _userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return View("ResetPasswordConfirmation");
+                    }
+                    // Display validation errors. For example, password reset token already
+                    // used to change the password or password complexity rules not met
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model);
+                }
+
+                // To avoid account enumeration and brute force attacks, don't
+                // reveal that the user does not exist
+                return View("ResetPasswordConfirmation");
+            }
+            // Display validation errors if model state is not valid
+            return View(model);
         } 
 
         public IActionResult ExportToExcel(int Id)

@@ -12,5 +12,7 @@ namespace yoga.Models
         public string ArName {get;set;}
         public Country Country { get; set; }
         public int CountryId { get; set; }
+        public string CountryName { get; set; }
+        public int CityDataId { get; set; }
     }
 }
