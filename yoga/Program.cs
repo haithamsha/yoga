@@ -22,11 +22,13 @@ builder.Services.AddIdentity<AppUser, IdentityRole> (
         options.User.RequireUniqueEmail = true; 
         options.SignIn.RequireConfirmedEmail = true;
         options.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+        options.Tokens.PasswordResetTokenProvider = "passwordReset";
 
     }
 )
 .AddEntityFrameworkStores<YogaAppDbContext>()
 .AddTokenProvider<EmailConfirmationTokenProvider<AppUser>>("emailconfirmation")
+.AddTokenProvider<PasswordResetTokenProvider<AppUser>>("passwordReset")
 .AddErrorDescriber<CustomIdentityErrorDescriber>();
 
 builder.Services.Configure<EmailConfirmationTokenProviderOptions>(opt =>

@@ -737,7 +737,7 @@ namespace yoga.Controllers
                 {
                     // Generate the reset password token
                     //var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
                     // Build the password reset link
                     var passwordResetLink = Url.Action("ResetPassword", "Account",
