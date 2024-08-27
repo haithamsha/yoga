@@ -17,7 +17,7 @@
     font-size: 20px;
     /* line-height: 26px; */
     color: var(--green-darker);
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
     height: 700px;
 }
 .advantage-title{
