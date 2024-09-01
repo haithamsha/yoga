@@ -453,7 +453,7 @@ select {
     background-size: 10px;
 }
 
-input[type=text],
+/*input[type=text],
 input[type=text]:focus,
 input[type=text]:focus-visible,
 input[type=password],
@@ -464,32 +464,32 @@ textarea:focus,
 textarea:focus-visible, 
 select,
 select:focus,
-select:focus-visible {
-    outline: 0px;
-    border: 0px;
-}
+select:focus-visible {*/
+    /*outline: 0px;
+    border: 0px;*/
+/*}
 
 input[type=text],
 input[type=password],
 textarea,
-select {
-    width: 100%;
-    height: 55px;
-    border-radius: 5px;
+select {*/
+    /*width: 100%;
+    height: 55px;*/
+    /*border-radius: 5px;
     background-color: rgba(255, 252, 251, 0.8);
     margin-bottom: 24px;
     padding-inline-start: 16px;
     padding-inline-end: 0px;
     padding-top: 19px;
-    padding-bottom: 13px;
+    padding-bottom: 13px;*/
     /* padding: 19px  0 13px 16px; */
-    color: var(--green-darker);
-    line-height: 24px;
-}
+    /*color: var(--green-darker);*/
+    /*line-height: 24px;*/
+/*}
 
 textarea {
     height: 210px !important;
-}
+}*/
 
 #upload-container {
     background-color: rgba(176, 123, 87, 0.08);
