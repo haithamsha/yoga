@@ -1,5 +1,8 @@
-@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
-
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions;
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+}
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,8 +15,18 @@
                             <div class="row row-cols-lg-2 row-cols-1">
                                 <div class="col">
                                     <h3>@localizer["AddressTitle"]</h3>
-                                    <p>@localizer["Address1"]</p>
-                                    <p>@localizer["Address2"]</p>
+
+                        @if (culture.RequestCulture.UICulture.Name == "ar")
+                        {
+                            <a target="_blank" href="https://maps.app.goo.gl/6LHcAQBpyUSzV5ew9">اللجنة الأولمبية العربية السعودية، الرياض</a>
+                        }
+                        else
+                        {
+
+                            <a target="_blank" href="https://maps.app.goo.gl/6LHcAQBpyUSzV5ew9">Saudi Arabian Olympic Committee, Riyadh</a>
+                        }
+                        
+                                    @* <p>@localizer["Address2"]</p> *@
                                 </div>
                                 <div class="col contact-info">
                                     <h3>@localizer["PageSubTitle"]</h3>

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -143,27 +144,35 @@ namespace yoga.Controllers
 
         private List<SelectListItem> GetCountries()
         {
-            var countries =  _db.Country
-                        .Select(r=>new SelectListItem() {
+
+            var cul = Request?.HttpContext?.Features.Get<IRequestCultureFeature>();
+
+            var countries = _db.Country
+                        .Select(r => new SelectListItem()
+                        {
                             Value = r.CountryId.ToString(),
-                            Text = r.EnName
+                            Text = cul.RequestCulture.UICulture.Name == "ar" ? r.ArName : r.EnName
                         })
                         .ToList();
+
             return countries;
+
+
             
         }
 
         private List<SelectListItem> GetCities(int countryId)
         {
+            var cul = Request?.HttpContext?.Features.Get<IRequestCultureFeature>();
+
             var cities =  _db.Cities
                         .Where(c=>c.CountryId == countryId)
                         .Select(r=>new SelectListItem() {
                             Value = r.CityId.ToString(),
-                            Text = r.EnName
+                            Text = cul.RequestCulture.UICulture.Name == "ar" ? r.ArName : r.EnName
                         })
                         .ToList();
             return cities;
-            
         }
 
         [AllowAnonymous]

@@ -1,66 +1,22 @@
-.teacher-list {
-    margin-top: 50px;
-    margin-bottom: 80px;
-}
 
-.teacher-list .page-header {
-    text-align: center;
-}
-
-.teacher-list .page-desc {
-    text-align: center;
-    font-weight: 500;
-    margin-bottom: 40px;
-}
-
-.teacher-item {
-    overflow: hidden;
-}
-
-.teacher-item img {
-    width: 370px;
-    height: 411px;
-}
-
-.teacher-position {
-    font-family: Tajawal;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 25px;
-    color: var(--green-darker);
-    margin-top: 32px;
-    margin-bottom: 12px;
-}
-
-.teacher-name {
-    font-family: zaridSerif;
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 44px;
-    color: var(--green-darker);
-    margin-bottom: 40px;
-}
-.objective-desc{
+.objective-desc {
     font-family: Tajawal;
     font-size: 20px;
     font-weight: 400;
     line-height: 26px;
-    color: #EEEAE3;
+    color: var(--green-darker);
 }
 #objective-container {
     width: 100%;
     display: block;
-    background-color: var(--brown);
     color: var(--green-darker)
 }
-.objective-title{
+.objective-title {
     font-family: zaridSerif;
-    font-size: 42px;
     font-weight: 600;
+    font-size: 42px;
     line-height: 62px;
-    color: white;
-    text-align: start;
-    margin-bottom: 35px;
+    color: var(--green-darker);
 }
 @media screen and (min-width: 768px){
     #objective-desktop-container{

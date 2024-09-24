@@ -365,13 +365,13 @@ header img {
     margin-inline-start: 16.5px;
 }
 
-#objectives .objective-column .objective-desc {
-    color: rgba(238, 234, 227, 1);
-    font-family: Tajawal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 23.4px;
-}
+    #objectives .objective-column .objective-desc {
+        color: var(--green-darker);
+        font-family: Tajawal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 23.4px;
+    }
 
 #objectives-container {
     width: 100%;
